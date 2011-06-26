@@ -3,15 +3,22 @@
 {% block title %}{{head}}{% endblock %}
 
 {% block main %}
-    {% for p in posts %}
-    <div>
-      <h2>{{p.title|safe}}</h2>
-      <div>{{p.abstract|safe}}</div>
+    {% for post in posts %}
+    <article>
+      <header>
+	<h1>{{post.title|safe}}</h1>
+	<p>Publicerad
+	  <time datetime="{{post.posted_time|date:'c'}}" pubdate>
+	    {{post.posted_time}}
+	  </time>
+	</p>
+      </header>
+      <div>{{post.abstract|safe}}</div>
       <p class="readmore">
-	<a href="/{{p.posted_time.year}}/{{p.slug}}">
-	  Läs inlägget {{p.title|safe}}
+	<a href="/{{post.posted_time.year}}/{{post.slug}}">
+	  Läs inlägget {{post.title|safe}}
 	</a>
       </p>
-    </div>
+    </article>
     {% endfor %}
 {% endblock %}

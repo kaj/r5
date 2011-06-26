@@ -56,6 +56,13 @@ html, body {
     -moz-box-shadow: 0.2em 0.3em 0.8em #aaaaaa;
     -moz-border-radius: 0.5em;
 }
-.sideblock h2 {
+
+header {
+    margin: 1em 0;
+}
+h1, h2 {
+    margin: 0;
+}
+header p {
     margin: 0;
 }

@@ -3,7 +3,14 @@
 {% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
 
 {% block main %}
-  <h1>{{post.title|safe}}</h1>
+  <header>
+    <h1>{{post.title|safe}}</h1>
+    <p>Publicerad
+    <time datetime="{{post.posted_time|date:'c'}}" pubdate>
+      {{post.posted_time}}
+    </time>
+    </p>
+  </header>
   <div class="abstract">{{post.abstract|safe}}</div>
   <div class="content">{{post.content|safe}}</div>
 {% endblock %}
