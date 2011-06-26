@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}Rasmus.krats.se{% endblock %}</title>
+    <link rel="stylesheet" href="{{STATIC_URL}}blog.css" type="text/css"/>
+  </head>
+  <body>
+    <div id="headerwrap">
+      <div id="header">
+	<p id="sitename">Rasmus.krats.se</p>
+	<p id="tagline">Skriverier då och då, på webben sedan 1995</p>
+      </div>
+    </div>
+    <div id="mainwrap">
+      <div id="main">
+	{% block main %}
+	<h1>{{post.title|safe}}</h1>
+	<div class="abstract">{{post.abstract|safe}}</div>
+	<div class="content">{{post.content|safe}}</div>
+	{% endblock %}
+      </div>
+      
+      <div class="sideblockwrap">
+	<div class="sideblock">
+	  <h2>Rasmus Kaj</h2>
+	  <ul>
+	    <li><a href="/">Rasmus.krats.se</a></li>
+	    <li><a href="http://www.kth.se/social/home/u1famwov/">@ KTH</a></li>
+	  </ul>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>

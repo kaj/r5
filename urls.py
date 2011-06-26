@@ -4,14 +4,15 @@ from django.conf.urls.defaults import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'r5.views.home', name='home'),
-    # url(r'^r5/', include('r5.foo.urls')),
-
+urlpatterns = patterns(
+    '',
+    
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
+
+    # The blog app handles most urls.  Must be last.
+    url(r'^', include('r5.blog.urls')),
 )

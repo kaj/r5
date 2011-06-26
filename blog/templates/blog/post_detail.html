@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
+
+{% block main %}
+  <h1>{{post.title|safe}}</h1>
+  <div class="abstract">{{post.abstract|safe}}</div>
+  <div class="content">{{post.content|safe}}</div>
+{% endblock %}

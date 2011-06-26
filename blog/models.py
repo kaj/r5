@@ -11,3 +11,5 @@ class Post(models.Model):
     abstract = models.TextField()
     content = models.TextField()
 
+    class Meta:
+        ordering = ['-posted_time']

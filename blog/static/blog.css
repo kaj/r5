@@ -1,0 +1,61 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #eeeeee;
+    color: black;
+}
+#headerwrap {
+    background: #454229 no-repeat 30% 60%;
+    color: white;
+    margin: 0;
+    padding: 1ex 1em;
+}
+
+#headerwrap { background-image: url(naturbanner-1680.jpg); }
+@media (max-width: 480px) {
+    #headerwrap {
+	background-image: url(naturbanner-480.jpg);
+	padding: 0.2em;
+    }
+}
+@media (min-width: 1681px) {
+    #headerwrap { background-image: url(naturbanner-3868.jpg); }
+}
+#sitename, #tagline {
+    margin: 0.1em 0;
+    text-shadow: 0.11em 0.07em 0.1em black;
+}
+#sitename {
+    font-size: 150%;
+    font-weight: bold;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+
+#header, #mainwrap {
+    margin: auto;
+    max-width: 60em;
+}
+#main {
+    float: left;
+    width: 72%;
+    margin: 0;
+    padding: 0;
+}
+.sideblockwrap {
+    width: 26%;
+    float: right;
+}
+.sideblock {
+    font-size: 90%;
+    margin: 1em 0;
+    padding: 1ex;
+    background: white;
+    color: black;
+    border: solid 1px #888888;
+    -moz-box-shadow: 0.2em 0.3em 0.8em #aaaaaa;
+    -moz-border-radius: 0.5em;
+}
+.sideblock h2 {
+    margin: 0;
+}

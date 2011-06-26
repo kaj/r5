@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{head}}{% endblock %}
+
+{% block main %}
+    {% for p in posts %}
+    <div>
+      <h2>{{p.title|safe}}</h2>
+      <div>{{p.abstract|safe}}</div>
+      <p class="readmore">
+	<a href="/{{p.posted_time.year}}/{{p.slug}}">
+	  Läs inlägget {{p.title|safe}}
+	</a>
+      </p>
+    </div>
+    {% endfor %}
+{% endblock %}
