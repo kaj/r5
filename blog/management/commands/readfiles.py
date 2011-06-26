@@ -81,10 +81,34 @@ def d2h(elem):
 
     for docb, html in (('db:para', 'p'), 
                        ('db:phrase', 'span'), ('db:acronym', 'abbr'),
-                       ('db:emphasis', 'em')):
+                       ('db:emphasis', 'em'),
+                       ('db:itemizedlist', 'ul'), ('db:listitem', 'li')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html
             e.tag = html
+
+    # Inline simple stuff, put it in a span with the docbook name as class
+    for docb in ('personname', 'filename'):
+        for e in elem.findall('.//db:' + docb, nsmap):
+            e.tag = 'span'
+            e.set('class', docb)
+    
+    for e in elem.iter():
+        link = e.get('{http://www.w3.org/1999/xlink}href')
+        if link:
+            if e.tag == 'span':
+                # Simply replace this element with a link
+                e.tag = 'a'
+                e.set('href', link)
+            else:
+                content = list(e)
+                a = ElementTree.SubElement(e, 'a', {'href': link})
+                for ee in content:
+                    e.remove(ee)
+                    a.append(ee)
+                a.text = e.text
+                e.text = None
+            del e.attrib['{http://www.w3.org/1999/xlink}href']
 
     return serialize(elem)
 
