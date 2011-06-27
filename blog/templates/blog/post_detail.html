@@ -11,6 +11,8 @@
     </time>
     </p>
   </header>
+  {% if post.abstract %}
   <div class="abstract">{{post.abstract|safe}}</div>
+  {% endif %}
   <div class="content">{{post.content|safe}}</div>
 {% endblock %}
