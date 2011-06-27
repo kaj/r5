@@ -83,16 +83,21 @@ def d2h(elem, dirname=''):
     for docb, html in (('db:para', 'p'), 
                        ('db:phrase', 'span'), ('db:acronym', 'abbr'),
                        ('db:emphasis', 'em'),
-                       ('db:itemizedlist', 'ul'), ('db:listitem', 'li')):
+                       ('db:itemizedlist', 'ul'), ('db:listitem', 'li'),
+                       ('db:table', 'table'), ('db:thead', 'thead'),
+                       ('db:summary', 'summary'),
+                       ('db:tr', 'tr'), ('db:th', 'th'), ('db:td', 'td'),
+                       ('db:sidebar', 'aside'),
+                       ('db:quote', 'q')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html
             e.tag = html
 
     # Inline simple stuff, put it in a span with the docbook name as class
-    for docb in ('personname', 'filename'):
+    for docb in ('personname', 'filename', 'tag'):
         for e in elem.findall('.//db:' + docb, nsmap):
             e.tag = 'span'
-            e.set('class', docb)
+            e.set('class', (e.get('class', '') + ' ' + docb).strip())
     
     for e in elem.iter():
         link = e.get('{http://www.w3.org/1999/xlink}href')
