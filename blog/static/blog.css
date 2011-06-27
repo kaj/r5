@@ -66,3 +66,14 @@ h1, h2 {
 header p {
     margin: 0;
 }
+
+.sidebar {
+    float: right;
+    clear: right;
+    margin-left: 1em;
+}
+.image img {
+    border: solid 1px #666666;
+    background: white;
+    padding: 2px;
+}

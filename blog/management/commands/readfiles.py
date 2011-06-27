@@ -45,6 +45,7 @@ class Command(NoArgsCommand):
 def readfile(filename):
     print "Handle", filename
     slug = os.path.basename(filename)[:-5]
+    dirname = os.path.dirname(filename)
     if slug in ['index', 'sv', 'en']:
         t = os.path.basename(os.path.dirname(filename))
         if slug == 'index':
@@ -66,11 +67,11 @@ def readfile(filename):
 
     p.title = d2h(tree.find('db:info/db:title', nsmap))
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))
-    p.content = d2h(tree.getroot())
+    p.content = d2h(tree.getroot(), dirname)
     p.save()
     print " ", date, slug, p.title
 
-def d2h(elem):
+def d2h(elem, dirname=''):
     if elem is None:
         return ''
 
@@ -110,7 +111,42 @@ def d2h(elem):
                 e.text = None
             del e.attrib['{http://www.w3.org/1999/xlink}href']
 
+    for e in elem.findall('.//r:image', nsmap):
+        e.tag = 'span'
+        e.set('class', 'image ' + e.get('class', ''))
+        imgref = e.get('ref')
+        aimg, aicon = getimginfo(dirname)
+        img = aimg.get(imgref)
+        icon = aicon.get(imgref)
+        if icon and img:
+            a = ElementTree.SubElement(e, 'a', dict(href=img['name']))
+            ElementTree.SubElement(
+                a, 'img', dict(src=icon['name'],
+                               width=icon['width'], height=icon['height']))
+            title = e.find('db:title', nsmap)
+            if title is not None:
+                a.set('title', title.text)
+                e.remove(title)
+        else:
+            print "WARNING: image data missing:", imgref
+
     return serialize(elem)
+
+def getimginfo(dirname):
+    img = {}
+    icon = {}
+    t = ElementTree.parse(dirname + '/imginfo.xml')
+    for i in t.findall('.//img'):
+        fullname = i.get('id')
+        name, _dot, suffix = fullname.rpartition('.')
+        if name.endswith('.i'):
+            ref = name[:-2]
+            icon[ref] = dict(name=fullname,
+                             width=i.get('width'), height=i.get('height'))
+        else:
+            img[name] = dict(name=fullname,
+                             width=i.get('width'), height=i.get('height'))
+    return img, icon
 
 def serialize(elem):
     if elem is None:
