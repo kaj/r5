@@ -11,8 +11,8 @@ def index(request, year=None):
         head = u'inlägg från %s' % year
         posts = get_list_or_404(all_posts, posted_time__year=year)
     else:
-        head = u'Rasmus.krats.se'
-        posts = Post.objects.exclude(posted_time__exact=None)[:50]
+        head = None
+        posts = Post.objects.exclude(posted_time__exact=None)[:5]
     
     return direct_to_template(request, 'blog/index.html', {
             'head': head,

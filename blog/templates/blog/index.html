@@ -1,8 +1,11 @@
 {% extends "blog/base.html" %}
 
-{% block title %}{{head}}{% endblock %}
+{% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
 
 {% block main %}
+    {% if head %}
+        <h1>{{head}}</h1>
+    {% endif %}
     {% for post in posts %}
     <article>
       <header>
@@ -21,4 +24,7 @@
       </p>
     </article>
     {% endfor %}
+    <p>Övriga inlägg från
+      {% for y in years %}
+      <a href="/{{y}}/">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 {% endblock %}

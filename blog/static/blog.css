@@ -39,7 +39,7 @@ html, body {
 #main {
     float: left;
     width: 72%;
-    margin: 0;
+    margin: 1em 0;
     padding: 0;
 }
 .sideblockwrap {
