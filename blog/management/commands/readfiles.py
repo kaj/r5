@@ -93,6 +93,12 @@ def d2h(elem, dirname=''):
             # print "Found element", e, "changing to", html
             e.tag = html
 
+    for e in elem.findall('.//db:section', nsmap):
+        e.tag = 'section';
+        t = e.find('db:title', nsmap)
+        if t is not None:
+            t.tag = 'h1'
+    
     # Inline simple stuff, put it in a span with the docbook name as class
     for docb in ('personname', 'orgname', 'filename', 'tag'):
         for e in elem.findall('.//db:' + docb, nsmap):

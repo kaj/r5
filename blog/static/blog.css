@@ -63,6 +63,14 @@ header {
 h1, h2 {
     margin: 0;
 }
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+section { margin: 2em 0 1em; }
+section h1 { font-size: 1.6em; }
+section section h1 { font-size: 1.2em; }
 header p {
     margin: 0;
 }
