@@ -94,7 +94,7 @@ def d2h(elem, dirname=''):
             e.tag = html
 
     # Inline simple stuff, put it in a span with the docbook name as class
-    for docb in ('personname', 'filename', 'tag'):
+    for docb in ('personname', 'orgname', 'filename', 'tag'):
         for e in elem.findall('.//db:' + docb, nsmap):
             e.tag = 'span'
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
@@ -102,19 +102,14 @@ def d2h(elem, dirname=''):
     for e in elem.iter():
         link = e.get('{http://www.w3.org/1999/xlink}href')
         if link:
-            if e.tag == 'span':
-                # Simply replace this element with a link
-                e.tag = 'a'
-                e.set('href', link)
-            else:
-                content = list(e)
-                a = ElementTree.SubElement(e, 'a', {'href': link})
-                for ee in content:
-                    e.remove(ee)
-                    a.append(ee)
-                a.text = e.text
-                e.text = None
+            makelink(e, link)
             del e.attrib['{http://www.w3.org/1999/xlink}href']
+        role = e.get('role')
+        if role == 'wp':
+            lang = 'sv' # TODO current language
+            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, e.text))
+        elif role == 'sw':
+            makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % e.text)
 
     for e in elem.findall('.//r:image', nsmap):
         e.tag = 'span'
@@ -136,6 +131,21 @@ def d2h(elem, dirname=''):
             print "WARNING: image data missing:", imgref
 
     return serialize(elem)
+
+def makelink(e, href):
+    """Convert the element e to a link to href."""
+    if e.tag == 'span':
+        # Simply replace this element with a link
+        e.tag = 'a'
+        e.set('href', href)
+    else:
+        content = list(e)
+        a = ElementTree.SubElement(e, 'a', {'href': href})
+        for ee in content:
+            e.remove(ee)
+            a.append(ee)
+        a.text = e.text
+        e.text = None
 
 def getimginfo(dirname):
     img = {}
