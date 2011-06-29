@@ -50,7 +50,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = '/home/kaj/public_html'
+MEDIA_ROOT = '/scratch/kaj/r5-media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -150,5 +150,5 @@ LOGGING = {
     }
 }
 
-CONTENT_FILES_BASE='/home/kaj/proj/myweb/content'
+CONTENT_FILES_BASE='/home/kaj/proj/myweb/content/'
 

@@ -3,6 +3,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 from xml.etree import ElementTree
+from shutil import copy
 import os
 
 nsmap = {
@@ -69,11 +70,11 @@ def readfile(filename):
 
     p.title = d2h(tree.find('db:info/db:title', nsmap))
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))
-    p.content = d2h(tree.getroot(), dirname)
+    p.content = d2h(tree.getroot(), dirname, str(date.year) if date else '')
     p.save()
     print " ", date, slug, p.title
 
-def d2h(elem, dirname=''):
+def d2h(elem, dirname='', year=''):
     if elem is None:
         return ''
 
@@ -119,12 +120,14 @@ def d2h(elem, dirname=''):
         elif role == 'sw':
             makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % e.text)
 
+    imginfo = None
     for e in elem.findall('.//r:image', nsmap):
         e.tag = 'span'
         e.set('class', 'image ' + e.get('class', ''))
         imgref = e.get('ref')
         
-        imginfo = ImageFinder(dirname)
+        if not imginfo:
+            imginfo = ImageFinder(dirname)
         img = imginfo.getimage(imgref)
         icon = imginfo.geticon(imgref)
         if icon and img:
@@ -136,8 +139,16 @@ def d2h(elem, dirname=''):
             if title is not None:
                 a.set('title', title.text)
                 e.remove(title)
+        elif img:
+            ElementTree.SubElement(
+                e, 'img', dict(src=img['name'],
+                               width=img['width'], height=img['height']))
+            
         else:
             print "WARNING: image data missing:", imgref
+    
+    if imginfo:
+        imginfo.handleUsed(year)
 
     return serialize(elem)
 
@@ -156,12 +167,13 @@ def makelink(e, href):
         a.text = e.text
         e.text = None
 
-class ImgageFinder:
+class ImageFinder:
     
     def __init__(self, dirname):
         self.dirname = dirname
         self.img = {}
         self.icon = {}
+        self.used = []
         t = ElementTree.parse(dirname + '/imginfo.xml')
         for i in t.findall('.//img'):
             fullname = i.get('id')
@@ -177,10 +189,30 @@ class ImgageFinder:
                                       height=i.get('height'))
     
     def getimage(self, name):
-        return self.img.get(name)
+        result = self.img.get(name)
+        if result:
+            self.used.append(result['name'])
+        return result
     
     def geticon(self, name):
-        return self.icon.get(name)
+        result = self.icon.get(name)
+        if result:
+            self.used.append(result['name'])
+        return result
+
+    def handleUsed(self, year):
+        path = self.dirname[len(settings.CONTENT_FILES_BASE):]
+        # print "Image files in %s: %s" % (path, self.used)
+        todir = os.path.join(settings.MEDIA_ROOT, year)
+        if not os.path.exists(todir):
+            print "Creating dir", todir
+            os.makedirs(todir)
+        for filename in self.used:
+            src = os.path.join(self.dirname, filename)
+            dst = os.path.join(todir, filename)
+            if not os.path.exists(dst):
+                print "Copy %s to %s" % (src, dst)
+                copy(src, dst)
 
 def serialize(elem):
     if elem is None:
