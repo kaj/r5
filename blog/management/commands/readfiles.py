@@ -160,7 +160,7 @@ def getimginfo(dirname):
     for i in t.findall('.//img'):
         fullname = i.get('id')
         name, _dot, suffix = fullname.rpartition('.')
-        if name.endswith('.i'):
+        if name.endswith('.i') or name.endswith('-i'):
             ref = name[:-2]
             icon[ref] = dict(name=fullname,
                              width=i.get('width'), height=i.get('height'))
