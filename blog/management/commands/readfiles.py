@@ -123,9 +123,10 @@ def d2h(elem, dirname=''):
         e.tag = 'span'
         e.set('class', 'image ' + e.get('class', ''))
         imgref = e.get('ref')
-        aimg, aicon = getimginfo(dirname)
-        img = aimg.get(imgref)
-        icon = aicon.get(imgref)
+        
+        imginfo = ImageFinder(dirname)
+        img = imginfo.getimage(imgref)
+        icon = imginfo.geticon(imgref)
         if icon and img:
             a = ElementTree.SubElement(e, 'a', dict(href=img['name']))
             ElementTree.SubElement(
@@ -155,21 +156,31 @@ def makelink(e, href):
         a.text = e.text
         e.text = None
 
-def getimginfo(dirname):
-    img = {}
-    icon = {}
-    t = ElementTree.parse(dirname + '/imginfo.xml')
-    for i in t.findall('.//img'):
-        fullname = i.get('id')
-        name, _dot, suffix = fullname.rpartition('.')
-        if name.endswith('.i') or name.endswith('-i'):
-            ref = name[:-2]
-            icon[ref] = dict(name=fullname,
-                             width=i.get('width'), height=i.get('height'))
-        else:
-            img[name] = dict(name=fullname,
-                             width=i.get('width'), height=i.get('height'))
-    return img, icon
+class ImgageFinder:
+    
+    def __init__(self, dirname):
+        self.dirname = dirname
+        self.img = {}
+        self.icon = {}
+        t = ElementTree.parse(dirname + '/imginfo.xml')
+        for i in t.findall('.//img'):
+            fullname = i.get('id')
+            name, _dot, suffix = fullname.rpartition('.')
+            if name.endswith('.i') or name.endswith('-i'):
+                ref = name[:-2]
+                self.icon[ref] = dict(name=fullname,
+                                      width=i.get('width'),
+                                      height=i.get('height'))
+            else:
+                self.img[name] = dict(name=fullname,
+                                      width=i.get('width'),
+                                      height=i.get('height'))
+    
+    def getimage(self, name):
+        return self.img.get(name)
+    
+    def geticon(self, name):
+        return self.icon.get(name)
 
 def serialize(elem):
     if elem is None:
