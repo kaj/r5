@@ -63,7 +63,9 @@ def readfile(filename):
     tree = ElementTree.parse(filename)
 
     date = parsedate(serialize(tree.find('db:info/db:pubdate', nsmap)))
-    p, isnew = Post.objects.get_or_create(posted_time=date, slug=slug)
+    lang = tree.getroot().get('{http://www.w3.org/XML/1998/namespace}lang')
+    p, isnew = Post.objects.get_or_create(posted_time=date, slug=slug,
+                                          lang=lang)
 
     p.title = d2h(tree.find('db:info/db:title', nsmap))
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))

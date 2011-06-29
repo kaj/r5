@@ -1,5 +1,6 @@
 <!doctype html>
-<html>
+{% load i18n %}
+<html lang="{{lang}}">
   <head>
     <title>{% block title %}Rasmus.krats.se{% endblock %}</title>
     <link rel="stylesheet" href="{{STATIC_URL}}blog.css" type="text/css"/>
@@ -8,7 +9,7 @@
     <div id="headerwrap">
       <div id="header">
 	<p id="sitename">Rasmus.krats.se</p>
-	<p id="tagline">Skriverier då och då, på webben sedan 1995</p>
+	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
       </div>
     </div>
     <div id="mainwrap">

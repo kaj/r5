@@ -31,7 +31,12 @@ TIME_ZONE = 'Europe/Stockholm'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'sv-se'
+LANGUAGE_CODE = 'sv'
+
+LANGUAGES = (
+    ('sv', 'Svenska'),
+    ('en', 'English'),
+)
 
 SITE_ID = 1
 

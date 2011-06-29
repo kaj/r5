@@ -10,6 +10,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     abstract = models.TextField()
     content = models.TextField()
-
+    lang = models.CharField(max_length=2)
+    
     class Meta:
         ordering = ['-posted_time']
