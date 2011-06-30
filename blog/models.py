@@ -14,3 +14,6 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-posted_time']
+    
+    def get_absolute_url(self):
+        return "/%d/%s" % (self.posted_time.year, self.slug)

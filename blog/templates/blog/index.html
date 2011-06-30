@@ -18,7 +18,7 @@
       </header>
       <div>{{post.abstract|safe}}</div>
       <p class="readmore">
-	<a href="/{{post.posted_time.year}}/{{post.slug}}">
+	<a href="{{post.get_absolute_url}}">
 	  Läs inlägget {{post.title|safe}}
 	</a>
       </p>
