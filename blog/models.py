@@ -16,4 +16,7 @@ class Post(models.Model):
         ordering = ['-posted_time']
     
     def get_absolute_url(self):
-        return "/%d/%s" % (self.posted_time.year, self.slug)
+        if self.posted_time:
+            return "/%d/%s" % (self.posted_time.year, self.slug)
+        else:
+            return "/%s" % self.slug
