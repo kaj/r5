@@ -143,7 +143,8 @@ def d2h(elem, dirname='', year=''):
         img = imginfo.getimage(imgref)
         icon = imginfo.geticon(imgref)
         if icon and img:
-            a = ElementTree.SubElement(e, 'a', dict(href=img['name']))
+            a = ElementTree.SubElement(
+                e, 'a', dict(href=img['name'], rel='image'))
             ElementTree.SubElement(
                 a, 'img', dict(src=icon['name'],
                                width=icon['width'], height=icon['height']))
