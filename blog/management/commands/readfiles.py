@@ -2,6 +2,7 @@ from blog.models import Post
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
+from django.contrib.redirects.models import Redirect
 from xml.etree import ElementTree
 from shutil import copy
 import os
@@ -73,6 +74,17 @@ def readfile(filename):
     p.content = d2h(tree.getroot(), dirname, str(date.year) if date else '')
     p.save()
     print " ", date, slug, p.title
+
+    op = filename[len(settings.CONTENT_FILES_BASE)-1:-5]
+    redirect(op, p.get_absolute_url())
+    redirect(op + '.html', p.get_absolute_url())
+
+def redirect(old_path, new_path):
+    redirect, _isnew = Redirect.objects.get_or_create(
+        site_id=settings.SITE_ID,
+        old_path=old_path)
+    redirect.new_path = new_path
+    redirect.save();
 
 def d2h(elem, dirname='', year=''):
     if elem is None:
