@@ -63,7 +63,12 @@ def readfile(filename):
         ElementTree.register_namespace(prefix, url)
 
     tree = ElementTree.parse(filename)
-
+    # Ok, I don't know if this is a good idea, but mark parets.
+    # Maybe there is a flag to ElementTree that provides this instead?
+    for e in tree.iter():
+        for child in list(e):
+            child.parent = e
+    
     date = parsedate(serialize(tree.find('db:info/db:pubdate', nsmap)))
     lang = tree.getroot().get('{http://www.w3.org/XML/1998/namespace}lang')
     p, isnew = Post.objects.get_or_create(posted_time=date, slug=slug,
@@ -127,7 +132,7 @@ def d2h(elem, dirname='', year=''):
             del e.attrib['{http://www.w3.org/1999/xlink}href']
         role = e.get('role')
         if role == 'wp':
-            lang = 'sv' # TODO current language
+            lang = getLanguage(e)
             makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, e.text))
         elif role == 'sw':
             makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % e.text)
@@ -165,6 +170,13 @@ def d2h(elem, dirname='', year=''):
 
     return serialize(elem)
 
+def getLanguage(e):
+    langattr = "{http://www.w3.org/XML/1998/namespace}lang"
+    if langattr in e.keys():
+        return e.get(langattr)
+    else:
+        return getLanguage(e.parent)
+    
 def makelink(e, href):
     """Convert the element e to a link to href."""
     if e.tag == 'span':
