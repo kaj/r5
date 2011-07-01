@@ -57,6 +57,9 @@ html, body {
     -moz-border-radius: 0.5em;
 }
 
+article {
+    margin: 1ex 0 2em;
+}
 header {
     margin: 1em 0;
 }
