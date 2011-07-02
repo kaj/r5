@@ -19,7 +19,7 @@
     <h2>{% trans "Liknande sidor" %}</h2>
     <ul>
       {% for p in post.tags.similar_objects %}
-      <li><a href="{{p.get_absolute_url}}">{{p.title|safe}}</li>
+      <li><a href="{{p.get_absolute_url}}">{{p.title|safe}}</a></li>
       {% endfor %}
     </ul>
   </div>
