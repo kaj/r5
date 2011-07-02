@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-06-29 21:29+0200\n"
+"POT-Creation-Date: 2011-07-03 00:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,10 +17,39 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: blog/templates/blog/base.html:12
+#: blog/templates/blog/base.html:21
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing This And That, on the web since 1995"
 
-#: blog/templates/blog/post_detail.html:9
+#: blog/templates/blog/index.html:19 blog/templates/blog/tagged.html:17
+msgid "Läs inlägget"
+msgstr "Read"
+
+#: blog/templates/blog/index.html:32 blog/templates/blog/tagcloud.html:7
+#: blog/templates/blog/tagged.html:27
+msgid "Taggmoln"
+msgstr "Tag cloud"
+
+#: blog/templates/blog/post_detail.html:19
+msgid "Liknande sidor"
+msgstr "Similar pages"
+
+#: blog/templates/blog/publine.html:3
 msgid "Publicerad"
 msgstr "Published"
+
+#: blog/templates/blog/publine.html:5
+msgid "taggat"
+msgstr "tagged"
+
+#: blog/templates/blog/tagcloud.html:4
+msgid "taggmoln"
+msgstr "tag cloud"
+
+#: blog/templates/blog/tagged.html:3
+msgid "på"
+msgstr "on"
+
+#: blog/templates/blog/tagged.html:6
+msgid "Taggat"
+msgstr "Tagged"
