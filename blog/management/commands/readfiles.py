@@ -182,7 +182,7 @@ def d2h(elem, dirname='', year=''):
 
     imginfo = None
     for e in elem.findall('.//r:image', nsmap):
-        e.tag = 'span'
+        e.tag = 'figure'
         e.set('class', 'image ' + e.get('class', ''))
         imgref = e.get('ref')
         
@@ -190,21 +190,31 @@ def d2h(elem, dirname='', year=''):
             imginfo = ImageFinder(dirname)
         img = imginfo.getimage(imgref)
         icon = imginfo.geticon(imgref)
+        altelem = e.find('r:alt', nsmap)
+        alt = textcontent(altelem)
+        if altelem is not None:
+            e.remove(altelem)
         if icon and img:
-            a = ElementTree.SubElement(
-                e, 'a', dict(href=img['name'], rel='image'))
-            ElementTree.SubElement(
+            e.set('style', 'width: %dpx' % (int(icon['width'])+6))
+            a = e.makeelement('a', {'href': img['name'], 'rel': 'image'})
+            e.insert(0, a)
+            img = ElementTree.SubElement(
                 a, 'img', dict(src=icon['name'],
                                width=icon['width'], height=icon['height']))
+            if alt:
+                img.set('alt', alt)
             title = e.find('db:title', nsmap)
             if title is not None:
                 a.set('title', textcontent(title))
                 e.remove(title)
+            elif alt:
+                a.set('title', alt)
         elif img:
-            ElementTree.SubElement(
-                e, 'img', dict(src=img['name'],
-                               width=img['width'], height=img['height']))
-            
+            e.set('style', 'width: %dpx' % (int(img['width'])+6))
+            a = e.makeelement('img', dict(src=img['name'],
+                                          width=img['width'], height=img['height']))
+            e.insert(0, a)
+        
         else:
             print "WARNING: image data missing:", imgref
     

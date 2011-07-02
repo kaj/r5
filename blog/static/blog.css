@@ -124,3 +124,15 @@ blockquote p.attribution {
 }
 .tag:before { content: '&'; }
 .tag:after { content: ';' }
+
+figure {
+    margin: 0.2em;
+    display: inline-block;
+}
+aside figure {
+    margin: 0;
+}
+figure p {
+    font-size: 90%;
+    font-style: italic;
+}
