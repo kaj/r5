@@ -200,10 +200,10 @@ def d2h(elem, dirname='', year=''):
             e.remove(altelem)
         if icon and img:
             e.set('style', 'width: %dpx' % (int(icon['width'])+6))
-            a = e.makeelement('a', {'href': img['name'], 'rel': 'image'})
+            a = e.makeelement('a', {'href': os.path.join('/', year, img['name']), 'rel': 'image'})
             e.insert(0, a)
             img = ElementTree.SubElement(
-                a, 'img', dict(src=icon['name'],
+                a, 'img', dict(src=os.path.join('/', year, icon['name']),
                                width=icon['width'], height=icon['height']))
             if alt:
                 img.set('alt', alt)
@@ -215,7 +215,7 @@ def d2h(elem, dirname='', year=''):
                 a.set('title', alt)
         elif img:
             e.set('style', 'width: %dpx' % (int(img['width'])+6))
-            a = e.makeelement('img', dict(src=img['name'],
+            a = e.makeelement('img', dict(src=os.path.join('/', year, img['name']),
                                           width=img['width'], height=img['height']))
             e.insert(0, a)
         

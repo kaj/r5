@@ -10,9 +10,10 @@
     {% for post in posts %}
     <article>
       <header>
-	<h1>{{post.title|safe}}</h1>
+	<h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
 	{% publine post %}
       </header>
+      {% if post.abstract %}
       <div>{{post.abstract|safe}}</div>
       <p class="readmore">
 	<a href="{{post.get_absolute_url}}">
@@ -20,6 +21,9 @@
 	  {{post.title|safe}}
 	</a>
       </p>
+      {% else %}
+      <div>{{post.content|safe}}</div>
+      {% endif %}
     </article>
     {% endfor %}
     <p>Övriga inlägg från
