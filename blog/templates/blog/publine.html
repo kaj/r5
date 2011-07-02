@@ -1,0 +1,9 @@
+{% load i18n %}
+<p>
+  {% trans "Publicerad" %}
+  <time datetime="{{time|date:'c'}}" pubdate>{{time}}</time>
+  {% trans "taggat" %}
+  {% for tag in tags %}
+    <a href="/tag/{{tag.slug}}" rel="tagged">{{tag.name}}</a>{%if forloop.last%}.{%else%}, {%endif%}
+  {% endfor %}
+</p>

@@ -1,5 +1,6 @@
 from django.db import models
 from autoslug.fields import AutoSlugField
+from taggit.managers import TaggableManager
 
 class Post(models.Model):
     
@@ -11,6 +12,7 @@ class Post(models.Model):
     abstract = models.TextField()
     content = models.TextField()
     lang = models.CharField(max_length=2)
+    tags = TaggableManager()
     
     class Meta:
         ordering = ['-posted_time']

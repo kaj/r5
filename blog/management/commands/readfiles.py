@@ -74,11 +74,15 @@ def readfile(filename):
     p, isnew = Post.objects.get_or_create(posted_time=date, slug=slug,
                                           lang=lang)
 
+    tags = [textcontent(e) for e in (tree.getroot().findall('.//db:subject', nsmap) or [])]
+    if tags:
+        p.tags.add(*tags)
+    
     p.title = d2h(tree.find('db:info/db:title', nsmap))
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))
     p.content = d2h(tree.getroot(), dirname, str(date.year) if date else '')
     p.save()
-    print " ", date, slug, p.title
+    print " ", date, slug, p.title, tags
 
     op = filename[len(settings.CONTENT_FILES_BASE)-1:-5]
     redirect(op, p.get_absolute_url())
@@ -310,4 +314,4 @@ def textcontent(e):
     if e is None:
         return ''
     
-    return (e.text or '') + ''.join(textcontent(ee)+(ee.tail or '') for ee in list(e))
+    return (e.text or '') + u''.join(textcontent(ee)+(ee.tail or '') for ee in list(e))

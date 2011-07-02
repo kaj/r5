@@ -2,3 +2,4 @@
 # Can be installed py "pip install -r requirements.txt"
 
 django-autoslug
+django-taggit

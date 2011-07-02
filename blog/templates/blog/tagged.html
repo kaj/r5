@@ -1,12 +1,10 @@
 {% extends "blog/base.html" %}
-{% load blogtags %}
-
-{% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
+{% load i18n blogtags %}
+{% block title %}{{tag.name}} {% trans "på" %} Rasmus.krats.se{% endblock %}
 
 {% block main %}
-    {% if head %}
-        <h1>{{head}}</h1>
-    {% endif %}
+    <h1>{% trans "Taggat" %} {{tag.name}}</h1>
+    
     {% for post in posts %}
     <article>
       <header>
@@ -21,7 +19,4 @@
       </p>
     </article>
     {% endfor %}
-    <p>Övriga inlägg från
-      {% for y in years %}
-      <a href="/{{y}}/">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 {% endblock %}

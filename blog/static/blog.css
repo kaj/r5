@@ -136,3 +136,15 @@ figure p {
     font-size: 90%;
     font-style: italic;
 }
+
+ul.tagcloud {
+    text-align: center;
+}
+ul.tagcloud li {
+    display: inline;
+}
+ul.tagcloud li.w1 { font-size: 80%; }
+ul.tagcloud li.w2 { font-size: 100%; }
+ul.tagcloud li.w3 { font-size: 120%; }
+ul.tagcloud li.w4 { font-size: 140%; }
+ul.tagcloud li.w5 { font-size: 160%; }

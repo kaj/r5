@@ -1,19 +1,26 @@
 {% extends "blog/base.html" %}
-{% load i18n %}
+{% load i18n blogtags %}
 
 {% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
 
 {% block main %}
   <header>
     <h1>{{post.title|safe}}</h1>
-    <p>{% trans "Publicerad" %}
-    <time datetime="{{post.posted_time|date:'c'}}" pubdate>
-      {{post.posted_time}}
-    </time>
-    </p>
+    {% publine post %}
   </header>
   {% if post.abstract %}
   <div class="abstract">{{post.abstract|safe}}</div>
   {% endif %}
   <div class="content">{{post.content|safe}}</div>
+{% endblock %}
+
+{% block sideblocktop %}
+  <div class="sideblock">
+    <h2>{% trans "Liknande sidor" %}</h2>
+    <ul>
+      {% for p in post.tags.similar_objects %}
+      <li><a href="{{p.get_absolute_url}}">{{p.title|safe}}</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

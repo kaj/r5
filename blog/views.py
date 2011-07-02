@@ -5,6 +5,8 @@ from blog.models import Post
 from django.template import defaultfilters
 from datetime import datetime
 from django.utils import translation
+from taggit.models import Tag
+from math import pow
 
 def index(request, year=None, lang='sv'):
     translation.activate(lang)
@@ -33,4 +35,26 @@ def post_detail(request, year, slug):
     return direct_to_template(request, 'blog/post_detail.html', {
             'post': post,
             'lang': post.lang,
+            })
+
+def tagcloud(request, lang='sv'):
+    translation.activate(lang)
+    tags = Tag.objects.all().order_by('name')
+    for tag in tags:
+        tag.n = tag.taggit_taggeditem_items.count()
+    max_n = max(tag.n for tag in tags)
+    exponent = 0.4
+    c = 5.9 / pow(max_n, exponent)
+    for tag in tags:
+        tag.w = int(pow(tag.n, exponent)*c)
+    return direct_to_template(request, 'blog/tagcloud.html', {
+            'tags': tags,
+            })
+
+def tagged(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    posts = Post.objects.filter(tags__in=[tag])
+    return direct_to_template(request, 'blog/tagged.html', {
+            'tag': tag,
+            'posts': posts,
             })
