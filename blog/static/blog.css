@@ -61,6 +61,11 @@ html, body {
 article {
     margin: 1ex 0 2em;
 }
+article .readmore {
+    text-align: right;
+    margin: 0 1em;
+    font-style: italic;
+}
 header {
     margin: 1em 0;
 }
