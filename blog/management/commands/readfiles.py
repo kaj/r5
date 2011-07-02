@@ -101,13 +101,18 @@ def d2h(elem, dirname='', year=''):
         info.tag = None
 
     for docb, html in (('db:para', 'p'), 
-                       ('db:phrase', 'span'), ('db:acronym', 'abbr'),
-                       ('db:emphasis', 'em'),
+                       ('db:phrase', 'span'),
+                       ('db:citetitle', 'cite'),
+                       ('db:acronym', 'abbr'), ('db:abbrev', 'abbr'),
+                       ('db:emphasis', 'em'), ('db:code', 'code'),
                        ('db:itemizedlist', 'ul'), ('db:listitem', 'li'),
-                       ('db:table', 'table'), ('db:thead', 'thead'),
-                       ('db:summary', 'summary'),
+                       ('db:simplelist', 'ul'), ('db:member', 'li'),
+                       ('db:table', 'table'),
+                       ('db:thead', 'thead'), ('db:tbody', 'tbody'),
+                       ('db:summary', 'summary'), ('db:caption', 'caption'),
                        ('db:tr', 'tr'), ('db:th', 'th'), ('db:td', 'td'),
                        ('db:sidebar', 'aside'),
+                       ('db:subscript', 'sub'), ('db:superscript', 'sup'),
                        ('db:quote', 'q')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html
@@ -118,11 +123,49 @@ def d2h(elem, dirname='', year=''):
         t = e.find('db:title', nsmap)
         if t is not None:
             t.tag = 'h1'
+
+    for e in elem.findall('.//db:blockquote', nsmap):
+        e.tag = 'blockquote'
+        attrib = e.find('db:attribution', nsmap)
+        if attrib is not None:
+            attrib.tag = 'p'
+            attrib.set('class', 'attribution')
+            e.remove(attrib)
+            e.append(attrib)
+    
+    for e in elem.findall('.//db:programlisting', nsmap):
+        e.tag = 'pre'
+        language = e.get('language')
+        if language:
+            e.set('class', 'programlisting ' + language)
+            del e.attrib['language']
+        else:
+            e.set('class', 'programlisting')
+        
+    for e in elem.findall('.//db:formalpara', nsmap):
+        e.tag = None
+        title = e.find('db:title', nsmap)
+        title.tag = 'strong'
+        p = e.find('p')
+        p.set('class', 'formalpara')
+        e.remove(title)
+        p.insert(0, title)
+        title.tail = title.tail + p.text
+        p.text = None
+
+    for e in elem.findall('.//db:uri', nsmap):
+        e.tag = 'a'
+        e.set('href', e.text if ':' in e.text else 'http://' + e.text)
     
     # Inline simple stuff, put it in a span with the docbook name as class
-    for docb in ('personname', 'orgname', 'filename', 'tag'):
+    for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
         for e in elem.findall('.//db:' + docb, nsmap):
             e.tag = 'span'
+            e.set('class', (e.get('class', '') + ' ' + docb).strip())
+    
+    for docb in ('command', ):
+        for e in elem.findall('.//db:' + docb, nsmap):
+            e.tag = 'code'
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
     
     for e in elem.iter():
@@ -133,7 +176,7 @@ def d2h(elem, dirname='', year=''):
         role = e.get('role')
         if role == 'wp':
             lang = getLanguage(e)
-            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, e.text))
+            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, textcontent(e)))
         elif role == 'sw':
             makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % e.text)
 
@@ -155,7 +198,7 @@ def d2h(elem, dirname='', year=''):
                                width=icon['width'], height=icon['height']))
             title = e.find('db:title', nsmap)
             if title is not None:
-                a.set('title', title.text)
+                a.set('title', textcontent(title))
                 e.remove(title)
         elif img:
             ElementTree.SubElement(
@@ -252,3 +295,9 @@ def serialize(elem):
     ElementTree._serialize_xml(data.append, elem, encoding='utf8',
                                qnames=qnames, namespaces=namespaces)
     return "".join(data).decode('utf8').strip()
+
+def textcontent(e):
+    if e is None:
+        return ''
+    
+    return (e.text or '') + ''.join(textcontent(ee)+(ee.tail or '') for ee in list(e))

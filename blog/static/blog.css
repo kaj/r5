@@ -96,3 +96,31 @@ aside, .sidebar {
 p {
     margin: 0 0 1ex 0;
 }
+
+/** Tables **/
+table { border-collapse: collapse; }
+table caption { caption-side: bottom; text-align: left;
+  font-style: italic; font-size: 90%; }
+table th, table td 
+  { border: solid 1px #cccccc; text-align: left; padding: 0 1ex; }
+table thead tr, table tbody tr:nth-child(even) { background-color: #e8e8e8; color: black; }
+
+blockquote { max-width: 34em; margin: 1ex 1em 1em; padding: 1ex 1em; 
+  font-style: italic;
+  background: white; color: #555555;
+  border: solid 1px #888888;
+  -moz-box-shadow: .3em .2em .5em #aaaaaa;
+}
+blockquote > *:first-child { margin-top: 0; padding-top: 0; }
+blockquote p.attribution {
+    text-align: right;
+    font-style: italic;
+    margin-bottom: 0;
+}
+.replaceable { font-style: italic; }
+.tag {
+    color: #51AA17;
+    font-family: monospace;
+}
+.tag:before { content: '&'; }
+.tag:after { content: ';' }
