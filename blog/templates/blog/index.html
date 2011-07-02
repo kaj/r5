@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load blogtags %}
+{% load i18n blogtags %}
 
 {% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
 
@@ -24,4 +24,11 @@
     <p>Övriga inlägg från
       {% for y in years %}
       <a href="/{{y}}/">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+{% endblock %}
+
+{% block sideblockbottom %}
+  <div class="sideblock">
+    <h2>{% trans "Taggmoln" %}</h2>
+    {% tagcloud %}
+  </div>
 {% endblock %}

@@ -1,16 +1,10 @@
 {% extends "blog/base.html" %}
-{% load i18n %}
+{% load i18n blogtags %}
 
 {% block title %}Rasmus.krats.se {% trans "taggmoln" %}{% endblock %}
 
 {% block main %}
     <h1>{% trans "Taggmoln" %}</h1>
 
-    <ul class="tagcloud">
-      {% for tag in tags %}
-      <li title="{{tag.n}} posts tagged {{tag.name}}" class="n{{tag.n}} w{{tag.w}}">
-	<a href="/tag/{{tag.slug}}">{{tag.name}}</a>
-      </li>
-      {% endfor %}
-    </ul>
+    {% tagcloud %}
 {% endblock %}

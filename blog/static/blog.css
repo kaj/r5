@@ -56,6 +56,7 @@ html, body {
     -moz-box-shadow: 0.2em 0.3em 0.8em #aaaaaa;
     -moz-border-radius: 0.5em;
 }
+.sideblock .tagcloud { font-size: 95%; }
 
 article {
     margin: 1ex 0 2em;
@@ -139,12 +140,14 @@ figure p {
 
 ul.tagcloud {
     text-align: center;
+    margin: 0 0 1em 0;
+    padding: 0;
 }
 ul.tagcloud li {
     display: inline;
 }
-ul.tagcloud li.w1 { font-size: 80%; }
-ul.tagcloud li.w2 { font-size: 100%; }
-ul.tagcloud li.w3 { font-size: 120%; }
-ul.tagcloud li.w4 { font-size: 140%; }
-ul.tagcloud li.w5 { font-size: 160%; }
+ul.tagcloud li.w1 { font-size: 70%; }
+ul.tagcloud li.w2 { font-size: 85%; }
+ul.tagcloud li.w3 { font-size: 100%; }
+ul.tagcloud li.w4 { font-size: 120%; }
+ul.tagcloud li.w5 { font-size: 150%; }

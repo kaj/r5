@@ -20,3 +20,10 @@
     </article>
     {% endfor %}
 {% endblock %}
+
+{% block sideblockbottom %}
+  <div class="sideblock">
+    <h2>{% trans "Taggmoln" %}</h2>
+    {% tagcloud %}
+  </div>
+{% endblock %}
