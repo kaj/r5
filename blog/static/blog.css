@@ -1,14 +1,22 @@
 html, body {
     margin: 0;
     padding: 0;
-    background: #eeeeee;
-    color: black;
+    background: #f6f1f4;
+    color: #200010;
 }
 #headerwrap {
     background: #454229 no-repeat 30% 60%;
     color: white;
     margin: 0;
     padding: 1ex 1em;
+}
+#headerwrap :link, #headerwrap :visited {
+    color: white;
+    text-decoration: none;
+}
+#headerwrap a:hover {
+    color: #eeccff;
+    text-decoration: underline;
 }
 
 #headerwrap { background-image: url(naturbanner-1680.jpg); }
@@ -68,8 +76,18 @@ article .readmore {
     font-style: italic;
 }
 article .readmore:before {
-    content: "\261e ";
+    content: "\261e";
     font-size: 120%;
+    padding-right: 1ex;
+}
+address {
+    text-align: right;
+    margin: 1em 0;
+}
+address:before {
+    content: "\270d";
+    font-size: 120%;
+    padding-right: 1ex;
 }
 header {
     margin: 1em 0;
