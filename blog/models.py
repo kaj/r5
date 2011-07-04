@@ -6,7 +6,7 @@ class Post(models.Model):
     
     posted_time = models.DateTimeField(null=True, blank=True, db_index=True)
     slug = AutoSlugField(populate_from='title', db_index=True,
-                         unique_with='posted_time__month')
+                         unique_with=('posted_time__month', 'lang'))
 
     title = models.CharField(max_length=200)
     abstract = models.TextField()
@@ -32,3 +32,10 @@ class Update(models.Model):
 
     class Meta:
         ordering = ['-time']
+
+    @property
+    def lang(self):
+        return self.post.lang
+
+    def get_absolute_url(self):
+        return self.post.get_absolute_url()

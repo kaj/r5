@@ -49,15 +49,9 @@ def readfile(filename):
     slug = os.path.basename(filename)[:-5]
     dirname = os.path.dirname(filename)
     if slug in ['index', 'sv', 'en']:
-        t = os.path.basename(os.path.dirname(filename))
-        if slug == 'index':
-            slug = t
-        else:
-            slug = t + '.' + slug
-    if slug.endswith('.sv'):
-        slug = slug[:-3] + '_sv'
-    if slug.endswith('.en'):
-        slug = slug[:-3] + '_en'
+        slug = os.path.basename(os.path.dirname(filename))
+    if slug.endswith('.sv') or slug.endswith('.en'):
+        slug = slug[:-3]
 
     for prefix, url in nsmap.items():
         ElementTree.register_namespace(prefix, url)

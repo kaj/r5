@@ -7,16 +7,21 @@ from blog.models import Post, Update
 from django.utils import translation
 from taggit.models import Tag
 
-def index(request, year=None, lang='sv'):
+def index(request, year=None):
+    lang = translation.get_language_from_request(request)
     translation.activate(lang)
+    
+    updates = Update.objects.all()
     if year:
         head = u'inlägg från %s' % year
-        updates = get_list_or_404(Update.objects\
+        updates = get_list_or_404(updates \
                                       .filter(time__year=year) \
                                       .order_by('time'))
+        updates = filter_by_language(updates, lang)
     else:
         head = None
-        updates = Update.objects.order_by('-time')[:5]
+        updates = updates.order_by('-time')[:10]
+        updates = filter_by_language(updates, lang)[:5]
     
     return direct_to_template(request, 'blog/index.html', {
             'head': head,
@@ -27,24 +32,46 @@ def index(request, year=None, lang='sv'):
             })
 
 def post_detail(request, year, slug):
-    post = get_object_or_404(Post, 
-                             posted_time__year=year,
-                             slug=slug)
-    translation.activate(post.lang)
+    lang = translation.get_language_from_request(request)
+    translation.activate(lang)
+    try:
+        post = get_object_or_404(Post, 
+                                 posted_time__year=year,
+                                 slug=slug,
+                                 lang=lang)
+    except:
+        post = get_object_or_404(Post, 
+                                 posted_time__year=year,
+                                 slug=slug)
+
+    similar = filter_by_language(post.tags.similar_objects(), post.lang,
+                                 extra_skip=post.get_absolute_url())
     
     return direct_to_template(request, 'blog/post_detail.html', {
             'post': post,
             'lang': post.lang,
+            'similar': similar,
             })
 
-def tagcloud(request, lang='sv'):
+def tagcloud(request):
+    lang = translation.get_language_from_request(request)
     translation.activate(lang)
     return direct_to_template(request, 'blog/tagcloud.html')
 
 def tagged(request, slug):
+    lang = translation.get_language_from_request(request)
+    translation.activate(lang)
     tag = Tag.objects.get(slug=slug)
-    posts = Post.objects.filter(tags__in=[tag])
+    posts = filter_by_language(Post.objects.filter(tags__in=[tag]),
+                               lang)
     return direct_to_template(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
             })
+
+def filter_by_language(posts, lang, extra_skip=None):
+    samelang = set(p.get_absolute_url() for p in posts if p.lang == lang)
+    if extra_skip:
+        samelang.add(extra_skip)
+    return [p for p in posts
+            if p.lang == lang or p.get_absolute_url() not in samelang]
