@@ -77,6 +77,8 @@ html, body {
     -moz-box-shadow: 0.2em 0.3em 0.8em #aaaaaa;
     -moz-border-radius: 0.5em;
 }
+.sideblock ul { margin: 0.5ex 0; padding: 0 0 0 2em; }
+.sideblock h3 { margin: 1ex 0 0 0; }
 .sideblock .tagcloud { font-size: 95%; }
 
 article {
@@ -111,6 +113,10 @@ h1, h2 {
 h1 {
     font-size: 2em;
     font-weight: bold;
+    font-family: sans-serif;
+}
+p.publine {
+    font-size: 90%;
     font-family: sans-serif;
 }
 article h1 a {
