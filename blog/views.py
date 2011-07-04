@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.views.generic.simple import direct_to_template
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.http import Http404
-from blog.models import Post
+from blog.models import Post, Update
 from django.utils import translation
 from taggit.models import Tag
 
@@ -11,21 +11,17 @@ def index(request, year=None, lang='sv'):
     translation.activate(lang)
     if year:
         head = u'inlägg från %s' % year
-        posts = get_list_or_404(Post.objects.all().distinct() \
-                                    .filter(update__time__year=year) \
-                                    .order_by('update__time'))
-        
-        if not posts:
-            raise Http404(u'Inga inlägg från %s.' % year)
+        updates = get_list_or_404(Update.objects\
+                                      .filter(time__year=year) \
+                                      .order_by('time'))
     else:
         head = None
-        posts = Post.objects.exclude(posted_time__exact=None) \
-            .order_by('-update__time')[:5]
+        updates = Update.objects.order_by('-time')[:5]
     
     return direct_to_template(request, 'blog/index.html', {
             'head': head,
             'lang': lang,
-            'posts': posts,
+            'updates': updates,
             'years': [x.year for x
                       in Post.objects.dates('posted_time', 'year')],
             })

@@ -7,8 +7,9 @@
     {% if head %}
         <h1>{{head}}</h1>
     {% endif %}
-    {% for post in posts %}
-    <article>
+    {% for update in updates %}
+      {% with update.post as post %}
+      <article>
       <header>
         <h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
         {% publine post %}
@@ -16,15 +17,13 @@
       {% if post.abstract %}
         <div class="abstract">{{post.abstract|safe}}</div>
       {% endif %}
-      {% for u in post.update_set.all %}
-        {% if u.note %}
+      {% if update.note %}
           <div class="update">
             <strong>{% trans "Uppdatering" %}
-              <time datetime="{{u.time|date:'c'}}">{{u.time}}</time>:</strong>
-            {{u.note|safe}}
+              <time datetime="{{update.time|date:'c'}}">{{update.time}}</time>:</strong>
+            {{update.note|safe}}
           </div>
-        {% endif %}
-      {% endfor %}
+      {% endif %}
       {% if post.abstract %}
         <p class="readmore">
           <a href="{{post.get_absolute_url}}">
@@ -35,7 +34,8 @@
       {% else %}
         <div>{{post.content|safe}}</div>
       {% endif %}
-    </article>
+      </article>
+      {% endwith %}
     {% endfor %}
     <p>Övriga inlägg från
       {% for y in years %}
