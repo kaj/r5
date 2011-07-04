@@ -22,3 +22,13 @@ class Post(models.Model):
             return "/%d/%s" % (self.posted_time.year, self.slug)
         else:
             return "/%s" % self.slug
+
+class Update(models.Model):
+    
+    post = models.ForeignKey(Post)
+    time = models.DateTimeField(db_index=True)
+
+    note = models.TextField()
+
+    class Meta:
+        ordering = ['-time']

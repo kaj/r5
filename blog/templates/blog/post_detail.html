@@ -8,9 +8,21 @@
     <h1>{{post.title|safe}}</h1>
     {% publine post %}
   </header>
+
   {% if post.abstract %}
-  <div class="abstract">{{post.abstract|safe}}</div>
+    <div class="abstract">{{post.abstract|safe}}</div>
   {% endif %}
+
+  {% for u in post.update_set.all %}
+    {% if u.note %}
+    <div class="update">
+      <strong>{% trans "Uppdatering" %}
+	<time datetime="{{u.time|date:'c'}}">{{u.time}}</time>:</strong>
+      {{u.note|safe}}
+    </div>
+    {% endif %}
+  {% endfor %}
+
   <div class="content">{{post.content|safe}}</div>
 
   <address>Rasmus Kaj

@@ -10,19 +10,30 @@
     {% for post in posts %}
     <article>
       <header>
-	<h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
-	{% publine post %}
+        <h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
+        {% publine post %}
       </header>
       {% if post.abstract %}
-      <div>{{post.abstract|safe}}</div>
-      <p class="readmore">
-	<a href="{{post.get_absolute_url}}">
-	  {% trans "Läs inlägget" %}
-	  {{post.title|safe}}
-	</a>
-      </p>
+        <div class="abstract">{{post.abstract|safe}}</div>
+      {% endif %}
+      {% for u in post.update_set.all %}
+        {% if u.note %}
+          <div class="update">
+            <strong>{% trans "Uppdatering" %}
+              <time datetime="{{u.time|date:'c'}}">{{u.time}}</time>:</strong>
+            {{u.note|safe}}
+          </div>
+        {% endif %}
+      {% endfor %}
+      {% if post.abstract %}
+        <p class="readmore">
+          <a href="{{post.get_absolute_url}}">
+            {% trans "Läs inlägget" %}
+            {{post.title|safe}}
+          </a>
+        </p>
       {% else %}
-      <div>{{post.content|safe}}</div>
+        <div>{{post.content|safe}}</div>
       {% endif %}
     </article>
     {% endfor %}

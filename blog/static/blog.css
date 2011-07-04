@@ -126,7 +126,7 @@ aside, .sidebar {
     padding: 2px;
 }
 
-.abstract {
+.abstract, .update {
     font-style: italic;
     margin-bottom: 1em;
 }

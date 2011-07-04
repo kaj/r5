@@ -1,4 +1,4 @@
-from blog.models import Post
+from blog.models import Post, Update
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
@@ -77,6 +77,17 @@ def readfile(filename):
     tags = [textcontent(e) for e in (tree.getroot().findall('.//db:subject', nsmap) or [])]
     if tags:
         p.tags.add(*tags)
+    
+    if date: # Create an empty update for original posting
+        update, isnew = Update.objects.get_or_create(post=p, time=date)
+    for revision in tree.findall('db:info//db:revision', nsmap):
+        date = parsedate(serialize(revision.find('db:date', nsmap)))
+        note = d2h(revision.find('db:revremark', nsmap)) or \
+            d2h(revision.find('db:revdescription', nsmap))
+        print date, note[:40]
+        update, isnew = Update.objects.get_or_create(post=p, time=date)
+        update.note = note
+        update.save()
     
     p.title = d2h(tree.find('db:info/db:title', nsmap))
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))
