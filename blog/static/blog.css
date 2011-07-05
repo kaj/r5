@@ -8,7 +8,7 @@ html, body {
     background: #454229 no-repeat 30% 60%;
     color: white;
     margin: 0;
-    padding: 1ex 1em;
+    padding: 1ex 0;
 }
 #headerwrap :link, #headerwrap :visited {
     color: white;
@@ -55,7 +55,8 @@ html, body {
 
 #header, #mainwrap {
     margin: auto;
-    max-width: 60em;
+    max-width: 62em;
+    padding: 0 1ex;
 }
 #main {
     float: left;
