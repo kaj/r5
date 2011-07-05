@@ -134,7 +134,7 @@ header p {
     margin: 0;
 }
 
-aside, .sidebar {
+aside, .sidebar, article figure {
     float: right;
     clear: right;
     margin: 0 0 1ex 1ex;

@@ -86,6 +86,9 @@ def readfile(filename):
     p.title = d2h(tree.find('db:info/db:title', nsmap))
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))
     p.content = d2h(tree.getroot(), dirname, str(date.year) if date else '')
+    for image in tree.findall('.//figure'):
+        if 'front' in image.get('class'):
+            p.frontimage = serialize(image, False)
     p.save()
     print " ", date, slug, p.title, tags
 
@@ -301,7 +304,7 @@ class ImageFinder:
                 print "Copy %s to %s" % (src, dst)
                 copy(src, dst)
 
-def serialize(elem):
+def serialize(elem, skip_root=True):
     if elem is None:
         return ''
 
@@ -309,7 +312,8 @@ def serialize(elem):
         elem, 'utf8', None
         )
 
-    elem.tag = None
+    if skip_root:
+        elem.tag = None
     data = []
     ElementTree._serialize_xml(data.append, elem, encoding='utf8',
                                qnames=qnames, namespaces=namespaces)
