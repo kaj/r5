@@ -5,6 +5,7 @@ from django.core.management.base import NoArgsCommand
 from django.contrib.redirects.models import Redirect
 from xml.etree import ElementTree
 from shutil import copy
+from urllib import quote
 import os
 
 nsmap = {
@@ -188,9 +189,11 @@ def d2h(elem, dirname='', year=''):
         role = e.get('role')
         if role == 'wp':
             lang = getLanguage(e)
-            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, textcontent(e)))
+            ref = quote(textcontent(e).encode('utf8'))
+            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, ref))
         elif role == 'sw':
-            makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % e.text)
+            ref = quote(textcontent(e).encode('utf8'))
+            makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % ref)
 
     imginfo = None
     for e in elem.findall('.//r:image', nsmap):
