@@ -1,6 +1,6 @@
 # Django settings for r5 project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 # COMPRESS = True
 
