@@ -98,6 +98,8 @@ def readfile(filename):
     redirect(op + '.html', p.get_absolute_url())
 
 def redirect(old_path, new_path):
+    if old_path == new_path:
+        return
     redirect, _isnew = Redirect.objects.get_or_create(
         site_id=settings.SITE_ID,
         old_path=old_path)
@@ -306,6 +308,11 @@ class ImageFinder:
             if not os.path.exists(dst):
                 print "Copy %s to %s" % (src, dst)
                 copy(src, dst)
+            srcurl = os.path.join('/', path, filename)
+            dsturl = '/%s/%s' % (year, filename)
+            redirect(srcurl, dsturl)
+            srcurl, _dot, _suffix = srcurl.rpartition('.')
+            redirect(srcurl, dsturl)
 
 def serialize(elem, skip_root=True):
     if elem is None:
