@@ -120,6 +120,7 @@ def d2h(elem, dirname='', year=''):
                        ('db:citetitle', 'cite'),
                        ('db:acronym', 'abbr'), ('db:abbrev', 'abbr'),
                        ('db:emphasis', 'em'), ('db:code', 'code'),
+                       ('db:literallayout', 'pre'),
                        ('db:itemizedlist', 'ul'), ('db:listitem', 'li'),
                        ('db:simplelist', 'ul'), ('db:member', 'li'),
                        ('db:table', 'table'),
