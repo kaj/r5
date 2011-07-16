@@ -19,16 +19,21 @@ html, body {
     text-decoration: underline;
 }
 
-#headerwrap { background-image: url(naturbanner-1680.jpg); }
 @media (max-width: 480px) {
-    #headerwrap {
+    body #headerwrap {
 	background-image: url(naturbanner-480.jpg);
 	padding: 0.2em;
+    }
+    body #main, body .sideblockwrap {
+	float: none;
+	width: auto;
     }
 }
 @media (min-width: 1681px) {
     #headerwrap { background-image: url(naturbanner-3868.jpg); }
 }
+#headerwrap { background-image: url(naturbanner-1680.jpg); }
+
 #sitename, #tagline {
     margin: 0.1em 0;
     text-shadow: 0.11em 0.07em 0.1em black;
