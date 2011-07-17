@@ -76,11 +76,11 @@ def readfile(filename):
     if date: # Create an empty update for original posting
         update, isnew = Update.objects.get_or_create(post=p, time=date)
     for revision in tree.findall('db:info//db:revision', nsmap):
-        date = parsedate(serialize(revision.find('db:date', nsmap)))
+        rdate = parsedate(serialize(revision.find('db:date', nsmap)))
         note = d2h(revision.find('db:revremark', nsmap)) or \
             d2h(revision.find('db:revdescription', nsmap))
-        print date, note[:40]
-        update, isnew = Update.objects.get_or_create(post=p, time=date)
+        print rdate, note[:40]
+        update, isnew = Update.objects.get_or_create(post=p, time=rdate)
         update.note = note
         update.save()
     
@@ -96,6 +96,8 @@ def readfile(filename):
     op = filename[len(settings.CONTENT_FILES_BASE)-1:-5]
     redirect(op, p.get_absolute_url())
     redirect(op + '.html', p.get_absolute_url())
+    if any(op.endswith(t) for t in ['index', 'sv', 'en']):
+        redirect(os.path.dirname(op) + '/', p.get_absolute_url())
 
 def redirect(old_path, new_path):
     if old_path == new_path:
@@ -187,8 +189,23 @@ def d2h(elem, dirname='', year=''):
     for e in elem.iter():
         link = e.get('{http://www.w3.org/1999/xlink}href')
         if link:
+            # TODO: Handle my "local protocols", lj:, rfc:
             makelink(e, link)
             del e.attrib['{http://www.w3.org/1999/xlink}href']
+            if ((not any(link.startswith(t) for t in
+                         ['#', 'http:', 'https:', 'mailto:', 'ftp:', 'lj:', 'rfc:', 'todo:', '../bm/'])) and
+                (not any(link.endswith(t) for t in
+                         ['/', '.html', '.en', '.sv', 'atom-sv.xml', 'atom-en.xml']))):
+                print "I think %s is a media file in %s for %s." % (link, dirname, year)
+                todir = os.path.join(settings.MEDIA_ROOT, year)
+                if not os.path.exists(todir):
+                    print "Creating dir", todir
+                    os.makedirs(todir)
+                copy(os.path.join(dirname, link), todir)
+                redirect(os.path.join('/', dirname[len(settings.CONTENT_FILES_BASE):], link),
+                         os.path.join('/', year, link))
+
+                
         role = e.get('role')
         if role == 'wp':
             lang = getLanguage(e)
