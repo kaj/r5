@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, url
 from django.shortcuts import redirect
+from django.views.generic.simple import direct_to_template
 from blog.views import index, post_detail, tagcloud, tagged
 
 def redirect_year(request, year):
@@ -14,4 +15,7 @@ urlpatterns = patterns(
     
     url(r'^tag/$', tagcloud),
     url(r'^tag/(?P<slug>[a-z0-9_]+)$', tagged),
+
+    url(r'^robots\.txt$', direct_to_template, 
+        {'template': 'robots.txt', 'mimetype': 'text/plain'}),
 )
