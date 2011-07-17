@@ -1,0 +1,26 @@
+{% load i18n blogtags %}
+
+{% publine obj.post %}
+
+{% if obj.post.abstract %}
+  {{obj.post.frontimage|safe}}
+  <div class="abstract">{{obj.post.abstract|safe}}</div>
+{% endif %}
+{% if obj.note %}
+  <div class="update">
+    <strong>{% trans "Uppdatering" %}
+      <time datetime="{{obj.time|date:'c'}}">{{obj.time}}</time>
+    </strong>
+    {{obj.note|safe}}
+  </div>
+{% endif %}
+{% if obj.post.abstract %}
+  <p class="readmore">
+    <a href="{{obj.post.get_absolute_url}}">
+      {% trans "Läs inlägget" %}
+      {{obj.post.title|safe}}
+    </a>
+  </p>
+{% else %}
+  <div>{{obj.post.content|safe}}</div>
+{% endif %}
