@@ -201,10 +201,12 @@ def d2h(elem, dirname='', year=''):
                 if not os.path.exists(todir):
                     print "Creating dir", todir
                     os.makedirs(todir)
-                copy(os.path.join(dirname, link), todir)
-                redirect(os.path.join('/', dirname[len(settings.CONTENT_FILES_BASE):], link),
-                         os.path.join('/', year, link))
-
+                try:
+                    copy(os.path.join(dirname, link), todir)
+                    redirect(os.path.join('/', dirname[len(settings.CONTENT_FILES_BASE):], link),
+                             os.path.join('/', year, link))
+                except:
+                    print "WARNING: Failed to copy media %s in %s to %s." % (link, dirname, year)
                 
         role = e.get('role')
         if role == 'wp':
