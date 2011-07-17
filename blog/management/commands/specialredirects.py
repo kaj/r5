@@ -51,4 +51,9 @@ class Command(NoArgsCommand):
                  'https://raw.github.com/kaj/chordlab/master/chordlab')
         redirect('/hack/webredirect?ref=darwinports.com', '/2001/webredirect')
 
+        # And finally some files that just aint there anymore.
         redirect('/rkinit.js', '')
+        redirect('/2005/natural.css', '')
+        redirect('/2005/rounded/', '')
+        redirect('/2006/print.css', '')
+
