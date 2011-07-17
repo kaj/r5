@@ -79,7 +79,7 @@ def readfile(filename):
         rdate = parsedate(serialize(revision.find('db:date', nsmap)))
         note = d2h(revision.find('db:revremark', nsmap)) or \
             d2h(revision.find('db:revdescription', nsmap))
-        print rdate, note[:40]
+        # print rdate, note[:40]
         update, isnew = Update.objects.get_or_create(post=p, time=rdate)
         update.note = note
         update.save()
@@ -91,7 +91,7 @@ def readfile(filename):
         if 'front' in image.get('class'):
             p.frontimage = serialize(image, False)
     p.save()
-    print " ", date, slug, p.title, tags
+    # print " ", date, slug, p.title, tags
 
     op = filename[len(settings.CONTENT_FILES_BASE)-1:-5]
     redirect(op, p.get_absolute_url())
@@ -196,10 +196,10 @@ def d2h(elem, dirname='', year=''):
                          ['#', 'http:', 'https:', 'mailto:', 'ftp:', 'lj:', 'rfc:', 'todo:', '../bm/'])) and
                 (not any(link.endswith(t) for t in
                          ['/', '.html', '.en', '.sv', 'atom-sv.xml', 'atom-en.xml']))):
-                print "I think %s is a media file in %s for %s." % (link, dirname, year)
+                # print "I think %s is a media file in %s for %s." % (link, dirname, year)
                 todir = os.path.join(settings.MEDIA_ROOT, year)
                 if not os.path.exists(todir):
-                    print "Creating dir", todir
+                    # print "Creating dir", todir
                     os.makedirs(todir)
                 try:
                     copy(os.path.join(dirname, link), todir)
@@ -320,13 +320,13 @@ class ImageFinder:
         # print "Image files in %s: %s" % (path, self.used)
         todir = os.path.join(settings.MEDIA_ROOT, year)
         if not os.path.exists(todir):
-            print "Creating dir", todir
+            # print "Creating dir", todir
             os.makedirs(todir)
         for filename in self.used:
             src = os.path.join(self.dirname, filename)
             dst = os.path.join(todir, filename)
             if not os.path.exists(dst):
-                print "Copy %s to %s" % (src, dst)
+                # print "Copy %s to %s" % (src, dst)
                 copy(src, dst)
             srcurl = os.path.join('/', path, filename)
             dsturl = '/%s/%s' % (year, filename)
