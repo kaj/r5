@@ -190,6 +190,7 @@ blockquote p.attribution {
 figure {
     margin: 0.2em;
     display: inline-block;
+    vertical-align: top;
 }
 aside figure {
     margin: 0;
