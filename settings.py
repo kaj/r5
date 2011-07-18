@@ -159,3 +159,6 @@ LOGGING = {
 CONTENT_FILES_BASE='/home/kaj/proj/myweb/content/'
 
 COMPRESS_OUTPUT_DIR = 'cache'
+# The default JSMINFilter breaks ugly ie-detection in html5.js
+# Try to use precompressed js files instead for now.
+COMPRESS_JS_FILTERS = []

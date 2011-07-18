@@ -1,0 +1,9 @@
+/*
+HTML5 base style, tell old browsers reasonable defaults for new elements,
+but not a "complete" "css reset", which I still think is a bad idea.
+*/
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
