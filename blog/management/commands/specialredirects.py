@@ -47,6 +47,9 @@ class Command(NoArgsCommand):
         redirect('/items.sv.html', '/')
         redirect('/items.sv', '/')
         
+        redirect('/cv.html', '/about')
+        redirect('/cv', '/about')
+
         redirect('fanatom-sv.xml', 'atom-sv-fandom.xml')
         redirect('/2008/chordlab/chordlab',
                  'https://raw.github.com/kaj/chordlab/master/chordlab')

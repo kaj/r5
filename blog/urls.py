@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 from django.shortcuts import redirect
 from django.views.generic.simple import direct_to_template
-from blog.views import index, post_detail, tagcloud, tagged
+from blog.views import index, post_detail, tagcloud, tagged, about
 from blog.feeds import UpdatesFeed, TaggedUpdatesFeed
 
 def redirect_year(request, year):
@@ -16,6 +16,8 @@ urlpatterns = patterns(
     
     url(r'^tag/$', tagcloud),
     url(r'^tag/(?P<slug>[a-z0-9-]+)$', tagged),
+
+    url(r'^about$', about),
 
     url(r'^atom-en.xml$', UpdatesFeed('en')),
     url(r'^atom-sv.xml$', UpdatesFeed('sv')),

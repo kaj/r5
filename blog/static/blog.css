@@ -207,6 +207,14 @@ ul.tagcloud li.w3 { font-size: 100%; }
 ul.tagcloud li.w4 { font-size: 120%; }
 ul.tagcloud li.w5 { font-size: 150%; }
 
+dl { margin: 1ex 0; padding: 0; }
+dl dt {
+    float: left;
+}
+dl dd {
+    margin: 0 0 1ex 10em; padding: 0;
+}
+
 @media screen and (max-width: 480px) {
     #headerwrap {
 	background-image: url(naturbanner-480.jpg);
