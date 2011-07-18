@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
+from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -18,8 +19,18 @@ urlpatterns = patterns(
     
     # The blog app handles most urls.  Must be last.
     url(r'^', include('r5.blog.urls')),
-    
-    # And even laster:
+)
+
+if settings.DEBUG:
+    urlpatterns += patterns(
+        '',
+        # url('500', direct_to_template, {'template': '500.html'}),
+        url('404', direct_to_template, {'template': '404.html'}),
+    )
+
+# And even laster:
+urlpatterns += patterns(
+    '',
     url(r'^(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
             }),
