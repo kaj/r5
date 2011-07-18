@@ -207,7 +207,7 @@ ul.tagcloud li.w3 { font-size: 100%; }
 ul.tagcloud li.w4 { font-size: 120%; }
 ul.tagcloud li.w5 { font-size: 150%; }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
     #headerwrap {
 	background-image: url(naturbanner-480.jpg);
 	padding: 0.2em;
@@ -217,9 +217,9 @@ ul.tagcloud li.w5 { font-size: 150%; }
 	width: auto;
     }
 }
-@media (min-width: 1681px) {
+@media screen and (min-width: 1681px) {
     #headerwrap { background-image: url(naturbanner-3868.jpg); }
 }
-@media (min-width: 481px) and (max-width: 1680px) {
+@media screen and (min-width: 481px) and (max-width: 1680px) {
     #headerwrap { background-image: url(naturbanner-1680.jpg); }
 }
