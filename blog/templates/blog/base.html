@@ -31,13 +31,14 @@
 	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
         <form action="/i18n/setlang/" method="post" id="selectlang">
           {% csrf_token %}
-          {% get_language_info_list for LANGUAGES as languages %}
-          {% for language in languages %}
-              <button type="submit" name="language"
-                      value="{{language.code}}">
-                {{language.name_local}} ({{language.code}})
-              </button>
-          {% endfor %}
+          {% get_current_language as LANGUAGE_CODE %}
+          {% if "en" == LANGUAGE_CODE %}
+            <input type="hidden" name="language" value="sv" />
+            <button type="submit" class="to_sv">Byt till svenska</button>
+          {% else %}
+            <input type="hidden" name="language" value="en" />
+            <button type="submit" class="to_en">Switch to English</button>
+          {% endif %}
         </form>
       </div>
     </div>
