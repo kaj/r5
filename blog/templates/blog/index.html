@@ -15,7 +15,9 @@
         {% publine post %}
       </header>
       {% if post.abstract %}
-        {{post.frontimage|safe}}
+        {% if post.frontimage %}
+          <aside>{{post.frontimage|safe}}</aside>
+        {% endif %}
         <div class="abstract">{{post.abstract|safe}}</div>
       {% endif %}
       {% if update.note %}

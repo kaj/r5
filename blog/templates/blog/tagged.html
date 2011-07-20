@@ -12,7 +12,9 @@
 	{% publine post %}
       </header>
       {% if post.abstract %}
-        {{post.frontimage|safe}}
+        {% if post.frontimage %}
+          <aside>{{post.frontimage|safe}}</aside>
+        {% endif %}
       <div>{{post.abstract|safe}}</div>
       <p class="readmore">
 	<a href="{{post.get_absolute_url}}">

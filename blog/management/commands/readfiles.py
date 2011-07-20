@@ -89,6 +89,7 @@ def readfile(filename):
     p.content = d2h(tree.getroot(), dirname, str(date.year) if date else '')
     for image in tree.findall('.//figure'):
         if 'front' in image.get('class'):
+            del image.attrib['class']
             p.frontimage = serialize(image, False)
     p.save()
     # print " ", date, slug, p.title, tags
