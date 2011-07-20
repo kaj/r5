@@ -18,7 +18,7 @@ urlpatterns = patterns(
     (r'^i18n/', include('django.conf.urls.i18n')),
     
     # The blog app handles most urls.  Must be last.
-    url(r'^', include('r5.blog.urls')),
+    url(r'^', include('blog.urls')),
 )
 
 if settings.DEBUG:
