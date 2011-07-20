@@ -5,3 +5,4 @@ django-autoslug
 django-taggit
 django_compressor
 django-debug-toolbar
+python-memcached
