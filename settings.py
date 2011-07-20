@@ -107,6 +107,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -133,6 +134,7 @@ INSTALLED_APPS = (
     'django.contrib.redirects',
     'taggit',
     'compressor',
+    'debug_toolbar',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -169,3 +171,6 @@ COMPRESS_OUTPUT_DIR = 'cache'
 # The default JSMINFilter breaks ugly ie-detection in html5.js
 # Try to use precompressed js files instead for now.
 COMPRESS_JS_FILTERS = []
+
+# Who should be allowed to see the debug toolbar.
+INTERNAL_IPS = ('127.0.0.1', )
