@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load i18n blogtags %}
+{% load cache i18n blogtags %}
 {% block title %}{{tag.name}} {% trans "på" %} Rasmus.krats.se{% endblock %}
 
 {% block main %}
@@ -32,6 +32,8 @@
 {% block sideblockbottom %}
   <div class="sideblock">
     <h2>{% trans "Taggmoln" %}</h2>
-    {% tagcloud %}
+    {% cache 7200 tagcloud %}
+      {% tagcloud %}
+    {% endcache %}
   </div>
 {% endblock %}
