@@ -51,6 +51,7 @@ def post_detail(request, year, slug):
             'post': post,
             'lang': post.lang,
             'similar': similar,
+            'next': post.get_absolute_url(),
             })
 
 def tagcloud(request):

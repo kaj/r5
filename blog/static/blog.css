@@ -225,6 +225,22 @@ dl dd {
     margin: 0 0 1ex 8em; padding: 0;
 }
 
+#writecomment p {
+    display: table-row;
+}
+#writecomment label, #writecomment input, #writecomment textarea {
+    margin: .2em;
+    display: table-cell;
+    vertical-align: baseline;
+}
+#writecomment p.fineprint {
+    display: block;
+    font-size: 84%;
+}
+#writecomment p.submit {
+    display: block;
+}
+
 @media screen and (max-width: 480px) {
     #headerwrap {
 	background-image: url(naturbanner-480.jpg);

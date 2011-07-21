@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load i18n blogtags %}
+{% load comments i18n blogtags %}
 
 {% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
 
@@ -28,6 +28,38 @@
   <address>Rasmus Kaj
     <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
   </address>
+  
+  <section id="comments">
+    {% get_comment_list for post as comment_list %}
+    {% if comment_list %}
+      <h1>{% trans "Kommentarer" %}</h1>
+    
+      {% for comment in comment_list %}
+        <section class="comment" id="c{{ comment.id }}">
+          <h1><a href="{{comment.user_url}}">{{comment.user_name}}</a>,
+            {{comment.submit_date}}</h1>
+          
+          <div>
+            {{comment.comment|linebreaks}}
+          </div>
+        </section>
+      {% endfor %}
+    {% endif %}
+
+    <section id="writecomment">
+      <h1>{% trans "Skriv en kommentar" %}</h1>
+
+      <p class="fineprint">
+        {% blocktrans %}
+        Din epostadress kommer inte att visas.  Du
+        kan inte använda markup i kommentaren, men en dubbel radmating
+        blir en styckesbrytning.
+        {% endblocktrans %}
+      </p>
+      
+      {% render_comment_form for post %}
+    </section>
+  </section>
 {% endblock %}
 
 {% block sideblocktop %}

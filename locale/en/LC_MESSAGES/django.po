@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-19 01:14+0200\n"
+"POT-Creation-Date: 2011-07-21 03:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,8 @@ msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing This And That, on the web since 1995"
 
 #: blog/templates/404.html:54 blog/templates/about.html:66
-#: blog/templates/me.html:51 blog/templates/blog/index.html:48
-#: blog/templates/blog/tagcloud.html:7 blog/templates/blog/tagged.html:32
+#: blog/templates/blog/index.html:73 blog/templates/blog/tagcloud.html:7
+#: blog/templates/blog/tagged.html:34
 msgid "Taggmoln"
 msgstr "Tag cloud"
 
@@ -58,13 +58,12 @@ msgstr ""
 "<p>I'm a system developer workin primarily with web, in an agile way and  "
 "mainly in a unix environment.  I started working and playing with web in the "
 "spring of 1995 and  hasn't been able to stop since then.</p><p>This site, <a "
-"href=\"/\">rasmus.krats.se</a>,  is part blog where I "
-"write about whatever I feel like and part lab  platform for my experiments "
-"with web development.  More about this site under the tag <a href=\"/tag/meta"
-"\">meta</a>.</p><p>I'm married to <a href=\"http://tygbittar.krats.se/"
-"\">Katarina Kaj</a>,  a member of <a href=\"http://www.stacken.kth.se/"
-"\">Stacken, the computer  club at KTH</a> and I like to read <a href=\"/tag/"
-"comics\">comics</a>.</p>"
+"href=\"/\">rasmus.krats.se</a>,  is part blog where I write about whatever I "
+"feel like and part lab  platform for my experiments with web development.  "
+"More about this site under the tag <a href=\"/tag/meta\">meta</a>.</p><p>I'm "
+"married to <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</a>,  a "
+"member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer  club "
+"at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
 
 #: blog/templates/about.html:34
 msgid "Kontakt"
@@ -86,25 +85,83 @@ msgstr "sms:"
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
-#: blog/templates/blog/base.html:58
+#: blog/templates/blog/base.html:59
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:64
+#: blog/templates/blog/base.html:65
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/index.html:23 blog/templates/blog/post_detail.html:19
+#: blog/templates/blog/index.html:26 blog/templates/blog/post_detail.html:19
 #: blog/templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: blog/templates/blog/index.html:31 blog/templates/blog/tagged.html:19
-#: blog/templates/feed/description.html:20
-msgid "Läs inlägget"
-msgstr "Read"
+#: blog/templates/blog/index.html:35
+#, python-format
+msgid ""
+"\n"
+"                  Läs inlägget %(title)s och en kommentar\n"
+"                "
+msgid_plural ""
+"\n"
+"                  Läs inlägget %(title)s och %(comments)s kommentarer\n"
+"                "
+msgstr[0] "\n"
+"Read the post %(title)s with one comment"
+msgstr[1] "\n"
+"Read the post %(title)s with %(comments)s comments"
+
+#: blog/templates/blog/index.html:41
+#, python-format
+msgid ""
+"\n"
+"                  Läs och kommentera inlägget %(title)s\n"
+"                "
+msgstr "\n"
+"Read and comment the post %(title)s"
+
+#: blog/templates/blog/index.html:52
+#, python-format
+msgid ""
+"\n"
+"                  Läs en kommentar\n"
+"                "
+msgid_plural ""
+"\n"
+"                  Läs %(comments)s kommentarer\n"
+"                "
+msgstr[0] "\n"
+"Read one comment"
+msgstr[1] "\n"
+"Read %(comments)s comments"
+
+#: blog/templates/blog/index.html:58
+msgid "Kommentera inlägget"
+msgstr "Write a comment"
 
 #: blog/templates/blog/post_detail.html:35
+msgid "Kommentarer"
+msgstr "Comments"
+
+#: blog/templates/blog/post_detail.html:50
+msgid "Skriv en kommentar"
+msgstr "Write a comment"
+
+#: blog/templates/blog/post_detail.html:53
+msgid ""
+"\n"
+"        Din epostadress kommer inte att visas.  Du\n"
+"        kan inte använda markup i kommentaren, men en dubbel radmating\n"
+"        blir en styckesbrytning.\n"
+"        "
+msgstr ""
+"\n"
+"Your email address will not be disclosed.  You can not use markup in the\n"
+"comment, but a double newline will be separate paragraphs."
+
+#: blog/templates/blog/post_detail.html:67
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
@@ -127,3 +184,7 @@ msgstr "on"
 #: blog/templates/blog/tagged.html:6
 msgid "Taggat"
 msgstr "Tagged"
+
+#: blog/templates/blog/tagged.html:21 blog/templates/feed/description.html:20
+msgid "Läs inlägget"
+msgstr "Read"
