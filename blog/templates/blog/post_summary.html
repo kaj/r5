@@ -1,6 +1,6 @@
 {% load blogtags comments i18n %}
 <article lang="{{post.lang}}">
-  {% get_comment_count for post as comment_count %}.
+  {% get_comment_count for post as comment_count %}
   <header>
     <h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
     {% publine post %}
