@@ -6,26 +6,7 @@
     <h1>{% trans "Taggat" %} {{tag.name}}</h1>
     
     {% for post in posts %}
-    <article lang="{{post.lang}}">
-      <header>
-	<h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
-	{% publine post %}
-      </header>
-      {% if post.abstract %}
-        {% if post.frontimage %}
-          <aside>{{post.frontimage|safe}}</aside>
-        {% endif %}
-      <div>{{post.abstract|safe}}</div>
-      <p class="readmore">
-	<a href="{{post.get_absolute_url}}">
-	  {% trans "Läs inlägget" %}
-	  {{post.title|safe}}
-	</a>
-      </p>
-      {% else %}
-      <div>{{post.content|safe}}</div>
-      {% endif %}
-    </article>
+        {% postsummary post %}
     {% endfor %}
 {% endblock %}
 

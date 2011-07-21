@@ -24,3 +24,17 @@ def tagcloud():
     return {
         'tags': tags,
         }
+
+@register.inclusion_tag('blog/post_summary.html')
+def updatesummary(update):
+    return {
+        'update': update,
+        'post': update.post,
+        }
+
+@register.inclusion_tag('blog/post_summary.html')
+def postsummary(post):
+    return {
+        'post': post,
+        'update': None,
+        }

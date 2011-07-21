@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load comments cache i18n blogtags %}
+{% load cache i18n blogtags %}
 
 {% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
 
@@ -7,62 +7,11 @@
     {% if head %}
         <h1>{{head}}</h1>
     {% endif %}
+
     {% for update in updates %}
-      {% with update.post as post %}
-      <article lang="{{post.lang}}">
-        {% get_comment_count for post as comment_count %}.
-        <header>
-          <h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
-          {% publine post %}
-        </header>
-        {% if post.abstract %}
-          {% if post.frontimage %}
-            <aside>{{post.frontimage|safe}}</aside>
-          {% endif %}
-          <div class="abstract">{{post.abstract|safe}}</div>
-        {% endif %}
-        {% if update.note %}
-          <div class="update">
-            <strong>{% trans "Uppdatering" %}
-              <time datetime="{{update.time|date:'c'}}">{{update.time}}</time>:</strong>
-            {{update.note|safe}}
-          </div>
-        {% endif %}
-        {% if post.abstract %}
-          <p class="readmore">
-            <a href="{{post.get_absolute_url}}">
-              {% if comment_count %}
-                {% blocktrans with title=post.title|safe count comments=comment_count %}
-                  Läs inlägget {{title}} och en kommentar
-                {% plural %}
-                  Läs inlägget {{title}} och {{comments}} kommentarer
-                {% endblocktrans %}
-              {% else %}
-                {% blocktrans with post.title|safe as title %}
-                  Läs och kommentera inlägget {{title}}
-                {% endblocktrans %}
-              {% endif %}
-            </a>
-          </p>
-        {% else %}
-          <div>{{post.content|safe}}</div>
-          <p class="readmore">
-            <a href="{{post.get_absolute_url}}#comments">
-              {% if comment_count %}
-                {% blocktrans count comments=comment_count %}
-                  Läs en kommentar
-                {% plural %}
-                  Läs {{comments}} kommentarer
-                {% endblocktrans %}
-              {% else %}
-                {% trans "Kommentera inlägget" %}
-              {% endif %}
-            </a>
-          </p>
-        {% endif %}
-      </article>
-      {% endwith %}
+        {% updatesummary update %}
     {% endfor %}
+
     <p>Övriga inlägg från
       {% for y in years %}
       <a href="/{{y}}/">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
