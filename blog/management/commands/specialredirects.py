@@ -10,6 +10,7 @@ class Command(NoArgsCommand):
         redirect('/2004/trafik-kaj-m.png', '/static/trafik-kaj-m.png')
         redirect('/2004/trafik-kaj.png', '/static/trafik-kaj.png')
         redirect('/2004/trafik-kaj.svg', '/static/trafik-kaj.svg')
+        redirect('/favicon.ico', '/static/trafik-kaj-s.png')
         redirect('/2009/naturbanner-3868.jpg', '/static/naturbanner-3868.jpg')
         redirect('/2009/naturbanner-1680.jpg', '/static/naturbanner-1680.jpg')
         redirect('/2009/naturbanner-480.jpg', '/static/naturbanner-480.jpg')
