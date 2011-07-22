@@ -1,6 +1,6 @@
 <!doctype html>
-{% load i18n compress %}
-<html lang="{{lang}}">
+{% load i18n compress %}{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{LANGUAGE_CODE}}">
   <head>
     <title>{% block title %}Rasmus.krats.se{% endblock %}</title>
     <meta name="viewport" content="width=device-width"/>
@@ -31,7 +31,6 @@
 	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
         <form action="/i18n/setlang/" method="post" id="selectlang">
           {% csrf_token %}
-          {% get_current_language as LANGUAGE_CODE %}
           {% if "en" == LANGUAGE_CODE %}
             <input type="hidden" name="language" value="sv" />
             <button type="submit" class="to_sv">Byt till svenska</button>
