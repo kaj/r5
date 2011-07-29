@@ -17,6 +17,13 @@
     <script type="text/javascript" src="{{STATIC_URL}}respond.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
+        $('figure').each(function() {
+          var link = $(this).find('a');
+          var caption = $(this).find('p');
+          if (! link.attr('title') && caption.size()) {
+            link.attr('title', caption.text());
+          }
+        });
         $("figure a").fancybox();
       });
     </script>
