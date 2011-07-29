@@ -8,8 +8,7 @@ from django.utils import translation
 from taggit.models import Tag
 
 def index(request, year=None):
-    lang = translation.get_language_from_request(request)
-    translation.activate(lang)
+    lang = _activatelang(request)
     
     updates = Update.objects.all()
     if year:
@@ -32,8 +31,7 @@ def index(request, year=None):
             })
 
 def post_detail(request, year, slug):
-    lang = translation.get_language_from_request(request)
-    translation.activate(lang)
+    lang = _activatelang(request)
     try:
         post = get_object_or_404(Post, 
                                  posted_time__year=year,
@@ -55,13 +53,11 @@ def post_detail(request, year, slug):
             })
 
 def tagcloud(request):
-    lang = translation.get_language_from_request(request)
-    translation.activate(lang)
+    _activatelang(request)
     return direct_to_template(request, 'blog/tagcloud.html')
 
 def tagged(request, slug):
-    lang = translation.get_language_from_request(request)
-    translation.activate(lang)
+    lang = _activatelang(request)
     tag = Tag.objects.get(slug=slug)
     posts = filter_by_language(Post.objects.filter(tags__in=[tag]),
                                lang)
@@ -78,6 +74,10 @@ def filter_by_language(posts, lang, extra_skip=None):
             if p.lang == lang or p.get_absolute_url() not in samelang]
 
 def about(request):
+    _activatelang(request)
+    return direct_to_template(request, 'about.html')
+
+def _activatelang(request):
     lang = translation.get_language_from_request(request)
     translation.activate(lang)
-    return direct_to_template(request, 'about.html')
+    return lang
