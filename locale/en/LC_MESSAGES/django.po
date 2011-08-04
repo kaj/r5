@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 22:57+0200\n"
+"POT-Creation-Date: 2011-08-04 23:08+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,21 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: blog/feeds.py:12
+msgid "Rasmus.krats.se"
+msgstr "Rasmus.krats.se"
+
+#: blog/feeds.py:13
+msgid ""
+"Uppdateringar på Rasmus.krats.se. Skriverier då och då, på webben sedan 1995."
+msgstr ""
+"Updates on Rasmus.krats.se.  Reminiscing This And That, on the web since 1995"
+
+#: blog/feeds.py:37
+#, python-format
+msgid "Taggat %s på Rasmus.krats.se"
+msgstr "Tagged %s on Rasmus.krats.se"
 
 #: blog/templates/404.html:15 blog/templates/blog/base.html:39
 msgid "Skriverier då och då, på webben sedan 1995"
