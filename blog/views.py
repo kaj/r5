@@ -10,7 +10,7 @@ from taggit.models import Tag
 def index(request, year=None):
     lang = _activatelang(request)
     
-    updates = Update.objects.all()
+    updates = Update.objects.all().select_related()
     if year:
         head = u'inlägg från %s' % year
         updates = get_list_or_404(updates \
