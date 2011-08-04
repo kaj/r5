@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-07-21 03:48+0200\n"
+"POT-Creation-Date: 2011-08-04 22:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:31
+#: blog/templates/404.html:15 blog/templates/blog/base.html:39
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing This And That, on the web since 1995"
 
-#: blog/templates/404.html:54 blog/templates/about.html:66
-#: blog/templates/blog/index.html:73 blog/templates/blog/tagcloud.html:7
-#: blog/templates/blog/tagged.html:34
+#: blog/templates/404.html:54 blog/templates/about.html:96
+#: blog/templates/blog/index.html:22 blog/templates/blog/tagcloud.html:7
+#: blog/templates/blog/tagged.html:15
 msgid "Taggmoln"
 msgstr "Tag cloud"
 
-#: blog/templates/about.html:12
+#: blog/templates/about.html:7 blog/templates/about.html.py:17
 msgid "Systemutvecklare på IT-Avdelningen på KTH."
 msgstr ""
 "System developer at the IT UNIT of the Royal Institute of Technology, KTH."
 
-#: blog/templates/about.html:16
+#: blog/templates/about.html:21
 msgid ""
 "\n"
 "    <p>Jag är en systemutvecklare som i första hand jobbar med webb,\n"
@@ -65,91 +65,83 @@ msgstr ""
 "member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer  club "
 "at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
 
-#: blog/templates/about.html:34
+#: blog/templates/about.html:39
+msgid "Prenumerationer"
+msgstr "Feeds"
+
+#: blog/templates/about.html:50
+#, python-format
+msgid ""
+"\n"
+"      <p>Det går att prenumerara på mina inlägg i form av en\n"
+"        atomfeed, antingen\n"
+"        <a href=\"%(atom-sv)s\">på svenska</a> eller\n"
+"        <a href=\"%(atom-en)s\">på engelska</a>.\n"
+"        Det går också att prenumera på enskilda taggar, t ex\n"
+"        <a href=\"%(atom-fandom)s\">fandom</a> eller\n"
+"        <a href=\"%(atom-serier)s\">serier</a> (det går bra att byta ut\n"
+"        \"fandom\" eller \"serier\" i de länkarna mot någon annan\n"
+"        tagg).</p>\n"
+"      "
+msgstr ""
+"\n"
+"  <p>You can subscribe to my musings in the form of an atom feed,\n"
+"  either <a href=\"%(atom-en)s\">in english</a>\n"
+"  or <a href=\"%(atom-sv)s\">in swedish</a>.\n"
+"  You can also subscribe to an individual tag, such as\n"
+"  <a href=\"%(atom-fandom)s\">fandom</a> or\n"
+"  <a href=\"%(atom-serier)s\">comics</a> (you can change\n"
+"  \"fandom\" or \"comics\" in those links to another tag).</p>\n"
+"  "
+
+#: blog/templates/about.html:64
 msgid "Kontakt"
 msgstr "Contact"
 
-#: blog/templates/about.html:42
+#: blog/templates/about.html:72
 msgid "Epost:"
 msgstr "E-mail:"
 
-#: blog/templates/about.html:45
+#: blog/templates/about.html:75
 msgid "Telefon:"
 msgstr "Phone:"
 
-#: blog/templates/about.html:47
+#: blog/templates/about.html:77
 msgid "sms:"
 msgstr "sms:"
 
-#: blog/templates/about.html:50
+#: blog/templates/about.html:80
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
-#: blog/templates/blog/base.html:59
+#: blog/templates/blog/base.html:66
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:65
+#: blog/templates/blog/base.html:72
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/index.html:26 blog/templates/blog/post_detail.html:19
+#: blog/templates/blog/part_latestcomments.html:7
+#: blog/templates/blog/tagged.html:3
+msgid "på"
+msgstr "on"
+
+#: blog/templates/blog/post_detail.html:25
+#: blog/templates/blog/post_summary.html:18
 #: blog/templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: blog/templates/blog/index.html:35
-#, python-format
-msgid ""
-"\n"
-"                  Läs inlägget %(title)s och en kommentar\n"
-"                "
-msgid_plural ""
-"\n"
-"                  Läs inlägget %(title)s och %(comments)s kommentarer\n"
-"                "
-msgstr[0] "\n"
-"Read the post %(title)s with one comment"
-msgstr[1] "\n"
-"Read the post %(title)s with %(comments)s comments"
-
-#: blog/templates/blog/index.html:41
-#, python-format
-msgid ""
-"\n"
-"                  Läs och kommentera inlägget %(title)s\n"
-"                "
-msgstr "\n"
-"Read and comment the post %(title)s"
-
-#: blog/templates/blog/index.html:52
-#, python-format
-msgid ""
-"\n"
-"                  Läs en kommentar\n"
-"                "
-msgid_plural ""
-"\n"
-"                  Läs %(comments)s kommentarer\n"
-"                "
-msgstr[0] "\n"
-"Read one comment"
-msgstr[1] "\n"
-"Read %(comments)s comments"
-
-#: blog/templates/blog/index.html:58
-msgid "Kommentera inlägget"
-msgstr "Write a comment"
-
-#: blog/templates/blog/post_detail.html:35
+#: blog/templates/blog/post_detail.html:41
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:50
+#: blog/templates/blog/post_detail.html:56
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:53
+#: blog/templates/blog/post_detail.html:59
 msgid ""
 "\n"
 "        Din epostadress kommer inte att visas.  Du\n"
@@ -161,9 +153,57 @@ msgstr ""
 "Your email address will not be disclosed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:67
+#: blog/templates/blog/post_detail.html:73
 msgid "Liknande sidor"
 msgstr "Similar pages"
+
+#: blog/templates/blog/post_summary.html:28
+#, fuzzy, python-format
+msgid ""
+"\n"
+"            Läs inlägget %(title)s och en kommentar\n"
+"          "
+msgid_plural ""
+"\n"
+"            Läs inlägget %(title)s och %(comments)s kommentarer\n"
+"          "
+msgstr[0] ""
+"\n"
+"Read the post %(title)s with one comment"
+msgstr[1] ""
+"\n"
+"Read the post %(title)s with %(comments)s comments"
+
+#: blog/templates/blog/post_summary.html:34
+#, fuzzy, python-format
+msgid ""
+"\n"
+"            Läs och kommentera inlägget %(title)s\n"
+"          "
+msgstr ""
+"\n"
+"Read and comment the post %(title)s"
+
+#: blog/templates/blog/post_summary.html:49
+#, fuzzy, python-format
+msgid ""
+"\n"
+"            Läs en kommentar\n"
+"          "
+msgid_plural ""
+"\n"
+"            Läs %(comments)s kommentarer\n"
+"          "
+msgstr[0] ""
+"\n"
+"Read one comment"
+msgstr[1] ""
+"\n"
+"Read %(comments)s comments"
+
+#: blog/templates/blog/post_summary.html:55
+msgid "Kommentera inlägget"
+msgstr "Write a comment"
 
 #: blog/templates/blog/publine.html:3
 msgid "Publicerad"
@@ -177,14 +217,14 @@ msgstr "tagged"
 msgid "taggmoln"
 msgstr "tag cloud"
 
-#: blog/templates/blog/tagged.html:3
-msgid "på"
-msgstr "on"
-
 #: blog/templates/blog/tagged.html:6
 msgid "Taggat"
 msgstr "Tagged"
 
-#: blog/templates/blog/tagged.html:21 blog/templates/feed/description.html:20
+#: blog/templates/feed/description.html:20
 msgid "Läs inlägget"
 msgstr "Read"
+
+#, fuzzy
+#~ msgid "Senaste kommentarerna"
+#~ msgstr "Write a comment"

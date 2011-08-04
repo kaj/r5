@@ -2,6 +2,11 @@
 {% load cache i18n blogtags %}
 
 {% block title %}Rasmus Kaj &#x2013; Rasmus.krats.se {% endblock %}
+{% block extrahead %}
+  {% if post.abstract %}
+    <meta name="Description" content='{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}'/>
+  {% endif %}
+{% endblock %}
 
 {% block main %}
   <header>
@@ -29,8 +34,33 @@
       aktiv i <a href="http://www.stacken.kth.se/">Datorföreningen Stacken</a>
       och läser gärna <a href="/tag/comics">serier</a>.</p>
     {% endblocktrans %}
+
+    <section id="feeds">
+      <h1>{% trans "Prenumerationer" %}</h1>
+      <p>{{LANGUAGE_CODE}}</p>
+      {% url atom-sv as atom-sv %}
+      {% url atom-en as atom-en %}
+      {% if LANGUAGE_CODE == 'sv' %}
+      {% url atom-tag-sv 'fandom' as atom-fandom %}
+      {% url atom-tag-sv 'serier' as atom-serier %}
+      {% else %}
+      {% url atom-tag-en 'fandom' as atom-fandom %}
+      {% url atom-tag-en 'comics' as atom-serier %}
+      {% endif %}
+      {% blocktrans %}
+      <p>Det går att prenumerara på mina inlägg i form av en
+        atomfeed, antingen
+        <a href="{{atom-sv}}">på svenska</a> eller
+        <a href="{{atom-en}}">på engelska</a>.
+        Det går också att prenumera på enskilda taggar, t ex
+        <a href="{{atom-fandom}}">fandom</a> eller
+        <a href="{{atom-serier}}">serier</a> (det går bra att byta ut
+        "fandom" eller "serier" i de länkarna mot någon annan
+        tagg).</p>
+      {% endblocktrans %}
+    </section>
     
-    <section>
+    <section id="contact">
       <h1>{% trans "Kontakt" %}</h1>
     
       <figure class="sidebar">
