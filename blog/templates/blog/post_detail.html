@@ -42,8 +42,14 @@
     
       {% for comment in comment_list %}
         <section class="comment" id="c{{ comment.id }}">
-          <h1><a href="{{comment.user_url}}">{{comment.user_name}}</a>,
-            {{comment.submit_date}}</h1>
+          <h1>
+            {% if comment.user_url %}
+              <a href="{{comment.user_url}}">{{comment.user_name}}</a>,
+            {% else %}
+              {{comment.user_name}},
+            {% endif %}
+            <time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
+          </h1>
           
           <div>
             {{comment.comment|linebreaks}}
