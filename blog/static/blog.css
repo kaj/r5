@@ -255,6 +255,24 @@ dl dd {
     display: block;
 }
 
+:target {
+    margin-left: -11px;
+    padding-left: 10px;
+    border-left: 1px solid red;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+:link:hover, :visited:hover {
+    text-decoration: underline;
+}
+:link:hover {
+    color: #0000aa;
+}
+:visited:hover {
+    color: #550088;
+}
+
 @media screen and (max-width: 480px) {
     #headerwrap {
 	background-image: url(naturbanner-480.jpg);
