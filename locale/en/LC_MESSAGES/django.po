@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-04 23:38+0200\n"
+"POT-Creation-Date: 2011-08-05 03:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,6 +137,22 @@ msgstr "About"
 msgid "Övrigt"
 msgstr "Other stuff"
 
+#: blog/templates/blog/base.html:89
+msgid ""
+"\n"
+"          Där inget annat anges är innehåll på rasmus.krats.se\n"
+"          tillgängligt under \n"
+"          <a rel=\"license\"\n"
+"             href=\"http://creativecommons.org/licenses/by/3.0/\">Creative\n"
+"            Commons Erkännande 3.0 Unported Licens</a>.\n"
+"          "
+msgstr ""
+"\n"
+"  Except where otherwise noted, content on rasmus.krats.se is licensed\n"
+"  under a <a rel=\"license\"\n"
+"             href=\"http://creativecommons.org/licenses/by/3.0/\">Creative\n"
+"  Commons Attribution 3.0 License</a>."
+
 #: blog/templates/blog/part_latestcomments.html:7
 #: blog/templates/blog/tagged.html:3
 msgid "på"
@@ -152,11 +168,11 @@ msgstr "Update"
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:56
+#: blog/templates/blog/post_detail.html:62
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:59
+#: blog/templates/blog/post_detail.html:65
 msgid ""
 "\n"
 "        Din epostadress kommer inte att visas.  Du\n"
@@ -168,7 +184,7 @@ msgstr ""
 "Your email address will not be disclosed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:73
+#: blog/templates/blog/post_detail.html:79
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
