@@ -19,10 +19,12 @@ urlpatterns = patterns(
 
     url(r'^about$', about),
 
-    url(r'^atom-en.xml$', UpdatesFeed('en')),
-    url(r'^atom-sv.xml$', UpdatesFeed('sv')),
-    url(r'^atom-en-(?P<tag>[a-z0-9-]+).xml$', TaggedUpdatesFeed('en')),
-    url(r'^atom-sv-(?P<tag>[a-z0-9-]+).xml$', TaggedUpdatesFeed('sv')),
+    url(r'^atom-en.xml$', UpdatesFeed('en'), name='atom-en'),
+    url(r'^atom-sv.xml$', UpdatesFeed('sv'), name='atom-sv'),
+    url(r'^atom-en-(?P<tag>[a-z0-9-]+).xml$', TaggedUpdatesFeed('en'),
+        name='atom-tag-en'),
+    url(r'^atom-sv-(?P<tag>[a-z0-9-]+).xml$', TaggedUpdatesFeed('sv'),
+        name='atom-tag-sv'),
 
     url(r'^robots\.txt$', direct_to_template, 
         {'template': 'robots.txt', 'mimetype': 'text/plain'}),
