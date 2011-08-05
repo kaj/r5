@@ -46,11 +46,25 @@ html, body {
     border-radius: 0.6em;
 }
 
-#header, #mainwrap {
+#header, #mainwrap, #footer {
     margin: auto;
     max-width: 62em;
     padding: 0 1ex;
 }
+#footerwrap {
+    clear: both;
+    border-top: solid 1px #454229;
+    padding: 0.2em 0;
+    margin-top: 1em;
+}
+#footer p {
+    font-size: 90%;
+    color: #606060;
+    text-decoration: none;
+    overflow: hidden;
+}
+#footer img { float: left; margin-right: 1em; }
+
 #main {
     float: left;
     width: 72%;
