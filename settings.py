@@ -10,6 +10,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+SEND_BROKEN_LINK_EMAILS = True
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
