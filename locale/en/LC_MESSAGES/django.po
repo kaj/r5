@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-05 03:38+0200\n"
+"POT-Creation-Date: 2011-08-06 07:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr "Rasmus.krats.se"
 msgid ""
 "Uppdateringar på Rasmus.krats.se. Skriverier då och då, på webben sedan 1995."
 msgstr ""
-"Updates on Rasmus.krats.se.  Reminiscing This And That, on the web since 1995"
+"Updates on Rasmus.krats.se.  Reminiscing this and that, on the web since 1995"
 
 #: blog/feeds.py:46
 #, python-format
@@ -36,7 +36,7 @@ msgstr "Tagged %s on Rasmus.krats.se"
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing This And That, on the web since 1995"
 
-#: blog/templates/404.html:54 blog/templates/about.html:96
+#: blog/templates/404.html:54 blog/templates/about.html:97
 #: blog/templates/blog/index.html:22 blog/templates/blog/tagcloud.html:7
 #: blog/templates/blog/tagged.html:15
 msgid "Taggmoln"
@@ -52,47 +52,50 @@ msgid ""
 "\n"
 "    <p>Jag är en systemutvecklare som i första hand jobbar med webb,\n"
 "      gärna på ett agilt sätt och gärna i unixmiljö.\n"
-"      Jag började med webbutveckling både hobbymässigt och professionellt\n"
-"      våren 1995 och har inte kunnat slita mig sedan dess.</p>\n"
+"      Jag började med webb&#xad;utveckling både hobby&#xad;mässigt och\n"
+"      professionellt våren 1995 och har inte kunnat slita mig sedan dess.</"
+"p>\n"
 "    \n"
 "    <p>Den här siten, <a href=\"/\">rasmus.krats.se</a>, är dels en blogg "
 "där\n"
 "      jag skriver om vad som helst som intresserar mig och dels en lekstuga\n"
-"      och labplattform för webbteknik.\n"
-"      Mer om den här siten och hur jag har utecklat den finns under taggen\n"
+"      och lab&#xad;plattform för webb&#xad;teknik.\n"
+"      Mer om den här siten och hur jag har utvecklat den finns under taggen\n"
 "      <a href=\"/tag/meta\" rel=\"tag\">meta</a>.</p>\n"
 "\n"
 "    <p>Jag är gift med <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</"
 "a>,\n"
-"      aktiv i <a href=\"http://www.stacken.kth.se/\">Datorföreningen "
-"Stacken</a>\n"
+"      aktiv i\n"
+"      <a href=\"http://www.stacken.kth.se/\">Dator&#xad;föreningen Stacken</"
+"a>\n"
 "      och läser gärna <a href=\"/tag/comics\">serier</a>.</p>\n"
 "    "
 msgstr ""
 "\n"
 "<p>I'm a system developer workin primarily with web, in an agile way and  "
 "mainly in a unix environment.  I started working and playing with web in the "
-"spring of 1995 and  hasn't been able to stop since then.</p><p>This site, <a "
-"href=\"/\">rasmus.krats.se</a>,  is part blog where I write about whatever I "
-"feel like and part lab  platform for my experiments with web development.  "
-"More about this site under the tag <a href=\"/tag/meta\">meta</a>.</p><p>I'm "
-"married to <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</a>,  a "
-"member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer  club "
+"spring of 1995 and  hasn't been able to stop since then.</p>\n"
+"<p>This site, <a href=\"/\">rasmus.krats.se</a>,  is part blog where I write "
+"about whatever I feel like and part lab platform for my experiments with web "
+"development.  More about this site under the tag <a href=\"/tag/meta\">meta</"
+"a>.</p>\n"
+"<p>I'm married to <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</a>, a "
+"member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer club "
 "at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
 
-#: blog/templates/about.html:39
+#: blog/templates/about.html:40
 msgid "Prenumerationer"
 msgstr "Feeds"
 
-#: blog/templates/about.html:50
+#: blog/templates/about.html:51
 #, python-format
 msgid ""
 "\n"
-"      <p>Det går att prenumerara på mina inlägg i form av en\n"
+"      <p>Det går att prenumerera på mina inlägg i form av en\n"
 "        atomfeed, antingen\n"
 "        <a href=\"%(atom-sv)s\">på svenska</a> eller\n"
 "        <a href=\"%(atom-en)s\">på engelska</a>.\n"
-"        Det går också att prenumera på enskilda taggar, t ex\n"
+"        Det går också att prenumerera på enskilda taggar, t&#xa0;ex\n"
 "        <a href=\"%(atom-fandom)s\">fandom</a> eller\n"
 "        <a href=\"%(atom-serier)s\">serier</a> (det går bra att byta ut\n"
 "        \"fandom\" eller \"serier\" i de länkarna mot någon annan\n"
@@ -109,23 +112,23 @@ msgstr ""
 "  \"fandom\" or \"comics\" in those links to another tag).</p>\n"
 "  "
 
-#: blog/templates/about.html:64
+#: blog/templates/about.html:65
 msgid "Kontakt"
 msgstr "Contact"
 
-#: blog/templates/about.html:72
+#: blog/templates/about.html:73
 msgid "Epost:"
 msgstr "E-mail:"
 
-#: blog/templates/about.html:75
+#: blog/templates/about.html:76
 msgid "Telefon:"
 msgstr "Phone:"
 
-#: blog/templates/about.html:77
+#: blog/templates/about.html:78
 msgid "sms:"
 msgstr "sms:"
 
-#: blog/templates/about.html:80
+#: blog/templates/about.html:81
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
@@ -168,11 +171,11 @@ msgstr "Update"
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:62
+#: blog/templates/blog/post_detail.html:64
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:65
+#: blog/templates/blog/post_detail.html:67
 msgid ""
 "\n"
 "        Din epostadress kommer inte att visas.  Du\n"
@@ -184,12 +187,12 @@ msgstr ""
 "Your email address will not be disclosed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:79
+#: blog/templates/blog/post_detail.html:81
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
 #: blog/templates/blog/post_summary.html:28
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "            Läs inlägget %(title)s och en kommentar\n"
@@ -206,7 +209,7 @@ msgstr[1] ""
 "Read the post %(title)s with %(comments)s comments"
 
 #: blog/templates/blog/post_summary.html:34
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "            Läs och kommentera inlägget %(title)s\n"
@@ -216,7 +219,7 @@ msgstr ""
 "Read and comment the post %(title)s"
 
 #: blog/templates/blog/post_summary.html:49
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "\n"
 "            Läs en kommentar\n"
@@ -255,7 +258,3 @@ msgstr "Tagged"
 #: blog/templates/feed/description.html:20
 msgid "Läs inlägget"
 msgstr "Read"
-
-#, fuzzy
-#~ msgid "Senaste kommentarerna"
-#~ msgstr "Write a comment"
