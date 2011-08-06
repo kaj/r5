@@ -34,7 +34,7 @@ msgstr "Tagged %s on Rasmus.krats.se"
 
 #: blog/templates/404.html:15 blog/templates/blog/base.html:39
 msgid "Skriverier då och då, på webben sedan 1995"
-msgstr "Reminiscing This And That, on the web since 1995"
+msgstr "Reminiscing this and that, on the web since 1995"
 
 #: blog/templates/404.html:54 blog/templates/about.html:97
 #: blog/templates/blog/index.html:22 blog/templates/blog/tagcloud.html:7
