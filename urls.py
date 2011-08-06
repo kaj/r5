@@ -3,8 +3,8 @@ from django.conf import settings
 from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns(
     '',
@@ -13,7 +13,7 @@ urlpatterns = patterns(
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     # Language selector
     (r'^i18n/', include('django.conf.urls.i18n')),
 
