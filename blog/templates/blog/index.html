@@ -24,4 +24,17 @@
       {% tagcloud %}
     {% endcache %}
   </div>
+  
+  {% if not head %}
+  <div class="sideblock">
+    <h2>{% trans "Några bra böcker" %}</h2>
+    <div id="w5c54f5e485d879152955168d893d33ab"></div>
+    <script type="text/javascript" charset="UTF-8" src="http://www.librarything.com/widget_get.php?userid=kaj&theID=w5c54f5e485d879152955168d893d33ab"></script>
+
+    <noscript>
+      <a href="http://www.librarything.com/profile/kaj">My Library</a>
+      at <a href="http://www.librarything.com">LibraryThing</a>
+    </noscript>
+  </div>
+  {% endif %}
 {% endblock %}
