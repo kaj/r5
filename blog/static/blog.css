@@ -48,7 +48,7 @@ html, body {
 
 #header, #mainwrap, #footer {
     margin: auto;
-    max-width: 62em;
+    max-width: 68em;
     padding: 0 1ex;
 }
 #footerwrap {
@@ -67,12 +67,12 @@ html, body {
 
 #main {
     float: left;
-    width: 72%;
+    width: 66%;
     margin: 1em 0;
     padding: 0;
 }
 .sideblockwrap {
-    width: 26%;
+    width: 31.83%;
     float: right;
 }
 .sideblock {
@@ -268,12 +268,12 @@ dl dd {
 }
 
 :target {
-    margin-left: -11px;
-    padding-left: 10px;
-    border-left: 1px solid red;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
+    margin-left: -.4em;
+    padding-left: .3em;
+    border-left: .1em solid red;
+    -webkit-border-radius: .3em 0 0 .3em;
+    -moz-border-radius: .3em 0 0 .3em;
+    border-radius: .3em 0 0 .3em;
 }
 :link:hover, :visited:hover {
     text-decoration: underline;
