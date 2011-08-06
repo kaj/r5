@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load comments i18n blogtags %}
+{% load comments i18n blogtags simplegravatar %}
 
 {% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
 
@@ -43,6 +43,7 @@
       {% for comment in comment_list %}
         <section id="c{{ comment.id }}"
                  class="comment{% if comment.user %} authorized{% endif %}" >
+          {% show_gravatar comment.email %}
           <h1>
             {% if comment.user_url %}
               <a href="{{comment.user_url}}">{{comment.name}}</a>,

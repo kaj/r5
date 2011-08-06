@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     'taggit',
     'compressor',
     'debug_toolbar',
+    'simplegravatar',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -177,3 +178,7 @@ COMPRESS_JS_FILTERS = []
 
 # Who should be allowed to see the debug toolbar.
 INTERNAL_IPS = ('127.0.0.1', )
+
+SIMPLEGRAVATAR_SIZE = 52
+SIMPLEGRAVATAR_DEFAULT = 'identicon'
+

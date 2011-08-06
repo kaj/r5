@@ -6,3 +6,4 @@ django-taggit
 django_compressor
 django-debug-toolbar
 python-memcached
+django-simplegravatar

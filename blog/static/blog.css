@@ -165,7 +165,7 @@ figure p {
     font-size: 83%;
     font-style: italic;
 }
-figure img {
+figure img, .comment img {
     border: solid 1px #666666;
     background: white;
     padding: 2px;
@@ -239,6 +239,13 @@ dl dd {
     margin: 0 0 1ex 8em; padding: 0;
 }
 
+.comment {
+    overflow: hidden;
+}
+.comment img { /* gravatar */
+    float: right;
+    margin: 0 0 .2em .4em
+}
 .comment.authorized h1:before {
     content: "\270d";
     color: #8a8452;
