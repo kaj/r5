@@ -239,8 +239,9 @@ dl dd {
     margin: 0 0 1ex 8em; padding: 0;
 }
 
-.comment.authorized h1 {
-    text-shadow: 0.15em 0.1em #ffff99;
+.comment.authorized h1:before {
+    content: "\270d";
+    color: #8a8452;
 }
 
 #writecomment p {
