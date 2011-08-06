@@ -41,12 +41,13 @@
       <h1>{% trans "Kommentarer" %}</h1>
     
       {% for comment in comment_list %}
-        <section class="comment" id="c{{ comment.id }}">
+        <section id="c{{ comment.id }}"
+                 class="comment{% if comment.user %} authorized{% endif %}" >
           <h1>
             {% if comment.user_url %}
-              <a href="{{comment.user_url}}">{{comment.user_name}}</a>,
+              <a href="{{comment.user_url}}">{{comment.name}}</a>,
             {% else %}
-              {{comment.user_name}},
+              <span class="name">{{comment.name}}</span>,
             {% endif %}
             <time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
           </h1>
