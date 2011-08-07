@@ -344,3 +344,43 @@ dl dd {
 @media screen and (min-width: 481px) and (max-width: 1680px) {
     #headerwrap { background-image: url(naturbanner-1680.jpg); }
 }
+
+@media print {
+    body, html {
+	background: white;
+	color: black;
+    }
+    #main {
+	float: none;
+	width: auto;
+    }
+    .sideblockwrap, #writecomment, #selectlang {
+	display: none;
+    }
+    #headerwrap, #header, #mainwrap, #footerwrap {
+	width: auto;
+	color: inherit;
+	background: transparent;
+    }
+    #sitename, #tagline {
+	display: inline;
+	font-size: 1em;
+	text-shadow: none;
+	font-weight: normal;
+	border: 0;
+    }
+    #tagline:before {
+	content: ' \2013\00a0 ';
+    }
+    #header {
+	border-bottom: solid 1px #454229;
+    }
+    
+    #headerwrap :link, #headerwrap :visited,
+    .publine :link, .publine :visited,
+    address :link, address :visited,
+    #footer :link, #footer :visited {
+	color: inherit;
+	text-decoration: none;
+    }
+}
