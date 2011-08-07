@@ -15,6 +15,8 @@
     <script type="text/javascript" src="{{STATIC_URL}}fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}respond.min.js"></script>
+    <script type="text/javascript"
+            src="http://s.gravatar.com/js/gprofiles.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('figure').each(function() {
@@ -25,6 +27,7 @@
           }
         });
         $("figure a").fancybox();
+        Gravatar.init();
       });
     </script>
     {% endcompress %}
