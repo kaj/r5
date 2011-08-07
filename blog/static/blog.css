@@ -90,6 +90,7 @@ html, body {
     border-radius: 0.5em;
 }
 .sideblock ul { margin: 0.5ex 0; padding: 0 0 0 2em; }
+.sideblock h2 { margin: 0 0 1ex 0; }
 .sideblock h3 { margin: 1ex 0 0 0; }
 .sideblock .tagcloud { font-size: 95%; }
 
@@ -224,7 +225,7 @@ blockquote p.attribution {
 
 ul.tagcloud {
     text-align: center;
-    margin: 0 0 1em 0;
+    margin: 0 0 1ex 0;
     padding: 0;
 }
 ul.tagcloud li {
@@ -326,6 +327,16 @@ dl dd {
     left: 0;
     width: 100%;
     height: 100%;
+}
+
+/* Override some stuff from jquery.tweet */
+.sideblock .tweet_list {
+    margin: -1ex;
+    padding: 0;
+    background: transparent;
+}
+.sideblock .tweet_list .tweet_even {
+    background: #f2f2f2;
 }
 
 @media screen and (max-width: 480px) {
