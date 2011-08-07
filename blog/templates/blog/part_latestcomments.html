@@ -1,0 +1,14 @@
+{% load i18n simplegravatar %}
+{% get_current_language as LANGUAGE_CODE %}
+{% for comment in comments %}
+  {% with comment.content_object as post %}
+    <p class="comment" lang="{{post.lang}}">
+      <a href="{{post.get_absolute_url}}{%if post.lang != LANGUAGE_CODE%}?l={{post.lang}}{%endif%}#c{{comment.id}}">
+	{% show_gravatar comment.email 40 %}
+	{{comment.name}},
+	<time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
+	{% trans "på" %} <i>{{post.title}}</i></a>:
+      {{comment.comment}}
+    </p>
+  {% endwith %}
+{% endfor %}

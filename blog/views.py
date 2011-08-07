@@ -43,7 +43,7 @@ def post_detail(request, year, slug):
         post = get_object_or_404(Post, 
                                  posted_time__year=year,
                                  slug=slug)
-
+        altlingos = []
     similar = filter_by_language(post.tags.similar_objects(), post.lang,
                                  extra_skip=post.get_absolute_url())
     

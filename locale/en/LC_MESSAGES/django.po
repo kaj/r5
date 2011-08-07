@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-06 20:38+0200\n"
+"POT-Creation-Date: 2011-08-07 12:31+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,29 +157,33 @@ msgstr ""
 "  Commons Attribution 3.0 License</a>."
 
 #: blog/templates/blog/index.html:30
+msgid "Senaste kommentarerna"
+msgstr "Latest comments"
+
+#: blog/templates/blog/index.html:35
 msgid "Några bra böcker"
 msgstr "Some good books"
 
-#: blog/templates/blog/part_latestcomments.html:7
+#: blog/templates/blog/part_latestcomments.html:10
 #: blog/templates/blog/tagged.html:3
 msgid "på"
 msgstr "on"
 
-#: blog/templates/blog/post_detail.html:25
+#: blog/templates/blog/post_detail.html:29
 #: blog/templates/blog/post_summary.html:18
 #: blog/templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: blog/templates/blog/post_detail.html:41
+#: blog/templates/blog/post_detail.html:45
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:64
+#: blog/templates/blog/post_detail.html:68
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:67
+#: blog/templates/blog/post_detail.html:71
 msgid ""
 "\n"
 "        Din epostadress kommer inte att visas.  Du\n"
@@ -191,7 +195,7 @@ msgstr ""
 "Your email address will not be disclosed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:81
+#: blog/templates/blog/post_detail.html:85
 msgid "Liknande sidor"
 msgstr "Similar pages"
 

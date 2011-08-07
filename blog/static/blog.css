@@ -127,6 +127,12 @@ h1 {
     font-weight: bold;
     font-family: sans-serif;
 }
+h2 {
+    font-size: 1.4em;
+}
+h3 {
+    font-size: 1.2em;
+}
 p.publine {
     font-size: 90%;
     font-family: sans-serif;
@@ -265,6 +271,13 @@ dl dd {
 }
 #writecomment p.submit {
     display: block;
+}
+.lastcomments p {
+    font-size: 90%;
+}
+.lastcomments :link,
+.lastcomments :visited {
+    text-decoration: none;
 }
 
 :target {

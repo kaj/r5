@@ -26,6 +26,13 @@
   </div>
   
   {% if not head %}
+  <div class="sideblock lastcomments">
+    {% cache 3600 lastcomments LANGUAGE_CODE %}
+      <h2>{% trans "Senaste kommentarerna" %}</h2>
+      {% latestcomments %}
+    {% endcache %}
+  </div>
+  
   <div class="sideblock">
     <h2>{% trans "Några bra böcker" %}</h2>
     <div id="w5c54f5e485d879152955168d893d33ab"></div>
