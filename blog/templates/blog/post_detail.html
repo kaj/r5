@@ -5,8 +5,12 @@
 
 {% block extrahead %}
   {% if post.abstract %}
-    <meta name="Description" content="{{post.abstract|striptags}}"/>
+    <meta name="Description" content="{{post.abstract|striptags}}" />
   {% endif %}
+  {% for l in altlingos %}
+    <link rel="alternate" hreflang="{{l}}"
+          href="{{post.get_absolute_url}}?l={{l}}" />
+  {% endfor %}
 {% endblock %}
 
 {% block main %}

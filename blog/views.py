@@ -37,6 +37,8 @@ def post_detail(request, year, slug):
                                  posted_time__year=year,
                                  slug=slug,
                                  lang=lang)
+        altlingos = Post.objects.filter(posted_time__year=year, slug=slug) \
+            .exclude(lang=lang).values_list('lang', flat=True)
     except:
         post = get_object_or_404(Post, 
                                  posted_time__year=year,
@@ -48,6 +50,7 @@ def post_detail(request, year, slug):
     return direct_to_template(request, 'blog/post_detail.html', {
             'post': post,
             'lang': post.lang,
+            'altlingos': altlingos,
             'similar': similar,
             'next': post.get_absolute_url(),
             })
@@ -78,6 +81,10 @@ def about(request):
     return direct_to_template(request, 'about.html')
 
 def _activatelang(request):
-    lang = translation.get_language_from_request(request)
+    lang = request.GET.get('l')
+    if lang:
+        request.session['django_language'] = lang
+    else:
+        lang = translation.get_language_from_request(request)
     translation.activate(lang)
     return lang
