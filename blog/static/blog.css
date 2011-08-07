@@ -320,6 +320,13 @@ dl dd {
     text-align: center;
     margin: .2em;
 }
+.LT_powered a {
+    text-decoration: none;
+}
+.LT_powered img {
+    margin-right: .3em;
+    vertical-align: middle;
+}
 #LT_LB_overlay {
     background: rgba(0, 0, 0, .2);
     position: absolute;
