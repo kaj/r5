@@ -172,6 +172,7 @@ figure p {
     font-size: 83%;
     font-style: italic;
 }
+img { border: 0; }
 figure img, .comment img {
     border: solid 1px #666666;
     background: white;
