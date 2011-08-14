@@ -1,9 +1,8 @@
 {% load i18n %}
-
 <ul class="tagcloud">
-  {% for tag in tags %}
-  <li title="{{tag.n}} posts tagged {{tag.name}}" class="n{{tag.n}} w{{tag.w}}">
+  {% for tag in tags %}{% spaceless %}
+  <li class="n{{tag.n}} w{{tag.w}}">
     <a href="/tag/{{tag.slug}}">{{tag.name}}</a>
-  </li>
+  </li>{% endspaceless %}
   {% endfor %}
 </ul>
