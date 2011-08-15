@@ -88,6 +88,7 @@ def index(request):
     return direct_to_template(request, 'dma/index.html', {
             'results': [ bysomething('path'),
                          bysomething('remote_addr'),
+                         bysomething('referer'),
                          bysomething('response.status_code', 'status code'),
                          bysomething('response.content_type', 'content type'),
                          bysomething('method'),
