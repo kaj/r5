@@ -1,6 +1,15 @@
 from django.views.generic.simple import direct_to_template
 from bson.code import Code
+from math import log, exp
 import pymongo
+
+
+def get_ranges(lo, hi, n=10):
+    llo = log(lo)
+    lhi = log(hi)
+    interval = (lhi - llo) / n
+    limits = [exp(llo + interval * x) for x in range(0, n+1)]
+    return [(limits[i], limits[i+1]) for i in range(0, n)]
 
 def index(request):
     def mapfunction(attr):
@@ -13,6 +22,7 @@ def index(request):
     mongo = pymongo.Connection()
     db = mongo.dmanalytics
     log = db.log
+
     reduce = Code("function (key, values) {"
                   "  var sum = 0;"
                   "  values.forEach(function (value) {sum += value.count;});"
@@ -50,6 +60,31 @@ def index(request):
                                  .sort('value.count', pymongo.DESCENDING)
                              ]
                  }
+    
+    def by_elapsed_time():
+        with_elapsed = subquery({'elapsed': {'$exists': True}})
+        lowest = log.find(with_elapsed, {'_id': 0, 'elapsed': 1}) \
+            .sort('elapsed', pymongo.ASCENDING).limit(1)[0]['elapsed']
+        highest = log.find(with_elapsed, {'_id': 0, 'elapsed': 1})\
+            .sort('elapsed', pymongo.DESCENDING).limit(1)[0]['elapsed']
+       
+        def query(lo, hi):
+            q = {'elapsed':
+                        {'$gt': lo,
+                         '$lte': hi}}
+            q.update(basequery)
+            print basequery
+            print q
+            return q
+        
+        return { 'name': 'Elapsed seconds',
+                 'values': [ { 'value': '%f - %f' % (lo, hi),
+                               'count': db.log.find(query(lo, hi)).count()
+                               }
+                             for (lo, hi)
+                             in get_ranges(0.999*lowest, 1.001*highest, n=7) ]
+                 }
+    
     return direct_to_template(request, 'dma/index.html', {
             'results': [ bysomething('path'),
                          bysomething('remote_addr'),
@@ -60,5 +95,6 @@ def index(request):
                          bysomething('user_agent'),
                          by_ua_part('browser'),
                          by_ua_part('os'),
+                         by_elapsed_time(),
                          ],
             })
