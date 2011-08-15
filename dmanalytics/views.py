@@ -1,8 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import direct_to_template
 from bson.code import Code
 from math import log, exp
 import pymongo
-
 
 def get_ranges(lo, hi, n=10):
     llo = log(lo)
@@ -11,6 +11,7 @@ def get_ranges(lo, hi, n=10):
     limits = [exp(llo + interval * x) for x in range(0, n+1)]
     return [(limits[i], limits[i+1]) for i in range(0, n)]
 
+@login_required
 def index(request):
     def mapfunction(attr):
         src = ("function() {"
@@ -83,6 +84,7 @@ def index(request):
                  }
     
     return direct_to_template(request, 'dma/index.html', {
+            'user': request.user,
             'results': [ bysomething('path'),
                          bysomething('remote_addr'),
                          bysomething('referer'),
