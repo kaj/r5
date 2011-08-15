@@ -62,7 +62,7 @@ def index(request):
                  }
     
     def by_elapsed_time():
-        with_elapsed = subquery({'elapsed': {'$exists': True}})
+        with_elapsed = {'elapsed': {'$exists': True}}
         lowest = log.find(with_elapsed, {'_id': 0, 'elapsed': 1}) \
             .sort('elapsed', pymongo.ASCENDING).limit(1)[0]['elapsed']
         highest = log.find(with_elapsed, {'_id': 0, 'elapsed': 1})\
@@ -72,9 +72,6 @@ def index(request):
             q = {'elapsed':
                         {'$gt': lo,
                          '$lte': hi}}
-            q.update(basequery)
-            print basequery
-            print q
             return q
         
         return { 'name': 'Elapsed seconds',
