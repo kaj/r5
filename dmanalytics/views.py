@@ -33,7 +33,7 @@ def index(request):
         return {
             'name': name or attr,
             'values': [ {'value': x['_id'],
-                         'count': x['value']['count']}
+                         'count': int(x['value']['count'])}
                         for x
                         in log.map_reduce(mapfunction(attr), reduce,
                                           'by_%s' % attr,
@@ -52,7 +52,7 @@ def index(request):
                  "}" % (attr, attr))
         return { 'name': attr or name,
                  'values': [ {'value': x['_id'],
-                              'count': x['value']['count']}
+                              'count': int(x['value']['count'])}
                              for x
                              in db.by_user_agent.map_reduce(m, reduce,
                                                             'by_browser') \
