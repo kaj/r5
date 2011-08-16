@@ -20,14 +20,15 @@ class DMAnalyticsMiddleware(object):
             'path': request.path,
             'is_ajax': request.is_ajax(),
             'cookies': request.COOKIES,
-            'user_agent': request.META['HTTP_USER_AGENT'],
             'remote_addr': request.META['REMOTE_ADDR'],
             'time': request.dma_starttime,
             }
         
+        if 'HTTP_USER_AGENT' in request.META:
+            item['user_agent'] = request.META['HTTP_USER_AGENT']
         if 'HTTP_REFERER' in request.META:
             item['referer'] = request.META['HTTP_REFERER']
-                
+        
         if request.GET:
             item['query'] = request.GET
         
