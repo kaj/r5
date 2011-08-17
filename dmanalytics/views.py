@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import direct_to_template
 from bson.code import Code
 from math import log, exp
+from datetime import datetime, timedelta
 import pymongo
 
 def get_ranges(lo, hi, n=10):
@@ -62,6 +63,24 @@ def index(request):
                              ]
                  }
     
+    def by_time(name, interval, n=12, base=None):
+        
+        if not base:
+            base = datetime.now()
+
+        limits = [base + interval * x for x in range(-n, 1)]
+        intervals = [(limits[i], limits[i+1]) for i in range(0, n)]
+            
+        return { 'name': name,
+                 'values': [ { 'value': lo,
+                               'count': db.log.find({'time':
+                                                         {'$gt': lo,
+                                                          '$lte': hi}}).count()
+                               }
+                             for (lo, hi) in intervals
+                             ]
+                 }
+    
     def by_elapsed_time():
         with_elapsed = {'elapsed': {'$exists': True}}
         lowest = log.find(with_elapsed, {'_id': 0, 'elapsed': 1}) \
@@ -85,7 +104,9 @@ def index(request):
     
     return direct_to_template(request, 'dma/index.html', {
             'user': request.user,
-            'results': [ bysomething('path'),
+            'results': [ by_time('By hour', timedelta(hours=1)),
+                         by_time('By day', timedelta(days=1)),
+                         bysomething('path'),
                          bysomething('remote_addr'),
                          bysomething('referer'),
                          bysomething('response.status_code', 'status code'),
