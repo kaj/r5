@@ -276,6 +276,14 @@ dl dd {
 }
 .lastcomments p {
     font-size: 90%;
+    border-top: solid 1px #aaa;
+    overflow: hidden;
+    padding: 1ex 0;
+    margin: 0;
+    background: transparent;
+}
+.lastcomments p:last-child {
+    padding-bottom: 0;
 }
 .lastcomments :link,
 .lastcomments :visited {
@@ -300,8 +308,8 @@ dl dd {
     color: #550088;
 }
 
-.LT_itemLast {
-    border-bottom: solid 1px #888;
+.LT_itemLast, .LT_powered {
+    border-top: solid 1px #aaa;
     overflow: hidden;
     padding: 1ex 0;
 }
@@ -319,7 +327,7 @@ dl dd {
 }
 .LT_powered {
     text-align: center;
-    margin: .2em;
+    padding-bottom: 0;
 }
 .LT_powered a {
     text-decoration: none;
@@ -339,12 +347,18 @@ dl dd {
 
 /* Override some stuff from jquery.tweet */
 .sideblock .tweet_list {
-    margin: -1ex;
+    margin: 0;
     padding: 0;
     background: transparent;
 }
-.sideblock .tweet_list .tweet_even {
-    background: #f2f2f2;
+.sideblock .tweet_list li {
+    border-top: solid 1px #aaa;
+    overflow: hidden;
+    padding: 1ex 0;
+    background: transparent;
+}
+.sideblock .tweet_list li:last-child {
+    padding-bottom: 0;
 }
 
 @media screen and (max-width: 480px) {
