@@ -13,6 +13,13 @@
     <script type="text/javascript" src="{{STATIC_URL}}jquery.tweet.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
+        $('#skiplinks').addClass('withoutfocus');
+        $('#skiplinks *').focus(function() {
+          $('#skiplinks').addClass('withfocus').removeClass('withoutfocus');
+        });
+        $('#skiplinks *').blur(function() {
+          $('#skiplinks').removeClass('withfocus').addClass('withoutfocus');
+        });
         $('figure').each(function() {
           var link = $(this).find('a');
           var caption = $(this).find('p');
@@ -54,6 +61,16 @@
       <div id="header">
 	<p id="sitename"><a href="/" rel="start">Rasmus.krats.se</a></p>
 	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
+	<div id="skiplinks"><div>{% trans "Hoppa till" %}
+	  <ul>
+	    <li><a href="#main">{% trans "innehåll" %}</a></li>
+	    {% block skiplinks %}
+	    {% block firstskiplinks %}{% endblock %}
+	    <li><a href="#mylinks">{% trans "mina länkar" %}</a></li>
+	    {% block lastskiplinks %}{% endblock %}
+	    {% endblock %}
+	  </ul>
+	</div></div>
         <form action="/i18n/setlang/" method="post" id="selectlang">
           {% csrf_token %}
           {% if "en" == LANGUAGE_CODE %}
@@ -77,7 +94,7 @@
       
       <div class="sideblockwrap">
 	{% block sideblocktop %}{% endblock %}
-	<div class="sideblock">
+	<div class="sideblock" id="mylinks">
 	  <h2>Rasmus Kaj</h2>
 	  <ul>
 	    <li><a href="/about">{% trans "Om" %} Rasmus.krats.se</a></li>

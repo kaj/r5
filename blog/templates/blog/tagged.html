@@ -10,8 +10,12 @@
     {% endfor %}
 {% endblock %}
 
+{% block lastskiplinks %}
+  <li><a href="#tagcloud">{% trans "taggmoln" %}</a></li>
+{% endblock %}
+
 {% block sideblockbottom %}
-  <div class="sideblock">
+  <div class="sideblock" id="tagcloud">
     <h2>{% trans "Taggmoln" %}</h2>
     {% cache 7200 tagcloud %}
       {% tagcloud %}

@@ -17,8 +17,15 @@
       <a href="/{{y}}/">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 {% endblock %}
 
+{% block lastskiplinks %}
+  <li><a href="#tagcloud">{% trans "taggmoln" %}</a></li>
+  <li><a href="#lastcomments">{% trans "senaste kommentarerna" %}</a></li>
+  <li><a href="#tweetbox">{% trans "jag twittrar" %}</a></li>
+  <li><a href="#booksbox">{% trans "några bra böcker" %}</a></li>
+{% endblock %}
+
 {% block sideblockbottom %}
-  <div class="sideblock">
+  <div class="sideblock" id="tagcloud">
     <h2>{% trans "Taggmoln" %}</h2>
     {% cache 7200 tagcloud %}
       {% tagcloud %}
@@ -26,7 +33,7 @@
   </div>
   
   {% if not head %}
-  <div class="sideblock lastcomments">
+  <div class="sideblock lastcomments" id="lastcomments">
     {% cache 3600 lastcomments LANGUAGE_CODE %}
       <h2>{% trans "Senaste kommentarerna" %}</h2>
       {% latestcomments %}
@@ -35,7 +42,7 @@
   
   <div class="sideblock" id="tweetbox"></div>
   
-  <div class="sideblock">
+  <div class="sideblock" id="booksbox">
     <h2>{% trans "Några bra böcker" %}</h2>
     <div id="w5c54f5e485d879152955168d893d33ab"></div>
     <script type="text/javascript" charset="UTF-8" src="http://www.librarything.com/widget_get.php?userid=kaj&theID=w5c54f5e485d879152955168d893d33ab"></script>

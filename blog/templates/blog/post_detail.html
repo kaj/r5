@@ -3,6 +3,10 @@
 
 {% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
 
+{% block firstskiplinks %}
+  <li><a href="#similar">{% trans "liknande sidor" %}</a></li>
+{% endblock %}
+
 {% block extrahead %}
   {% if post.abstract %}
     <meta name="Description" content="{{post.abstract|striptags}}" />
@@ -81,7 +85,7 @@
 {% endblock %}
 
 {% block sideblocktop %}
-  <div class="sideblock">
+  <div class="sideblock" id="similar">
     <h2>{% trans "Liknande sidor" %}</h2>
     <ul>
       {% for p in similar %}

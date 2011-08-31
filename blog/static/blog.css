@@ -12,16 +12,36 @@ html, body {
 }
 #headerwrap :link, #headerwrap :visited {
     color: white;
-    text-decoration: none;
 }
-#headerwrap a:hover {
+#headerwrap a:hover, #headerwrap a:focus {
     color: #eeccff;
     text-decoration: underline;
 }
-
-#sitename, #tagline {
+#sitename :link, #sitename :visited {
+    text-decoration: none;
+}
+#sitename, #tagline, #skiplinks {
     margin: 0.1em 0;
     text-shadow: 0.11em 0.07em 0.1em black;
+}
+#skiplinks {
+    position: absolute;
+}
+#skiplinks div {
+    background: rgba(15,50,5,.7);
+    padding: .2em .4em;
+    border-radius: .2em;
+}
+#skiplinks ul, #skiplinks li {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+#skiplinks li:after {
+    content: ', ';
+}
+#skiplinks li:last-child:after {
+    content: '.';
 }
 #sitename {
     font-size: 150%;
@@ -142,7 +162,7 @@ article h1 a {
     color: black;
     text-decoration: none;
 }
-article h1 a:hover {
+article h1 a:hover, article h1 a:focus {
     color: #440088; /* TODO Link color */
     text-decoration: underline;
 }
@@ -370,6 +390,20 @@ dl dd {
 	float: none;
 	width: auto;
     }
+    #skiplinks {
+	position: static;
+    }
+}
+@media screen and (min-width: 481px) {
+    #skiplinks.withoutfocus {
+	height: 0;
+	overflow: hidden;
+	margin: 0;
+    }
+    #skiplinks.withfocus {
+	height: auto;
+	overflow: visible;
+    }
 }
 @media screen and (min-width: 1681px) {
     #headerwrap { background-image: url(naturbanner-3868.jpg); }
@@ -387,7 +421,7 @@ dl dd {
 	float: none;
 	width: auto;
     }
-    .sideblockwrap, #writecomment, #selectlang {
+    .sideblockwrap, #writecomment, #selectlang, #skiplinks {
 	display: none;
     }
     #headerwrap, #header, #mainwrap, #footerwrap {
