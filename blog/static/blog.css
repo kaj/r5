@@ -213,6 +213,9 @@ figure img, .comment img {
 p {
     margin: 0 0 1ex 0;
 }
+.postort {
+    font-variant: small-caps;
+}
 
 /** Tables **/
 table { border-collapse: collapse; }
