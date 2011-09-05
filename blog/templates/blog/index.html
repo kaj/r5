@@ -34,7 +34,7 @@
   
   {% if not head %}
   <div class="sideblock lastcomments" id="lastcomments">
-    {% cache 3600 lastcomments LANGUAGE_CODE %}
+    {% cache 900 lastcomments LANGUAGE_CODE %}
       <h2>{% trans "Senaste kommentarerna" %}</h2>
       {% latestcomments %}
     {% endcache %}
