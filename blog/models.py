@@ -1,8 +1,6 @@
-from autoslug.fields import AutoSlugField
-from django.contrib.comments.moderation import CommentModerator, moderator
 from django.db import models
+from autoslug.fields import AutoSlugField
 from taggit.managers import TaggableManager
-from IPy import IP
 
 class Post(models.Model):
     
@@ -42,22 +40,3 @@ class Update(models.Model):
 
     def get_absolute_url(self):
         return self.post.get_absolute_url()
-
-class PostCommentModerator(CommentModerator):
-    """Moderator for comments to Posts."""
-    email_notification = True
-
-    BLACKLIST = (
-        IP('46.251.227.3'),
-        IP('46.251.237.188'),
-        IP('83.9.122.87'),
-        IP('91.207.5.130'),
-        IP('109.230.0.0/16'),
-        IP('193.105.210.41'),
-        )
-
-    def moderate(self, comment, content_object, request):
-        addr = IP(request.META['REMOTE_ADDR'])
-        return any(addr in net for net in PostCommentModerator.BLACKLIST)
-
-moderator.register(Post, PostCommentModerator)
