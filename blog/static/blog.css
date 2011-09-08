@@ -143,6 +143,12 @@ header {
 h1, h2 {
     margin: 0;
 }
+div.message {
+    background: white;
+    border: dashed 1px red;
+    padding: 1ex;
+    border-radius: 1ex;
+}
 h1 {
     font-size: 2em;
     font-weight: bold;

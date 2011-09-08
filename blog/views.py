@@ -1,11 +1,13 @@
 # -*- encoding: utf-8 -*-
+from django.contrib.comments.models import Comment
 from django.db.models import Q
-from django.views.generic.simple import direct_to_template
-from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.http import Http404
-from blog.models import Post, Update
+from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.utils import translation
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic.simple import direct_to_template
 from taggit.models import Tag
+from blog.models import Post, Update
 
 def index(request, year=None):
     lang = _activatelang(request)
@@ -47,8 +49,22 @@ def post_detail(request, year, slug):
     similar = filter_by_language(post.tags.similar_objects(), post.lang,
                                  extra_skip=post.get_absolute_url())
     
+    message = None
+    if 'c' in request.GET:
+        comment = Comment.objects.get(id=request.GET['c'])
+        print "Comment:", comment
+        if comment.is_removed:
+            print "That comment is removed!!"
+            message = _(u'Din kommentar är borttagen.')
+        elif not comment.is_public:
+            print "That comment awaits moderation!!"
+            message = _(u'Din kommentar väntar på moderering.')
+        else:
+            return redirect('%s#c%d' % (post.get_absolute_url(), comment.id))
+        
     return direct_to_template(request, 'blog/post_detail.html', {
             'post': post,
+            'message': message,
             'lang': post.lang,
             'altlingos': altlingos,
             'similar': similar,
