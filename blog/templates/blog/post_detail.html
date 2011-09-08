@@ -18,6 +18,10 @@
 {% endblock %}
 
 {% block main %}
+  {% if message %}
+    <div class="message">{{message}}</div>
+  {% endif %}
+
   <header>
     <h1>{{post.title|safe}}</h1>
     {% publine post %}
