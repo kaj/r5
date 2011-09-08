@@ -19,6 +19,9 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-posted_time']
+
+    def __unicode__(self):
+        return u'%s (%d)' % (self.title, self.posted_time.year)
     
     def get_absolute_url(self):
         if self.posted_time:
