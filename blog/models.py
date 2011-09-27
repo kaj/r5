@@ -53,6 +53,7 @@ class PostCommentModerator(CommentModerator):
     BLACKLIST = (
         IP('46.251.227.3'),
         IP('46.251.237.188'),
+        IP('80.243.19.171'),
         IP('83.9.122.87'),
         IP('91.207.5.130'),
         IP('109.230.192.0/18'),
