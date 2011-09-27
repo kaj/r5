@@ -11,9 +11,9 @@ class Post(models.Model):
                          unique_with=('posted_time__month', 'lang'))
 
     title = models.CharField(max_length=200)
-    abstract = models.TextField()
+    abstract = models.TextField(blank=True)
     content = models.TextField()
-    frontimage = models.TextField()
+    frontimage = models.TextField(blank=True)
     lang = models.CharField(max_length=2)
     tags = TaggableManager()
     
@@ -34,7 +34,7 @@ class Update(models.Model):
     post = models.ForeignKey(Post)
     time = models.DateTimeField(db_index=True)
 
-    note = models.TextField()
+    note = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-time']
