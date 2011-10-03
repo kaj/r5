@@ -8,3 +8,4 @@ django-debug-toolbar
 python-memcached
 django-simplegravatar
 IPy
+pymongo
