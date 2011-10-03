@@ -53,11 +53,13 @@ class PostCommentModerator(CommentModerator):
     BLACKLIST = (
         IP('46.251.227.3'),
         IP('46.251.237.188'),
+        IP('69.162.118.155'),
         IP('80.243.19.171'),
         IP('83.9.122.87'),
         IP('91.207.5.130'),
         IP('109.230.192.0/18'),
         IP('193.105.210.41'),
+        IP('216.245.209.15'),
         )
 
     def moderate(self, comment, content_object, request):
