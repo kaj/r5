@@ -61,6 +61,7 @@ class PostCommentModerator(CommentModerator):
         IP('109.230.192.0/18'),
         IP('193.105.210.41'),
         IP('216.245.209.15'),
+        IP('216.245.209.154'),
         )
 
     def moderate(self, comment, content_object, request):
