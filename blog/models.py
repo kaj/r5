@@ -51,6 +51,7 @@ class PostCommentModerator(CommentModerator):
     email_notification = True
 
     BLACKLIST = (
+        IP('27.98.203.51'),
         IP('31.214.145.236'),
         IP('46.251.227.3'),
         IP('46.251.237.188'),
@@ -61,6 +62,7 @@ class PostCommentModerator(CommentModerator):
         IP('91.207.5.130'),
         IP('98.126.95.98'),
         IP('109.230.192.0/18'),
+        IP('117.26.200.71'),
         IP('193.105.210.41'),
         IP('216.245.209.0/24'),
         )
