@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 {% load comments i18n blogtags simplegravatar %}
 
-{% block title %}{{post.title}} &#x2013; Rasmus.krats.se {% endblock %}
+{% block title %}{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se {% endblock %}
 
 {% block firstskiplinks %}
   <li><a href="#similar">{% trans "liknande sidor" %}</a></li>
