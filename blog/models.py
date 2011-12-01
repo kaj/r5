@@ -21,7 +21,8 @@ class Post(models.Model):
         ordering = ['-posted_time']
 
     def __unicode__(self):
-        return u'%s (%d)' % (self.title, self.posted_time.year)
+        year = self.posted_time.year if self.posted_time else 'unposted'
+        return u'%s (%d)' % (self.title, year)
     
     def get_absolute_url(self):
         if self.posted_time:
