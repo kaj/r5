@@ -7,7 +7,7 @@ from contentprocessor import *
 
 class ContentProcessorTest(TestCase):
 
-    def test_process_simple(self):
+    def test_process_simple_figure(self):
         INPUT = '\n'.join([
                 '<figure class="image sidebar" ref="foo" />',
                 '<p>Lorem ipsum.</p>'
@@ -15,6 +15,23 @@ class ContentProcessorTest(TestCase):
         
         EXPECTED = '\n'.join([
                 '<figure class="image sidebar"><a href="foo.jpg"><img src="foo.i.jpeg"/></a></figure>',
+                '<p>Lorem ipsum.</p>'
+                ])
+        
+        self.assertEqual(EXPECTED, process_content(INPUT))
+
+    def test_process_figure_with_title(self):
+        INPUT = ''.join([
+                '<figure class="image sidebar" ref="foo">',
+                '<title>Foo</title>',
+                '</figure>',
+                '<p>Lorem ipsum.</p>'
+                ])
+        
+        EXPECTED = u''.join([
+                '<figure class="image sidebar">',
+                '<a href="foo.jpg" title="Foo"><img src="foo.i.jpeg"/></a>',
+                '</figure>',
                 '<p>Lorem ipsum.</p>'
                 ])
         
