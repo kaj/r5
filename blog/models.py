@@ -3,6 +3,7 @@ from django.contrib.comments.moderation import CommentModerator, moderator
 from django.db import models
 from taggit.managers import TaggableManager
 from IPy import IP
+from blog.contentprocessor import process_content
 
 class Post(models.Model):
     
@@ -20,6 +21,9 @@ class Post(models.Model):
     class Meta:
         ordering = ['-posted_time']
 
+    def content_output(self):
+        return process_content(self.content)
+    
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
         return u'%s (%d)' % (self.title, year)
