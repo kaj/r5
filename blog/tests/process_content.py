@@ -3,7 +3,7 @@ Test the blog module
 """
 
 from django.test import TestCase
-from contentprocessor import *
+from blog.contentprocessor import *
 
 
 class imageinfo:
