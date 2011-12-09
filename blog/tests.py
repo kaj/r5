@@ -5,8 +5,27 @@ Test the blog module
 from django.test import TestCase
 from contentprocessor import *
 
+
+class imageinfo:
+    
+    def __init__(self, name, width, height, iconsize=200):
+        self.large = '%s.jpg' % name
+        self.width = width
+        self.height = height
+        
+        self.icon = '%s.i.jpeg' % name
+        factor = min(float(iconsize)/width, float(iconsize)/height)
+        self.iwidth = unicode(int(round(factor * width)))
+        self.iheight = unicode(int(round(factor * height)))
+
+
 class ContentProcessorTest(TestCase):
 
+    def setUp(self):
+        self.images = {
+            'foo': imageinfo('foo', 848, 565),
+            }
+        
     def test_process_simple_figure(self):
         INPUT = '\n'.join([
                 '<figure class="image sidebar" ref="foo" />',
@@ -14,11 +33,11 @@ class ContentProcessorTest(TestCase):
                 ])
         
         EXPECTED = '\n'.join([
-                '<figure class="image sidebar"><a href="foo.jpg"><img src="foo.i.jpeg"/></a></figure>',
+                '<figure class="image sidebar"><a href="foo.jpg"><img src="foo.i.jpeg" height="133" width="200"/></a></figure>',
                 '<p>Lorem ipsum.</p>'
                 ])
         
-        self.assertEqual(EXPECTED, process_content(INPUT))
+        self.assertEqual(EXPECTED, process_content(INPUT, self.images))
 
     def test_process_figure_with_title(self):
         INPUT = ''.join([
@@ -30,12 +49,12 @@ class ContentProcessorTest(TestCase):
         
         EXPECTED = u''.join([
                 '<figure class="image sidebar">',
-                '<a href="foo.jpg" title="Foo"><img src="foo.i.jpeg"/></a>',
+                '<a href="foo.jpg" title="Foo"><img src="foo.i.jpeg" height="133" width="200"/></a>',
                 '</figure>',
                 '<p>Lorem ipsum.</p>'
                 ])
         
-        self.assertEqual(EXPECTED, process_content(INPUT))
+        self.assertEqual(EXPECTED, process_content(INPUT, self.images))
 
 
 #def t():
