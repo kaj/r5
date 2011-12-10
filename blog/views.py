@@ -77,7 +77,7 @@ def tagcloud(request):
 
 def tagged(request, slug):
     lang = _activatelang(request)
-    tag = Tag.objects.get(slug=slug)
+    tag = get_object_or_404(Tag, slug=slug)
     posts = filter_by_language(Post.objects.filter(tags__in=[tag]),
                                lang)
     return direct_to_template(request, 'blog/tagged.html', {

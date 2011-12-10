@@ -65,3 +65,6 @@ class SimpleTest(TestCase):
                          # TODO More semantic markup!
                          select_texts(doc, 'h1'))
         # TODO Have actual content in the test db and test for that.
+
+    def test_get_nonexistant_tag(self):
+        doc = self.get('/tag/nonesuch', expected_status_code=404)
