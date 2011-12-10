@@ -52,3 +52,16 @@ class SimpleTest(TestCase):
         
     def test_get_nonexistant_year(self):
         doc = self.get('/1971/', expected_status_code=404)
+
+    def test_get_tagcloud(self):
+        doc = self.get('/tag/')
+        
+        self.assertEqual(['Rasmus.krats.se taggmoln'],
+                         select_texts(doc, 'head title'))
+        self.assertEqual(['Rasmus.krats.se'],
+                         # TODO More semantic markup!
+                         select_texts(doc, '#header #sitename'))
+        self.assertEqual(['Taggmoln'],
+                         # TODO More semantic markup!
+                         select_texts(doc, 'h1'))
+        # TODO Have actual content in the test db and test for that.
