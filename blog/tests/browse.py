@@ -18,9 +18,9 @@ class SimpleTest(TestCase):
     def setUp(self):
         self.c = Client()
     
-    def get(self, url):
+    def get(self, url, expected_status_code=200):
         response = self.c.get(url)
-        self.assertEqual((200, 'text/html; charset=utf-8'),
+        self.assertEqual((expected_status_code, 'text/html; charset=utf-8'),
                          (response.status_code, response['Content-Type']))
     
         # NOTE Settings strict=False disables (all?) validation.
@@ -46,3 +46,9 @@ class SimpleTest(TestCase):
                          # TODO More semantic markup!
                          select_texts(doc, '#header #sitename'))
         # TODO Have actual content in the test db and test for that.
+
+    def test_get_nonexistant_page(self):
+        doc = self.get('/2011/nonesuch', expected_status_code=404)
+        
+    def test_get_nonexistant_year(self):
+        doc = self.get('/1971/', expected_status_code=404)
