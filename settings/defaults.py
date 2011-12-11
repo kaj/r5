@@ -184,3 +184,8 @@ INTERNAL_IPS = ('127.0.0.1', )
 SIMPLEGRAVATAR_SIZE = 52
 SIMPLEGRAVATAR_DEFAULT = 'identicon'
 
+import sys
+if 'test' in sys.argv or 'testserver' in sys.argv:
+    DATABASES['default'] = {'ENGINE': 'sqlite3'}
+    MIDDLEWARE_CLASSES = (m for m in MIDDLEWARE_CLASSES if m != 'dmanalytics.middleware.DMAnalyticsMiddleware')
+
