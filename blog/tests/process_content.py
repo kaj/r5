@@ -15,16 +15,23 @@ class imageinfo:
         
         self.icon = '%s.i.jpeg' % name
         factor = min(float(iconsize)/width, float(iconsize)/height)
-        self.iwidth = unicode(int(round(factor * width)))
-        self.iheight = unicode(int(round(factor * height)))
+        self.iwidth = int(round(factor * width))
+        self.iheight = int(round(factor * height))
 
+class imagecollection:
+    def __init__(self, data):
+        self.data = data
+        
+    def get(self, ref):
+        return self.data[ref]
 
 class ContentProcessorTest(TestCase):
 
     def setUp(self):
-        self.images = {
+        self.images = imagecollection({
             'foo': imageinfo('foo', 848, 565),
-            }
+            })
+        
         
     def test_process_simple_figure(self):
         INPUT = '\n'.join([
@@ -56,6 +63,17 @@ class ContentProcessorTest(TestCase):
         
         self.assertEqual(EXPECTED, process_content(INPUT, self.images))
 
+    def test_process_nonexistant_figure(self):
+        INPUT = '\n'.join([
+                '<figure class="image sidebar" ref="nonesuch" />',
+                '<p>Lorem ipsum.</p>'
+                ])
+
+        try:
+            process_content(INPUT, self.images)
+            self.fail('Expected an exception')
+        except KeyError:
+            pass
 
 #def t():
 #    process_content_etree(INPUT)

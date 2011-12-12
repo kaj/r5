@@ -6,14 +6,14 @@ def process_content(content, images):
     for figure in dom.iterfind('figure'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
-        info = images.get(ref)
+        info = images.get(ref=ref)
         title = figure.xpath('title')
         a = SubElement(figure, 'a', {'href': info.large})
         if len(title) == 1:
             a.attrib['title'] = tostring(title[0], method='text', encoding=unicode, with_tail=False)
             figure.remove(*title)
         img = SubElement(a, 'img', {'src': info.icon,
-                                    'width': info.iwidth,
-                                    'height': info.iheight})
+                                    'width': str(info.iwidth),
+                                    'height': str(info.iheight)})
     
     return mark_safe(u''.join(tostring(x, encoding=unicode) for x in dom.iterchildren()))

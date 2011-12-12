@@ -22,7 +22,11 @@ class Post(models.Model):
         ordering = ['-posted_time']
 
     def content_output(self):
-        return process_content(self.content)
+        try:
+            return process_content(self.content, Image.objects)
+        except Exception as e:
+            print e
+            raise e
     
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
@@ -51,6 +55,30 @@ class Update(models.Model):
     def get_absolute_url(self):
         return self.post.get_absolute_url()
 
+class Image(models.Model):
+    ref = models.CharField(max_length=50)
+    sourcename = models.CharField(max_length=100)
+    orig_width = models.IntegerField()
+    orig_height = models.IntegerField()
+
+    def __unicode__(self):
+        return u'<Image from %s>' % self.sourcename
+
+    @property
+    def large(self):
+        return u'%s.jpg' % self.ref
+    
+    @property
+    def icon(self):
+        return u'%s.i.jpeg' % self.ref
+    
+    @property
+    def iwidth(self):
+        return 200
+    @property
+    def iheight(self):
+        return 133
+    
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
     email_notification = True
