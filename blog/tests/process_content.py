@@ -75,6 +75,25 @@ class ContentProcessorTest(TestCase):
         except KeyError:
             pass
 
+    def test_process_figure_with_caption(self):
+        INPUT = ''.join([
+                '<figure class="image sidebar" ref="foo">',
+                '<title>Foo</title>',
+                '<p>This is some kind of caption.</p>',
+                '</figure>',
+                '<p>Lorem ipsum.</p>'
+                ])
+        
+        EXPECTED = u''.join([
+                '<figure class="image sidebar">',
+                '<a href="foo.jpg" title="Foo"><img src="foo.i.jpeg" height="133" width="200"/></a>',
+                '<p>This is some kind of caption.</p>',
+                '</figure>',
+                '<p>Lorem ipsum.</p>'
+                ])
+        
+        self.assertEqual(EXPECTED, process_content(INPUT, self.images))
+
 #def t():
 #    process_content_etree(INPUT)
 

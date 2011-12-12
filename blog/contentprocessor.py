@@ -1,5 +1,5 @@
 from django.utils.safestring import mark_safe
-from lxml.etree import fromstring, SubElement, tostring
+from lxml.etree import fromstring, Element, SubElement, tostring
 
 def process_content(content, images):
     dom = fromstring(u'<article>%s</article>' % content)
@@ -8,7 +8,8 @@ def process_content(content, images):
         del figure.attrib['ref']
         info = images.get(ref=ref)
         title = figure.xpath('title')
-        a = SubElement(figure, 'a', {'href': info.large})
+        a = Element('a', {'href': info.large})
+        figure.insert(0, a)
         if len(title) == 1:
             a.attrib['title'] = tostring(title[0], method='text', encoding=unicode, with_tail=False)
             figure.remove(*title)
