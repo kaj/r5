@@ -174,9 +174,6 @@ LOGGING = {
 CONTENT_FILES_BASE='/home/kaj/proj/myweb/content/'
 
 COMPRESS_OUTPUT_DIR = 'cache'
-# The default JSMINFilter breaks ugly ie-detection in html5.js
-# Try to use precompressed js files instead for now.
-COMPRESS_JS_FILTERS = []
 
 # Who should be allowed to see the debug toolbar.
 INTERNAL_IPS = ('127.0.0.1', )
