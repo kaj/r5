@@ -4,4 +4,6 @@
 media
 ve
 ^static
-settings/local.py
+
+/settings/local.py
+/static/

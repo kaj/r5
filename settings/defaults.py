@@ -77,11 +77,6 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -174,9 +169,6 @@ LOGGING = {
 CONTENT_FILES_BASE='/home/kaj/proj/myweb/content/'
 
 COMPRESS_OUTPUT_DIR = 'cache'
-# The default JSMINFilter breaks ugly ie-detection in html5.js
-# Try to use precompressed js files instead for now.
-COMPRESS_JS_FILTERS = []
 
 # Who should be allowed to see the debug toolbar.
 INTERNAL_IPS = ('127.0.0.1', )
