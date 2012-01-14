@@ -3,16 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-08-07 12:31+0200\n"
+"POT-Creation-Date: 2012-01-13 23:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
+"Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,13 +31,21 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:39
+#: blog/views.py:58
+msgid "Din kommentar är borttagen."
+msgstr "Your comment is removed."
+
+#: blog/views.py:61
+msgid "Din kommentar väntar på moderering."
+msgstr "Your comment awaits moderation."
+
+#: blog/templates/404.html:15 blog/templates/blog/base.html:66
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
-#: blog/templates/404.html:54 blog/templates/about.html:97
-#: blog/templates/blog/index.html:22 blog/templates/blog/tagcloud.html:7
-#: blog/templates/blog/tagged.html:15
+#: blog/templates/404.html:54 blog/templates/about.html:101
+#: blog/templates/blog/index.html:29 blog/templates/blog/tagcloud.html:7
+#: blog/templates/blog/tagged.html:19
 msgid "Taggmoln"
 msgstr "Tag cloud"
 
@@ -132,15 +139,32 @@ msgstr "sms:"
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
-#: blog/templates/blog/base.html:66
+#: blog/templates/about.html:96 blog/templates/blog/index.html:21
+#: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:14
+msgid "taggmoln"
+msgstr "tag cloud"
+
+#: blog/templates/blog/base.html:67
+msgid "Hoppa till"
+msgstr "Skip to"
+
+#: blog/templates/blog/base.html:69
+msgid "innehåll"
+msgstr "content"
+
+#: blog/templates/blog/base.html:72
+msgid "mina länkar"
+msgstr "my links"
+
+#: blog/templates/blog/base.html:103
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:72
+#: blog/templates/blog/base.html:109
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/base.html:89
+#: blog/templates/blog/base.html:126
 msgid ""
 "\n"
 "          Där inget annat anges är innehåll på rasmus.krats.se\n"
@@ -156,11 +180,23 @@ msgstr ""
 "             href=\"http://creativecommons.org/licenses/by/3.0/\">Creative\n"
 "  Commons Attribution 3.0 License</a>."
 
-#: blog/templates/blog/index.html:30
+#: blog/templates/blog/index.html:22
+msgid "senaste kommentarerna"
+msgstr "latest comments"
+
+#: blog/templates/blog/index.html:23
+msgid "jag twittrar"
+msgstr "I tweet"
+
+#: blog/templates/blog/index.html:24
+msgid "några bra böcker"
+msgstr "some good books"
+
+#: blog/templates/blog/index.html:38
 msgid "Senaste kommentarerna"
 msgstr "Latest comments"
 
-#: blog/templates/blog/index.html:35
+#: blog/templates/blog/index.html:46
 msgid "Några bra böcker"
 msgstr "Some good books"
 
@@ -169,21 +205,25 @@ msgstr "Some good books"
 msgid "på"
 msgstr "on"
 
-#: blog/templates/blog/post_detail.html:29
+#: blog/templates/blog/post_detail.html:7
+msgid "liknande sidor"
+msgstr "similar pages"
+
+#: blog/templates/blog/post_detail.html:37
 #: blog/templates/blog/post_summary.html:18
 #: blog/templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: blog/templates/blog/post_detail.html:45
+#: blog/templates/blog/post_detail.html:53
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:68
+#: blog/templates/blog/post_detail.html:76
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:71
+#: blog/templates/blog/post_detail.html:79
 msgid ""
 "\n"
 "        Din epostadress kommer inte att visas.  Du\n"
@@ -195,7 +235,7 @@ msgstr ""
 "Your email address will not be disclosed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:85
+#: blog/templates/blog/post_detail.html:93
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
@@ -254,10 +294,6 @@ msgstr "Published"
 #: blog/templates/blog/publine.html:5
 msgid "taggat"
 msgstr "tagged"
-
-#: blog/templates/blog/tagcloud.html:4
-msgid "taggmoln"
-msgstr "tag cloud"
 
 #: blog/templates/blog/tagged.html:6
 msgid "Taggat"
