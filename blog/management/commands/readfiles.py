@@ -194,6 +194,11 @@ def d2h(elem, dirname='', year=''):
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
     
     for e in elem.iter():
+        title = e.get('{http://www.w3.org/1999/xlink}title')
+        if title:
+            del e.attrib['{http://www.w3.org/1999/xlink}title']
+            e.set('title', title)
+        
         link = e.get('{http://www.w3.org/1999/xlink}href')
         if link:
             # TODO: Handle my "local protocols", lj:, rfc:
