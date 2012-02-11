@@ -90,6 +90,7 @@ def tagged(request, slug):
     return direct_to_template(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
+            'lang': lang,
             })
 
 def filter_by_language(posts, lang, extra_skip=None):

@@ -3,6 +3,12 @@
 
 {% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
 
+{% block extrahead %}
+    {# <meta name="Description" content="TODO" /> #}
+    <link rel="alternate" type="application/atom+xml"
+          href="/atom-{{lang}}.xml">
+{% endblock %}
+
 {% block main %}
     {% if head %}
         <h1>{{head}}</h1>
