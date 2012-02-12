@@ -138,7 +138,8 @@ def d2h(elem, dirname='', year=''):
                        ('db:tr', 'tr'), ('db:th', 'th'), ('db:td', 'td'),
                        ('db:sidebar', 'aside'),
                        ('db:subscript', 'sub'), ('db:superscript', 'sup'),
-                       ('db:quote', 'q')):
+                       ('db:quote', 'q'),
+                       ('r:br', 'br')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html
             e.tag = html
