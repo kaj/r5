@@ -52,6 +52,9 @@ class Update(models.Model):
     def lang(self):
         return self.post.lang
 
+    def __unicode__(self):
+        return u'Update %s to %s' % (self.time, self.post)
+    
     def get_absolute_url(self):
         return self.post.get_absolute_url()
 
