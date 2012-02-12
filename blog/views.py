@@ -41,17 +41,24 @@ def post_detail(request, year, slug):
                                  lang=lang)
         altlingos = Post.objects.filter(posted_time__year=year, slug=slug) \
             .exclude(lang=lang).values_list('lang', flat=True)
-    except:
+    except Http404:
+        # Failed to get the requested language, try any other
+        lingos = Post.objects.filter(posted_time__year=year, slug=slug) \
+            .values_list('lang', flat=True)
+        if not lingos:
+            raise Http404
+        
         post = get_object_or_404(Post, 
                                  posted_time__year=year,
-                                 slug=slug)
-        altlingos = []
+                                 slug=slug,
+                                 lang=lingos[0])
+        altlingos = lingos[1:]
     similar = filter_by_language(post.tags.similar_objects(), post.lang,
                                  extra_skip=post.get_absolute_url())
     
     message = None
     if 'c' in request.GET:
-        comment = Comment.objects.get(id=request.GET['c'])
+        comment = get_object_or_404(Comment, id=request.GET['c'])
         print "Comment:", comment
         if comment.is_removed:
             print "That comment is removed!!"
@@ -83,6 +90,7 @@ def tagged(request, slug):
     return direct_to_template(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
+            'lang': lang,
             })
 
 def filter_by_language(posts, lang, extra_skip=None):

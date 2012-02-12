@@ -3,6 +3,18 @@
 
 {% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
 
+{% block extrahead %}
+    {# <meta name="Description" content="TODO" /> #}
+    <link rel="alternate" type="application/atom+xml"
+          href="/atom-{{lang}}.xml">
+    {% if not head %}
+        <link rel="openid.server"
+              href="http://openid.sys.kth.se/_/kthcasopenid.php/kaj">
+        <link rel="openid.delegate"
+              href="http://openid.sys.kth.se/_/kthcasopenid.php/kaj">
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     {% if head %}
         <h1>{{head}}</h1>
@@ -45,7 +57,7 @@
   <div class="sideblock" id="booksbox">
     <h2>{% trans "Några bra böcker" %}</h2>
     <div id="w5c54f5e485d879152955168d893d33ab"></div>
-    <script type="text/javascript" charset="UTF-8" src="http://www.librarything.com/widget_get.php?userid=kaj&theID=w5c54f5e485d879152955168d893d33ab"></script>
+    <script type="text/javascript" charset="UTF-8" src="http://www.librarything.com/widget_get.php?userid=kaj&amp;theID=w5c54f5e485d879152955168d893d33ab"></script>
 
     <noscript>
       <a href="http://www.librarything.com/profile/kaj">My Library</a>

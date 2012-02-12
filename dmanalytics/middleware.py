@@ -43,7 +43,7 @@ class DMAnalyticsMiddleware(object):
                 'content_length': response.get('Content-Length', None),
                 },
             'elapsed': (datetime.now() - request.dma_starttime).total_seconds(),
-            'user': unicode(request.user),
+            'user': unicode(getattr(request, 'user', u'Anonymous')),
             }
         #if request.user.is_authenticated():
         #    item['user'] = request.user.username
