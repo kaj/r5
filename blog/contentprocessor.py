@@ -6,7 +6,12 @@ def process_content(content, images):
     for figure in dom.iterfind('figure'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
-        info = images.get(ref=ref)
+        try:
+            info = images.get(ref=ref)
+        except:
+            figure.text = ' (image not found) '
+            print 'Image %s not found' % ref
+            continue
         title = figure.xpath('title')
         a = Element('a', {'href': info.large})
         figure.insert(0, a)

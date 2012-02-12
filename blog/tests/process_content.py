@@ -69,11 +69,11 @@ class ContentProcessorTest(TestCase):
                 '<p>Lorem ipsum.</p>'
                 ])
 
-        try:
-            process_content(INPUT, self.images)
-            self.fail('Expected an exception')
-        except KeyError:
-            pass
+        EXPECTED = '\n'.join([
+                '<figure class="image sidebar"> (image not found) </figure>',
+                '<p>Lorem ipsum.</p>'
+                ]) 
+        self.assertEqual(EXPECTED, process_content(INPUT, self.images))
 
     def test_process_figure_with_caption(self):
         INPUT = ''.join([
