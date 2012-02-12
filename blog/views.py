@@ -58,7 +58,7 @@ def post_detail(request, year, slug):
     
     message = None
     if 'c' in request.GET:
-        comment = Comment.objects.get(id=request.GET['c'])
+        comment = get_object_or_404(Comment, id=request.GET['c'])
         print "Comment:", comment
         if comment.is_removed:
             print "That comment is removed!!"
