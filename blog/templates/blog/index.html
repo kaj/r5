@@ -32,7 +32,6 @@
 {% block lastskiplinks %}
   <li><a href="#tagcloud">{% trans "taggmoln" %}</a></li>
   <li><a href="#lastcomments">{% trans "senaste kommentarerna" %}</a></li>
-  <li><a href="#tweetbox">{% trans "jag twittrar" %}</a></li>
   <li><a href="#booksbox">{% trans "några bra böcker" %}</a></li>
 {% endblock %}
 
@@ -51,8 +50,6 @@
       {% latestcomments %}
     {% endcache %}
   </div>
-  
-  <div class="sideblock" id="tweetbox"></div>
   
   <div class="sideblock" id="booksbox">
     <h2>{% trans "Några bra böcker" %}</h2>
