@@ -176,6 +176,10 @@ INTERNAL_IPS = ('127.0.0.1', )
 SIMPLEGRAVATAR_SIZE = 52
 SIMPLEGRAVATAR_DEFAULT = 'identicon'
 
+# Use the (rather silly) profanities system to avoid some spam
+COMMENTS_ALLOW_PROFANITIES = False
+PROFANITIES_LIST = ['[url=', 'penisadvantage']
+
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'sqlite3'}
