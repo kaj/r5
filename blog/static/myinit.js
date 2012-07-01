@@ -23,3 +23,11 @@ function initMyTweetbox() {
         auto_join_text_url: ":"
     });
 }
+function initMyLibthing() {
+    $('#sideblockwrap').append(
+        '<div class="sideblock" id="booksbox"><h2>Några bra böcker</h2>
+<div id="w5c54f5e485d879152955168d893d33ab"></div>
+<script type="text/javascript" charset="UTF-8" src="http://www.librarything.com/widget_get.php?userid=kaj&amp;theID=w5c54f5e485d879152955168d893d33ab"></script></div>');
+    $('#skiplinks ul').append('<li><a href="#booksbox">några bra böcker</a></li>');
+    initSkiplinks($('#skiplinks a[href=#booksbox]'));
+}
