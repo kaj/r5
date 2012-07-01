@@ -72,7 +72,8 @@ def readfile(filename):
     lang = tree.getroot().get('{http://www.w3.org/XML/1998/namespace}lang')
     p, isnew = Post.objects.get_or_create(posted_time__year=date.year,
                                           slug=slug,
-                                          lang=lang)
+                                          lang=lang,
+                                          defaults={'posted_time': date})
 
     tags = [textcontent(e) for e in (tree.getroot().findall('.//db:subject', nsmap) or [])]
     if tags:
