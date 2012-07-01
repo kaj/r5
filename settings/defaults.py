@@ -169,6 +169,11 @@ LOGGING = {
 CONTENT_FILES_BASE='/home/kaj/proj/myweb/content/'
 
 COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+)
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 # Who should be allowed to see the debug toolbar.
 INTERNAL_IPS = ('127.0.0.1', )
