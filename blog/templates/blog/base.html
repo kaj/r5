@@ -11,15 +11,11 @@
     <script type="text/javascript" src="{{STATIC_URL}}jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}kratsbox/kratsbox.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}jquery.tweet.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}myinit.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $('#skiplinks').addClass('withoutfocus');
-        $('#skiplinks *').focus(function() {
-          $('#skiplinks').addClass('withfocus').removeClass('withoutfocus');
-        });
-        $('#skiplinks *').blur(function() {
-          $('#skiplinks').removeClass('withfocus').addClass('withoutfocus');
-        });
+        initSkiplinks($('#skiplinks *'));
         $('figure').each(function() {
           var link = $(this).find('a');
           var caption = $(this).find('p');
@@ -29,18 +25,10 @@
         });
         $("figure a").kratsbox();
         Gravatar.init();
-
-        $("#tweetbox").tweet({
-          username: "rasmus_kaj",
-          join_text: "auto",
-          avatar_size: 0,
-          count: 5,
-          auto_join_text_default: ":",
-          auto_join_text_ed: "I",
-          auto_join_text_ing: "I were",
-          auto_join_text_reply: "I replied to",
-          auto_join_text_url: ":"
-        }).prepend('\u003Ch2\u003EJag twittrar ...\u003C/h2\u003E');
+        if ($('#lastcomments').size()) {
+          initMyTweetbox();
+          initMyLibthing();
+        }
       });
     </script>
     {% endcompress %}
@@ -95,7 +83,7 @@
 	{% endblock %}
       </div>
       
-      <div class="sideblockwrap">
+      <div class="sideblockwrap" id="sideblockwrap">
 	{% block sideblocktop %}{% endblock %}
 	<div class="sideblock" id="mylinks">
 	  <h2>Rasmus Kaj</h2>

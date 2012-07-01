@@ -123,6 +123,8 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
+    'blog',
+    'dmanalytics',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -139,8 +141,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'blog',
-    'dmanalytics',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -169,12 +169,21 @@ LOGGING = {
 CONTENT_FILES_BASE='/home/kaj/proj/myweb/content/'
 
 COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
+)
+COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 
 # Who should be allowed to see the debug toolbar.
 INTERNAL_IPS = ('127.0.0.1', )
 
 SIMPLEGRAVATAR_SIZE = 52
 SIMPLEGRAVATAR_DEFAULT = 'identicon'
+
+# Use the (rather silly) profanities system to avoid some spam
+COMMENTS_ALLOW_PROFANITIES = False
+PROFANITIES_LIST = ['[url=', 'penisadvantage']
 
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
