@@ -83,6 +83,7 @@ html, body {
     text-decoration: none;
     overflow: hidden;
 }
+#footer .license br { display: none; }
 #footer img { float: left; margin-right: 1em; }
 
 #main {

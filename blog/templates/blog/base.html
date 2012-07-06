@@ -106,19 +106,20 @@
     </div>
     <div id="footerwrap">
       <div id="footer">
-        <p class="license"><a rel="license"
-                 href="http://creativecommons.org/licenses/by/3.0/">
-            <img alt="Creative Commons License" width="88" height="31"
-                 src="http://i.creativecommons.org/l/by/3.0/88x31.png"
-                 /></a>
-          {% blocktrans %}
-          Där inget annat anges är innehåll på rasmus.krats.se
-          tillgängligt under 
+        {% spaceless %}
+        <p class="license">
           <a rel="license"
-             href="http://creativecommons.org/licenses/by/3.0/">Creative
-            Commons Erkännande 3.0 Unported Licens</a>.
+             href="http://creativecommons.org/licenses/by/3.0/"
+             ><img alt="{%trans 'Creative Commons-licens'%}"
+                   src="http://i.creativecommons.org/l/by/3.0/88x31.png"
+                   width="88" height="31"
+                   /></a><br />
+          {% blocktrans with me='<a xmlns:cc="http://creativecommons.org/ns#" href="http://rasmus.krats.se/" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>' a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">' sa='</a>'%}
+          Detta verk av {{me}} är licensierat under en
+          {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
           {% endblocktrans %}
         </p>
+        {% endspaceless %}
       </div>
     </div>
   </body>
