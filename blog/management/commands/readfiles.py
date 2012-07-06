@@ -1,4 +1,4 @@
-from blog.models import Post, Update
+from blog.models import Post, Update, Image
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
@@ -245,28 +245,13 @@ def d2h(elem, dirname='', year=''):
         alt = textcontent(altelem)
         if altelem is not None:
             e.remove(altelem)
-        if icon and img:
-            e.set('style', 'width: %dpx' % (int(icon['width'])+6))
-            a = e.makeelement('a', {'href': os.path.join('/', year, img['name']), 'rel': 'image'})
-            e.insert(0, a)
-            img = ElementTree.SubElement(
-                a, 'img', dict(src=os.path.join('/', year, icon['name']),
-                               width=icon['width'], height=icon['height']))
-            if alt:
-                img.set('alt', alt)
-            title = e.find('db:title', nsmap)
-            if title is not None:
-                a.set('title', textcontent(title))
-                e.remove(title)
-            elif alt:
-                a.set('title', alt)
-        elif img:
-            e.set('style', 'width: %dpx' % (int(img['width'])+6))
-            a = e.makeelement('img', dict(src=os.path.join('/', year, img['name']),
-                                          width=img['width'], height=img['height']))
-            e.insert(0, a)
-        
-        else:
+
+        # TODO Unify title and para in a good way?
+        for alt in e.findall('r:alt', nsmap):
+            alt.tag = 'alt'
+        for caption in e.findall('db:title', nsmap):
+            caption.tag = 'figcaption'
+        if not img:
             print "WARNING: image data missing:", imgref
     
     if imginfo:
@@ -300,6 +285,7 @@ class ImageFinder:
     
     def __init__(self, dirname):
         self.dirname = dirname
+        self.subdir = dirname[len(settings.CONTENT_FILES_BASE):]
         self.img = {}
         self.icon = {}
         self.used = []
@@ -320,6 +306,11 @@ class ImageFinder:
     def getimage(self, name):
         result = self.img.get(name)
         if result:
+            Image.objects.get_or_create(
+                sourcename=os.path.join(self.subdir, result['name']),
+                defaults={'ref': name,
+                          'orig_width': result['width'],
+                          'orig_height': result['height']})
             self.used.append(result['name'])
         return result
     
@@ -342,6 +333,8 @@ class ImageFinder:
             if not os.path.exists(dst):
                 # print "Copy %s to %s" % (src, dst)
                 copy(src, dst)
+            else:
+                print "Target %s allready there." % dst
             srcurl = os.path.join('/', path, filename)
             dsturl = '/%s/%s' % (year, filename)
             redirect(srcurl, dsturl)
