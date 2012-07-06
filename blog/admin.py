@@ -31,4 +31,7 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 
-admin.site.register(Image)
+class ImageAdmin(admin.ModelAdmin):
+    list_display = ('ref', 'sourcename', 'orig_width', 'orig_height')
+
+admin.site.register(Image, ImageAdmin)
