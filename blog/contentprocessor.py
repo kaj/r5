@@ -3,7 +3,7 @@ from lxml.etree import fromstring, Element, SubElement, tostring
 
 def process_content(content, images):
     dom = fromstring(u'<article>%s</article>' % content)
-    for figure in dom.iterfind('figure'):
+    for figure in dom.iterfind('.//figure'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
         try:
