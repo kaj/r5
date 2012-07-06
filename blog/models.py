@@ -59,10 +59,12 @@ class Update(models.Model):
         return self.post.get_absolute_url()
 
 class Image(models.Model):
-    ref = models.CharField(max_length=50)
+    ref = models.CharField(max_length=50, db_index=True, unique=True)
     sourcename = models.CharField(max_length=100)
     orig_width = models.IntegerField()
     orig_height = models.IntegerField()
+
+    ICON_MAX = {'width': 200.0, 'height': 180.0}
 
     def __unicode__(self):
         return u'<Image from %s>' % self.sourcename
@@ -77,10 +79,14 @@ class Image(models.Model):
     
     @property
     def iwidth(self):
-        return 200
+        factor = min(self.ICON_MAX['width'] / self.orig_width,
+                     self.ICON_MAX['height'] / self.orig_height)
+        return int(round(self.orig_width * factor))
     @property
     def iheight(self):
-        return 133
+        factor = min(self.ICON_MAX['width'] / self.orig_width,
+                     self.ICON_MAX['height'] / self.orig_height)
+        return int(round(self.orig_height * factor))
     
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
