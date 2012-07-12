@@ -7,7 +7,13 @@ from django.utils import translation
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.simple import direct_to_template
 from taggit.models import Tag
-from blog.models import Post, Update
+from blog.models import Post, Update, Image
+import os
+from django.conf import settings
+from django.views.static import serve
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 def index(request, year=None):
     lang = _activatelang(request)
@@ -112,3 +118,26 @@ def _activatelang(request):
         lang = translation.get_language_from_request(request)
     translation.activate(lang)
     return lang
+
+def image_small(request, slug):
+    return image_view(request, slug, size=Image.ICON_MAX)
+
+def image_view(request, slug, size=900):
+    obj = get_object_or_404(Image, ref=slug)
+    scaled_path = os.path.join(settings.SCALED_IMAGE_DIR,
+                               '%s-%s.jpg' % (slug, size))
+    print "Scaled image path:", scaled_path, "from", obj.sourcename
+    try:
+        return serve(request, path=scaled_path, document_root=settings.MEDIA_ROOT)
+    except Http404:
+        from PIL import Image as PImage
+        sourcedata = PImage.open(os.path.join('/home/kaj/Bilder/foto', obj.sourcename))
+        print("Try to fit %s into %s" % (obj, size))
+        scaleddata = sourcedata.resize(obj.scaled_size(size), int(PImage.ANTIALIAS))
+        full_path = os.path.join(settings.MEDIA_ROOT, scaled_path)
+        dir = os.path.dirname(full_path)
+        if not os.path.exists(dir):
+            os.makedirs(dir, 0777)
+        scaleddata.save(full_path)
+        return serve(request, path=scaled_path, document_root=settings.MEDIA_ROOT)
+        

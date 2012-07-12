@@ -300,6 +300,7 @@ class ImageFinder:
                                       height=i.get('height'))
             else:
                 self.img[name] = dict(name=fullname,
+                                      sourcename=i.get('src')
                                       width=i.get('width'),
                                       height=i.get('height'))
     
@@ -307,7 +308,7 @@ class ImageFinder:
         result = self.img.get(name)
         if result:
             Image.objects.get_or_create(
-                sourcename=os.path.join(self.subdir, result['name']),
+                sourcename=result['sourcename'],
                 defaults={'ref': name,
                           'orig_width': result['width'],
                           'orig_height': result['height']})
@@ -321,6 +322,8 @@ class ImageFinder:
         return result
 
     def handleUsed(self, year):
+        if True:
+            return
         path = self.dirname[len(settings.CONTENT_FILES_BASE):]
         # print "Image files in %s: %s" % (path, self.used)
         todir = os.path.join(settings.MEDIA_ROOT, year)

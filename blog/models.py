@@ -4,6 +4,7 @@ from django.db import models
 from taggit.managers import TaggableManager
 from IPy import IP
 from blog.contentprocessor import process_content
+from django.core.urlresolvers import reverse
 
 class Post(models.Model):
     
@@ -60,33 +61,39 @@ class Update(models.Model):
 
 class Image(models.Model):
     ref = models.CharField(max_length=50, db_index=True, unique=True)
-    sourcename = models.CharField(max_length=100)
+    sourcename = models.CharField(max_length=100, db_index=True, unique=True)
     orig_width = models.IntegerField()
     orig_height = models.IntegerField()
 
-    ICON_MAX = {'width': 200.0, 'height': 180.0}
+    ICON_MAX = 200
 
     def __unicode__(self):
         return u'<Image from %s>' % self.sourcename
 
+    def get_absolute_url(self):
+        return reverse('image_view', args=[self.ref])
+
     @property
     def large(self):
-        return u'%s.jpg' % self.ref
+        return self.get_absolute_url()
     
     @property
     def icon(self):
-        return u'%s.i.jpeg' % self.ref
+        return reverse('image_small', args=[self.ref])
     
+    def scaled_size(self, limit):
+        factor = min(float(limit) / self.orig_width,
+                     float(limit) / self.orig_height)
+        return (int(round(self.orig_width * factor)),
+                int(round(self.orig_height * factor)))
+        
     @property
     def iwidth(self):
-        factor = min(self.ICON_MAX['width'] / self.orig_width,
-                     self.ICON_MAX['height'] / self.orig_height)
-        return int(round(self.orig_width * factor))
+        return self.scaled_size(self.ICON_MAX)[0]
+    
     @property
     def iheight(self):
-        factor = min(self.ICON_MAX['width'] / self.orig_width,
-                     self.ICON_MAX['height'] / self.orig_height)
-        return int(round(self.orig_height * factor))
+        return self.scaled_size(self.ICON_MAX)[1]
     
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
