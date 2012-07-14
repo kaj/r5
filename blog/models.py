@@ -23,11 +23,7 @@ class Post(models.Model):
         ordering = ['-posted_time']
 
     def content_output(self):
-        try:
-            return process_content(self.content, Image.objects)
-        except Exception as e:
-            print e
-            raise e
+        return process_content(self.content, Image.objects)
 
     def frontimage_output(self):
         return process_content(self.frontimage, Image.objects)
