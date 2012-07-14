@@ -300,7 +300,7 @@ class ImageFinder:
                                       height=i.get('height'))
             else:
                 self.img[name] = dict(name=fullname,
-                                      sourcename=i.get('src')
+                                      sourcename=i.get('src'),
                                       width=i.get('width'),
                                       height=i.get('height'))
     
