@@ -28,6 +28,9 @@ class Post(models.Model):
         except Exception as e:
             print e
             raise e
+
+    def frontimage_output(self):
+        return process_content(self.frontimage, Image.objects)
     
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
