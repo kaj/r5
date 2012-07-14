@@ -81,7 +81,8 @@ class Image(models.Model):
         return reverse('image_small', args=[self.ref])
     
     def scaled_size(self, limit):
-        factor = min(float(limit) / self.orig_width,
+        factor = min(1, # Don't scale up!
+                     float(limit) / self.orig_width,
                      float(limit) / self.orig_height)
         return (int(round(self.orig_width * factor)),
                 int(round(self.orig_height * factor)))
