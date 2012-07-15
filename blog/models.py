@@ -63,7 +63,8 @@ class Image(models.Model):
     sourcename = models.CharField(max_length=100, db_index=True, unique=True)
     orig_width = models.IntegerField()
     orig_height = models.IntegerField()
-
+    mimetype = models.CharField(max_length=50)
+    
     ICON_MAX = 200
 
     def __unicode__(self):

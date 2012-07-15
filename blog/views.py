@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
+from django.conf import settings
 from django.contrib.comments.models import Comment
-from django.db.models import Q
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.utils import translation
+from django.utils.http import http_date
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.simple import direct_to_template
+from django.views.static import was_modified_since
+from logging import getLogger
 from taggit.models import Tag
 from blog.models import Post, Update, Image
 import os
-from django.conf import settings
-from django.views.static import serve
-from logging import getLogger
 
 logger = getLogger(__name__)
 
@@ -125,19 +125,35 @@ def image_small(request, slug):
 def image_view(request, slug, size=900):
     obj = get_object_or_404(Image, ref=slug)
     scaled_path = os.path.join(settings.SCALED_IMAGE_DIR,
-                               '%s-%s.jpg' % (slug, size))
+                               '%s-%s' % (slug, size))
     print "Scaled image path:", scaled_path, "from", obj.sourcename
     try:
-        return serve(request, path=scaled_path, document_root=settings.MEDIA_ROOT)
+        return serve_file(request, path=scaled_path, mimetype=obj.mimetype)
     except Http404:
         from PIL import Image as PImage
-        sourcedata = PImage.open(os.path.join('/home/kaj/Bilder/foto', obj.sourcename))
+        sourcedata = PImage.open(os.path.join(settings.IMAGE_FILES_BASE, obj.sourcename))
         print("Try to fit %s into %s" % (obj, size))
         scaleddata = sourcedata.resize(obj.scaled_size(size), int(PImage.ANTIALIAS))
         full_path = os.path.join(settings.MEDIA_ROOT, scaled_path)
         dir = os.path.dirname(full_path)
         if not os.path.exists(dir):
             os.makedirs(dir, 0777)
-        scaleddata.save(full_path)
-        return serve(request, path=scaled_path, document_root=settings.MEDIA_ROOT)
-        
+        scaleddata.save(full_path, sourcedata.format)
+        return serve_file(request, path=scaled_path, mimetype=obj.mimetype)
+
+def serve_file(request, path, mimetype):
+    fullpath = os.path.join(settings.MEDIA_ROOT, path)
+    if not os.path.exists(fullpath):
+        raise Http404(_(u'"%(path)s" does not exist') % {'path': fullpath})
+    # Respect the If-Modified-Since header.
+    statobj = os.stat(fullpath)
+    if not was_modified_since(request.META.get('HTTP_IF_MODIFIED_SINCE'),
+                              statobj.st_mtime, statobj.st_size):
+        return HttpResponseNotModified(mimetype=mimetype)
+    with open(fullpath, 'rb') as f:
+        response = HttpResponse(f.read(), mimetype=mimetype)
+    response["Last-Modified"] = http_date(statobj.st_mtime)
+    if stat.S_ISREG(statobj.st_mode):
+        response["Content-Length"] = statobj.st_size
+    return response
+    
