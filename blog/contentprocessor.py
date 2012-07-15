@@ -13,7 +13,7 @@ def process_content(content, images):
             print 'Image %s not found' % ref
             continue
 
-        if 'scaled' in figure.attrib.get('class', ''):
+        if info.is_small or 'scaled' in figure.attrib.get('class', ''):
             img = Element('img', {'src': info.large,
                                   'width': str(info.width),
                                   'height': str(info.height)})

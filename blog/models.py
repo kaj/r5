@@ -88,7 +88,11 @@ class Image(models.Model):
                      float(limit) / self.orig_height)
         return (int(round(self.orig_width * factor)),
                 int(round(self.orig_height * factor)))
-        
+    
+    @property
+    def is_small(self):
+        return self.orig_width <= self.ICON_MAX and self.orig_height <= self.ICON_MAX
+    
     @property
     def iwidth(self):
         return self.scaled_size(self.ICON_MAX)[0]
