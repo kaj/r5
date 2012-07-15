@@ -22,7 +22,7 @@ class Post(models.Model):
 
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
-        return u'%s (%d)' % (self.title, year)
+        return u'%s (%s)' % (self.title, year)
     
     def get_absolute_url(self):
         if self.posted_time:
