@@ -135,6 +135,7 @@ def d2h(elem, dirname='', year=''):
                        ('db:varlistentry/db:listitem', 'dd'),
                        ('db:varlistentry', None),
                        ('db:variablelist', 'dl'),
+                       ('db:orderedlist', 'ol'),
                        ('db:itemizedlist', 'ul'), ('db:listitem', 'li'),
                        ('db:simplelist', 'ul'), ('db:member', 'li'),
                        ('db:table', 'table'),
