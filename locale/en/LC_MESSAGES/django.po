@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-14 20:21+0100\n"
+"POT-Creation-Date: 2012-07-07 00:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -39,13 +39,13 @@ msgstr "Your comment is removed."
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:66
+#: blog/templates/404.html:15 blog/templates/blog/base.html:54
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
 #: blog/templates/404.html:54 blog/templates/about.html:101
-#: blog/templates/blog/index.html:29 blog/templates/blog/tagcloud.html:7
-#: blog/templates/blog/tagged.html:19
+#: blog/templates/blog/index.html:39 blog/templates/blog/tagcloud.html:7
+#: blog/templates/blog/tagged.html:25
 msgid "Taggmoln"
 msgstr "Tag cloud"
 
@@ -139,48 +139,49 @@ msgstr "sms:"
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
-#: blog/templates/about.html:96 blog/templates/blog/index.html:21
-#: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:14
+#: blog/templates/about.html:96 blog/templates/blog/index.html:33
+#: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:20
 msgid "taggmoln"
 msgstr "tag cloud"
 
-#: blog/templates/blog/base.html:67
+#: blog/templates/blog/base.html:55
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: blog/templates/blog/base.html:69
+#: blog/templates/blog/base.html:57
 msgid "innehåll"
 msgstr "content"
 
-#: blog/templates/blog/base.html:72
+#: blog/templates/blog/base.html:60
 msgid "mina länkar"
 msgstr "my links"
 
-#: blog/templates/blog/base.html:103
+#: blog/templates/blog/base.html:91
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:109
+#: blog/templates/blog/base.html:97
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/base.html:126
+#: blog/templates/blog/base.html:113
+msgid "Creative Commons-licens"
+msgstr "Creative Commons License"
+
+#: blog/templates/blog/base.html:117
+#, python-format
 msgid ""
 "\n"
-"          Där inget annat anges är innehåll på rasmus.krats.se\n"
-"          tillgängligt under \n"
-"          <a rel=\"license\"\n"
-"             href=\"http://creativecommons.org/licenses/by/3.0/\">Creative\n"
-"            Commons Erkännande 3.0 Unported Licens</a>.\n"
+"          Detta verk av %(me)s är licensierat under en\n"
+"          %(a)sCreative Commons Erkännande 3.0 Unported-licens%(sa)s.\n"
 "          "
 msgstr ""
 "\n"
-"  Except where otherwise noted, content on rasmus.krats.se is licensed\n"
-"  under a <a rel=\"license\"\n"
-"             href=\"http://creativecommons.org/licenses/by/3.0/\">Creative\n"
-"  Commons Attribution 3.0 License</a>."
+"          This work by %(me)s is licensed under a\n"
+"          %(a)sCreative Commons Attribution 3.0 Unported License%(sa)s.\n"
+"          "
 
-#: blog/templates/blog/index.html:22
+#: blog/templates/blog/index.html:34
 msgid "senaste kommentarerna"
 msgstr "latest comments"
 
@@ -192,7 +193,7 @@ msgstr "I tweet"
 msgid "några bra böcker"
 msgstr "some good books"
 
-#: blog/templates/blog/index.html:38
+#: blog/templates/blog/index.html:48
 msgid "Senaste kommentarerna"
 msgstr "Latest comments"
 
@@ -295,7 +296,7 @@ msgstr "Published"
 msgid "taggat"
 msgstr "tagged"
 
-#: blog/templates/blog/tagged.html:6
+#: blog/templates/blog/tagged.html:12
 msgid "Taggat"
 msgstr "Tagged"
 

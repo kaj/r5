@@ -83,6 +83,7 @@ html, body {
     text-decoration: none;
     overflow: hidden;
 }
+#footer .license br { display: none; }
 #footer img { float: left; margin-right: 1em; }
 
 #main {
@@ -298,13 +299,19 @@ dl dd {
     color: #8a8452;
 }
 
-#writecomment p {
-    display: table-row;
+#writecomment form p {
+    margin-left: 10em;
 }
 #writecomment label, #writecomment input, #writecomment textarea {
-    margin: .2em;
-    display: table-cell;
     vertical-align: baseline;
+}
+#writecomment label {
+    float: left;
+    margin-left: -10em;
+}
+#writecomment input, #writecomment textarea {
+    width: 95%;
+    width: -moz-available;
 }
 #writecomment p.fineprint {
     display: block;
@@ -312,6 +319,9 @@ dl dd {
 }
 #writecomment p.submit {
     display: block;
+}
+#writecomment p.submit input {
+    width: auto;
 }
 .lastcomments p {
     font-size: 90%;
