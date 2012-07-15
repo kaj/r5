@@ -12,6 +12,7 @@ from logging import getLogger
 from taggit.models import Tag
 from blog.models import Post, Update, Image
 import os
+import stat
 
 logger = getLogger(__name__)
 
