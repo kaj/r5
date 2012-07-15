@@ -66,7 +66,8 @@ class Image(models.Model):
     mimetype = models.CharField(max_length=50)
     
     ICON_MAX = 200
-
+    LARGE_MAX = 900
+    
     def __unicode__(self):
         return u'<Image from %s>' % self.sourcename
 
@@ -95,6 +96,15 @@ class Image(models.Model):
     @property
     def iheight(self):
         return self.scaled_size(self.ICON_MAX)[1]
+    
+    @property
+    def width(self):
+        return self.scaled_size(self.LARGE_MAX)[0]
+    
+    @property
+    def height(self):
+        return self.scaled_size(self.LARGE_MAX)[1]
+
     
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
