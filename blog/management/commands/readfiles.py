@@ -188,6 +188,10 @@ def d2h(elem, dirname='', year=''):
         e.tag = 'a'
         e.set('href', e.text if ':' in e.text else 'http://' + e.text)
     
+    for e in elem.findall('.//db:email', nsmap):
+        e.tag = 'a'
+        e.set('href', 'mailto:%s' % e.text)
+    
     # Inline simple stuff, put it in a span with the docbook name as class
     for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
         for e in elem.findall('.//db:' + docb, nsmap):
