@@ -191,6 +191,12 @@ figure {
     display: inline-block;
     vertical-align: top;
     max-width: 100%;
+    width: 206px;
+    width: -moz-min-content;
+}
+figure.scaled {
+    width: auto;
+    width: -moz-min-content;
 }
 aside figure {
     margin: 0;
