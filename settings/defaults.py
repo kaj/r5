@@ -185,6 +185,8 @@ SIMPLEGRAVATAR_DEFAULT = 'identicon'
 COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
 
+SCALED_IMAGE_DIR = 'cache/image'
+
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'sqlite3'}
