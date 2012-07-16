@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.comments.models import Comment
 from django.http import Http404, HttpResponse
@@ -10,6 +11,7 @@ from django.views.generic.simple import direct_to_template
 from django.views.static import was_modified_since
 from logging import getLogger
 from taggit.models import Tag
+from time import mktime
 from blog.models import Post, Update, Image
 import os
 import stat
@@ -154,7 +156,11 @@ def serve_file(request, path, mimetype):
     with open(fullpath, 'rb') as f:
         response = HttpResponse(f.read(), mimetype=mimetype)
     response["Last-Modified"] = http_date(statobj.st_mtime)
+    response["Expires"] = http_date_future(weeks=26)
     if stat.S_ISREG(statobj.st_mode):
         response["Content-Length"] = statobj.st_size
     return response
     
+def http_date_future(**args):
+    future=datetime.now() + timedelta(**args)
+    return http_date(mktime(future.timetuple()))
