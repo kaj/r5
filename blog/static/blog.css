@@ -299,15 +299,11 @@ dl dd {
     color: #8a8452;
 }
 
-#writecomment form p {
-    margin-left: 10em;
-}
 #writecomment label, #writecomment input, #writecomment textarea {
     vertical-align: baseline;
 }
 #writecomment label {
     float: left;
-    margin-left: -10em;
 }
 #writecomment input, #writecomment textarea {
     width: 95%;
@@ -478,5 +474,13 @@ dl dd {
     #footer :link, #footer :visited {
 	color: inherit;
 	text-decoration: none;
+    }
+}
+@media screen and (min-width: 25em) {
+    #writecomment form p {
+        margin-left: 10em;
+    }
+    #writecomment label {
+        margin-left: -10em;
     }
 }
