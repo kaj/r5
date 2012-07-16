@@ -3,6 +3,8 @@ from django.contrib.comments.moderation import CommentModerator, moderator
 from django.db import models
 from taggit.managers import TaggableManager
 from IPy import IP
+from blog.contentprocessor import process_content
+from django.core.urlresolvers import reverse
 
 class Post(models.Model):
     
@@ -20,9 +22,15 @@ class Post(models.Model):
     class Meta:
         ordering = ['-posted_time']
 
+    def content_output(self):
+        return process_content(self.content, Image.objects)
+
+    def frontimage_output(self):
+        return process_content(self.frontimage, Image.objects)
+    
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
-        return u'%s (%d)' % (self.title, year)
+        return u'%s (%s)' % (self.title, year)
     
     def get_absolute_url(self):
         if self.posted_time:
@@ -44,9 +52,64 @@ class Update(models.Model):
     def lang(self):
         return self.post.lang
 
+    def __unicode__(self):
+        return u'Update %s to %s' % (self.time, self.post)
+    
     def get_absolute_url(self):
         return self.post.get_absolute_url()
 
+class Image(models.Model):
+    ref = models.CharField(max_length=50, db_index=True, unique=True)
+    sourcename = models.CharField(max_length=100, db_index=True, unique=True)
+    orig_width = models.IntegerField()
+    orig_height = models.IntegerField()
+    mimetype = models.CharField(max_length=50)
+    
+    ICON_MAX = 200
+    LARGE_MAX = 900
+    
+    def __unicode__(self):
+        return u'<Image from %s>' % self.sourcename
+
+    def get_absolute_url(self):
+        return reverse('image_view', args=[self.ref])
+
+    @property
+    def large(self):
+        return self.get_absolute_url()
+    
+    @property
+    def icon(self):
+        return reverse('image_small', args=[self.ref])
+    
+    def scaled_size(self, limit):
+        factor = min(1, # Don't scale up!
+                     float(limit) / self.orig_width,
+                     float(limit) / self.orig_height)
+        return (int(round(self.orig_width * factor)),
+                int(round(self.orig_height * factor)))
+    
+    @property
+    def is_small(self):
+        return self.orig_width <= self.ICON_MAX and self.orig_height <= self.ICON_MAX
+    
+    @property
+    def iwidth(self):
+        return self.scaled_size(self.ICON_MAX)[0]
+    
+    @property
+    def iheight(self):
+        return self.scaled_size(self.ICON_MAX)[1]
+    
+    @property
+    def width(self):
+        return self.scaled_size(self.LARGE_MAX)[0]
+    
+    @property
+    def height(self):
+        return self.scaled_size(self.LARGE_MAX)[1]
+
+    
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
     email_notification = True

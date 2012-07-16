@@ -83,6 +83,7 @@ html, body {
     text-decoration: none;
     overflow: hidden;
 }
+#footer .license br { display: none; }
 #footer img { float: left; margin-right: 1em; }
 
 #main {
@@ -190,6 +191,12 @@ figure {
     display: inline-block;
     vertical-align: top;
     max-width: 100%;
+    width: 206px;
+    width: -moz-min-content;
+}
+figure.scaled {
+    width: auto;
+    width: -moz-min-content;
 }
 aside figure {
     margin: 0;
@@ -260,8 +267,14 @@ blockquote p.attribution {
     color: #51AA17;
     font-family: monospace;
 }
-.tag:before { content: '&'; }
-.tag:after { content: ';' }
+.tag:before { content: '<'; }
+.tag:after { content: '>' }
+.tag.attribute:before { content: ''; }
+.tag.attribute:after { content: '' }
+.tag.comment:before { content: '<!--'; }
+.tag.comment:after { content: '-->' }
+.tag.paramentity:before, .tag.numcharref:before { content: '&'; }
+.tag.paramentity:after,  .tag.numcharref:after { content: ';' }
 
 ul.tagcloud {
     text-align: center;
@@ -298,13 +311,15 @@ dl dd {
     color: #8a8452;
 }
 
-#writecomment p {
-    display: table-row;
-}
 #writecomment label, #writecomment input, #writecomment textarea {
-    margin: .2em;
-    display: table-cell;
     vertical-align: baseline;
+}
+#writecomment label {
+    float: left;
+}
+#writecomment input, #writecomment textarea {
+    width: 95%;
+    width: -moz-available;
 }
 #writecomment p.fineprint {
     display: block;
@@ -312,6 +327,9 @@ dl dd {
 }
 #writecomment p.submit {
     display: block;
+}
+#writecomment p.submit input {
+    width: auto;
 }
 .lastcomments p {
     font-size: 90%;
@@ -468,5 +486,13 @@ dl dd {
     #footer :link, #footer :visited {
 	color: inherit;
 	text-decoration: none;
+    }
+}
+@media screen and (min-width: 25em) {
+    #writecomment form p {
+        margin-left: 10em;
+    }
+    #writecomment label {
+        margin-left: -10em;
     }
 }

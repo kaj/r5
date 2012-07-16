@@ -1,4 +1,4 @@
-from blog.models import Post, Update
+from blog.models import Post, Update, Image
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
@@ -131,6 +131,11 @@ def d2h(elem, dirname='', year=''):
                        ('db:acronym', 'abbr'), ('db:abbrev', 'abbr'),
                        ('db:emphasis', 'em'), ('db:code', 'code'),
                        ('db:literallayout', 'pre'),
+                       ('db:varlistentry/db:term', 'dt'),
+                       ('db:varlistentry/db:listitem', 'dd'),
+                       ('db:varlistentry', None),
+                       ('db:variablelist', 'dl'),
+                       ('db:orderedlist', 'ol'),
                        ('db:itemizedlist', 'ul'), ('db:listitem', 'li'),
                        ('db:simplelist', 'ul'), ('db:member', 'li'),
                        ('db:table', 'table'),
@@ -183,6 +188,10 @@ def d2h(elem, dirname='', year=''):
     for e in elem.findall('.//db:uri', nsmap):
         e.tag = 'a'
         e.set('href', e.text if ':' in e.text else 'http://' + e.text)
+    
+    for e in elem.findall('.//db:email', nsmap):
+        e.tag = 'a'
+        e.set('href', 'mailto:%s' % e.text)
     
     # Inline simple stuff, put it in a span with the docbook name as class
     for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
@@ -245,28 +254,13 @@ def d2h(elem, dirname='', year=''):
         alt = textcontent(altelem)
         if altelem is not None:
             e.remove(altelem)
-        if icon and img:
-            e.set('style', 'width: %dpx' % (int(icon['width'])+6))
-            a = e.makeelement('a', {'href': os.path.join('/', year, img['name']), 'rel': 'image'})
-            e.insert(0, a)
-            img = ElementTree.SubElement(
-                a, 'img', dict(src=os.path.join('/', year, icon['name']),
-                               width=icon['width'], height=icon['height']))
-            if alt:
-                img.set('alt', alt)
-            title = e.find('db:title', nsmap)
-            if title is not None:
-                a.set('title', textcontent(title))
-                e.remove(title)
-            elif alt:
-                a.set('title', alt)
-        elif img:
-            e.set('style', 'width: %dpx' % (int(img['width'])+6))
-            a = e.makeelement('img', dict(src=os.path.join('/', year, img['name']),
-                                          width=img['width'], height=img['height']))
-            e.insert(0, a)
-        
-        else:
+
+        # TODO Unify title and para in a good way?
+        for alt in e.findall('r:alt', nsmap):
+            alt.tag = 'alt'
+        for caption in e.findall('db:title', nsmap):
+            caption.tag = 'figcaption'
+        if not img:
             print "WARNING: image data missing:", imgref
     
     if imginfo:
@@ -300,6 +294,7 @@ class ImageFinder:
     
     def __init__(self, dirname):
         self.dirname = dirname
+        self.subdir = dirname[len(settings.CONTENT_FILES_BASE):]
         self.img = {}
         self.icon = {}
         self.used = []
@@ -314,12 +309,18 @@ class ImageFinder:
                                       height=i.get('height'))
             else:
                 self.img[name] = dict(name=fullname,
+                                      sourcename=i.get('src'),
                                       width=i.get('width'),
                                       height=i.get('height'))
     
     def getimage(self, name):
         result = self.img.get(name)
         if result:
+            Image.objects.get_or_create(
+                sourcename=result['sourcename'],
+                defaults={'ref': name,
+                          'orig_width': result['width'],
+                          'orig_height': result['height']})
             self.used.append(result['name'])
         return result
     
@@ -330,6 +331,8 @@ class ImageFinder:
         return result
 
     def handleUsed(self, year):
+        if True:
+            return
         path = self.dirname[len(settings.CONTENT_FILES_BASE):]
         # print "Image files in %s: %s" % (path, self.used)
         todir = os.path.join(settings.MEDIA_ROOT, year)
@@ -342,6 +345,8 @@ class ImageFinder:
             if not os.path.exists(dst):
                 # print "Copy %s to %s" % (src, dst)
                 copy(src, dst)
+            else:
+                print "Target %s allready there." % dst
             srcurl = os.path.join('/', path, filename)
             dsturl = '/%s/%s' % (year, filename)
             redirect(srcurl, dsturl)

@@ -8,7 +8,7 @@
   
   {% if post.abstract %}
     {% if post.frontimage %}
-      <aside>{{post.frontimage|safe}}</aside>
+      <aside>{{post.frontimage_output}}</aside>
     {% endif %}
     <div class="abstract">{{post.abstract|safe}}</div>
   {% endif %}
@@ -40,7 +40,7 @@
 
   {% else %}
     <div>
-      {{post.content|safe}}
+      {{post.content_output}}
     </div>
 
     <p class="readmore">
