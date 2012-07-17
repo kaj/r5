@@ -219,6 +219,11 @@ def d2h(elem, dirname='', year=''):
         for e in elem.findall('.//db:' + docb, nsmap):
             e.tag = 'span'
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
+
+    for mymark in ('book',):
+        for e in elem.findall('.//r:' + mymark, nsmap):
+            e.tag = 'span'
+            e.set('class', (e.get('class', '') + ' ' + mymark).strip())
     
     for docb in ('command', ):
         for e in elem.findall('.//db:' + docb, nsmap):
