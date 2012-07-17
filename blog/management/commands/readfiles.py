@@ -145,6 +145,7 @@ def d2h(elem, dirname='', year=''):
                        ('db:sidebar', 'aside'),
                        ('db:subscript', 'sub'), ('db:superscript', 'sup'),
                        ('db:quote', 'q'),
+                       ('db:note', 'div'),
                        ('r:br', 'br')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html
@@ -152,6 +153,13 @@ def d2h(elem, dirname='', year=''):
 
     for e in elem.findall('.//db:section', nsmap):
         e.tag = 'section';
+        t = e.find('db:title', nsmap)
+        if t is not None:
+            t.tag = 'h1'
+
+    for e in elem.findall('.//db:info', nsmap):
+        e.tag = 'section';
+        e.set('class', 'info')
         t = e.find('db:title', nsmap)
         if t is not None:
             t.tag = 'h1'
@@ -192,12 +200,30 @@ def d2h(elem, dirname='', year=''):
     for e in elem.findall('.//db:email', nsmap):
         e.tag = 'a'
         e.set('href', 'mailto:%s' % e.text)
+
+    for e in elem.findall('.//r:java', nsmap):
+        # width and height attribs are kept.
+        jclass = e.get('class')
+        del e.attrib['class']
+        jar = e.get('jar')
+        del e.attrib['jar']
+        e.tag = 'object'
+        e.set('codetype', 'application/java')
+        e.set('classid', 'java:%s.class' % jclass)
+        e.set('archive', jar)
+        for p in e.findall('r:param', nsmap):
+            p.tag = 'param'
     
     # Inline simple stuff, put it in a span with the docbook name as class
     for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
         for e in elem.findall('.//db:' + docb, nsmap):
             e.tag = 'span'
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
+
+    for mymark in ('book',):
+        for e in elem.findall('.//r:' + mymark, nsmap):
+            e.tag = 'span'
+            e.set('class', (e.get('class', '') + ' ' + mymark).strip())
     
     for docb in ('command', ):
         for e in elem.findall('.//db:' + docb, nsmap):
