@@ -14,7 +14,11 @@ class UpdatesInline(admin.TabularInline):
         return field
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('posted_time', 'slug', 'lang', 'title')
+    list_display = ('title', 'slug', 'posted_time', 'slug')
+    search_fields = ('title', 'slug', 'abstract', 'content')
+    fields = (('title', 'slug'), ('lang', 'posted_time'), 'tags',
+              ('abstract', 'frontimage'), 'content')
+    readonly_fields = ('slug',)
     list_filter = ('lang', )
     date_hierarchy = 'posted_time'
     inlines = (UpdatesInline,)
@@ -23,10 +27,11 @@ class PostAdmin(admin.ModelAdmin):
         """Override to get smaller ingress field."""
         field = super(PostAdmin, self).formfield_for_dbfield(
             db_field, **kwargs)
-        if db_field.name == 'abstract':
-            field.widget.attrs['rows'] = 5
-        elif db_field.name == 'frontimage':
-            field.widget.attrs['rows'] = 3;
+        if db_field.name in ('abstract', 'frontimage'):
+            print field.widget.attrs
+            field.widget.attrs['rows'] = 4
+            field.widget.attrs['cols'] = 60
+            field.widget.attrs['class'] = None
         return field
 
 admin.site.register(Post, PostAdmin)
