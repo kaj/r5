@@ -28,7 +28,7 @@
   </header>
 
   {% if post.abstract %}
-    <div class="abstract">{{post.abstract|safe}}</div>
+    <div class="abstract">{{post.abstract_output}}</div>
   {% endif %}
 
   {% for u in post.update_set.all %}

@@ -22,6 +22,9 @@ class Post(models.Model):
     class Meta:
         ordering = ['-posted_time']
 
+    def abstract_output(self):
+        return process_content(self.abstract, Image.objects)
+    
     def content_output(self):
         return process_content(self.content, Image.objects)
 

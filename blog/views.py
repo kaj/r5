@@ -129,13 +129,11 @@ def image_view(request, slug, size=900):
     obj = get_object_or_404(Image, ref=slug)
     scaled_path = os.path.join(settings.SCALED_IMAGE_DIR,
                                '%s-%s' % (slug, size))
-    print "Scaled image path:", scaled_path, "from", obj.sourcename
     try:
         return serve_file(request, path=scaled_path, mimetype=obj.mimetype)
     except Http404:
         from PIL import Image as PImage
         sourcedata = PImage.open(os.path.join(settings.IMAGE_FILES_BASE, obj.sourcename))
-        print("Try to fit %s into %s" % (obj, size))
         scaleddata = sourcedata.resize(obj.scaled_size(size), int(PImage.ANTIALIAS))
         full_path = os.path.join(settings.MEDIA_ROOT, scaled_path)
         dir = os.path.dirname(full_path)

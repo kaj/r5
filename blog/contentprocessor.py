@@ -29,4 +29,14 @@ def process_content(content, images):
                                         'width': str(info.iwidth),
                                         'height': str(info.iheight)})
     
+    for e in dom.iterfind('.//uri'):
+        e.tag = 'a'
+        href = e.text
+        e.set('href', href if ':' in href else 'http://' + href)
+
+    for e in dom.iterfind('.//email'):
+        e.tag = 'a'
+        e.set('class', 'email')
+        e.set('href', 'mailto:' +  e.text)
+        
     return mark_safe(u''.join(tostring(x, encoding=unicode) for x in dom.iterchildren()))

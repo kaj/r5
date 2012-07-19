@@ -105,7 +105,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'dmanalytics.middleware.DMAnalyticsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'taggit',
     'compressor',
-    'debug_toolbar',
+#    'debug_toolbar',
     'simplegravatar',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
