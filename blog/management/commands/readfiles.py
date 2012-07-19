@@ -12,6 +12,7 @@ nsmap = {
     'db': 'http://docbook.org/ns/docbook',
     'r': 'http://www.kth.se/rasmusmarkup',
     'xl': 'http://www.w3.org/1999/xlink',
+    'html': 'http://www.w3.org/1999/xhtml',
     }
 
 def parsedate(datestr=None):
@@ -147,6 +148,7 @@ def d2h(elem, dirname='', year=''):
                        ('db:quote', 'q'),
                        ('db:note', 'div'),
                        ('db:uri', 'uri'), ('db:email', 'email'),
+                       ('html:script', 'script'),
                        ('r:br', 'br')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html

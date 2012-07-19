@@ -402,6 +402,24 @@ dl dd {
     height: 100%;
 }
 
+#main .LTitem {
+    display: inline-block;
+    margin: 0 1em 1em 0;
+    vertical-align: middle;
+    width: 20em;
+    width: -moz-max-content;
+}
+#main .LTitem img {
+    float: left;
+    margin-right: 1ex;
+}
+#main .LTitem .LTtitle {
+    display: block;
+    font-weight: bold;
+}
+#main .LTitem a {
+    text-decoration: none;
+}
 /* Override some stuff from jquery.tweet */
 .sideblock .tweet_list {
     margin: 0;
