@@ -146,6 +146,7 @@ def d2h(elem, dirname='', year=''):
                        ('db:subscript', 'sub'), ('db:superscript', 'sup'),
                        ('db:quote', 'q'),
                        ('db:note', 'div'),
+                       ('db:uri', 'uri'), ('db:email', 'email'),
                        ('r:br', 'br')):
         for e in elem.findall('.//' + docb, nsmap):
             # print "Found element", e, "changing to", html
@@ -192,15 +193,7 @@ def d2h(elem, dirname='', year=''):
         p.insert(0, title)
         title.tail = title.tail + p.text
         p.text = None
-
-    for e in elem.findall('.//db:uri', nsmap):
-        e.tag = 'a'
-        e.set('href', e.text if ':' in e.text else 'http://' + e.text)
     
-    for e in elem.findall('.//db:email', nsmap):
-        e.tag = 'a'
-        e.set('href', 'mailto:%s' % e.text)
-
     for e in elem.findall('.//r:java', nsmap):
         # width and height attribs are kept.
         jclass = e.get('class')
