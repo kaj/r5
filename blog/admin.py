@@ -38,5 +38,13 @@ admin.site.register(Post, PostAdmin)
 
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('ref', 'sourcename', 'orig_width', 'orig_height')
+    fields = ('ref', 'sourcename', ('orig_width', 'orig_height'), 
+              'mimetype', 'preview')
+    readonly_fields = ('preview',)
+    
+    def preview(self, obj):
+        return '<img src="%s" width="%d" height="%d" alt="">' % \
+            (obj.icon, obj.iwidth, obj.iheight)
+    preview.allow_tags = True
 
 admin.site.register(Image, ImageAdmin)
