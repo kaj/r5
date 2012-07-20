@@ -279,10 +279,14 @@ def d2h(elem, dirname='', year=''):
         # TODO Unify title and para in a good way?
         for alt in e.findall('r:alt', nsmap):
             alt.tag = 'alt'
-        for caption in e.findall('db:title', nsmap):
-            caption.tag = 'figcaption'
+        
+        for title in e.findall('db:title', nsmap):
+            title.tag = 'zoomcaption'
+        for para in e.findall('p', nsmap): # mapped earlier!
+            para.tag = 'figcaption'
+        
         if not img:
-            print "WARNING: image data missing:", imgref
+            raise RuntimeError("WARNING: image data missing: %s" % imgref)
     
     if imginfo:
         imginfo.handleUsed(year)

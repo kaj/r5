@@ -76,9 +76,10 @@
       <h1>{% trans "Skriv en kommentar" %}</h1>
 
       <p class="fineprint">
-        {% blocktrans %}
-        Din epostadress kommer inte att visas.  Du
-        kan inte använda markup i kommentaren, men en dubbel radmating
+        {% blocktrans with gravatar='<a href="https://gravatar.com/">gravatar</a>'%}
+        Din epostadress kommer inte att visas, men har du en {{gravatar}}
+        så visas den.
+        Du kan inte använda markup i kommentaren, men en dubbel radmating
         blir en styckesbrytning.
         {% endblocktrans %}
       </p>

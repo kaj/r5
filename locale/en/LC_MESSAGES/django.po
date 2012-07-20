@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-07 00:36+0200\n"
+"POT-Creation-Date: 2012-07-20 13:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -31,13 +31,18 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: blog/views.py:65
+#: blog/views.py:74
 msgid "Din kommentar är borttagen."
 msgstr "Your comment is removed."
 
-#: blog/views.py:68
+#: blog/views.py:77
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
+
+#: blog/views.py:148
+#, python-format
+msgid "\"%(path)s\" does not exist"
+msgstr "\"%(path)s\" does not exist"
 
 #: blog/templates/404.html:15 blog/templates/blog/base.html:54
 msgid "Skriverier då och då, på webben sedan 1995"
@@ -185,21 +190,9 @@ msgstr ""
 msgid "senaste kommentarerna"
 msgstr "latest comments"
 
-#: blog/templates/blog/index.html:23
-msgid "jag twittrar"
-msgstr "I tweet"
-
-#: blog/templates/blog/index.html:24
-msgid "några bra böcker"
-msgstr "some good books"
-
 #: blog/templates/blog/index.html:48
 msgid "Senaste kommentarerna"
 msgstr "Latest comments"
-
-#: blog/templates/blog/index.html:46
-msgid "Några bra böcker"
-msgstr "Some good books"
 
 #: blog/templates/blog/part_latestcomments.html:10
 #: blog/templates/blog/tagged.html:3
@@ -225,18 +218,21 @@ msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
 #: blog/templates/blog/post_detail.html:79
+#, python-format
 msgid ""
 "\n"
-"        Din epostadress kommer inte att visas.  Du\n"
-"        kan inte använda markup i kommentaren, men en dubbel radmating\n"
+"        Din epostadress kommer inte att visas, men har du en %(gravatar)s\n"
+"        så visas den.\n"
+"        Du kan inte använda markup i kommentaren, men en dubbel radmating\n"
 "        blir en styckesbrytning.\n"
 "        "
 msgstr ""
 "\n"
-"Your email address will not be disclosed.  You can not use markup in the\n"
+"Your email address will not be disclosed, but if you have a %(gravatar)s\n"
+"that will be displayed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:93
+#: blog/templates/blog/post_detail.html:94
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
@@ -303,3 +299,12 @@ msgstr "Tagged"
 #: blog/templates/feed/description.html:20
 msgid "Läs inlägget"
 msgstr "Read"
+
+#~ msgid "jag twittrar"
+#~ msgstr "I tweet"
+
+#~ msgid "några bra böcker"
+#~ msgstr "some good books"
+
+#~ msgid "Några bra böcker"
+#~ msgstr "Some good books"

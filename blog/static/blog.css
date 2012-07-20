@@ -201,7 +201,7 @@ figure.scaled {
 aside figure {
     margin: 0;
 }
-figure p {
+figure figcaption {
     font-size: 83%;
     font-style: italic;
 }
@@ -218,7 +218,35 @@ figure img, .comment img {
     max-width: calc(100% - 6px);
     height: auto;
 }
-
+.orgname.parti {
+    display: inline-block;
+    width: 52px;
+    height: 40px;
+    vertical-align: bottom;
+    text-indent: 53px;
+    overflow: hidden;
+}
+.orgname.parti.kds {
+    background: url('/img/kds');
+}
+.orgname.parti.m {
+    background: url('/img/m');
+}
+.orgname.parti.fp {
+    background: url('/img/fp');
+}
+.orgname.parti.c {
+    background: url('/img/c');
+}
+.orgname.parti.mp {
+    background: url('/img/mp');
+}
+.orgname.parti.s {
+    background: url('/img/s');
+}
+.orgname.parti.v {
+    background: url('/img/v');
+}
 .abstract, .update {
     font-style: italic;
     margin-bottom: 1em;
@@ -250,17 +278,20 @@ pre.programlisting {
 
 blockquote { max-width: 34em; margin: 1ex 1em 1em; padding: 1ex 1em; 
   font-style: italic;
-  background: white; color: #555555;
-  border: solid 1px #888888;
+  background: #fafafa; color: #222222;
+  border: solid 1px #aaaaaa;
   -webkit-box-shadow: .3em .2em .5em #aaaaaa;
   -moz-box-shadow: .3em .2em .5em #aaaaaa;
-  box-shadow: .3em .2em .5em #aaaaaa;
+  box-shadow: .3em .2em .5em #cccccc;
 }
 blockquote > *:first-child { margin-top: 0; padding-top: 0; }
 blockquote p.attribution {
     text-align: right;
     font-style: italic;
     margin-bottom: 0;
+}
+blockquote em {
+    font-weight: bold;
 }
 .replaceable { font-style: italic; }
 .tag {

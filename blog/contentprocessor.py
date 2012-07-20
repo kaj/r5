@@ -19,11 +19,12 @@ def process_content(content, images):
                                   'height': str(info.height)})
             figure.insert(0, img)
         else:
-            title = figure.xpath('title')
+            title = figure.xpath('zoomcaption')
             a = Element('a', {'href': info.large})
             figure.insert(0, a)
             if len(title) == 1:
-                a.attrib['title'] = tostring(title[0], method='text', encoding=unicode, with_tail=False)
+                a.set('title', tostring(title[0], method='text',
+                                        encoding=unicode, with_tail=False))
                 figure.remove(*title)
             img = SubElement(a, 'img', {'src': info.icon,
                                         'width': str(info.iwidth),
