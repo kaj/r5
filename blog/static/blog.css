@@ -201,7 +201,7 @@ figure.scaled {
 aside figure {
     margin: 0;
 }
-figure p {
+figure figcaption {
     font-size: 83%;
     font-style: italic;
 }

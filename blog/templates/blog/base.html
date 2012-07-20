@@ -18,12 +18,12 @@
         initSkiplinks($('#skiplinks *'));
         $('figure').each(function() {
           var link = $(this).find('a');
-          var caption = $(this).find('p');
+          var caption = $(this).find('figcaption');
           if (! link.attr('title') && caption.size()) {
             link.attr('title', caption.text());
           }
         });
-        $("figure a").kratsbox();
+        $("figure > a").kratsbox();
         Gravatar.init();
         if ($('#lastcomments').size()) {
           initMyTweetbox();
