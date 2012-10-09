@@ -9,3 +9,8 @@ python-memcached
 django-simplegravatar
 IPy
 pymongo
+lxml
+
+# TODO Do I actually need both html5lib and BeautifulSoup?
+html5lib
+BeautifulSoup
