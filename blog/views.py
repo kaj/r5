@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.comments.models import Comment
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.utils import translation
 from django.utils.http import http_date
