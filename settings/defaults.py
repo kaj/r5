@@ -189,6 +189,6 @@ SCALED_IMAGE_DIR = 'cache/image'
 
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
-    DATABASES['default'] = {'ENGINE': 'sqlite3'}
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
     MIDDLEWARE_CLASSES = (m for m in MIDDLEWARE_CLASSES if m != 'dmanalytics.middleware.DMAnalyticsMiddleware')
 
