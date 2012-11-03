@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'django.contrib.comments',
+    'r5comments',
     'taggit',
     'compressor',
 #    'debug_toolbar',
@@ -182,6 +183,7 @@ SIMPLEGRAVATAR_SIZE = 52
 SIMPLEGRAVATAR_DEFAULT = 'identicon'
 
 # Use the (rather silly) profanities system to avoid some spam
+COMMENTS_APP = 'r5comments'
 COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
 
