@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'django.contrib.comments',
+    'r5comments',
     'taggit',
     'compressor',
 #    'debug_toolbar',
@@ -182,6 +183,7 @@ SIMPLEGRAVATAR_SIZE = 52
 SIMPLEGRAVATAR_DEFAULT = 'identicon'
 
 # Use the (rather silly) profanities system to avoid some spam
+COMMENTS_APP = 'r5comments'
 COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
 
@@ -189,6 +191,6 @@ SCALED_IMAGE_DIR = 'cache/image'
 
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
-    DATABASES['default'] = {'ENGINE': 'sqlite3'}
+    DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
     MIDDLEWARE_CLASSES = (m for m in MIDDLEWARE_CLASSES if m != 'dmanalytics.middleware.DMAnalyticsMiddleware')
 
