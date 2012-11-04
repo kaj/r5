@@ -5,7 +5,9 @@ from django.utils.translation import ugettext_lazy as _
 import re
 
 class CommentFormAvoidingSpam(CommentForm):
-    bad_names = ('pay ?day', 'loans?', 'finance', 'cigarettes')
+    bad_names = ('cialis', 'cigarettes', 'escorts?', 'finance',
+                 'loans?', 'ordillaoffips', 'pay ?day', 'pyncpelay',
+                 'viagra')
 
     def clean_name(self):
         #super(CommentFormAvoidingSpam, self).clean_name()
