@@ -6,7 +6,8 @@ import re
 
 class CommentFormAvoidingSpam(CommentForm):
     bad_names = ('cialis', 'cigarettes', 'escorts?', 'finance',
-                 'loans?', 'ordillaoffips', 'pay ?day', 'pyncpelay',
+                 'infoxesee', 'loans?', 'luggisintedge', 'offinafag',
+                 'ordillaoffips', 'pay ?day', 'praikicky', 'pyncpelay',
                  'viagra')
 
     def clean_name(self):
