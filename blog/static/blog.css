@@ -476,6 +476,7 @@ li[class^="icon-"]:before,
 li[class*=" icon-"]:before {
     display: marker;
     padding-right: 1ex;
+    color: #222;
 }
 
 
