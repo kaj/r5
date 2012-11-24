@@ -110,7 +110,7 @@ html, body {
     -moz-border-radius: 0.5em;
     border-radius: 0.5em;
 }
-.sideblock ul { margin: 0.5ex 0; padding: 0 0 0 2em; }
+.sideblock ul { margin: 0.5ex 0; padding: 0 0 0 2ex; }
 .sideblock h2 { margin: 0 0 1ex 0; }
 .sideblock h3 { margin: 1ex 0 0 0; }
 .sideblock .tagcloud { font-size: 95%; }
@@ -466,6 +466,18 @@ dl dd {
 .sideblock .tweet_list li:last-child {
     padding-bottom: 0;
 }
+
+li[class^="icon-"],
+li[class*=" icon-"] {
+    list-style-type: none;
+    list-style-type: inline;
+}
+li[class^="icon-"]:before,
+li[class*=" icon-"]:before {
+    display: marker;
+    padding-right: 1ex;
+}
+
 
 @media screen and (max-width: 480px) {
     #headerwrap {

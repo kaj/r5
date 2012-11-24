@@ -37,12 +37,15 @@
     <link rel="stylesheet" href="{{STATIC_URL}}blog.css" type="text/css"/>
     <link rel="stylesheet" href="{{STATIC_URL}}jquery.tweet.css" type="text/css"/>
     <link rel="stylesheet" href="{{STATIC_URL}}kratsbox/kratsbox.css" type="text/css"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}iconfont/css/font-kaj-20121124.css" type="text/css"/>
     {% endcompress %}
     <script type="text/javascript"
             src="http://s.gravatar.com/js/gprofiles.js"></script>
     <link rel="shortcut icon" href="{{STATIC_URL}}trafik-kaj-s.png" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}trafik-kaj.png" />
     {% block extrahead %}{% endblock %}
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="{{STATIC_URL}}iconfont/css/font-kaj-20121124-ie7.css"><![endif]-->
     <!--[if lte IE 8]>
     <script type="text/javascript" src="{{STATIC_URL}}respond.min.js"></script>
     <![endif]-->
@@ -88,17 +91,17 @@
 	<div class="sideblock" id="mylinks">
 	  <h2>Rasmus Kaj</h2>
 	  <ul>
-	    <li><a href="/about">{% trans "Om" %} Rasmus.krats.se</a></li>
-	    <li><a href="http://www.kth.se/social/user/u1famwov/">@ KTH</a></li>
-	    <li><a href="http://github.com/kaj">@ Github</a></li>
-	    <li><a href="http://twitter.com/rasmus_kaj">@ Twitter</a></li>
-	    <li><a href="http://www.librarything.com/profile/kaj">@ LibraryThing</a></li>
+	    <li class="icon-user"><a href="/about">{% trans "Om" %} Rasmus.krats.se</a></li>
+	    <li class="icon-leaf"><a href="http://www.kth.se/social/user/u1famwov/">KTH</a></li>
+	    <li class="icon-github"><a href="http://github.com/kaj">Github</a></li>
+	    <li class="icon-twitter"><a href="http://twitter.com/rasmus_kaj">Twitter</a></li>
+	    <li class="icon-book"><a href="http://www.librarything.com/profile/kaj">LibraryThing</a></li>
 	  </ul>
           <h3>{% trans "Övrigt" %}</h3>
           <ul>
-            <li><a href="http://krats.se/">krats.se</a></li>
-            <li><a href="http://fantomenindex.krats.se/">Fantomenindex</a></li>
-            <li><a href="http://www.albumforlaget.se/">Albumförlaget</a></li>
+            <li class="icon-link-ext"><a href="http://krats.se/">krats.se</a></li>
+            <li class="icon-link-ext"><a href="http://fantomenindex.krats.se/">Fantomenindex</a></li>
+            <li class="icon-link-ext"><a href="http://www.albumforlaget.se/">Albumförlaget</a></li>
           </ul>
 	</div>
 	{% block sideblockbottom %}{% endblock %}
@@ -108,12 +111,8 @@
       <div id="footer">
         {% spaceless %}
         <p class="license">
-          <a rel="license"
-             href="http://creativecommons.org/licenses/by/3.0/"
-             ><img alt="{%trans 'Creative Commons-licens'%}"
-                   src="http://i.creativecommons.org/l/by/3.0/88x31.png"
-                   width="88" height="31"
-                   /></a><br />
+          <i class="icon-cc"></i>
+          <i class="icon-cc-by"></i>
           {% blocktrans with me='<a xmlns:cc="http://creativecommons.org/ns#" href="http://rasmus.krats.se/" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>' a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">' sa='</a>'%}
           Detta verk av {{me}} är licensierat under en
           {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
