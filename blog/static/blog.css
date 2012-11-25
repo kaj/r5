@@ -110,7 +110,7 @@ html, body {
     -moz-border-radius: .5em;
     border-radius: .5em;
 }
-.sideblock ul { margin: .5ex 0; padding: 0 0 0 2ex; }
+.sideblock ul { margin: .5ex 0; padding: 0 0 0 .7em; }
 .sideblock h2 { margin: 0 0 1ex 0; }
 .sideblock h3 { margin: 1ex 0 0 0; }
 .sideblock .tagcloud { font-size: 95%; }
@@ -477,7 +477,7 @@ li[class*=" icon-"] {
 li[class^="icon-"]:before,
 li[class*=" icon-"]:before {
     display: marker;
-    padding-right: 1ex;
+    padding-right: .2em;
     color: #222;
 }
 
