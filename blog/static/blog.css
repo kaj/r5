@@ -192,7 +192,9 @@ figure {
     vertical-align: top;
     max-width: 100%;
     width: 206px;
+    width: intrinsic;
     width: -moz-min-content;
+    width: min-content;
 }
 figure.scaled {
     width: auto;
