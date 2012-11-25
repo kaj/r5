@@ -482,15 +482,13 @@ li[class*=" icon-"]:before {
 
 @media screen and (max-width: 34.999em) {
     #main, .sideblockwrap {
+	clear: left;
 	float: none;
 	width: auto;
     }
     #skiplinks {
 	position: static;
 	float: left;
-    }
-    article {
-	clear: left;
     }
 }
 @media screen and (min-width: 35em) {
