@@ -491,6 +491,10 @@ li[class*=" icon-"]:before {
     }
     #skiplinks {
 	position: static;
+	float: left;
+    }
+    article {
+	clear: left;
     }
 }
 @media screen and (min-width: 481px) {
