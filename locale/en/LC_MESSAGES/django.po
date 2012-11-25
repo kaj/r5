@@ -337,16 +337,16 @@ msgstr "Read"
 #: r5comments/forms.py:18
 #, python-format
 msgid "\"%s\" looks like spam, sorry."
-msgstr ""
+msgstr "Tyvärr, \"%s\" ser ut som spam."
 
 #: r5comments/forms.py:29
 msgid "Please use an unshortened url."
-msgstr ""
+msgstr "Vänligen använd en oförkortad url."
 
 #: r5comments/forms.py:35
 #, python-format
 msgid "\"%s\" is used in spam, sorry."
-msgstr ""
+msgstr "Tyvärr, \"%s\" används i spam jag fått."
 
 #~ msgid "Creative Commons-licens"
 #~ msgstr "Creative Commons License"
