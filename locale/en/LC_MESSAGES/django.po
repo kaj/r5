@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-20 13:51+0200\n"
+"POT-Creation-Date: 2012-11-25 23:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -44,11 +44,11 @@ msgstr "Your comment awaits moderation."
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:54
+#: blog/templates/404.html:15 blog/templates/blog/base.html:57
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
-#: blog/templates/404.html:54 blog/templates/about.html:101
+#: blog/templates/404.html:54 blog/templates/about.html:125
 #: blog/templates/blog/index.html:39 blog/templates/blog/tagcloud.html:7
 #: blog/templates/blog/tagged.html:25
 msgid "Taggmoln"
@@ -68,13 +68,6 @@ msgid ""
 "      professionellt våren 1995 och har inte kunnat slita mig sedan dess.</"
 "p>\n"
 "    \n"
-"    <p>Den här siten, <a href=\"/\">rasmus.krats.se</a>, är dels en blogg "
-"där\n"
-"      jag skriver om vad som helst som intresserar mig och dels en lekstuga\n"
-"      och lab&#xad;plattform för webb&#xad;teknik.\n"
-"      Mer om den här siten och hur jag har utvecklat den finns under taggen\n"
-"      <a href=\"/tag/meta\" rel=\"tag\">meta</a>.</p>\n"
-"\n"
 "    <p>Jag är gift med <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</"
 "a>,\n"
 "      aktiv i\n"
@@ -87,32 +80,72 @@ msgstr ""
 "<p>I'm a system developer workin primarily with web, in an agile way and  "
 "mainly in a unix environment.  I started working and playing with web in the "
 "spring of 1995 and  hasn't been able to stop since then.</p>\n"
-"<p>This site, <a href=\"/\">rasmus.krats.se</a>,  is part blog where I write "
-"about whatever I feel like and part lab platform for my experiments with web "
-"development.  More about this site under the tag <a href=\"/tag/meta\">meta</"
-"a>.</p>\n"
 "<p>I'm married to <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</a>, a "
 "member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer club "
 "at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
 
-#: blog/templates/about.html:40
+#: blog/templates/about.html:34
+msgid "Kontakt"
+msgstr "Contact"
+
+#: blog/templates/about.html:42
+msgid "Epost:"
+msgstr "E-mail:"
+
+#: blog/templates/about.html:45
+msgid "Telefon:"
+msgstr "Phone:"
+
+#: blog/templates/about.html:47
+msgid "sms:"
+msgstr "sms:"
+
+#: blog/templates/about.html:50
+msgid "Papperspost:"
+msgstr "Paper mail:"
+
+#: blog/templates/about.html:60
+msgid "Om den här siten"
+msgstr "About this site"
+
+#: blog/templates/about.html:62
+msgid ""
+"\n"
+"      <p>Den här siten, <a href=\"/\">rasmus.krats.se</a>, är dels en blogg "
+"där\n"
+"        jag skriver om vad som helst som intresserar mig och dels en "
+"lekstuga\n"
+"        och lab&#xad;plattform för webb&#xad;teknik.\n"
+"        Mer om den här siten och hur jag har utvecklat den finns under "
+"taggen\n"
+"        <a href=\"/tag/meta\" rel=\"tag\">meta</a>.</p>\n"
+"      "
+msgstr ""
+"\n"
+"<p>This site, <a href=\"/\">rasmus.krats.se</a>,  is part blog where I write "
+"about whatever I feel like and part lab platform for my experiments with web "
+"development.  More about this site under the tag <a href=\"/tag/meta\">meta</"
+"a>.</p>\n"
+" "
+
+#: blog/templates/about.html:71
 msgid "Prenumerationer"
 msgstr "Feeds"
 
-#: blog/templates/about.html:51
+#: blog/templates/about.html:82
 #, python-format
 msgid ""
 "\n"
-"      <p>Det går att prenumerera på mina inlägg i form av en\n"
-"        atomfeed, antingen\n"
-"        <a href=\"%(atom-sv)s\">på svenska</a> eller\n"
-"        <a href=\"%(atom-en)s\">på engelska</a>.\n"
-"        Det går också att prenumerera på enskilda taggar, t&#xa0;ex\n"
-"        <a href=\"%(atom-fandom)s\">fandom</a> eller\n"
-"        <a href=\"%(atom-serier)s\">serier</a> (det går bra att byta ut\n"
-"        \"fandom\" eller \"serier\" i de länkarna mot någon annan\n"
-"        tagg).</p>\n"
-"      "
+"        <p>Det går att prenumerera på mina inlägg i form av en\n"
+"          atomfeed, antingen\n"
+"          <a href=\"%(atom-sv)s\">på svenska</a> eller\n"
+"          <a href=\"%(atom-en)s\">på engelska</a>.\n"
+"          Det går också att prenumerera på enskilda taggar, t&#xa0;ex\n"
+"          <a href=\"%(atom-fandom)s\">fandom</a> eller\n"
+"          <a href=\"%(atom-serier)s\">serier</a> (det går bra att byta ut\n"
+"          \"fandom\" eller \"serier\" i de länkarna mot någon annan\n"
+"          tagg).</p>\n"
+"        "
 msgstr ""
 "\n"
 "  <p>You can subscribe to my musings in the form of an atom feed,\n"
@@ -124,56 +157,70 @@ msgstr ""
 "  \"fandom\" or \"comics\" in those links to another tag).</p>\n"
 "  "
 
-#: blog/templates/about.html:65
-msgid "Kontakt"
-msgstr "Contact"
+#: blog/templates/about.html:96
+msgid "Ikonfont"
+msgstr "Icon font"
 
-#: blog/templates/about.html:73
-msgid "Epost:"
-msgstr "E-mail:"
+#: blog/templates/about.html:98
+msgid ""
+"\n"
+"        <p>Jag använder en liten font med några ikoner.  På så sätt blir\n"
+"          de dels snyggt skalbara och dels kan de laddas tillsammans i\n"
+"          stället för en och en, vilket sparar lite bandbredd.</p>\n"
+"        \n"
+"        <p>Symbolerna är ur\n"
+"          <a href=\"http://fortawesome.github.com/Font-Awesome/\">Font "
+"Awesome</a>,\n"
+"          CC BY Dave Gandy, och\n"
+"          <a href=\"http://www.entypo.com\">Entypo</a>, &#xA9; 2012 Daniel "
+"Bruce.\n"
+"          Symbolurvalet är gjort med\n"
+"          <a href=\"http://fontello.com/\">Fontello</a>.\n"
+"        </p>\n"
+"        "
+msgstr ""
+"\n"
+"      <p>I use a small font with some icons.  That way, I get nice looking\n"
+"      scalable icons, which are loaded together with one request\n"
+"      instead of one request per icon, saving some bandwidth.</p>\n"
+"\n"
+"      <p>The symbol glyphs are from\n"
+"      <a href=\"http://fortawesome.github.com/Font-Awesome/\">Font Awesome</"
+"a>,\n"
+"      CC BY Dave Gandy, and\n"
+"      <a href=\"http://www.entypo.com\">Entypo</a>, &#xA9; 2012 Daniel "
+"Bruce.\n"
+"      The font itself is made by <a href=\"http://fontello.com/\">Fontello</"
+"a>.\n"
+"      </p>\n"
+"      "
 
-#: blog/templates/about.html:76
-msgid "Telefon:"
-msgstr "Phone:"
-
-#: blog/templates/about.html:78
-msgid "sms:"
-msgstr "sms:"
-
-#: blog/templates/about.html:81
-msgid "Papperspost:"
-msgstr "Paper mail:"
-
-#: blog/templates/about.html:96 blog/templates/blog/index.html:33
+#: blog/templates/about.html:120 blog/templates/blog/index.html:33
 #: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:20
 msgid "taggmoln"
 msgstr "tag cloud"
 
-#: blog/templates/blog/base.html:55
+#: blog/templates/blog/base.html:58
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: blog/templates/blog/base.html:57
+#: blog/templates/blog/base.html:60
 msgid "innehåll"
 msgstr "content"
 
-#: blog/templates/blog/base.html:60
+#: blog/templates/blog/base.html:63
 msgid "mina länkar"
 msgstr "my links"
 
-#: blog/templates/blog/base.html:91
+#: blog/templates/blog/base.html:94
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:97
+#: blog/templates/blog/base.html:100
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/base.html:113
-msgid "Creative Commons-licens"
-msgstr "Creative Commons License"
-
-#: blog/templates/blog/base.html:117
+#: blog/templates/blog/base.html:116
 #, python-format
 msgid ""
 "\n"
@@ -299,6 +346,23 @@ msgstr "Tagged"
 #: blog/templates/feed/description.html:20
 msgid "Läs inlägget"
 msgstr "Read"
+
+#: r5comments/forms.py:18
+#, python-format
+msgid "\"%s\" looks like spam, sorry."
+msgstr "Tyvärr, \"%s\" ser ut som spam."
+
+#: r5comments/forms.py:29
+msgid "Please use an unshortened url."
+msgstr "Vänligen använd en oförkortad url."
+
+#: r5comments/forms.py:35
+#, python-format
+msgid "\"%s\" is used in spam, sorry."
+msgstr "Tyvärr, \"%s\" används i spam jag fått."
+
+#~ msgid "Creative Commons-licens"
+#~ msgstr "Creative Commons License"
 
 #~ msgid "jag twittrar"
 #~ msgstr "I tweet"
