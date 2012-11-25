@@ -24,85 +24,92 @@
       Jag började med webb&#xad;utveckling både hobby&#xad;mässigt och
       professionellt våren 1995 och har inte kunnat slita mig sedan dess.</p>
     
-    <p>Den här siten, <a href="/">rasmus.krats.se</a>, är dels en blogg där
-      jag skriver om vad som helst som intresserar mig och dels en lekstuga
-      och lab&#xad;plattform för webb&#xad;teknik.
-      Mer om den här siten och hur jag har utvecklat den finns under taggen
-      <a href="/tag/meta" rel="tag">meta</a>.</p>
-
     <p>Jag är gift med <a href="http://tygbittar.krats.se/">Katarina Kaj</a>,
       aktiv i
       <a href="http://www.stacken.kth.se/">Dator&#xad;föreningen Stacken</a>
       och läser gärna <a href="/tag/comics">serier</a>.</p>
     {% endblocktrans %}
 
-    <section id="feeds">
-      <h1>{% trans "Prenumerationer" %}</h1>
-      
-      {% url atom-sv as atom-sv %}
-      {% url atom-en as atom-en %}
-      {% if LANGUAGE_CODE == 'sv' %}
-      {% url atom-tag-sv 'fandom' as atom-fandom %}
-      {% url atom-tag-sv 'serier' as atom-serier %}
-      {% else %}
-      {% url atom-tag-en 'fandom' as atom-fandom %}
-      {% url atom-tag-en 'comics' as atom-serier %}
-      {% endif %}
-      {% blocktrans %}
-      <p>Det går att prenumerera på mina inlägg i form av en
-        atomfeed, antingen
-        <a href="{{atom-sv}}">på svenska</a> eller
-        <a href="{{atom-en}}">på engelska</a>.
-        Det går också att prenumerera på enskilda taggar, t&#xa0;ex
-        <a href="{{atom-fandom}}">fandom</a> eller
-        <a href="{{atom-serier}}">serier</a> (det går bra att byta ut
-        "fandom" eller "serier" i de länkarna mot någon annan
-        tagg).</p>
-      {% endblocktrans %}
-    </section>
-
-    <section id="iconfont">
-      <h1>{% trans "Ikonfont" %}</h1>
-      
-      {% blocktrans %}
-      <p>Jag använder en liten font med några ikoner.  På så sätt blir
-      de dels snyggt skalbara och dels kan de laddas tillsammans i
-      stället för en och en, vilket sparar lite bandbredd.</p>
-
-      <p>Symbolerna är ur
-      <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>,
-      CC BY Dave Gandy, och
-      <a href="http://www.entypo.com">Entypo</a>, &#xA9; 2012 Daniel Bruce.
-      Symbolurvalet är gjort med <a href="http://fontello.com/">Fontello</a>.
-      </p>
-      {% endblocktrans %}
-    </section>
-    
     <section id="contact">
       <h1>{% trans "Kontakt" %}</h1>
     
       <figure class="sidebar">
-	<img src="{{STATIC_URL}}qr-kaj.png" width="82" height="82"
-	     alt="">
+        <img src="{{STATIC_URL}}qr-kaj.png" width="82" height="82"
+             alt=""/>
       </figure>
       
       <dl>
-	<dt class="icon-mail">{% trans "Epost:" %}</dt>
-	<dd><a href="mailto:rasmus@krats.se">rasmus@krats.se</a></dd>
-	
-	<dt class="icon-phone">{% trans "Telefon:" %}</dt>
-	<dd><a href="tel:+46-8-790-67-21">08‒790 67 21</a></dd>
-	<dt class="icon-phone">{% trans "sms:" %}</dt>
-	<dd><a href="sms:+46-739736226">0739736226</a></dd>
-	
-	<dt class="icon-mail">{% trans "Papperspost:" %}</dt>
-	<dd>Rasmus Kaj<br>
-	  Stamgatan 55<br>
-	  SE-125 74 &#160;<span class="postort">Älvsjö</span><br>
-	  Sweden</dd>
+        <dt class="icon-mail">{% trans "Epost:" %}</dt>
+        <dd><a href="mailto:rasmus@krats.se">rasmus@krats.se</a></dd>
+        
+        <dt class="icon-phone">{% trans "Telefon:" %}</dt>
+        <dd><a href="tel:+46-8-790-67-21">08‒790 67 21</a></dd>
+        <dt class="icon-phone">{% trans "sms:" %}</dt>
+        <dd><a href="sms:+46-739736226">0739736226</a></dd>
+        
+        <dt class="icon-mail">{% trans "Papperspost:" %}</dt>
+        <dd>Rasmus Kaj<br>
+          Stamgatan 55<br>
+          SE-125 74 &#160;<span class="postort">Älvsjö</span><br>
+          Sweden</dd>
       </dl>
     </section>
   </div>
+
+  <section id="site">
+      <h1>{% trans "Om den här siten" %}</h1>
+      
+      {% blocktrans %}
+      <p>Den här siten, <a href="/">rasmus.krats.se</a>, är dels en blogg där
+        jag skriver om vad som helst som intresserar mig och dels en lekstuga
+        och lab&#xad;plattform för webb&#xad;teknik.
+        Mer om den här siten och hur jag har utvecklat den finns under taggen
+        <a href="/tag/meta" rel="tag">meta</a>.</p>
+      {% endblocktrans %}
+      
+      <section id="feeds">
+        <h1>{% trans "Prenumerationer" %}</h1>
+      
+        {% url atom-sv as atom-sv %}
+        {% url atom-en as atom-en %}
+        {% if LANGUAGE_CODE == 'sv' %}
+        {% url atom-tag-sv 'fandom' as atom-fandom %}
+        {% url atom-tag-sv 'serier' as atom-serier %}
+        {% else %}
+        {% url atom-tag-en 'fandom' as atom-fandom %}
+        {% url atom-tag-en 'comics' as atom-serier %}
+        {% endif %}
+        {% blocktrans %}
+        <p>Det går att prenumerera på mina inlägg i form av en
+          atomfeed, antingen
+          <a href="{{atom-sv}}">på svenska</a> eller
+          <a href="{{atom-en}}">på engelska</a>.
+          Det går också att prenumerera på enskilda taggar, t&#xa0;ex
+          <a href="{{atom-fandom}}">fandom</a> eller
+          <a href="{{atom-serier}}">serier</a> (det går bra att byta ut
+          "fandom" eller "serier" i de länkarna mot någon annan
+          tagg).</p>
+        {% endblocktrans %}
+      </section>
+
+      <section id="iconfont">
+        <h1>{% trans "Ikonfont" %}</h1>
+      
+        {% blocktrans %}
+        <p>Jag använder en liten font med några ikoner.  På så sätt blir
+          de dels snyggt skalbara och dels kan de laddas tillsammans i
+          stället för en och en, vilket sparar lite bandbredd.</p>
+        
+        <p>Symbolerna är ur
+          <a href="http://fortawesome.github.com/Font-Awesome/">Font Awesome</a>,
+          CC BY Dave Gandy, och
+          <a href="http://www.entypo.com">Entypo</a>, &#xA9; 2012 Daniel Bruce.
+          Symbolurvalet är gjort med
+          <a href="http://fontello.com/">Fontello</a>.
+        </p>
+        {% endblocktrans %}
+      </section>
+  </section>
   
   <address>Rasmus Kaj
     <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
