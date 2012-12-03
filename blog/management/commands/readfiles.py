@@ -47,7 +47,7 @@ class Command(NoArgsCommand):
             #print "Sub directories", dirs
             #print "Files", files
             for fn in files:
-                if fn.endswith('.docb'):
+                if fn.endswith('.docb') and not fn.startswith('.#'):
                     filename = os.path.join(root, fn)
                     try:
                         readfile(filename)
