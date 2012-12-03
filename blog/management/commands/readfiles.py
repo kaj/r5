@@ -3,9 +3,10 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management.base import NoArgsCommand
 from django.contrib.redirects.models import Redirect
-from xml.etree import ElementTree
+from optparse import make_option
 from shutil import copy
 from urllib import quote
+from xml.etree import ElementTree
 import os
 
 nsmap = {
@@ -29,9 +30,17 @@ def parsedate(datestr=None):
 
 class Command(NoArgsCommand):
     help = 'Find and read content'
+
+    option_list = NoArgsCommand.option_list + (
+        make_option('--part', help='Part (i.e. year) of site to read',
+                    dest='part'),
+        )
     
     def handle_noargs(self, **options):
         base = settings.CONTENT_FILES_BASE
+        
+        if options['part']:
+            base = os.path.join(base, options['part'])
         
         for root, dirs, files in os.walk(base):
             #print "Current directory", root
