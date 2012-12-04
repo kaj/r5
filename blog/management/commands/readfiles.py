@@ -90,7 +90,10 @@ def readfile(filename):
         p.tags.add(*tags)
     
     # Create an empty update for original posting
-    update, isnew = Update.objects.get_or_create(post=p, time=date)
+    update, isnew = Update.objects.get_or_create(post=p, note='')
+    if not isnew:
+        update.time=date
+        update.save()
     for revision in tree.findall('db:info//db:revision', nsmap):
         rdate = parsedate(serialize(revision.find('db:date', nsmap)))
         note = d2h(revision.find('db:revremark', nsmap)) or \
