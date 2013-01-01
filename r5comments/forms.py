@@ -13,7 +13,7 @@ class CommentFormAvoidingSpam(CommentForm):
     def clean_name(self):
         #super(CommentFormAvoidingSpam, self).clean_name()
         name = self.cleaned_data['name']
-        if re.search('(?:^|\s)(?:%s)(?:\s|$)' % '|'.join(self.bad_names),
+        if re.search('(?:^|-|\.|\s)(?:%s)(?:\s|-|\.|$)' % '|'.join(self.bad_names),
                      name, re.IGNORECASE):
             raise forms.ValidationError(_(u'"%s" looks like spam, sorry.') %
                                         name)
