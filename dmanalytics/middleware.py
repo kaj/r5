@@ -19,7 +19,8 @@ class DMAnalyticsMiddleware(object):
             'host': request.get_host(),
             'path': request.path,
             'is_ajax': request.is_ajax(),
-            'cookies': request.COOKIES,
+            # TODO Store cookies in a non-breaking way?
+            # 'cookies': request.COOKIES,
             'remote_addr': request.META['REMOTE_ADDR'],
             'time': request.dma_starttime,
             }
@@ -48,7 +49,8 @@ class DMAnalyticsMiddleware(object):
         #if request.user.is_authenticated():
         #    item['user'] = request.user.username
 
-        self.log.update({'_id': request.dma_id},
-                        {'$set': item})
+        if 'dma_id' in request:
+            self.log.update({'_id': request.dma_id},
+                            {'$set': item})
         #print "Done:", item
         return response
