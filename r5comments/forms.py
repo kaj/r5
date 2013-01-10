@@ -24,7 +24,7 @@ class CommentFormAvoidingSpam(CommentForm):
         #super(CommentFormAvoidingSpam, self).clean_url()
         url = self.cleaned_data['url']
         if url:
-            if re.match('^https?://bit.ly/.*', url, re.IGNORECASE):
+            if re.match('^https?://(bit.ly|is.gd|tinyurl.com)/.*', url, re.IGNORECASE):
                 raise forms.ValidationError(
                     _('Please use an unshortened url.'))
             spamurls = Comment.objects \
