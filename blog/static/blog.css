@@ -174,7 +174,10 @@ article h1 a:hover, article h1 a:focus {
     color: #440088; /* TODO Link color */
     text-decoration: underline;
 }
-section { margin: 2em 0 1em; }
+section {
+  margin: 2em 0 1em;
+  overflow: auto;
+}
 section h1 { font-size: 1.4em; }
 section section h1 { font-size: 1.2em; }
 header p {
