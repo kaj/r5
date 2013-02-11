@@ -10,6 +10,17 @@ class PostCommentModerator(CommentModerator):
     email_notification = True
     
     def moderate(self, comment, content_object, request):
+        # Allow comments from known commenters
+        commenters = Comment.objects.filter(is_removed=False, is_public=True) \
+            .values_list('ip_address', flat=True).distinct()
+        if request.META['REMOTE_ADDR'] in commenters:
+            return False
+        
+        # Moderate comments for old posts
+        if (datetime.now() - content_object.posted_time).days > 100:
+            return True
+        
+        # Moderate comments from previous spammers
         spammers = Comment.objects.filter(is_removed=True, is_public=False) \
             .values_list('ip_address', flat=True).distinct()
         return request.META['REMOTE_ADDR'] in spammers
