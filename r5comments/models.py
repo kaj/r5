@@ -4,6 +4,7 @@ from django.contrib.comments.moderation import CommentModerator, moderator
 from django.contrib.comments.models import Comment
 from IPy import IP
 from blog.models import Post
+from datetime import datetime
 
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
