@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-25 23:59+0100\n"
+"POT-Creation-Date: 2013-04-16 19:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -48,7 +48,7 @@ msgstr "\"%(path)s\" does not exist"
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
-#: blog/templates/404.html:54 blog/templates/about.html:125
+#: blog/templates/404.html:54 blog/templates/about.html:138
 #: blog/templates/blog/index.html:39 blog/templates/blog/tagcloud.html:7
 #: blog/templates/blog/tagged.html:25
 msgid "Taggmoln"
@@ -158,10 +158,30 @@ msgstr ""
 "  "
 
 #: blog/templates/about.html:96
+msgid "Kakor"
+msgstr "Cookies"
+
+#: blog/templates/about.html:98
+msgid ""
+"\n"
+"\t<p>Den här siten sätter en kaka som används när du skriver en\n"
+"\t  kommentar.\n"
+"\t  För att kunna kommentera mina inlägg behöver du ha kakor påslaget i\n"
+"\t  din browser, att bara läsa inlägg och kommentarer går bra även utan\n"
+"\t  kakor.</p>\n"
+"\t"
+msgstr ""
+"\n"
+"\t<p>This site sets a cookie that is used when you write a comment.\n"
+"\t  To write a comment, you need to have cookies enabled in your browser.\n"
+"\t  To read posts and comments, cookies are optional.</p>\n"
+"\t"
+
+#: blog/templates/about.html:108
 msgid "Ikonfont"
 msgstr "Icon font"
 
-#: blog/templates/about.html:98
+#: blog/templates/about.html:110
 msgid ""
 "\n"
 "        <p>Jag använder en liten font med några ikoner.  På så sätt blir\n"
@@ -195,7 +215,7 @@ msgstr ""
 "      </p>\n"
 "      "
 
-#: blog/templates/about.html:120 blog/templates/blog/index.html:33
+#: blog/templates/about.html:133 blog/templates/blog/index.html:33
 #: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:20
 msgid "taggmoln"
 msgstr "tag cloud"
@@ -347,16 +367,16 @@ msgstr "Tagged"
 msgid "Läs inlägget"
 msgstr "Read"
 
-#: r5comments/forms.py:18
+#: r5comments/forms.py:20
 #, python-format
 msgid "\"%s\" looks like spam, sorry."
 msgstr "Tyvärr, \"%s\" ser ut som spam."
 
-#: r5comments/forms.py:29
+#: r5comments/forms.py:31
 msgid "Please use an unshortened url."
 msgstr "Vänligen använd en oförkortad url."
 
-#: r5comments/forms.py:35
+#: r5comments/forms.py:37
 #, python-format
 msgid "\"%s\" is used in spam, sorry."
 msgstr "Tyvärr, \"%s\" används i spam jag fått."
