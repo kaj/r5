@@ -5,12 +5,12 @@ from django.utils.translation import ugettext_lazy as _
 import re
 
 class CommentFormAvoidingSpam(CommentForm):
-    bad_names = ('cash', 'casinos?', 'cialis', 'cigarettes?', 'escorts?',
-                 'finance',
+    bad_names = ('boobs', 'cash', 'casinos?', 'cialis', 'cigarettes?', 'cigs',
+                 'escorts?', 'finance', 'forex'
                  'infoxesee', 'insurance', 'loans?', 'luggisintedge',
-                 'offinafag',
+                 'movie', 'offinafag',
                  'ordillaoffips', 'pay ?day', 'praikicky', 'pyncpelay',
-                 'viagra')
+                 'sex', 'sexchat', 'viagra', 'video')
 
     def clean_name(self):
         #super(CommentFormAvoidingSpam, self).clean_name()
