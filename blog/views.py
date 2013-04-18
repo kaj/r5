@@ -118,9 +118,12 @@ def filter_by_language(posts, lang, extra_skip=None):
         samelang.add(ref(extra_skip))
     return [p for p in posts if p.lang == lang or ref(p) not in samelang]
 
-def about(request):
-    _activatelang(request)
-    return direct_to_template(request, 'about.html')
+def about(request, lang):
+    _activatelang(request, lang)
+    altlingos = {'sv', 'en'} - {lang}
+    return direct_to_template(request, 'about.html', {
+            'altlingos': altlingos,
+            })
 
 def _activatelang(request, lang=None):
     if not lang:

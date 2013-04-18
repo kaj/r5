@@ -21,7 +21,8 @@ urlpatterns = patterns(
     url(r'^tag/$', tagcloud),
     url(r'^tag/(?P<slug>[a-z0-9-]+)$', tagged),
 
-    url(r'^about$', about),
+    url(r'^about$', about, {'lang': 'en'}, name='about'),
+    url(r'^om$', about, {'lang': 'sv'}, name='about'),
 
     url(r'^atom-en.xml$', UpdatesFeed('en'), name='atom-en'),
     url(r'^atom-sv.xml$', UpdatesFeed('sv'), name='atom-sv'),
