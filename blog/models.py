@@ -20,6 +20,10 @@ class Post(models.Model):
     class Meta:
         ordering = ['-posted_time']
 
+    @property
+    def year(self):
+        return self.posted_time.year
+
     def abstract_output(self):
         return process_content(self.abstract, Image.objects)
     
@@ -35,7 +39,7 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         if self.posted_time:
-            return "/%d/%s" % (self.posted_time.year, self.slug)
+            return "/%d/%s.%s" % (self.posted_time.year, self.slug, self.lang)
         else:
             return "/%s" % self.slug
 
@@ -53,6 +57,15 @@ class Update(models.Model):
     def lang(self):
         return self.post.lang
 
+    @property
+    def year(self):
+        '''Linking year, not update year.  I.e. year of the post.'''
+        return self.post.year
+
+    @property
+    def slug(self):
+        return self.post.slug
+    
     def __unicode__(self):
         return u'Update %s to %s' % (self.time, self.post)
     

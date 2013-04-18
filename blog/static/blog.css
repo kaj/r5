@@ -20,9 +20,13 @@ html, body {
 #sitename :link, #sitename :visited {
     text-decoration: none;
 }
-#sitename, #tagline, #skiplinks {
+#sitename, #lingos, #tagline, #skiplinks {
     margin: .1em 0;
     text-shadow: .11em .07em .1em black;
+}
+#lingos {
+    float: right;
+    margin-top: 0;
 }
 #skiplinks {
     position: absolute;

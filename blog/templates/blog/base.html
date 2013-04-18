@@ -54,6 +54,18 @@
     <div id="headerwrap">
       <div id="header">
 	<p id="sitename"><a href="/" rel="start">Rasmus.krats.se</a></p>
+        {% block extraheader %}
+        <form action="/i18n/setlang/" method="post" id="selectlang">
+          {% csrf_token %}
+          {% if "en" == LANGUAGE_CODE %}
+            <input type="hidden" name="language" value="sv" />
+            <button type="submit" class="to_sv">Byt till svenska</button>
+          {% else %}
+            <input type="hidden" name="language" value="en" />
+            <button type="submit" class="to_en">Switch to English</button>
+          {% endif %}
+        </form>
+        {% endblock %}
 	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
 	<div id="skiplinks"><div>{% trans "Hoppa till" %}
 	  <ul>
@@ -65,16 +77,6 @@
 	    {% endblock %}
 	  </ul>
 	</div></div>
-        <form action="/i18n/setlang/" method="post" id="selectlang">
-          {% csrf_token %}
-          {% if "en" == LANGUAGE_CODE %}
-            <input type="hidden" name="language" value="sv" />
-            <button type="submit" class="to_sv">Byt till svenska</button>
-          {% else %}
-            <input type="hidden" name="language" value="en" />
-            <button type="submit" class="to_en">Switch to English</button>
-          {% endif %}
-        </form>
       </div>
     </div>
     <div id="mainwrap">

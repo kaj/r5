@@ -41,29 +41,37 @@ def index(request, year=None):
                       in Post.objects.dates('posted_time', 'year')],
             })
 
-def post_detail(request, year, slug):
-    lang = _activatelang(request)
+def post_detail(request, year, slug, lang=None):
+    post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
+    _activatelang(request, lang)
     try:
-        post = get_object_or_404(Post, 
-                                 posted_time__year=year,
-                                 slug=slug,
-                                 lang=lang)
-        altlingos = Post.objects.filter(posted_time__year=year, slug=slug) \
+        post = get_object_or_404(post_objects, lang=lang)
+        altlingos = post_objects \
             .exclude(lang=lang).values_list('lang', flat=True)
     except Http404:
         # Failed to get the requested language, try any other
-        lingos = Post.objects.filter(posted_time__year=year, slug=slug) \
-            .values_list('lang', flat=True)
+        lingos = post_objects.values_list('lang', flat=True)
         if not lingos:
             raise Http404
+
+        def best_lang(want, got):
+            for accept_lang, q in want:
+                if accept_lang == '*':
+                    break;
+                normalized = accept_lang.split('-', 1)[0]
+                if normalized in got:
+                    return normalized
+            # no match, fallback to "any" language
+            return got[0]
         
-        post = get_object_or_404(Post, 
-                                 posted_time__year=year,
-                                 slug=slug,
-                                 lang=lingos[0])
-        altlingos = lingos[1:]
+        lang = best_lang(translation.trans_real.parse_accept_lang_header \
+                             (request.META.get('HTTP_ACCEPT_LANGUAGE', '')),
+                         lingos)
+        post = get_object_or_404(post_objects, lang=lang)
+        return redirect(post.get_absolute_url())
+    
     similar = filter_by_language(post.tags.similar_objects(), post.lang,
-                                 extra_skip=post.get_absolute_url())
+                                 extra_skip=post)
     
     message = None
     if 'c' in request.GET:
@@ -103,22 +111,24 @@ def tagged(request, slug):
             })
 
 def filter_by_language(posts, lang, extra_skip=None):
-    samelang = set(p.get_absolute_url() for p in posts if p.lang == lang)
+    def ref(p):
+        return "%s/%s" % (p.year, p.slug)
+    samelang = {ref(p) for p in posts if p.lang == lang}
     if extra_skip:
-        samelang.add(extra_skip)
-    return [p for p in posts
-            if p.lang == lang or p.get_absolute_url() not in samelang]
+        samelang.add(ref(extra_skip))
+    return [p for p in posts if p.lang == lang or ref(p) not in samelang]
 
 def about(request):
     _activatelang(request)
     return direct_to_template(request, 'about.html')
 
-def _activatelang(request):
-    lang = request.GET.get('l')
-    if lang:
-        request.session['django_language'] = lang
-    else:
-        lang = translation.get_language_from_request(request)
+def _activatelang(request, lang=None):
+    if not lang:
+        lang = request.GET.get('l')
+        if lang:
+            request.session['django_language'] = lang
+        else:
+            lang = translation.get_language_from_request(request)
     translation.activate(lang)
     return lang
 

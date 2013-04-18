@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-16 19:18+0200\n"
+"POT-Creation-Date: 2013-04-18 18:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -31,20 +31,20 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: blog/views.py:74
+#: blog/views.py:82
 msgid "Din kommentar är borttagen."
 msgstr "Your comment is removed."
 
-#: blog/views.py:77
+#: blog/views.py:85
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
-#: blog/views.py:148
+#: blog/views.py:158
 #, python-format
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:57
+#: blog/templates/404.html:15 blog/templates/blog/base.html:69
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
@@ -220,27 +220,27 @@ msgstr ""
 msgid "taggmoln"
 msgstr "tag cloud"
 
-#: blog/templates/blog/base.html:58
+#: blog/templates/blog/base.html:70
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: blog/templates/blog/base.html:60
+#: blog/templates/blog/base.html:72
 msgid "innehåll"
 msgstr "content"
 
-#: blog/templates/blog/base.html:63
+#: blog/templates/blog/base.html:75
 msgid "mina länkar"
 msgstr "my links"
 
-#: blog/templates/blog/base.html:94
+#: blog/templates/blog/base.html:96
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:100
+#: blog/templates/blog/base.html:102
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/base.html:116
+#: blog/templates/blog/base.html:118
 #, python-format
 msgid ""
 "\n"
@@ -270,21 +270,26 @@ msgstr "on"
 msgid "liknande sidor"
 msgstr "similar pages"
 
-#: blog/templates/blog/post_detail.html:37
+#: blog/templates/blog/post_detail.html:24
+msgctxt "target language"
+msgid "På svenska"
+msgstr "In English"
+
+#: blog/templates/blog/post_detail.html:45
 #: blog/templates/blog/post_summary.html:18
 #: blog/templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: blog/templates/blog/post_detail.html:53
+#: blog/templates/blog/post_detail.html:61
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:76
+#: blog/templates/blog/post_detail.html:84
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:79
+#: blog/templates/blog/post_detail.html:87
 #, python-format
 msgid ""
 "\n"
@@ -299,7 +304,7 @@ msgstr ""
 "that will be displayed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:94
+#: blog/templates/blog/post_detail.html:102
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
