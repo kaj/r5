@@ -41,6 +41,19 @@ def index(request, year=None):
                       in Post.objects.dates('posted_time', 'year')],
             })
 
+def choose_lang(request, availiable):
+    '''Choose the best language availiable based on the request meta.'''
+    wanted = translation.trans_real.parse_accept_lang_header(
+        request.META.get('HTTP_ACCEPT_LANGUAGE', ''))
+    for accept_lang, q in wanted:
+        if accept_lang == '*':
+            break;
+        normalized = accept_lang.split('-', 1)[0]
+        if normalized in availiable:
+            return normalized
+    # no match, fallback to "any" language
+    return availiable.pop()
+
 def post_detail(request, year, slug, lang=None):
     post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
     _activatelang(request, lang)
@@ -53,21 +66,9 @@ def post_detail(request, year, slug, lang=None):
         lingos = post_objects.values_list('lang', flat=True)
         if not lingos:
             raise Http404
-
-        def best_lang(want, got):
-            for accept_lang, q in want:
-                if accept_lang == '*':
-                    break;
-                normalized = accept_lang.split('-', 1)[0]
-                if normalized in got:
-                    return normalized
-            # no match, fallback to "any" language
-            return got[0]
         
-        lang = best_lang(translation.trans_real.parse_accept_lang_header \
-                             (request.META.get('HTTP_ACCEPT_LANGUAGE', '')),
-                         lingos)
-        post = get_object_or_404(post_objects, lang=lang)
+        post = get_object_or_404(post_objects,
+                                 lang=choose_lang(request, lingos))
         return redirect(post.get_absolute_url())
     
     similar = filter_by_language(post.tags.similar_objects(), post.lang,
@@ -99,15 +100,20 @@ def tagcloud(request):
     _activatelang(request)
     return direct_to_template(request, 'blog/tagcloud.html')
 
-def tagged(request, slug):
-    lang = _activatelang(request)
+def tagged(request, slug, lang=None):
     tag = get_object_or_404(Tag, slug=slug)
-    posts = filter_by_language(Post.objects.filter(tags__in=[tag]),
-                               lang)
+    posts = Post.objects.filter(tags__in=[tag])
+    if not lang:
+        lingos = get_list_or_404(posts.values_list('lang', flat=True))
+        return redirect('tagged', slug=slug, lang=choose_lang(request, lingos))
+    _activatelang(request, lang)
+    posts = filter_by_language(posts, lang)
+    altlingos = {'sv', 'en'} - {lang}
     return direct_to_template(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
             'lang': lang,
+            'altlingos': altlingos,
             })
 
 def filter_by_language(posts, lang, extra_skip=None):
