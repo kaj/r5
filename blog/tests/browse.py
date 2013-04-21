@@ -61,8 +61,12 @@ class SimpleTest(TestCase):
     def test_get_nonexistant_year(self):
         doc = self.get('/1971/', expected_status_code=404)
 
+    def test_tagcloud_redirects_to_lang(self):
+        self.get('/tag/', expected_status_code=302,
+                 expected_location='/tag/en')
+    
     def test_get_tagcloud(self):
-        doc = self.get('/tag/')
+        doc = self.get('/tag/sv')
         
         self.assertEqual(['Rasmus.krats.se taggmoln'],
                          select_texts(doc, 'head title'))

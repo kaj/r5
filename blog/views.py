@@ -101,9 +101,14 @@ def post_detail(request, year, slug, lang=None):
             'next': post.get_absolute_url(),
             })
 
-def tagcloud(request):
-    _activatelang(request)
-    return direct_to_template(request, 'blog/tagcloud.html')
+def tagcloud(request, lang):
+    if not lang:
+        return redirect('tagcloud', lang=choose_lang(request, {'sv', 'en'}))
+    _activatelang(request, lang)
+    altlingos = {'sv', 'en'} - {lang}
+    return direct_to_template(request, 'blog/tagcloud.html', {
+            'altlingos': altlingos,
+            })
 
 def tagged(request, slug, lang=None):
     tag = get_object_or_404(Tag, slug=slug)

@@ -18,7 +18,7 @@ urlpatterns = patterns(
     url(r'^img/(?P<slug>[a-z0-9_-]+)\.i', image_small, name='image_small'),
     url(r'^img/(?P<slug>[a-z0-9_-]+)', image_view, name='image_view'),
     
-    url(r'^tag/$', tagcloud),
+    url(r'^tag/(?P<lang>(sv|en)?)$', tagcloud, name='tagcloud'),
     url(r'^tag/(?P<slug>[a-z0-9-]+)$', tagged, name='tagged'),
     url(r'^tag/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$', tagged, name='tagged'),
 
