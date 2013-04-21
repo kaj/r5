@@ -15,6 +15,14 @@
     {% endif %}
 {% endblock %}
 
+{% block extraheader %}
+  <p id="lingos">{% for l in altlingos %}
+    <a rel="alternate" hreflang="{{l}}" lang="{{l}}"
+       href="{% url index year=year lang=l %}">
+      {% language l %}{% trans "På svenska" context "target language" %}{% endlanguage %}</a>{% if not forloop.last %}, {% endif %}
+  {% endfor %}</p>
+{% endblock %}
+
 {% block main %}
     {% if head %}
         <h1>{{head}}</h1>
@@ -26,7 +34,7 @@
 
     <p>Övriga inlägg från
       {% for y in years %}
-      <a href="/{{y}}/">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
+      <a href="{% url index year=y, lang=lang%}">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 {% endblock %}
 
 {% block lastskiplinks %}

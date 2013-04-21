@@ -9,8 +9,8 @@ def redirect_year(request, year):
 
 urlpatterns = patterns(
     '',
-    url(r'^$', index, name='index'),
-    url(r'^(?P<year>[0-9]{4})/$', index),
+    url(r'^(?P<lang>(sv|en)?)$', index, {'year': None}, name='index'),
+    url(r'^(?P<year>[0-9]{4})/(?P<lang>(sv|en)?)$', index, name='index'),
     url(r'^(?P<year>[0-9]{4})$', redirect_year), 
     url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$',
         post_detail),
