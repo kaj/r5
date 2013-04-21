@@ -11,18 +11,6 @@
   {% if post.abstract %}
     <meta name="Description" content="{{post.abstract|striptags}}" />
   {% endif %}
-  {% for l in altlingos %}
-    <link rel="alternate" hreflang="{{l}}"
-          href="/{{post.year}}/{{post.slug}}.{{l}}" />
-  {% endfor %}
-{% endblock %}
-
-{% block extraheader %}
-  <p id="lingos">{% for l in altlingos %}
-    <a rel="alternate" hreflang="{{l}}" lang="{{l}}"
-       href="/{{post.year}}/{{post.slug}}.{{l}}">
-      {% language l %}{% trans "På svenska" context "target language" %}{% endlanguage %}</a>{% if not forloop.last %}, {% endif %}
-  {% endfor %}</p>
 {% endblock %}
 
 {% block main %}

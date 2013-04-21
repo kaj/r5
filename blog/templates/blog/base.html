@@ -44,6 +44,9 @@
     <link rel="shortcut icon" href="{{STATIC_URL}}trafik-kaj-s.png" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}trafik-kaj.png" />
     {% block extrahead %}{% endblock %}
+    {% for l, url in altlingos %}
+    <link rel="alternate" hreflang="{{l}}" href="{{url}}"/>
+    {% endfor %}
     <!--[if IE 7]>
     <link rel="stylesheet" href="{{STATIC_URL}}iconfont/css/font-kaj-20121124-ie7.css"><![endif]-->
     <!--[if lte IE 8]>
@@ -54,18 +57,12 @@
     <div id="headerwrap">
       <div id="header">
 	<p id="sitename"><a href="/" rel="start">Rasmus.krats.se</a></p>
-        {% block extraheader %}
-        <form action="/i18n/setlang/" method="post" id="selectlang">
-          {% csrf_token %}
-          {% if "en" == LANGUAGE_CODE %}
-            <input type="hidden" name="language" value="sv" />
-            <button type="submit" class="to_sv">Byt till svenska</button>
-          {% else %}
-            <input type="hidden" name="language" value="en" />
-            <button type="submit" class="to_en">Switch to English</button>
-          {% endif %}
-        </form>
-        {% endblock %}
+        {% if altlingos %}
+        <p id="lingos">{% for l, url in altlingos %}{% language l %}
+          <a rel="alternate" hreflang="{{l}}" lang="{{l}}"
+             href="{{url}}">{% trans "På svenska" context "target language" %}</a>{% if not forloop.last %}, {% endif %}
+          {% endlanguage %}{% endfor %}</p>
+        {% endif %}
 	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
 	<div id="skiplinks"><div>{% trans "Hoppa till" %}
 	  <ul>

@@ -3,17 +3,7 @@
 
 {% block title %}Rasmus Kaj &#x2013; Rasmus.krats.se {% endblock %}
 {% block extrahead %}
-  {% if post.abstract %}
-    <meta name="Description" content='{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}'/>
-  {% endif %}
-{% endblock %}
-
-{% block extraheader %}
-  <p id="lingos">{% for l in altlingos %}
-    <a rel="alternate" hreflang="{{l}}" lang="{{l}}"
-       href="{% url about lang=l %}">
-      {% language l %}{% trans "På svenska" context "target language" %}{% endlanguage %}</a>{% if not forloop.last %}, {% endif %}
-  {% endfor %}</p>
+  <meta name="Description" content='{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}'/>
 {% endblock %}
 
 {% block main %}

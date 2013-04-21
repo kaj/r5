@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.comments.models import Comment
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.utils import translation
@@ -40,7 +41,7 @@ def index(request, year=None, lang=None):
             'year': year,
             'head': head,
             'lang': lang,
-            'altlingos': {'sv', 'en'} - {lang},
+            'altlingos': langlinks('index', {'sv', 'en'} - {lang}, year=year),
             'updates': updates,
             'years': [x.year for x
                       in Post.objects.dates('posted_time', 'year')],
@@ -96,7 +97,8 @@ def post_detail(request, year, slug, lang=None):
             'post': post,
             'message': message,
             'lang': post.lang,
-            'altlingos': altlingos,
+            'altlingos': langlinks('post_detail', altlingos, 
+                                   year=year, slug=slug),
             'similar': similar,
             'next': post.get_absolute_url(),
             })
@@ -107,7 +109,7 @@ def tagcloud(request, lang):
     _activatelang(request, lang)
     altlingos = {'sv', 'en'} - {lang}
     return direct_to_template(request, 'blog/tagcloud.html', {
-            'altlingos': altlingos,
+            'altlingos': langlinks('tagcloud', altlingos),
             })
 
 def tagged(request, slug, lang=None):
@@ -123,7 +125,7 @@ def tagged(request, slug, lang=None):
             'tag': tag,
             'posts': posts,
             'lang': lang,
-            'altlingos': altlingos,
+            'altlingos': langlinks('tagged', altlingos, slug=slug),
             })
 
 def filter_by_language(posts, lang, extra_skip=None):
@@ -138,8 +140,13 @@ def about(request, lang):
     _activatelang(request, lang)
     altlingos = {'sv', 'en'} - {lang}
     return direct_to_template(request, 'about.html', {
-            'altlingos': altlingos,
+            'altlingos': langlinks('about', altlingos),
             })
+
+def langlinks(page, lingos, **kwargs):
+    return [ (l, reverse(page, kwargs=dict(lang=l, **kwargs)))
+             for l in lingos
+             ]
 
 def _activatelang(request, lang=None):
     if not lang:

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-21 12:07+0200\n"
+"POT-Creation-Date: 2013-04-21 22:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -31,41 +31,35 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: blog/views.py:88
+#: blog/views.py:89
 msgid "Din kommentar är borttagen."
 msgstr "Your comment is removed."
 
-#: blog/views.py:91
+#: blog/views.py:92
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
-#: blog/views.py:172
+#: blog/views.py:184
 #, python-format
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:69
+#: blog/templates/404.html:15 blog/templates/blog/base.html:66
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
-#: blog/templates/404.html:54 blog/templates/about.html:146
-#: blog/templates/blog/index.html:47 blog/templates/blog/tagcloud.html:7
-#: blog/templates/blog/tagged.html:34
+#: blog/templates/404.html:54 blog/templates/about.html:136
+#: blog/templates/blog/index.html:39 blog/templates/blog/tagcloud.html:7
+#: blog/templates/blog/tagged.html:26
 msgid "Taggmoln"
 msgstr "Tag cloud"
 
-#: blog/templates/about.html:7 blog/templates/about.html.py:25
+#: blog/templates/about.html:6 blog/templates/about.html.py:15
 msgid "Systemutvecklare på IT-Avdelningen på KTH."
 msgstr ""
 "System developer at the IT UNIT of the Royal Institute of Technology, KTH."
 
-#: blog/templates/about.html:15 blog/templates/blog/index.html:22
-#: blog/templates/blog/post_detail.html:24 blog/templates/blog/tagged.html:15
-msgctxt "target language"
-msgid "På svenska"
-msgstr "In English"
-
-#: blog/templates/about.html:29
+#: blog/templates/about.html:19
 msgid ""
 "\n"
 "    <p>Jag är en systemutvecklare som i första hand jobbar med webb,\n"
@@ -90,31 +84,31 @@ msgstr ""
 "member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer club "
 "at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
 
-#: blog/templates/about.html:42
+#: blog/templates/about.html:32
 msgid "Kontakt"
 msgstr "Contact"
 
-#: blog/templates/about.html:50
+#: blog/templates/about.html:40
 msgid "Epost:"
 msgstr "E-mail:"
 
-#: blog/templates/about.html:53
+#: blog/templates/about.html:43
 msgid "Telefon:"
 msgstr "Phone:"
 
-#: blog/templates/about.html:55
+#: blog/templates/about.html:45
 msgid "sms:"
 msgstr "sms:"
 
-#: blog/templates/about.html:58
+#: blog/templates/about.html:48
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
-#: blog/templates/about.html:68
+#: blog/templates/about.html:58
 msgid "Om den här siten"
 msgstr "About this site"
 
-#: blog/templates/about.html:70
+#: blog/templates/about.html:60
 msgid ""
 "\n"
 "      <p>Den här siten, <a href=\"/\">rasmus.krats.se</a>, är dels en blogg "
@@ -134,11 +128,11 @@ msgstr ""
 "a>.</p>\n"
 " "
 
-#: blog/templates/about.html:79
+#: blog/templates/about.html:69
 msgid "Prenumerationer"
 msgstr "Feeds"
 
-#: blog/templates/about.html:90
+#: blog/templates/about.html:80
 #, python-format
 msgid ""
 "\n"
@@ -163,11 +157,11 @@ msgstr ""
 "  \"fandom\" or \"comics\" in those links to another tag).</p>\n"
 "  "
 
-#: blog/templates/about.html:104
+#: blog/templates/about.html:94
 msgid "Kakor"
 msgstr "Cookies"
 
-#: blog/templates/about.html:106
+#: blog/templates/about.html:96
 msgid ""
 "\n"
 "\t<p>Den här siten sätter en kaka som används när du skriver en\n"
@@ -183,11 +177,11 @@ msgstr ""
 "\t  To read posts and comments, cookies are optional.</p>\n"
 "\t"
 
-#: blog/templates/about.html:116
+#: blog/templates/about.html:106
 msgid "Ikonfont"
 msgstr "Icon font"
 
-#: blog/templates/about.html:118
+#: blog/templates/about.html:108
 msgid ""
 "\n"
 "        <p>Jag använder en liten font med några ikoner.  På så sätt blir\n"
@@ -221,32 +215,37 @@ msgstr ""
 "      </p>\n"
 "      "
 
-#: blog/templates/about.html:141 blog/templates/blog/index.html:41
-#: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:28
+#: blog/templates/about.html:131 blog/templates/blog/index.html:33
+#: blog/templates/blog/tagcloud.html:4 blog/templates/blog/tagged.html:20
 msgid "taggmoln"
 msgstr "tag cloud"
 
-#: blog/templates/blog/base.html:70
+#: blog/templates/blog/base.html:63
+msgctxt "target language"
+msgid "På svenska"
+msgstr "In English"
+
+#: blog/templates/blog/base.html:67
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: blog/templates/blog/base.html:72
+#: blog/templates/blog/base.html:69
 msgid "innehåll"
 msgstr "content"
 
-#: blog/templates/blog/base.html:75
+#: blog/templates/blog/base.html:72
 msgid "mina länkar"
 msgstr "my links"
 
-#: blog/templates/blog/base.html:96
+#: blog/templates/blog/base.html:93
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:102
+#: blog/templates/blog/base.html:99
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/base.html:118
+#: blog/templates/blog/base.html:115
 #, python-format
 msgid ""
 "\n"
@@ -259,11 +258,11 @@ msgstr ""
 "          %(a)sCreative Commons Attribution 3.0 Unported License%(sa)s.\n"
 "          "
 
-#: blog/templates/blog/index.html:42
+#: blog/templates/blog/index.html:34
 msgid "senaste kommentarerna"
 msgstr "latest comments"
 
-#: blog/templates/blog/index.html:56
+#: blog/templates/blog/index.html:48
 msgid "Senaste kommentarerna"
 msgstr "Latest comments"
 
@@ -276,21 +275,21 @@ msgstr "on"
 msgid "liknande sidor"
 msgstr "similar pages"
 
-#: blog/templates/blog/post_detail.html:45
+#: blog/templates/blog/post_detail.html:33
 #: blog/templates/blog/post_summary.html:18
 #: blog/templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: blog/templates/blog/post_detail.html:61
+#: blog/templates/blog/post_detail.html:49
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: blog/templates/blog/post_detail.html:84
+#: blog/templates/blog/post_detail.html:72
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: blog/templates/blog/post_detail.html:87
+#: blog/templates/blog/post_detail.html:75
 #, python-format
 msgid ""
 "\n"
@@ -305,7 +304,7 @@ msgstr ""
 "that will be displayed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: blog/templates/blog/post_detail.html:102
+#: blog/templates/blog/post_detail.html:90
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
@@ -365,7 +364,7 @@ msgstr "Published"
 msgid "taggat"
 msgstr "tagged"
 
-#: blog/templates/blog/tagged.html:20
+#: blog/templates/blog/tagged.html:12
 msgid "Taggat"
 msgstr "Tagged"
 
