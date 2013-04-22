@@ -31,7 +31,7 @@ def index(request, year=None, lang=None):
         updates = updates.order_by('-time')[:10]
 
     if not lang:
-        return redirect('index', year=year, lang=choose_lang(request, {'sv', 'en'}))
+        return redirect('index', year=year, lang=choose_lang(request))
     updates = filter_by_language(updates, lang)
     if not year:
         updates = updates[:5]
@@ -41,16 +41,18 @@ def index(request, year=None, lang=None):
             'year': year,
             'head': head,
             'lang': lang,
-            'altlingos': langlinks('index', {'sv', 'en'} - {lang}, year=year),
+            'altlingos': langlinks('index', lang=lang, year=year),
             'updates': updates,
             'years': [x.year for x
                       in Post.objects.dates('posted_time', 'year')],
             })
 
-def choose_lang(request, availiable):
+def choose_lang(request, availiable=None):
     '''Choose the best language availiable based on the request meta.'''
     wanted = translation.trans_real.parse_accept_lang_header(
         request.META.get('HTTP_ACCEPT_LANGUAGE', ''))
+    if availiable is None:
+        availiable = {'sv', 'en'}
     for accept_lang, q in wanted:
         if accept_lang == '*':
             break;
@@ -105,11 +107,10 @@ def post_detail(request, year, slug, lang=None):
 
 def tagcloud(request, lang):
     if not lang:
-        return redirect('tagcloud', lang=choose_lang(request, {'sv', 'en'}))
+        return redirect('tagcloud', lang=choose_lang(request))
     translation.activate(lang)
-    altlingos = {'sv', 'en'} - {lang}
     return direct_to_template(request, 'blog/tagcloud.html', {
-            'altlingos': langlinks('tagcloud', altlingos),
+            'altlingos': langlinks('tagcloud', lang=lang),
             })
 
 def tagged(request, slug, lang=None):
@@ -120,12 +121,11 @@ def tagged(request, slug, lang=None):
         return redirect('tagged', slug=slug, lang=choose_lang(request, lingos))
     translation.activate(lang)
     posts = filter_by_language(posts, lang)
-    altlingos = {'sv', 'en'} - {lang}
     return direct_to_template(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
             'lang': lang,
-            'altlingos': langlinks('tagged', altlingos, slug=slug),
+            'altlingos': langlinks('tagged', lang=lang, slug=slug),
             })
 
 def filter_by_language(posts, lang, extra_skip=None):
@@ -138,12 +138,13 @@ def filter_by_language(posts, lang, extra_skip=None):
 
 def about(request, lang):
     translation.activate(lang)
-    altlingos = {'sv', 'en'} - {lang}
     return direct_to_template(request, 'about.html', {
-            'altlingos': langlinks('about', altlingos),
+            'altlingos': langlinks('about', lang=lang),
             })
 
-def langlinks(page, lingos, **kwargs):
+def langlinks(page, lingos=None, lang=None, **kwargs):
+    if lingos is None:
+        lingos = {'sv', 'en'} - {lang}
     return [ (l, reverse(page, kwargs=dict(lang=l, **kwargs)))
              for l in lingos
              ]
