@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 from django.shortcuts import redirect
 from django.views.generic.simple import direct_to_template
-from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view
+from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post
 from blog.feeds import UpdatesFeed, TaggedUpdatesFeed
 
 def redirect_year(request, year):
@@ -15,6 +15,8 @@ urlpatterns = patterns(
     url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$',
         post_detail, name='post_detail'),
     url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)/?$', post_detail),
+    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)(\.(?P<lang>(sv|en)))?(/|.html)$',
+        redirect_post),
     url(r'^img/(?P<slug>[a-z0-9_-]+)\.i', image_small, name='image_small'),
     url(r'^img/(?P<slug>[a-z0-9_-]+)', image_view, name='image_view'),
     
