@@ -30,10 +30,13 @@ class SimpleTest(TestCase):
         # NOTE Settings strict=False disables (all?) validation.
         # However, setting it to True gives bogus errors.
         parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("lxml"),
-                                     strict=False, namespaceHTMLElements=False)
+                                     strict=True, namespaceHTMLElements=False)
         
         try:
-            return parser.parse(response.content)
+            if response.content:
+                return parser.parse(response.content)
+            else:
+                return None
 
         except Exception:
             # NOTE Even though parser.errors is an array, it contains only first error.
