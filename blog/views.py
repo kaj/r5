@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.comments.models import Comment
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.shortcuts import get_object_or_404, get_list_or_404, redirect
 from django.utils import translation
@@ -18,53 +19,69 @@ import stat
 
 logger = getLogger(__name__)
 
-def index(request, year=None):
-    lang = _activatelang(request)
-    
+def index(request, year=None, lang=None):
     updates = Update.objects.all().select_related()
     if year:
         head = u'inlägg från %s' % year
         updates = get_list_or_404(updates \
                                       .filter(time__year=year) \
                                       .order_by('time'))
-        updates = filter_by_language(updates, lang)
     else:
         head = None
         updates = updates.order_by('-time')[:10]
-        updates = filter_by_language(updates, lang)[:5]
+
+    if not lang:
+        return redirect('index', year=year, lang=choose_lang(request))
+    updates = filter_by_language(updates, lang)
+    if not year:
+        updates = updates[:5]
+    translation.activate(lang)
     
     return direct_to_template(request, 'blog/index.html', {
+            'year': year,
             'head': head,
             'lang': lang,
+            'altlingos': langlinks('index', lang=lang, year=year),
             'updates': updates,
             'years': [x.year for x
                       in Post.objects.dates('posted_time', 'year')],
             })
 
-def post_detail(request, year, slug):
-    lang = _activatelang(request)
+def choose_lang(request, availiable=None):
+    '''Choose the best language availiable based on the request meta.'''
+    wanted = translation.trans_real.parse_accept_lang_header(
+        request.META.get('HTTP_ACCEPT_LANGUAGE', ''))
+    if availiable is None:
+        availiable = {'sv', 'en'}
+    for accept_lang, q in wanted:
+        if accept_lang == '*':
+            break;
+        normalized = accept_lang.split('-', 1)[0]
+        if normalized in availiable:
+            return normalized
+    # no match, fallback to "any" language
+    return availiable.pop()
+
+def post_detail(request, year, slug, lang=None):
+    post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
     try:
-        post = get_object_or_404(Post, 
-                                 posted_time__year=year,
-                                 slug=slug,
-                                 lang=lang)
-        altlingos = Post.objects.filter(posted_time__year=year, slug=slug) \
+        post = get_object_or_404(post_objects, lang=lang)
+        altlingos = post_objects \
             .exclude(lang=lang).values_list('lang', flat=True)
     except Http404:
         # Failed to get the requested language, try any other
-        lingos = Post.objects.filter(posted_time__year=year, slug=slug) \
-            .values_list('lang', flat=True)
+        lingos = post_objects.values_list('lang', flat=True)
         if not lingos:
             raise Http404
         
-        post = get_object_or_404(Post, 
-                                 posted_time__year=year,
-                                 slug=slug,
-                                 lang=lingos[0])
-        altlingos = lingos[1:]
-    similar = filter_by_language(post.tags.similar_objects(), post.lang,
-                                 extra_skip=post.get_absolute_url())
+        post = get_object_or_404(post_objects,
+                                 lang=choose_lang(request, lingos))
+        return redirect(post.get_absolute_url())
     
+    similar = filter_by_language(post.tags.similar_objects(), post.lang,
+                                 extra_skip=post)
+    
+    translation.activate(lang)
     message = None
     if 'c' in request.GET:
         comment = get_object_or_404(Comment, id=request.GET['c'])
@@ -82,45 +99,55 @@ def post_detail(request, year, slug):
             'post': post,
             'message': message,
             'lang': post.lang,
-            'altlingos': altlingos,
+            'altlingos': langlinks('post_detail', altlingos, 
+                                   year=year, slug=slug),
             'similar': similar,
             'next': post.get_absolute_url(),
             })
 
-def tagcloud(request):
-    _activatelang(request)
-    return direct_to_template(request, 'blog/tagcloud.html')
+def tagcloud(request, lang):
+    if not lang:
+        return redirect('tagcloud', lang=choose_lang(request))
+    translation.activate(lang)
+    return direct_to_template(request, 'blog/tagcloud.html', {
+            'altlingos': langlinks('tagcloud', lang=lang),
+            })
 
-def tagged(request, slug):
-    lang = _activatelang(request)
+def tagged(request, slug, lang=None):
     tag = get_object_or_404(Tag, slug=slug)
-    posts = filter_by_language(Post.objects.filter(tags__in=[tag]),
-                               lang)
+    posts = Post.objects.filter(tags__in=[tag])
+    if not lang:
+        lingos = get_list_or_404(posts.values_list('lang', flat=True))
+        return redirect('tagged', slug=slug, lang=choose_lang(request, lingos))
+    translation.activate(lang)
+    posts = filter_by_language(posts, lang)
     return direct_to_template(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
             'lang': lang,
+            'altlingos': langlinks('tagged', lang=lang, slug=slug),
             })
 
 def filter_by_language(posts, lang, extra_skip=None):
-    samelang = set(p.get_absolute_url() for p in posts if p.lang == lang)
+    def ref(p):
+        return "%s/%s" % (p.year, p.slug)
+    samelang = {ref(p) for p in posts if p.lang == lang}
     if extra_skip:
-        samelang.add(extra_skip)
-    return [p for p in posts
-            if p.lang == lang or p.get_absolute_url() not in samelang]
+        samelang.add(ref(extra_skip))
+    return [p for p in posts if p.lang == lang or ref(p) not in samelang]
 
-def about(request):
-    _activatelang(request)
-    return direct_to_template(request, 'about.html')
-
-def _activatelang(request):
-    lang = request.GET.get('l')
-    if lang:
-        request.session['django_language'] = lang
-    else:
-        lang = translation.get_language_from_request(request)
+def about(request, lang):
     translation.activate(lang)
-    return lang
+    return direct_to_template(request, 'about.html', {
+            'altlingos': langlinks('about', lang=lang),
+            })
+
+def langlinks(page, lingos=None, lang=None, **kwargs):
+    if lingos is None:
+        lingos = {'sv', 'en'} - {lang}
+    return [ (l, reverse(page, kwargs=dict(lang=l, **kwargs)))
+             for l in lingos
+             ]
 
 def image_small(request, slug):
     return image_view(request, slug, size=Image.ICON_MAX)
