@@ -29,6 +29,9 @@ html, body {
     float: right;
     margin-top: 0;
 }
+#lingos .icon-flag:before {
+    text-decoration: none;
+}
 #skiplinks {
     position: absolute;
 }

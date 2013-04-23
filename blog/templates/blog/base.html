@@ -59,7 +59,7 @@
 	<p id="sitename"><a href="/" rel="start">Rasmus.krats.se</a></p>
         {% if altlingos %}
         <p id="lingos">{% for l, url in altlingos %}{% language l %}
-          <a rel="alternate" hreflang="{{l}}" lang="{{l}}"
+          <a rel="alternate" hreflang="{{l}}" lang="{{l}}" class="icon-flag"
              href="{{url}}">{% trans "På svenska" context "target language" %}</a>{% if not forloop.last %}, {% endif %}
           {% endlanguage %}{% endfor %}</p>
         {% endif %}
