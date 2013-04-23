@@ -60,7 +60,7 @@ def choose_lang(request, availiable=None):
         if normalized in availiable:
             return normalized
     # no match, fallback to "any" language
-    return availiable.pop()
+    return list(availiable)[0]
 
 def post_detail(request, year, slug, lang=None):
     post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
