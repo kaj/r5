@@ -10,6 +10,7 @@ def publine(post):
     return {
         'time': post.posted_time,
         'tags': post.tags.all(),
+        'lang': post.lang
         }
 
 @register.inclusion_tag('blog/part_tagcloud.html')

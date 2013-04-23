@@ -9,17 +9,21 @@ def redirect_year(request, year):
 
 urlpatterns = patterns(
     '',
-    url(r'^$', index, name='index'),
-    url(r'^(?P<year>[0-9]{4})/$', index),
-    url(r'^(?P<year>[0-9]{4})$', redirect_year),
-    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)$', post_detail),
+    url(r'^(?P<lang>(sv|en)?)$', index, {'year': None}, name='index'),
+    url(r'^(?P<year>[0-9]{4})/(?P<lang>(sv|en)?)$', index, name='index'),
+    url(r'^(?P<year>[0-9]{4})$', redirect_year), 
+    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$',
+        post_detail, name='post_detail'),
+    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)/?$', post_detail),
     url(r'^img/(?P<slug>[a-z0-9_-]+)\.i', image_small, name='image_small'),
     url(r'^img/(?P<slug>[a-z0-9_-]+)', image_view, name='image_view'),
     
-    url(r'^tag/$', tagcloud),
-    url(r'^tag/(?P<slug>[a-z0-9-]+)$', tagged),
+    url(r'^tag/(?P<lang>(sv|en)?)$', tagcloud, name='tagcloud'),
+    url(r'^tag/(?P<slug>[a-z0-9-]+)$', tagged, name='tagged'),
+    url(r'^tag/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$', tagged, name='tagged'),
 
-    url(r'^about$', about),
+    url(r'^about$', about, {'lang': 'en'}, name='about'),
+    url(r'^om$', about, {'lang': 'sv'}, name='about'),
 
     url(r'^atom-en.xml$', UpdatesFeed('en'), name='atom-en'),
     url(r'^atom-sv.xml$', UpdatesFeed('sv'), name='atom-sv'),

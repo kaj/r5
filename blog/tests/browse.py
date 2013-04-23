@@ -18,18 +18,25 @@ class SimpleTest(TestCase):
     def setUp(self):
         self.c = Client()
     
-    def get(self, url, expected_status_code=200):
+    def get(self, url, expected_status_code=200, expected_location=''):
         response = self.c.get(url)
-        self.assertEqual((expected_status_code, 'text/html; charset=utf-8'),
-                         (response.status_code, response['Content-Type']))
+        self.assertEqual((expected_status_code, expected_location, 
+                          'text/html; charset=utf-8'),
+                         (response.status_code,
+                          response.get('Location', '') \
+                              .replace('http://testserver', ''),
+                          response['Content-Type']))
     
         # NOTE Settings strict=False disables (all?) validation.
         # However, setting it to True gives bogus errors.
         parser = html5lib.HTMLParser(tree=treebuilders.getTreeBuilder("lxml"),
-                                     strict=False, namespaceHTMLElements=False)
+                                     strict=True, namespaceHTMLElements=False)
         
         try:
-            return parser.parse(response.content)
+            if response.content:
+                return parser.parse(response.content)
+            else:
+                return None
 
         except Exception:
             # NOTE Even though parser.errors is an array, it contains only first error.
@@ -37,8 +44,12 @@ class SimpleTest(TestCase):
                       ["%s, element: %s, pos: %s" % (error, element.get('name'), pos)
                        for pos, error, element in parser.errors])
         
+    def test_base_url_redirects_to_lang(self):
+        self.get('/', expected_status_code=302,
+                 expected_location='/en')
+    
     def test_get_frontpage(self):
-        doc = self.get('/')
+        doc = self.get('/sv')
         
         self.assertEqual(['Rasmus.krats.se'],
                          select_texts(doc, 'head title'))
@@ -53,8 +64,12 @@ class SimpleTest(TestCase):
     def test_get_nonexistant_year(self):
         doc = self.get('/1971/', expected_status_code=404)
 
+    def test_tagcloud_redirects_to_lang(self):
+        self.get('/tag/', expected_status_code=302,
+                 expected_location='/tag/en')
+    
     def test_get_tagcloud(self):
-        doc = self.get('/tag/')
+        doc = self.get('/tag/sv')
         
         self.assertEqual(['Rasmus.krats.se taggmoln'],
                          select_texts(doc, 'head title'))
