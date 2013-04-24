@@ -90,6 +90,7 @@ def readfile(filename):
         p.tags.add(*tags)
     
     # Create an empty update for original posting
+    Update.objects.filter(post=p).delete()
     update, isnew = Update.objects.get_or_create(post=p, note='',
                                                  defaults={'time': date})
     if not isnew:
