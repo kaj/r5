@@ -90,6 +90,7 @@ def readfile(filename):
         p.tags.add(*tags)
     
     # Create an empty update for original posting
+    Update.objects.filter(post=p).delete()
     update, isnew = Update.objects.get_or_create(post=p, note='',
                                                  defaults={'time': date})
     if not isnew:
@@ -116,9 +117,10 @@ def readfile(filename):
     # print " ", date, slug, p.title, tags
 
     op = filename[len(settings.CONTENT_FILES_BASE)-1:-5]
-    redirect(op, p.get_absolute_url())
-    redirect(op + '.html', p.get_absolute_url())
-    if any(op.endswith(t) for t in ['index', 'sv', 'en']):
+    if op[:6] != '/%d/' % p.posted_time.year:
+        redirect(op, p.get_absolute_url())
+        redirect(op + '.html', p.get_absolute_url())
+    if any(op.endswith(t) for t in ['/index', '/sv', '/en']):
         redirect(os.path.dirname(op) + '/', p.get_absolute_url())
 
 def redirect(old_path, new_path):

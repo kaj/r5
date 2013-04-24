@@ -60,7 +60,7 @@ def choose_lang(request, availiable=None):
         if normalized in availiable:
             return normalized
     # no match, fallback to "any" language
-    return availiable.pop()
+    return list(availiable)[0]
 
 def post_detail(request, year, slug, lang=None):
     post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
@@ -104,6 +104,19 @@ def post_detail(request, year, slug, lang=None):
             'similar': similar,
             'next': post.get_absolute_url(),
             })
+
+def redirect_post(request, year, slug, lang=None):
+    post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
+    try:
+        post = get_object_or_404(post_objects, lang=lang)
+    except Http404:
+        lingos = post_objects.values_list('lang', flat=True)
+        if not lingos:
+            raise Http404
+        
+        post = get_object_or_404(post_objects,
+                                 lang=choose_lang(request, lingos))
+    return redirect(post.get_absolute_url())
 
 def tagcloud(request, lang):
     if not lang:
