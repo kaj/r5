@@ -15,7 +15,7 @@ urlpatterns = patterns(
     url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$',
         post_detail, name='post_detail'),
     url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)/?$', post_detail),
-    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)(\.(?P<lang>(sv|en)))?(/|.html)$',
+    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)([/\.](?P<lang>(sv|en)))?(/|.html|)$',
         redirect_post),
     url(r'^img/(?P<slug>[a-z0-9_-]+)\.i', image_small, name='image_small'),
     url(r'^img/(?P<slug>[a-z0-9_-]+)', image_view, name='image_view'),
