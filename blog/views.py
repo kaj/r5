@@ -162,13 +162,13 @@ def langlinks(page, lingos=None, lang=None, **kwargs):
              for l in lingos
              ]
 
-def image_small(request, slug):
-    return image_view(request, slug, size=Image.ICON_MAX)
+def image_small(request, imgid):
+    return image_view(request, imgid, size=Image.ICON_MAX)
 
-def image_view(request, slug, size=900):
-    obj = get_object_or_404(Image, ref=slug)
+def image_view(request, imgid, size=900):
+    obj = get_object_or_404(Image, ref=imgid)
     scaled_path = os.path.join(settings.SCALED_IMAGE_DIR,
-                               '%s-%s' % (slug, size))
+                               '%s-%s' % (imgid, size))
     try:
         return serve_file(request, path=scaled_path, mimetype=obj.mimetype)
     except Http404:
