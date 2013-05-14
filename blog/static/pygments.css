@@ -1,0 +1,62 @@
+pre.programlisting .hll { background-color: #ffffcc }
+pre.programlisting  { background: #f8f8f8; }
+pre.programlisting .c { color: #408080; font-style: italic } /* Comment */
+pre.programlisting .err { border: 1px solid #FF0000 } /* Error */
+pre.programlisting .k { color: #008000; font-weight: bold } /* Keyword */
+pre.programlisting .o { color: #666666 } /* Operator */
+pre.programlisting .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+pre.programlisting .cp { color: #BC7A00 } /* Comment.Preproc */
+pre.programlisting .c1 { color: #408080; font-style: italic } /* Comment.Single */
+pre.programlisting .cs { color: #408080; font-style: italic } /* Comment.Special */
+pre.programlisting .gd { color: #A00000 } /* Generic.Deleted */
+pre.programlisting .ge { font-style: italic } /* Generic.Emph */
+pre.programlisting .gr { color: #FF0000 } /* Generic.Error */
+pre.programlisting .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+pre.programlisting .gi { color: #00A000 } /* Generic.Inserted */
+pre.programlisting .go { color: #808080 } /* Generic.Output */
+pre.programlisting .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+pre.programlisting .gs { font-weight: bold } /* Generic.Strong */
+pre.programlisting .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+pre.programlisting .gt { color: #0040D0 } /* Generic.Traceback */
+pre.programlisting .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+pre.programlisting .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+pre.programlisting .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+pre.programlisting .kp { color: #008000 } /* Keyword.Pseudo */
+pre.programlisting .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+pre.programlisting .kt { color: #B00040 } /* Keyword.Type */
+pre.programlisting .m { color: #666666 } /* Literal.Number */
+pre.programlisting .s { color: #BA2121 } /* Literal.String */
+pre.programlisting .na { color: #7D9029 } /* Name.Attribute */
+pre.programlisting .nb { color: #008000 } /* Name.Builtin */
+pre.programlisting .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+pre.programlisting .no { color: #880000 } /* Name.Constant */
+pre.programlisting .nd { color: #AA22FF } /* Name.Decorator */
+pre.programlisting .ni { color: #999999; font-weight: bold } /* Name.Entity */
+pre.programlisting .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+pre.programlisting .nf { color: #0000FF } /* Name.Function */
+pre.programlisting .nl { color: #A0A000 } /* Name.Label */
+pre.programlisting .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+pre.programlisting .nt { color: #008000; font-weight: bold } /* Name.Tag */
+pre.programlisting .nv { color: #19177C } /* Name.Variable */
+pre.programlisting .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+pre.programlisting .w { color: #bbbbbb } /* Text.Whitespace */
+pre.programlisting .mf { color: #666666 } /* Literal.Number.Float */
+pre.programlisting .mh { color: #666666 } /* Literal.Number.Hex */
+pre.programlisting .mi { color: #666666 } /* Literal.Number.Integer */
+pre.programlisting .mo { color: #666666 } /* Literal.Number.Oct */
+pre.programlisting .sb { color: #BA2121 } /* Literal.String.Backtick */
+pre.programlisting .sc { color: #BA2121 } /* Literal.String.Char */
+pre.programlisting .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+pre.programlisting .s2 { color: #BA2121 } /* Literal.String.Double */
+pre.programlisting .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+pre.programlisting .sh { color: #BA2121 } /* Literal.String.Heredoc */
+pre.programlisting .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+pre.programlisting .sx { color: #008000 } /* Literal.String.Other */
+pre.programlisting .sr { color: #BB6688 } /* Literal.String.Regex */
+pre.programlisting .s1 { color: #BA2121 } /* Literal.String.Single */
+pre.programlisting .ss { color: #19177C } /* Literal.String.Symbol */
+pre.programlisting .bp { color: #008000 } /* Name.Builtin.Pseudo */
+pre.programlisting .vc { color: #19177C } /* Name.Variable.Class */
+pre.programlisting .vg { color: #19177C } /* Name.Variable.Global */
+pre.programlisting .vi { color: #19177C } /* Name.Variable.Instance */
+pre.programlisting .il { color: #666666 } /* Literal.Number.Integer.Long */
