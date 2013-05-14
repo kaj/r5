@@ -1,37 +1,56 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, url as django_url
 from django.shortcuts import redirect
 from django.views.generic.simple import direct_to_template
 from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post
 from blog.feeds import UpdatesFeed, TaggedUpdatesFeed
+import re
 
 def redirect_year(request, year):
     return redirect('/%s/' % year)
 
+class UrlShortcut:
+    def __init__(self):
+        self.bound = {}
+        self.default = r'[a-z0-9-]+'
+        
+    def bind(self, name, pattern):
+        self.bound[name] = pattern
+        
+    def __call__(self, pattern, *args, **kwargs):
+        def djangify(m):
+            p = m.group(1)
+            return r'(?P<%s>%s)' % (p, self.bound.get(p, self.default))
+        return django_url(re.sub(r'<(\w+)>', djangify, pattern),
+                          *args, **kwargs)
+
+url = UrlShortcut()
+url.bind('year', '[0-9]{4}')
+url.bind('lang', '(sv|en)')
+url.bind('imgid', '[a-z0-9_-]+')
+
 urlpatterns = patterns(
     '',
-    url(r'^(?P<lang>(sv|en)?)$', index, {'year': None}, name='index'),
-    url(r'^(?P<year>[0-9]{4})/(?P<lang>(sv|en)?)$', index, name='index'),
-    url(r'^(?P<year>[0-9]{4})$', redirect_year), 
-    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$',
-        post_detail, name='post_detail'),
-    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)/?$', post_detail),
-    url(r'^(?P<year>[0-9]{4})/(?P<slug>[a-z0-9-]+)(\.(?P<lang>(sv|en)))?(/|.html)$',
-        redirect_post),
-    url(r'^img/(?P<slug>[a-z0-9_-]+)\.i', image_small, name='image_small'),
-    url(r'^img/(?P<slug>[a-z0-9_-]+)', image_view, name='image_view'),
+    url(r'^<lang>?$', index, {'year': None}, name='index'),
+    url(r'^<year>/<lang>?$', index, name='index'),
+    url(r'^<year>$', redirect_year), 
+    url(r'^<year>/<slug>\.<lang>$', post_detail, name='post_detail'),
+    url(r'^<year>/<slug>/?$',       post_detail),
+    url(r'^<year>/<slug>([/\.]<lang>)?(/|.html|)$', redirect_post),
+    url(r'^img/<imgid>\.i', image_small, name='image_small'),
+    url(r'^img/<imgid>', image_view, name='image_view'),
     
-    url(r'^tag/(?P<lang>(sv|en)?)$', tagcloud, name='tagcloud'),
-    url(r'^tag/(?P<slug>[a-z0-9-]+)$', tagged, name='tagged'),
-    url(r'^tag/(?P<slug>[a-z0-9-]+)\.(?P<lang>(sv|en))$', tagged, name='tagged'),
+    url(r'^tag/<lang>?$', tagcloud, name='tagcloud'),
+    url(r'^tag/<slug>$', tagged, name='tagged'),
+    url(r'^tag/<slug>\.<lang>$', tagged, name='tagged'),
 
     url(r'^about$', about, {'lang': 'en'}, name='about'),
     url(r'^om$', about, {'lang': 'sv'}, name='about'),
 
     url(r'^atom-en.xml$', UpdatesFeed('en'), name='atom-en'),
     url(r'^atom-sv.xml$', UpdatesFeed('sv'), name='atom-sv'),
-    url(r'^atom-en-(?P<tag>[a-z0-9-]+).xml$', TaggedUpdatesFeed('en'),
+    url(r'^atom-en-<tag>.xml$', TaggedUpdatesFeed('en'),
         name='atom-tag-en'),
-    url(r'^atom-sv-(?P<tag>[a-z0-9-]+).xml$', TaggedUpdatesFeed('sv'),
+    url(r'^atom-sv-<tag>.xml$', TaggedUpdatesFeed('sv'),
         name='atom-tag-sv'),
 
     url(r'^robots\.txt$', direct_to_template, 
