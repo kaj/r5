@@ -4,11 +4,11 @@ from django.conf import settings
 from django.contrib.comments.models import Comment
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse, HttpResponseNotModified
-from django.shortcuts import get_object_or_404, get_list_or_404, redirect
+from django.shortcuts import get_object_or_404, get_list_or_404, \
+    redirect, render
 from django.utils import translation
 from django.utils.http import http_date
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic.simple import direct_to_template
 from django.views.static import was_modified_since
 from logging import getLogger
 from taggit.models import Tag
@@ -37,7 +37,7 @@ def index(request, year=None, lang=None):
         updates = updates[:5]
     translation.activate(lang)
     
-    return direct_to_template(request, 'blog/index.html', {
+    return render(request, 'blog/index.html', {
             'year': year,
             'head': head,
             'lang': lang,
@@ -95,7 +95,7 @@ def post_detail(request, year, slug, lang=None):
         else:
             return redirect('%s#c%d' % (post.get_absolute_url(), comment.id))
         
-    return direct_to_template(request, 'blog/post_detail.html', {
+    return render(request, 'blog/post_detail.html', {
             'post': post,
             'message': message,
             'lang': post.lang,
@@ -122,7 +122,7 @@ def tagcloud(request, lang):
     if not lang:
         return redirect('tagcloud', lang=choose_lang(request))
     translation.activate(lang)
-    return direct_to_template(request, 'blog/tagcloud.html', {
+    return render(request, 'blog/tagcloud.html', {
             'altlingos': langlinks('tagcloud', lang=lang),
             })
 
@@ -134,7 +134,7 @@ def tagged(request, slug, lang=None):
         return redirect('tagged', slug=slug, lang=choose_lang(request, lingos))
     translation.activate(lang)
     posts = filter_by_language(posts, lang)
-    return direct_to_template(request, 'blog/tagged.html', {
+    return render(request, 'blog/tagged.html', {
             'tag': tag,
             'posts': posts,
             'lang': lang,
@@ -151,7 +151,7 @@ def filter_by_language(posts, lang, extra_skip=None):
 
 def about(request, lang):
     translation.activate(lang)
-    return direct_to_template(request, 'about.html', {
+    return render(request, 'about.html', {
             'altlingos': langlinks('about', lang=lang),
             })
 
