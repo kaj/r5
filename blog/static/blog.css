@@ -393,12 +393,10 @@ dl dd {
 }
 
 :target {
-    margin-left: -.4em;
-    padding-left: .3em;
-    border-left: .1em solid red;
-    -webkit-border-radius: .3em 0 0 .3em;
-    -moz-border-radius: .3em 0 0 .3em;
-    border-radius: .3em 0 0 .3em;
+    padding-left: .5em;
+    border-radius: .4em 1em 0 0;
+    background: -webkit-linear-gradient(176deg, rgba(255,0,99,0.4), rgba(255,0,0,0) 3em);
+    background: linear-gradient(176deg, rgba(255,0,99,0.4), rgba(255,0,0,0) 3em);
 }
 :link:hover, :visited:hover {
     text-decoration: underline;
