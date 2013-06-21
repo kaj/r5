@@ -463,22 +463,9 @@ dl dd {
 #main .LTitem a {
     text-decoration: none;
 }
-/* Override some stuff from jquery.tweet */
-.sideblock .tweet_list {
-    margin: 0;
+.sideblock#tweetbox {
     padding: 0;
-    background: transparent;
 }
-.sideblock .tweet_list li {
-    border-top: solid 1px #aaa;
-    overflow: hidden;
-    padding: 1ex 0;
-    background: transparent;
-}
-.sideblock .tweet_list li:last-child {
-    padding-bottom: 0;
-}
-
 li[class^="icon-"],
 li[class*=" icon-"] {
     list-style-type: none;
