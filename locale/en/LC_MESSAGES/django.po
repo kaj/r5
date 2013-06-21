@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-21 22:19+0200\n"
+"POT-Creation-Date: 2013-06-21 15:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -31,20 +31,20 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: blog/views.py:89
+#: blog/views.py:91
 msgid "Din kommentar är borttagen."
 msgstr "Your comment is removed."
 
-#: blog/views.py:92
+#: blog/views.py:94
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
-#: blog/views.py:184
+#: blog/views.py:188
 #, python-format
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-#: blog/templates/404.html:15 blog/templates/blog/base.html:66
+#: blog/templates/404.html:15 blog/templates/blog/base.html:67
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
@@ -220,32 +220,32 @@ msgstr ""
 msgid "taggmoln"
 msgstr "tag cloud"
 
-#: blog/templates/blog/base.html:63
+#: blog/templates/blog/base.html:64
 msgctxt "target language"
 msgid "På svenska"
 msgstr "In English"
 
-#: blog/templates/blog/base.html:67
+#: blog/templates/blog/base.html:68
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: blog/templates/blog/base.html:69
+#: blog/templates/blog/base.html:70
 msgid "innehåll"
 msgstr "content"
 
-#: blog/templates/blog/base.html:72
+#: blog/templates/blog/base.html:73
 msgid "mina länkar"
 msgstr "my links"
 
-#: blog/templates/blog/base.html:93
+#: blog/templates/blog/base.html:94
 msgid "Om"
 msgstr "About"
 
-#: blog/templates/blog/base.html:99
+#: blog/templates/blog/base.html:100
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: blog/templates/blog/base.html:115
+#: blog/templates/blog/base.html:116
 #, python-format
 msgid ""
 "\n"
@@ -258,6 +258,16 @@ msgstr ""
 "          %(a)sCreative Commons Attribution 3.0 Unported License%(sa)s.\n"
 "          "
 
+#: blog/templates/blog/base.html:120
+msgid ""
+"\n"
+"\t  Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
+"\t  "
+msgstr ""
+"\n"
+"\t  This site <a href=\"/about#cookie\">uses cookies</a>.\n"
+"\t  "
+
 #: blog/templates/blog/index.html:34
 msgid "senaste kommentarerna"
 msgstr "latest comments"
@@ -266,7 +276,7 @@ msgstr "latest comments"
 msgid "Senaste kommentarerna"
 msgstr "Latest comments"
 
-#: blog/templates/blog/part_latestcomments.html:10
+#: blog/templates/blog/part_latestcomments.html:9
 #: blog/templates/blog/tagged.html:3
 msgid "på"
 msgstr "on"
