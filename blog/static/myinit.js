@@ -8,20 +8,11 @@ function initSkiplinks(selector) {
 }
 function initMyTweetbox() {
     $('#sideblockwrap').append(
-        '<div class="sideblock" id="tweetbox"><h2>My tweets</h2></div>');
+        '<div class="sideblock" id="tweetbox">'+
+	    '<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/rasmus_kaj"  data-widget-id="348079144619356161">Tweets by @rasmus_kaj</a>'+
+	    '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?\'http\':\'https\';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>');
     $('#skiplinks ul').append('<li><a href="#tweetbox">my tweets</a></li>');
     initSkiplinks($('#skiplinks a[href=#tweetbox]'));
-    $('#tweetbox').tweet({
-        username: "rasmus_kaj",
-        join_text: "auto",
-        avatar_size: 0,
-        count: 5,
-        auto_join_text_default: ":",
-        auto_join_text_ed: "I",
-        auto_join_text_ing: "I were",
-        auto_join_text_reply: "I replied to",
-        auto_join_text_url: ":"
-    });
 }
 function initMyLibthing() {
     $('#sideblockwrap').append(
