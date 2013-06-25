@@ -1,6 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
-from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -25,10 +24,11 @@ urlpatterns = patterns(
 )
 
 if settings.DEBUG:
+    from django.views.generic.base import TemplateView
     urlpatterns += patterns(
         '',
-        # url('500', direct_to_template, {'template': '500.html'}),
-        url('404', direct_to_template, {'template': '404.html'}),
+        # url('500', TemplateView.as_view(template_name='500.html')),
+        url('404', TemplateView.as_view(template_name='404.html')),
     )
 
 # And even laster:

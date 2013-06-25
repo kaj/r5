@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.views.generic.simple import direct_to_template
+from django.shortcuts import render
 from bson.code import Code
 from math import log, exp
 from datetime import datetime, timedelta
@@ -102,7 +102,7 @@ def index(request):
                              in get_ranges(0.999*lowest, 1.001*highest, n=7) ]
                  }
     
-    return direct_to_template(request, 'dma/index.html', {
+    return render(request, 'dma/index.html', {
             'user': request.user,
             'results': [ by_time('By hour', timedelta(hours=1)),
                          by_time('By day', timedelta(days=1)),

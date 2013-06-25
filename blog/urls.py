@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, url as django_url
 from django.shortcuts import redirect
-from django.views.generic.simple import direct_to_template
+from django.views.generic.base import TemplateView
 from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post
 from blog.feeds import UpdatesFeed, TaggedUpdatesFeed
 import re
@@ -53,6 +53,6 @@ urlpatterns = patterns(
     url(r'^atom-sv-<tag>.xml$', TaggedUpdatesFeed('sv'),
         name='atom-tag-sv'),
 
-    url(r'^robots\.txt$', direct_to_template, 
-        {'template': 'robots.txt', 'mimetype': 'text/plain'}),
+    url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
+                                               content_type='text/plain')),
 )
