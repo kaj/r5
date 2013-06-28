@@ -106,7 +106,6 @@ TEMPLATE_LOADERS = (
 MIDDLEWARE_CLASSES = (
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
     'django_statsd.middleware.GraphiteMiddleware',
-    'dmanalytics.middleware.DMAnalyticsMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -126,7 +125,6 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'blog',
-    'dmanalytics',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -197,5 +195,4 @@ SCALED_IMAGE_DIR = 'cache/image'
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
-    MIDDLEWARE_CLASSES = (m for m in MIDDLEWARE_CLASSES if m != 'dmanalytics.middleware.DMAnalyticsMiddleware')
 
