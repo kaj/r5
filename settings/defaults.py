@@ -104,6 +104,8 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
     'dmanalytics.middleware.DMAnalyticsMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -133,6 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'django.contrib.comments',
+    'django_statsd',
     'r5comments',
     'taggit',
     'compressor',
@@ -143,6 +146,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+STATSD_PREFIX='web.rasmus_krats_se'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
