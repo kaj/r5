@@ -104,7 +104,8 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'dmanalytics.middleware.DMAnalyticsMiddleware',
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -124,7 +125,6 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'blog',
-    'dmanalytics',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'django.contrib.comments',
+    'django_statsd',
     'r5comments',
     'taggit',
     'compressor',
@@ -143,6 +144,8 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+STATSD_PREFIX='web.rasmus_krats_se'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -192,5 +195,4 @@ SCALED_IMAGE_DIR = 'cache/image'
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
-    MIDDLEWARE_CLASSES = (m for m in MIDDLEWARE_CLASSES if m != 'dmanalytics.middleware.DMAnalyticsMiddleware')
 

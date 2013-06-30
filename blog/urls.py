@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url as django_url
+from django.conf.urls import patterns, url as django_url
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post

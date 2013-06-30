@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
@@ -17,7 +17,6 @@ urlpatterns = patterns(
     (r'^i18n/', include('django.conf.urls.i18n')),
 
     url(r'^comments/', include('django.contrib.comments.urls')),
-    url(r'^dma/', include('dmanalytics.urls')),
     
     # The blog app handles most urls.  Must be last.
     url(r'^', include('blog.urls')),
