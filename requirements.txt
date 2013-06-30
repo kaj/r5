@@ -18,5 +18,8 @@ Pygments
 html5lib
 BeautifulSoup
 
+# For testing
+cssselect
+
 # Collect statistics in a nice way
 django-statsd-mozilla
