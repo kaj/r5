@@ -59,19 +59,6 @@ html, body {
 #header {
     position: relative;
 }
-#selectlang {
-    position: absolute;
-    top: 0; right: 1.43ex;
-    font-size: 70%;
-}
-#selectlang button {
-    background: #454229;
-    background: rgba(0,0,0,.4);
-    color: #eeeeee;
-    border: solid 1px rgba(255,255,255,.4);
-    -webkit-border-radius: .6em;
-    border-radius: .6em;
-}
 
 #headerwrap header, #mainwrap, #footer {
     margin: auto;
@@ -520,7 +507,7 @@ li[class*=" icon-"]:before {
 	float: none;
 	width: auto;
     }
-    #sideblockwrap, #writecomment, #selectlang, #skiplinks {
+    #sideblockwrap, #writecomment, #skiplinks {
 	display: none;
     }
     #headerwrap, header, #mainwrap, #footerwrap {
