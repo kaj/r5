@@ -31,23 +31,23 @@
 
 {% block lastskiplinks %}
   <li><a href="#tagcloud">{% trans "taggmoln" %}</a></li>
-  <li><a href="#lastcomments">{% trans "senaste kommentarerna" %}</a></li>
+  <li><a href="#latestcomments">{% trans "senaste kommentarerna" %}</a></li>
 {% endblock %}
 
 {% block sideblockbottom %}
-  <div class="sideblock" id="tagcloud">
-    <h2>{% trans "Taggmoln" %}</h2>
+  <aside id="tagcloud">
+    <h1>{% trans "Taggmoln" %}</h1>
     {% cache 7200 tagcloud %}
       {% tagcloud %}
     {% endcache %}
-  </div>
+  </aside>
   
   {% if not head %}
-  <div class="sideblock lastcomments" id="lastcomments">
+  <aside id="latestcomments">
     {% cache 900 lastcomments LANGUAGE_CODE %}
-      <h2>{% trans "Senaste kommentarerna" %}</h2>
+      <h1>{% trans "Senaste kommentarerna" %}</h1>
       {% latestcomments %}
     {% endcache %}
-  </div>
+  </aside>
   {% endif %}
 {% endblock %}

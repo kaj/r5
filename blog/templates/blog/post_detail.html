@@ -86,13 +86,13 @@
 {% endblock %}
 
 {% block sideblocktop %}
-  <div class="sideblock" id="similar">
-    <h2>{% trans "Liknande sidor" %}</h2>
+  <aside id="similar">
+    <h1>{% trans "Liknande sidor" %}</h1>
     <ul>
       {% for p in similar %}
       <li><a href="{{p.get_absolute_url}}" lang="{{p.lang}}">
 	  {{p.title|safe}}</a></li>
       {% endfor %}
     </ul>
-  </div>
+  </aside>
 {% endblock %}

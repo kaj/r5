@@ -5,6 +5,7 @@
     <title>404: Not on Rasmus.krats.se</title>
     <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="/static/blog.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/iconfont/css/font-kaj-20121124.css" type="text/css"/>
     <link rel="shortcut icon" href="/static/trafik-kaj-s.png" />
     <link rel="apple-touch-icon" href="/static/trafik-kaj.png" />
   </head>
@@ -33,27 +34,27 @@
 	</div>
       </main>
       
-      <div class="sideblockwrap">
-	<div class="sideblock">
-	  <h2>Rasmus Kaj</h2>
+      <div id="sideblockwrap">
+	<aside id="mylinks">
+	  <h1>Rasmus Kaj</h1>
 	  <ul>
-	    <li><a href="/">Rasmus.krats.se</a></li>
-	    <li><a href="http://www.kth.se/social/home/u1famwov/">@ KTH</a></li>
-	    <li><a href="http://github.com/kaj">@ Github</a></li>
-	    <li><a href="http://twitter.com/rasmus_kaj">@ Twitter</a></li>
-	    <li><a href="http://www.librarything.com/profile/kaj">@ LibraryThing</a></li>
+	    <li class="icon-user"><a href="/">Rasmus.krats.se</a></li>
+	    <li class="icon-leaf"><a href="http://www.kth.se/social/home/u1famwov/">@ KTH</a></li>
+	    <li class="icon-github"><a href="http://github.com/kaj">@ Github</a></li>
+	    <li class="icon-twitter"><a href="http://twitter.com/rasmus_kaj">@ Twitter</a></li>
+	    <li class="icon-book"><a href="http://www.librarything.com/profile/kaj">@ LibraryThing</a></li>
 	  </ul>
-          <h3>Övrigt</h3>
+          <h2>Övrigt</h2>
           <ul>
-            <li><a href="http://krats.se/">krats.se</a></li>
-            <li><a href="http://fantomenindex.krats.se/">Fantomenindex</a></li>
-            <li><a href="http://www.albumforlaget.se/">Albumförlaget</a></li>
+            <li class="icon-link-ext"><a href="http://krats.se/">krats.se</a></li>
+            <li class="icon-link-ext"><a href="http://fantomenindex.krats.se/">Fantomenindex</a></li>
+            <li class="icon-link-ext"><a href="http://www.albumforlaget.se/">Albumförlaget</a></li>
           </ul>
-	</div>
-	<div class="sideblock">
-	  <h2>{% trans "Taggmoln" %}</h2>
+	</aside>
+	<aside id="tagcloud">
+	  <h1>{% trans "Taggmoln" %}</h1>
 	  {% tagcloud %}
-	</div>
+	</aside>
       </div>
     </div>
   </body>

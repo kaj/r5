@@ -99,11 +99,11 @@ main {
     margin: 1em 0;
     padding: 0;
 }
-.sideblockwrap {
+#sideblockwrap {
     width: 31.83%;
     float: right;
 }
-.sideblock {
+#sideblockwrap aside {
     font-size: 90%;
     margin: 1em 0;
     padding: 1ex;
@@ -115,11 +115,15 @@ main {
     -webkit-border-radius: .5em;
     border-radius: .5em;
 }
-.sideblock ul { margin: .5ex 0; padding: 0 0 0 1.7em; }
+aside ul { margin: .5ex 0; padding: 0 0 0 1.7em; }
 #mylinks ul { padding-left: .7em; }
-.sideblock h2 { margin: 0 0 1ex 0; }
-.sideblock h3 { margin: 1ex 0 0 0; }
-.sideblock .tagcloud { font-size: 95%; }
+aside h1 { margin: 0 0 1ex 0; font-size: 140%; }
+aside h2 { margin: 1ex 0 0 0; font-size: 120%; }
+aside h1, aside h2 {
+    font-family: serif;
+    font-weight: bold;
+}
+aside .tagcloud { font-size: 95%; }
 
 article {
     margin: 1ex 0 1em;
@@ -189,7 +193,7 @@ main header p {
     margin: 0;
 }
 
-aside, .sidebar {
+main aside, .sidebar {
     float: right;
     clear: right;
     max-width: 45%;
@@ -372,7 +376,7 @@ dl dd {
 #writecomment p.submit input {
     width: auto;
 }
-.lastcomments p {
+#latestcomments p {
     font-size: 90%;
     border-top: solid 1px #aaa;
     overflow: hidden;
@@ -380,11 +384,11 @@ dl dd {
     margin: 0;
     background: transparent;
 }
-.lastcomments p:last-child {
+#latestcomments p:last-child {
     padding-bottom: 0;
 }
-.lastcomments :link,
-.lastcomments :visited {
+#latestcomments :link,
+#latestcomments :visited {
     text-decoration: none;
 }
 
@@ -459,7 +463,7 @@ main .LTitem .LTtitle {
 main .LTitem a {
     text-decoration: none;
 }
-.sideblock#tweetbox {
+aside#tweetbox {
     padding: 0;
 }
 li[class^="icon-"],
@@ -476,7 +480,7 @@ li[class*=" icon-"]:before {
 
 
 @media screen and (max-width: 34.999em) {
-    main, .sideblockwrap {
+    main, #sideblockwrap {
 	clear: left;
 	float: none;
 	width: auto;
@@ -516,7 +520,7 @@ li[class*=" icon-"]:before {
 	float: none;
 	width: auto;
     }
-    .sideblockwrap, #writecomment, #selectlang, #skiplinks {
+    #sideblockwrap, #writecomment, #selectlang, #skiplinks {
 	display: none;
     }
     #headerwrap, header, #mainwrap, #footerwrap {
