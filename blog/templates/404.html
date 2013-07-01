@@ -1,5 +1,5 @@
 <!doctype html>
-{% load i18n blogtags %}
+{% load cache i18n blogtags %}
 <html>
   <head>
     <title>404: Not on Rasmus.krats.se</title>
@@ -52,8 +52,7 @@
           </ul>
 	</aside>
 	<aside id="tagcloud">
-	  <h1>{% trans "Taggmoln" %}</h1>
-	  {% tagcloud %}
+	  {% cache 14400 tagcloud LANGUAGE_CODE %}{% tagcloud %}{% endcache %}
 	</aside>
       </div>
     </div>

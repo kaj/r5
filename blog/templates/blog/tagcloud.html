@@ -1,10 +1,8 @@
 {% extends "blog/base.html" %}
-{% load i18n blogtags %}
+{% load cache i18n blogtags %}
 
 {% block title %}Rasmus.krats.se {% trans "taggmoln" %}{% endblock %}
 
 {% block main %}
-    <h1>{% trans "Taggmoln" %}</h1>
-
-    {% tagcloud %}
+    {% cache 14400 tagcloud LANGUAGE_CODE %}{% tagcloud %}{% endcache %}
 {% endblock %}

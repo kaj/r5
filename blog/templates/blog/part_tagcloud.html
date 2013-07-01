@@ -1,4 +1,5 @@
 {% load i18n %}{% get_current_language as lang %}
+<h1>{% trans "Taggmoln" %}</h1>
 <ul class="tagcloud">
   {% for tag in tags %}{% spaceless %}
   <li class="n{{tag.n}} w{{tag.w}}">
