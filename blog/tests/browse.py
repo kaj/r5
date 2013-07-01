@@ -54,8 +54,7 @@ class SimpleTest(TestCase):
         self.assertEqual(['Rasmus.krats.se'],
                          select_texts(doc, 'head title'))
         self.assertEqual(['Rasmus.krats.se'],
-                         # TODO More semantic markup!
-                         select_texts(doc, '#header #sitename'))
+                         select_texts(doc, 'header #sitename'))
         # TODO Have actual content in the test db and test for that.
 
     def test_get_nonexistant_page(self):
@@ -74,11 +73,9 @@ class SimpleTest(TestCase):
         self.assertEqual(['Rasmus.krats.se taggmoln'],
                          select_texts(doc, 'head title'))
         self.assertEqual(['Rasmus.krats.se'],
-                         # TODO More semantic markup!
-                         select_texts(doc, '#header #sitename'))
+                         select_texts(doc, 'header #sitename'))
         self.assertEqual(['Taggmoln'],
-                         # TODO More semantic markup!
-                         select_texts(doc, 'h1'))
+                         select_texts(doc, 'main h1'))
         # TODO Have actual content in the test db and test for that.
 
     def test_get_nonexistant_tag(self):

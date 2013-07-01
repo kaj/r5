@@ -54,7 +54,7 @@
   </head>
   <body>
     <div id="headerwrap">
-      <div id="header">
+      <header>
 	<p id="sitename"><a href="/" rel="start">Rasmus.krats.se</a></p>
         {% if altlingos %}
         <p id="lingos">{% for l, url in altlingos %}{% language l %}
@@ -73,16 +73,16 @@
 	    {% endblock %}
 	  </ul>
 	</div></div>
-      </div>
+      </header>
     </div>
     <div id="mainwrap">
-      <div id="main">
+      <main>
 	{% block main %}
 	<h1>{{post.title|safe}}</h1>
 	<div class="abstract">{{post.abstract|safe}}</div>
 	<div class="content">{{post.content|safe}}</div>
 	{% endblock %}
-      </div>
+      </main>
       
       <div class="sideblockwrap" id="sideblockwrap">
 	{% block sideblocktop %}{% endblock %}
