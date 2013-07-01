@@ -70,7 +70,6 @@ html, body {
     color: #eeeeee;
     border: solid 1px rgba(255,255,255,.4);
     -webkit-border-radius: .6em;
-    -moz-border-radius: .6em;
     border-radius: .6em;
 }
 
@@ -112,10 +111,8 @@ main {
     color: black;
     border: solid 1px #888888;
     -webkit-box-shadow: .2em .3em .8em #aaaaaa;
-    -moz-box-shadow: .2em .3em .8em #aaaaaa;
     box-shadow: .2em .3em .8em #aaaaaa;
     -webkit-border-radius: .5em;
-    -moz-border-radius: .5em;
     border-radius: .5em;
 }
 .sideblock ul { margin: .5ex 0; padding: 0 0 0 1.7em; }
@@ -295,7 +292,6 @@ blockquote { max-width: 34em; margin: 1ex 1em 1em; padding: 1ex 1em;
   background: #fafafa; color: #222222;
   border: solid 1px #aaaaaa;
   -webkit-box-shadow: .3em .2em .5em #aaaaaa;
-  -moz-box-shadow: .3em .2em .5em #aaaaaa;
   box-shadow: .3em .2em .5em #cccccc;
 }
 blockquote > *:first-child { margin-top: 0; padding-top: 0; }
