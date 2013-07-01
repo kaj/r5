@@ -101,8 +101,6 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
-    'django_statsd.middleware.GraphiteMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -130,7 +128,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'django.contrib.comments',
-    'django_statsd',
     'r5comments',
     'taggit',
     'compressor',
@@ -142,7 +139,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-STATSD_PREFIX='web.rasmus_krats_se'
+# Override with 'web.url_domain' in local.py to enable django_statsd
+STATSD_PREFIX = None
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
