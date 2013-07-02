@@ -518,9 +518,7 @@ li[class*=" icon-"]:before {
     header.site > div {
 	border-bottom: solid 1px #454229;
     }
-    
-    header.site :link, header.site :visited,
-    .publine :link, .publine :visited,
+    header :link, header :visited,
     address :link, address :visited,
     footer :link, footer :visited {
 	color: inherit;
