@@ -132,10 +132,7 @@
 {% endblock %}
 
 {% block sideblockbottom %}
-  <div class="sideblock" id="tagcloud">
-    <h2>{% trans "Taggmoln" %}</h2>
-    {% cache 7200 tagcloud %}
-      {% tagcloud %}
-    {% endcache %}
-  </div>
+  <aside id="tagcloud">
+    {% cache 14400 tagcloud LANGUAGE_CODE %}{% tagcloud %}{% endcache %}
+  </aside>
 {% endblock %}

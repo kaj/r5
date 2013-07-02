@@ -93,9 +93,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'u8h6mp(%7w(+awrdo!meawf-qc=r5ldh*2e0@ak+-tpda4c&ka'
-
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -104,8 +101,6 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
-    'django_statsd.middleware.GraphiteMiddleware',
 #    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -133,7 +128,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.redirects',
     'django.contrib.comments',
-    'django_statsd',
     'r5comments',
     'taggit',
     'compressor',
@@ -145,7 +139,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-STATSD_PREFIX='web.rasmus_krats_se'
+# Override with 'web.url_domain' in local.py to enable django_statsd
+STATSD_PREFIX = None
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -155,9 +150,15 @@ STATSD_PREFIX='web.rasmus_krats_se'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+            }
+        },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
+            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },

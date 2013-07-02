@@ -4,6 +4,6 @@ but not a "complete" "css reset", which I still think is a bad idea.
 */
 
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header, hgroup, main, menu, nav, section {
     display: block;
 }
