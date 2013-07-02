@@ -503,7 +503,7 @@ li[class*=" icon-"]:before {
 	float: none;
 	width: auto;
     }
-    #sideblockwrap, #writecomment, #skiplinks {
+    #sideblockwrap, #writecomment, #lingos, #skiplinks {
 	display: none;
     }
     header.site, #mainwrap, footer {
