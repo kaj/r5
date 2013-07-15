@@ -7,7 +7,7 @@
 	{{comment.name}},
 	<time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
 	{% trans "på" %} <i>{{post.title}}</i></a>:
-      {{comment.comment|truncatewords:60}}
+      {{comment.comment|truncatewords:25}}
     </p>
   {% endwith %}
 {% endfor %}
