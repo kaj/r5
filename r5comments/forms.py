@@ -9,8 +9,9 @@ class CommentFormAvoidingSpam(CommentForm):
                  'escorts?', 'finance', 'forex'
                  'infoxesee', 'insurance', 'loans?', 'luggisintedge',
                  'movie', 'offinafag',
-                 'ordillaoffips', 'pay ?day', 'praikicky', 'pyncpelay',
-                 'sex', 'sexchat', 'viagra', 'video')
+                 'ordillaoffips', 'pay ?day', 'poker',
+                 'praikicky', 'pyncpelay',
+                 'sex', 'sexchat', r'tripod\.co\.uk', 'viagra', 'video')
 
     def clean_name(self):
         #super(CommentFormAvoidingSpam, self).clean_name()
