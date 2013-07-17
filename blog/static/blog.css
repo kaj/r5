@@ -455,9 +455,8 @@ li[class*=" icon-"]:before {
 }
 
 p.postyears {
-    margin-top: 4em;
     border-top: solid 1px #454229;
-    margin-left: 1.4em;
+    margin: 4em auto 2em 1.4em;
     padding-top: .3em;
 }
 p.postyears:before {
