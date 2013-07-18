@@ -3,8 +3,8 @@
 {% publine obj.post %}
 
 {% if obj.post.abstract %}
-  {{obj.post.frontimage|safe}}
-  <div class="abstract">{{obj.post.abstract|safe}}</div>
+  {{obj.post.frontimage_output}}
+  <div class="abstract">{{obj.post.abstract_output}}</div>
 {% endif %}
 {% if obj.note %}
   <div class="update">
@@ -22,5 +22,5 @@
     </a>
   </p>
 {% else %}
-  <div>{{obj.post.content|safe}}</div>
+  <div>{{obj.post.content_output}}</div>
 {% endif %}
