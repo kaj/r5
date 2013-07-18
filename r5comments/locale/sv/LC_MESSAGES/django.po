@@ -1,0 +1,32 @@
+# Swedish translations for r5comments
+# Copyright (C) 2013 Rasmus Kaj
+# This file is distributed under the same license as the r5comments package.
+# Rasmus Kaj <rasmus@krats.se>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-15 22:36+0200\n"
+"PO-Revision-Date: 2013-07-15 22:36+0200\n"
+"Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
+"Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
+"Language: sv \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: forms.py:21
+#, python-format
+msgid "\"%s\" looks like spam, sorry."
+msgstr "\"%s\" ser ut som spam.  Beklagar."
+
+#: forms.py:32
+msgid "Please use an unshortened url."
+msgstr "Använd en oförkortad url."
+
+#: forms.py:38
+#, python-format
+msgid "\"%s\" is used in spam, sorry."
+msgstr "\"%s\" förekommer i spam.  Beklagar."

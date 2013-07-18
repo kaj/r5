@@ -24,7 +24,7 @@
         {% updatesummary update %}
     {% endfor %}
 
-    <p>Övriga inlägg från
+    <p class="postyears">Övriga inlägg från
       {% for y in years %}
       <a href="{% url 'index' year=y lang=lang%}">{{y}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}.</p>
 {% endblock %}

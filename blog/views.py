@@ -19,7 +19,7 @@ import stat
 
 logger = getLogger(__name__)
 
-def index(request, year=None, lang=None):
+def index(request, year=None, lang=None, nUpdates=6):
     updates = Update.objects.all().select_related()
     if year:
         head = u'inlägg från %s' % year
@@ -28,13 +28,13 @@ def index(request, year=None, lang=None):
                                       .order_by('time'))
     else:
         head = None
-        updates = updates.order_by('-time')[:10]
+        updates = updates.order_by('-time')[:2*nUpdates]
 
     if not lang:
         return redirect('index', year=year, lang=choose_lang(request))
     updates = filter_by_language(updates, lang)
     if not year:
-        updates = updates[:5]
+        updates = updates[:nUpdates]
     translation.activate(lang)
     
     return render(request, 'blog/index.html', {
