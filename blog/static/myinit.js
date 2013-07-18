@@ -24,3 +24,13 @@ function initMyLibthing() {
     $('#skiplinks ul').append('<li><a href="#booksbox">några bra böcker</a></li>');
     initSkiplinks($('#skiplinks a[href=#booksbox]'));
 }
+
+$(document).ready(function() {
+    $('#skiplinks').addClass('withoutfocus');
+    initSkiplinks($('#skiplinks a'));
+    $("figure > a").kratsbox();
+    if ($('#latestcomments').size()) {
+        initMyTweetbox();
+        initMyLibthing();
+    }
+});
