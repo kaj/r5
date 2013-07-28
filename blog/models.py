@@ -3,6 +3,8 @@ from django.db import models
 from taggit.managers import TaggableManager
 from blog.contentprocessor import process_content
 from django.core.urlresolvers import reverse
+from django.utils.html import strip_tags
+from re import sub
 
 class Post(models.Model):
     
@@ -26,6 +28,9 @@ class Post(models.Model):
 
     def abstract_output(self):
         return process_content(self.abstract, Image.objects)
+    
+    def abstract_text(self):
+        return sub('\s+', ' ', strip_tags(self.abstract))
     
     def content_output(self):
         return process_content(self.content, Image.objects)
