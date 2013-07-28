@@ -17,7 +17,7 @@
     <div class="update">
       <strong>{% trans "Uppdatering" %}
         <time datetime="{{update.time|date:'c'}}">{{update.time}}</time>:</strong>
-      {{update.note|safe}}
+      {{update.note_output}}
     </div>
   {% endif %}
 

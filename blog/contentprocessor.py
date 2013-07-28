@@ -30,6 +30,13 @@ def process_content(content, images):
                                         'width': str(info.iwidth),
                                         'height': str(info.iheight)})
     
+    for e in dom.iterfind('.//a'):
+        href = e.attrib.get('href', '')
+        if href.startswith('rfc:'):
+            e.set('href', 'http://tools.ietf.org/html/rfc' + href[4:])
+        elif href.startswith('lj:'):
+            e.set('href', 'http://' + href[3:] + '.livejournal.com/')
+    
     for e in dom.iterfind('.//uri'):
         e.tag = 'a'
         href = e.text
@@ -39,7 +46,7 @@ def process_content(content, images):
         e.tag = 'a'
         e.set('class', 'email')
         e.set('href', 'mailto:' +  e.text)
-        
+    
     for pre in dom.iterfind('.//pre'):
         cls = {c for c in pre.attrib.get('class', '').split()}
         if 'programlisting' in cls and len(cls) == 2:
@@ -60,4 +67,6 @@ def process_content(content, images):
                 pre.insert(0, fromstring('<span>'+result+'</span>'))
             except:
                 print "Error handling pre", cls
-    return mark_safe(u''.join(tostring(x, encoding=unicode) for x in dom.iterchildren()))
+    return mark_safe((dom.text or u'') +
+                     u''.join(tostring(x, encoding=unicode)
+                              for x in dom.iterchildren()))

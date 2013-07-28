@@ -7,5 +7,6 @@ ve
 
 /settings/local.py
 /static/
+/dump/
 
 /.idea

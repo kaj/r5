@@ -9,8 +9,17 @@
 
 {% block extrahead %}
   {% if post.abstract %}
-    <meta name="Description" content="{{post.abstract|striptags}}" />
+    <meta name="Description" content="{{post.abstract_text}}" />
   {% endif %}
+  <script type="text/javascript" async="async"
+          src="//api.flattr.com/js/0.6/load.js"
+          onload="FlattrLoader.render({'uid':'rasmus_kaj', 'button':'compact',
+            'url':'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
+            'title':'{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se',
+            'description':'{{post.abstract_text}}', 'category':'text'
+            }, 'socialwidgets', 'append')"></script>
+  <script type="text/javascript" async="async"
+          src="https://platform.twitter.com/widgets.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -32,7 +41,7 @@
     <div class="update">
       <strong>{% trans "Uppdatering" %}
 	<time datetime="{{u.time|date:'c'}}">{{u.time}}</time>:</strong>
-      {{u.note|safe}}
+      {{u.note_output}}
     </div>
     {% endif %}
   {% endfor %}
@@ -42,6 +51,12 @@
   <address>Rasmus Kaj
     <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
   </address>
+  
+  <div id="socialwidgets">
+    <a href="https://twitter.com/share" class="twitter-share-button"
+       data-text="{{post.title|striptags}}" data-via="rasmus_kaj"
+       data-lang="{{lang}}">Tweet</a>
+  </div>
   
   <section id="comments">
     {% get_comment_list for post as comment_list %}

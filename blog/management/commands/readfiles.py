@@ -248,7 +248,6 @@ def d2h(elem, dirname='', year=''):
         
         link = e.get('{http://www.w3.org/1999/xlink}href')
         if link:
-            # TODO: Handle my "local protocols", lj:, rfc:
             makelink(e, link)
             del e.attrib['{http://www.w3.org/1999/xlink}href']
             if ((not any(link.startswith(t) for t in
