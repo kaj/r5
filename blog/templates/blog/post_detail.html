@@ -17,7 +17,9 @@
             'url':'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
             'title':'{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se',
             'description':'{{post.abstract_text}}', 'category':'text'
-            }, 'comments', 'before')"></script>
+            }, 'socialwidgets', 'append')"></script>
+  <script type="text/javascript" async="async"
+          src="https://platform.twitter.com/widgets.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -49,6 +51,12 @@
   <address>Rasmus Kaj
     <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
   </address>
+  
+  <div id="socialwidgets">
+    <a href="https://twitter.com/share" class="twitter-share-button"
+       data-text="{{post.title|striptags}}" data-via="rasmus_kaj"
+       data-lang="{{lang}}">Tweet</a>
+  </div>
   
   <section id="comments">
     {% get_comment_list for post as comment_list %}
