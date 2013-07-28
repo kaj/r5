@@ -74,6 +74,9 @@ class Update(models.Model):
     def __unicode__(self):
         return u'Update %s to %s' % (self.time, self.post)
     
+    def note_output(self):
+        return process_content(self.note, Image.objects)
+
     def get_absolute_url(self):
         return self.post.get_absolute_url()
 

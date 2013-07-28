@@ -67,4 +67,6 @@ def process_content(content, images):
                 pre.insert(0, fromstring('<span>'+result+'</span>'))
             except:
                 print "Error handling pre", cls
-    return mark_safe(u''.join(tostring(x, encoding=unicode) for x in dom.iterchildren()))
+    return mark_safe((dom.text or u'') +
+                     u''.join(tostring(x, encoding=unicode)
+                              for x in dom.iterchildren()))
