@@ -33,7 +33,8 @@ class Post(models.Model):
         return sub('\s+', ' ', strip_tags(self.abstract))
     
     def content_output(self):
-        return process_content(self.content, Image.objects)
+        return process_content(self.content, Image.objects,
+                               '/%d/' % self.posted_time.year)
 
     def frontimage_output(self):
         return process_content(self.frontimage, Image.objects)

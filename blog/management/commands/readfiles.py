@@ -110,7 +110,7 @@ def readfile(filename):
     p.abstract = d2h(tree.find('db:info/db:abstract', nsmap))
     p.content = d2h(tree.getroot(), dirname, str(date.year) if date else '')
     for image in tree.findall('.//figure'):
-        if 'front' in image.get('class'):
+        if 'front' in image.get('class', ''):
             del image.attrib['class']
             p.frontimage = serialize(image, False)
     p.save()
@@ -278,7 +278,8 @@ def d2h(elem, dirname='', year=''):
     imginfo = None
     for e in elem.findall('.//r:image', nsmap):
         e.tag = 'figure'
-        e.set('class', 'image ' + e.get('class', ''))
+        if e.get('class'):
+            e.set('class', e.get('class'))
         imgref = e.get('ref')
         
         if not imginfo:

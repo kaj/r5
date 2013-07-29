@@ -1,7 +1,8 @@
 from django.utils.safestring import mark_safe
 from lxml.etree import fromstring, Element, SubElement, tostring
+from re import match
 
-def process_content(content, images):
+def process_content(content, images, base=None):
     dom = fromstring(u'<article>%s</article>' % content)
     for figure in dom.iterfind('.//figure'):
         ref = figure.attrib['ref']
@@ -36,6 +37,8 @@ def process_content(content, images):
             e.set('href', 'http://tools.ietf.org/html/rfc' + href[4:])
         elif href.startswith('lj:'):
             e.set('href', 'http://' + href[3:] + '.livejournal.com/')
+        elif base and not match('^([a-z]+:|/)', href):
+            e.set('href', base + href)
     
     for e in dom.iterfind('.//uri'):
         e.tag = 'a'

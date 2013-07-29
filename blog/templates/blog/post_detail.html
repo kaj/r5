@@ -15,8 +15,8 @@
           src="//api.flattr.com/js/0.6/load.js"
           onload="FlattrLoader.render({'uid':'rasmus_kaj', 'button':'compact',
             'url':'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
-            'title':'{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se',
-            'description':'{{post.abstract_text}}', 'category':'text'
+            'title':$('head title').html(), 'category':'text',
+            'description':$('meta[name=Description]').attr('content')
             }, 'socialwidgets', 'append')"></script>
   <script type="text/javascript" async="async"
           src="https://platform.twitter.com/widgets.js"></script>
