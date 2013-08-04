@@ -44,7 +44,7 @@ class Command(NoArgsCommand):
                 # TODO Handle the zone better?
                 f.write(u'    <pubdate>%sZ</pubdate>\n' %
                         post.posted_time.isoformat())
-                for tag in post.tags.all():
+                for tag in post.tags.all().order_by('name'):
                     f.write(u'    <tag>%s</tag>\n' % tag)
                 if post.abstract:
                     f.write(u'    <abstract>\n      %s\n    </abstract>\n' %
