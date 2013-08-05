@@ -73,13 +73,19 @@ def readfile(filename):
     for e in tree.iter():
         for child in list(e):
             child.parent = e
+        
+        xxns = '{http://www.w3.org/XML/1998/namespace}'
+        for xattr in ('lang', 'id'):
+            if e.get(xxns + xattr):
+                e.set(xattr, e.get(xxns + xattr))
+                del e.attrib[xxns + xattr]
     
     date = parsedate(serialize(tree.find('db:info/db:pubdate', nsmap)))
     if not date:
         print "Print ignoring %s, pubdate missing." % filename
         return
     
-    lang = tree.getroot().get('{http://www.w3.org/XML/1998/namespace}lang')
+    lang = tree.getroot().get('lang')
     p, isnew = Post.objects.get_or_create(posted_time__year=date.year,
                                           slug=slug,
                                           lang=lang,
@@ -309,7 +315,7 @@ def d2h(elem, dirname='', year=''):
     return serialize(elem)
 
 def getLanguage(e):
-    langattr = "{http://www.w3.org/XML/1998/namespace}lang"
+    langattr = "lang"
     if langattr in e.keys():
         return e.get(langattr)
     else:
