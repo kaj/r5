@@ -271,15 +271,13 @@ def d2h(elem, dirname='', year=''):
                              os.path.join('/', year, link))
                 except:
                     print "WARNING: Failed to copy media %s in %s to %s." % (link, dirname, year)
+
+        if e.tag in ('term', 'a'):
+            next
                 
         role = e.get('role')
-        if role == 'wp':
-            lang = getLanguage(e)
-            ref = quote(textcontent(e).encode('utf8'))
-            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, ref))
-        elif role == 'sw':
-            ref = quote(textcontent(e).encode('utf8'))
-            makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % ref)
+        if role in ['wp', 'sw']:
+            makelink(e, tag='term')
 
     imginfo = None
     for e in elem.findall('.//r:image', nsmap):
@@ -321,18 +319,27 @@ def getLanguage(e):
     else:
         return getLanguage(e.parent)
     
-def makelink(e, href):
+def makelink(e, href=None, tag='a'):
     """Convert the element e to a link to href."""
-    if e.tag == 'span':
+    if e.get('role') == 'wp':
+        # Wikipedia is default place to lookup terms, so dont point it here.
+        del e.attrib['role']
+    if e.tag in ('span', 'term'):
         # Simply replace this element with a link
-        e.tag = 'a'
-        e.set('href', href)
+        e.tag = tag
+        if href:
+            e.set('href', href)
     else:
         content = list(e)
-        a = ElementTree.SubElement(e, 'a', {'href': href})
+        a = ElementTree.SubElement(e, tag)
+        if href:
+            a.set('href', href)
         for ee in content:
             e.remove(ee)
             a.append(ee)
+        if e.get('role'):
+            a.set('role', e.get('role'))
+            del e.attrib['role']
         a.text = e.text
         e.text = None
 
