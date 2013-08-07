@@ -3,8 +3,8 @@ from lxml.etree import fromstring, Element, SubElement, tostring
 from re import match
 from urllib import quote
 
-def process_content(content, images, base=None):
-    dom = fromstring(u'<article>%s</article>' % content)
+def process_content(content, images, base=None, lang='sv'):
+    dom = fromstring(u'<article lang="%s">%s</article>' % (lang, content))
     for figure in dom.iterfind('.//figure'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
@@ -44,8 +44,9 @@ def process_content(content, images, base=None):
     for e in dom.iterfind('.//term'):
         href = e.get('href', '')
         if not href:
-            # TODO Respect languate attributes, or at least post lang.
-            lang = 'sv'
+            def getlang(elem):
+                return elem.get('lang') or getlang(elem.getparent())
+            lang = getlang(e)
             ref = quote(e.text.encode('utf8'))
             urlbase = {
                 'wp': 'http://{lang}.wikipedia.org/wiki/{ref}',

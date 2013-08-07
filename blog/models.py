@@ -27,17 +27,18 @@ class Post(models.Model):
         return self.posted_time.year
 
     def abstract_output(self):
-        return process_content(self.abstract, Image.objects)
+        return process_content(self.abstract, Image.objects, lang=self.lang)
     
     def abstract_text(self):
         return sub('\s+', ' ', strip_tags(self.abstract))
     
     def content_output(self):
         return process_content(self.content, Image.objects,
-                               '/%d/' % self.posted_time.year)
+                               '/%d/' % self.posted_time.year,
+                               lang=self.lang)
 
     def frontimage_output(self):
-        return process_content(self.frontimage, Image.objects)
+        return process_content(self.frontimage, Image.objects, lang=self.lang)
     
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
@@ -76,7 +77,7 @@ class Update(models.Model):
         return u'Update %s to %s' % (self.time, self.post)
     
     def note_output(self):
-        return process_content(self.note, Image.objects)
+        return process_content(self.note, Image.objects, lang=self.lang)
 
     def get_absolute_url(self):
         return self.post.get_absolute_url()
