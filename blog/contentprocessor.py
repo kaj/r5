@@ -46,15 +46,14 @@ def process_content(content, images, base=None, lang='sv'):
         if not href:
             def getlang(elem):
                 return elem.get('lang') or getlang(elem.getparent())
-            lang = getlang(e)
-            ref = quote(e.text.encode('utf8'))
             urlbase = {
                 'wp': 'http://{lang}.wikipedia.org/wiki/{ref}',
                 'sw': 'http://seriewikin.serieframjandet.se/index.php/{ref}',
                 'foldoc': 'http://foldoc.org/{ref}',
             }
-            kind = e.get('role') or 'wp'
-            e.set('href', urlbase.get(kind, '').format(lang=lang, ref=ref))
+            e.set('href', urlbase.get(e.get('role') or 'wp', '').format(
+                lang=getlang(e),
+                ref=quote(e.text.encode('utf8'))))
         e.tag = 'a'
     
     for e in dom.iterfind('.//uri'):
