@@ -50,9 +50,10 @@ def process_content(content, images, base=None):
             urlbase = {
                 'wp': 'http://{lang}.wikipedia.org/wiki/{ref}',
                 'sw': 'http://seriewikin.serieframjandet.se/index.php/{ref}',
+                'foldoc': 'http://foldoc.org/{ref}',
             }
             kind = e.get('role') or 'wp'
-            e.set('href', urlbase[kind].format(lang=lang, ref=ref))
+            e.set('href', urlbase.get(kind, '').format(lang=lang, ref=ref))
         e.tag = 'a'
     
     for e in dom.iterfind('.//uri'):

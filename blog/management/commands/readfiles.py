@@ -276,7 +276,7 @@ def d2h(elem, dirname='', year=''):
             next
                 
         role = e.get('role')
-        if role in ['wp', 'sw']:
+        if role in ['wp', 'sw', 'foldoc']:
             makelink(e, tag='term')
 
     imginfo = None
