@@ -192,7 +192,7 @@ def d2h(elem, dirname='', year=''):
         e.tag = 'blockquote'
         attrib = e.find('db:attribution', nsmap)
         if attrib is not None:
-            attrib.tag = 'p'
+            attrib.tag = 'footer'
             attrib.set('class', 'attribution')
             e.remove(attrib)
             e.append(attrib)

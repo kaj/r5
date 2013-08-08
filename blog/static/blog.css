@@ -277,10 +277,9 @@ blockquote { max-width: 34em; margin: 1ex 1em 1em; padding: 1ex 1em;
   box-shadow: .3em .2em .5em #cccccc;
 }
 blockquote > *:first-child { margin-top: 0; padding-top: 0; }
-blockquote p.attribution {
+blockquote footer.attribution {
     text-align: right;
     font-style: italic;
-    margin-bottom: 0;
 }
 blockquote em {
     font-weight: bold;
