@@ -229,6 +229,18 @@ def d2h(elem, dirname='', year=''):
         for p in e.findall('r:param', nsmap):
             p.tag = 'param'
     
+    for e in elem.findall('.//db:tag', nsmap):
+        e.tag = 'code'
+        if e.get('class') in ('numcharref', 'paramentity'):
+            e.text = '&' + e.text + ';';
+        elif e.get('class') == 'attribute':
+            pass
+        elif not e.get('class'):
+            e.text = '<' + e.text + '>';
+        else:
+            raise RuntimeError('Unsupported <tag class="%s">' % e.get('class'))
+        e.set('class', 'xml')
+    
     # Inline simple stuff, put it in a span with the docbook name as class
     for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
         for e in elem.findall('.//db:' + docb, nsmap):
