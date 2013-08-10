@@ -211,10 +211,9 @@ def d2h(elem, dirname='', year=''):
         title = e.find('db:title', nsmap)
         title.tag = 'strong'
         p = e.find('p')
-        p.set('class', 'formalpara')
         e.remove(title)
         p.insert(0, title)
-        title.tail = title.tail + p.text
+        title.tail = u' \u2013 ' + title.tail + p.text
         p.text = None
     
     for e in elem.findall('.//r:java', nsmap):
