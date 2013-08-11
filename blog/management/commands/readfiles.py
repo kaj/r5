@@ -217,15 +217,16 @@ def d2h(elem, dirname='', year=''):
         p.text = None
     
     for e in elem.findall('.//r:java', nsmap):
-        # width and height attribs are kept.
-        jclass = e.get('class')
-        del e.attrib['class']
-        jar = e.get('jar')
-        del e.attrib['jar']
         e.tag = 'object'
-        e.set('codetype', 'application/java')
-        e.set('classid', 'java:%s.class' % jclass)
-        e.set('archive', jar)
+        # width and height attribs are kept.
+        e.set('type', 'application/x-java-applet')
+        for name, val in (('code', e.get('class')), ('archive', e.get('jar'))):
+            pe = ElementTree.Element('param', {'name':name, 'value':val})
+            pe.tail = e.text # The correct indent (should be ws only).
+            e.insert(0, pe)
+        del e.attrib['class']
+        del e.attrib['jar']
+        
         for p in e.findall('r:param', nsmap):
             p.tag = 'param'
     
