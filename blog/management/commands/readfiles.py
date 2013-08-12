@@ -243,9 +243,11 @@ def d2h(elem, dirname='', year=''):
         e.set('class', 'xml')
     
     # Inline simple stuff, put it in a span with the docbook name as class
-    for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
+    for docb, html in (('personname', 'span'), ('orgname', 'span'), 
+                       ('filename', 'span'), ('replaceable', 'em'),
+                       ('remark', 'span')):
         for e in elem.findall('.//db:' + docb, nsmap):
-            e.tag = 'span'
+            e.tag = html
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
 
     for e in elem.findall('.//r:book', nsmap):
