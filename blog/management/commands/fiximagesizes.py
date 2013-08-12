@@ -16,6 +16,15 @@ class Command(NoArgsCommand):
         mime = { 'JPEG': 'image/jpeg',
                  'PNG': 'image/png',
                  }
+
+        # Old more or less junk, but used from static css:
+        for parti in ('kds', 'm', 'v', 'c', 'mp', 's', 'fp'):
+            img, isnew = Image.objects.get_or_create(
+                ref=parti,
+                defaults = {
+                    'sourcename': 'old/partier/%s.png' % parti,
+                    'orig_width': 0,
+                    'orig_height': 0})
         
         files = Image.objects
         if not options['all']:
