@@ -291,6 +291,9 @@ def d2h(elem, dirname='', year=''):
         role = e.get('role')
         if role in ['wp', 'sw', 'foldoc']:
             makelink(e, tag='term')
+        elif role:
+            e.set('class', role)
+            del e.attrib['role']
 
     imginfo = None
     for e in elem.findall('.//r:image', nsmap):
