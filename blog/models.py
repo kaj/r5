@@ -4,6 +4,7 @@ from taggit.managers import TaggableManager
 from blog.contentprocessor import process_content
 from django.core.urlresolvers import reverse
 from django.utils.html import strip_tags
+from os import path
 from re import sub
 
 class Post(models.Model):
@@ -91,6 +92,12 @@ class Image(models.Model):
     
     ICON_MAX = 200
     LARGE_MAX = 900
+
+    def save(self, *args, **kwargs):
+        if not self.ref:
+            self.ref, x, y = path.basename(self.sourcename) \
+                                 .lower().partition('.')
+        super(Image, self).save(*args, **kwargs)
     
     def __unicode__(self):
         return u'<Image from %s>' % self.sourcename

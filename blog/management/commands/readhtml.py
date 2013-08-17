@@ -1,3 +1,4 @@
+from PIL import Image as PImage
 from blog.models import Post, Update, Image
 from datetime import datetime
 from django.conf import settings
@@ -146,9 +147,17 @@ def d2h(elem, dirname='', year=''):
         try:
             e.set('ref', Image.objects.get(sourcename=ref).ref)
         except Exception as err:
-            # TODO Check for file and create new Image object!
-            raise RuntimeError("WARNING: image data missing: %s" % ref)
-    
+            mime = { 'JPEG': 'image/jpeg',
+                     'PNG': 'image/png',
+                   }
+            data = PImage.open(os.path.join(settings.IMAGE_FILES_BASE, ref))
+            img = Image(sourcename=ref,
+                        orig_width=data.size[0],
+                        orig_height=data.size[1],
+                        mimetype=mime[data.format])
+            img.save()
+            print 'Found image %s.' % img
+            e.set('ref', img.ref)
     return serialize(elem)
 
 def serialize(elem, skip_root=True):
