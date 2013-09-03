@@ -3,7 +3,23 @@ from django.core.management.base import NoArgsCommand
 from io import open
 from optparse import make_option
 from os import mkdir, path
+from lxml.etree import fromstring, tostring
 
+def ready_to_save(content):
+    '''Make content ready to save.
+
+    Image refs (slugs) are replaced with the full path.'''
+    dom = fromstring(u'<article>%s</article>' % content)
+    for figure in dom.iterfind('.//figure'):
+        ref = figure.get('ref')
+        try:
+            figure.set('ref', Image.objects.get(ref=ref).sourcename)
+        except:
+            print 'Image %s not found' % ref
+            continue
+
+    return u''.join(tostring(x, encoding=unicode) for x in dom.iterchildren())
+    
 class Command(NoArgsCommand):
     help = 'Save content in semi-html format'
 
@@ -28,14 +44,14 @@ class Command(NoArgsCommand):
                 # TODO Handle the zone better?
                 f.write(u'    <pubdate>%sZ</pubdate>\n' %
                         post.posted_time.isoformat())
-                for tag in post.tags.all():
+                for tag in post.tags.all().order_by('name'):
                     f.write(u'    <tag>%s</tag>\n' % tag)
                 if post.abstract:
                     f.write(u'    <abstract>\n      %s\n    </abstract>\n' %
-                            post.abstract)
+                            ready_to_save(post.abstract))
                 for update in post.update_set.exclude(note=''):
                     f.write(u'    <update date="%sZ">\n      %s\n    </update>\n' %
                             (update.time.isoformat(), update.note))
                 f.write(u'  </head>\n\n')
-                f.write(u'  ' + post.content + '\n')
+                f.write(u'  ' + ready_to_save(post.content) + '\n')
                 f.write(u'</html>\n')

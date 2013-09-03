@@ -73,13 +73,19 @@ def readfile(filename):
     for e in tree.iter():
         for child in list(e):
             child.parent = e
+        
+        xxns = '{http://www.w3.org/XML/1998/namespace}'
+        for xattr in ('lang', 'id'):
+            if e.get(xxns + xattr):
+                e.set(xattr, e.get(xxns + xattr))
+                del e.attrib[xxns + xattr]
     
     date = parsedate(serialize(tree.find('db:info/db:pubdate', nsmap)))
     if not date:
         print "Print ignoring %s, pubdate missing." % filename
         return
     
-    lang = tree.getroot().get('{http://www.w3.org/XML/1998/namespace}lang')
+    lang = tree.getroot().get('lang')
     p, isnew = Post.objects.get_or_create(posted_time__year=date.year,
                                           slug=slug,
                                           lang=lang,
@@ -186,7 +192,7 @@ def d2h(elem, dirname='', year=''):
         e.tag = 'blockquote'
         attrib = e.find('db:attribution', nsmap)
         if attrib is not None:
-            attrib.tag = 'p'
+            attrib.tag = 'footer'
             attrib.set('class', 'attribution')
             e.remove(attrib)
             e.append(attrib)
@@ -205,35 +211,48 @@ def d2h(elem, dirname='', year=''):
         title = e.find('db:title', nsmap)
         title.tag = 'strong'
         p = e.find('p')
-        p.set('class', 'formalpara')
         e.remove(title)
         p.insert(0, title)
-        title.tail = title.tail + p.text
+        title.tail = u' \u2013 ' + title.tail + p.text
         p.text = None
     
     for e in elem.findall('.//r:java', nsmap):
-        # width and height attribs are kept.
-        jclass = e.get('class')
-        del e.attrib['class']
-        jar = e.get('jar')
-        del e.attrib['jar']
         e.tag = 'object'
-        e.set('codetype', 'application/java')
-        e.set('classid', 'java:%s.class' % jclass)
-        e.set('archive', jar)
+        # width and height attribs are kept.
+        e.set('type', 'application/x-java-applet')
+        for name, val in (('code', e.get('class')), ('archive', e.get('jar'))):
+            pe = ElementTree.Element('param', {'name':name, 'value':val})
+            pe.tail = e.text # The correct indent (should be ws only).
+            e.insert(0, pe)
+        del e.attrib['class']
+        del e.attrib['jar']
+        
         for p in e.findall('r:param', nsmap):
             p.tag = 'param'
     
+    for e in elem.findall('.//db:tag', nsmap):
+        e.tag = 'code'
+        if e.get('class') in ('numcharref', 'paramentity'):
+            e.text = '&' + e.text + ';';
+        elif e.get('class') == 'attribute':
+            pass
+        elif not e.get('class'):
+            e.text = '<' + e.text + '>';
+        else:
+            raise RuntimeError('Unsupported <tag class="%s">' % e.get('class'))
+        e.set('class', 'xml')
+    
     # Inline simple stuff, put it in a span with the docbook name as class
-    for docb in ('personname', 'orgname', 'filename', 'tag', 'replaceable', 'remark'):
+    for docb, html in (('personname', 'span'), ('orgname', 'span'), 
+                       ('filename', 'span'), ('replaceable', 'em'),
+                       ('remark', 'span')):
         for e in elem.findall('.//db:' + docb, nsmap):
-            e.tag = 'span'
+            e.tag = html
             e.set('class', (e.get('class', '') + ' ' + docb).strip())
 
-    for mymark in ('book',):
-        for e in elem.findall('.//r:' + mymark, nsmap):
-            e.tag = 'span'
-            e.set('class', (e.get('class', '') + ' ' + mymark).strip())
+    for e in elem.findall('.//r:book', nsmap):
+        e.tag = 'cite'
+        e.set('class', (e.get('class', '') + ' ' + 'book').strip())
     
     for docb in ('command', ):
         for e in elem.findall('.//db:' + docb, nsmap):
@@ -265,15 +284,16 @@ def d2h(elem, dirname='', year=''):
                              os.path.join('/', year, link))
                 except:
                     print "WARNING: Failed to copy media %s in %s to %s." % (link, dirname, year)
+
+        if e.tag in ('term', 'a'):
+            next
                 
         role = e.get('role')
-        if role == 'wp':
-            lang = getLanguage(e)
-            ref = quote(textcontent(e).encode('utf8'))
-            makelink(e, u'http://%s.wikipedia.org/wiki/%s' % (lang, ref))
-        elif role == 'sw':
-            ref = quote(textcontent(e).encode('utf8'))
-            makelink(e, u'http://seriewikin.serieframjandet.se/index.php/%s' % ref)
+        if role in ['wp', 'sw', 'foldoc']:
+            makelink(e, tag='term')
+        elif role:
+            e.set('class', role)
+            del e.attrib['role']
 
     imginfo = None
     for e in elem.findall('.//r:image', nsmap):
@@ -309,24 +329,33 @@ def d2h(elem, dirname='', year=''):
     return serialize(elem)
 
 def getLanguage(e):
-    langattr = "{http://www.w3.org/XML/1998/namespace}lang"
+    langattr = "lang"
     if langattr in e.keys():
         return e.get(langattr)
     else:
         return getLanguage(e.parent)
     
-def makelink(e, href):
+def makelink(e, href=None, tag='a'):
     """Convert the element e to a link to href."""
-    if e.tag == 'span':
+    if e.get('role') == 'wp':
+        # Wikipedia is default place to lookup terms, so dont point it here.
+        del e.attrib['role']
+    if e.tag in ('span', 'term'):
         # Simply replace this element with a link
-        e.tag = 'a'
-        e.set('href', href)
+        e.tag = tag
+        if href:
+            e.set('href', href)
     else:
         content = list(e)
-        a = ElementTree.SubElement(e, 'a', {'href': href})
+        a = ElementTree.SubElement(e, tag)
+        if href:
+            a.set('href', href)
         for ee in content:
             e.remove(ee)
             a.append(ee)
+        if e.get('role'):
+            a.set('role', e.get('role'))
+            del e.attrib['role']
         a.text = e.text
         e.text = None
 

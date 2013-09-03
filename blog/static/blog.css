@@ -277,27 +277,15 @@ blockquote { max-width: 34em; margin: 1ex 1em 1em; padding: 1ex 1em;
   box-shadow: .3em .2em .5em #cccccc;
 }
 blockquote > *:first-child { margin-top: 0; padding-top: 0; }
-blockquote p.attribution {
+blockquote footer.attribution {
     text-align: right;
     font-style: italic;
-    margin-bottom: 0;
 }
 blockquote em {
     font-weight: bold;
 }
 .replaceable { font-style: italic; }
-.tag {
-    color: #51AA17;
-    font-family: monospace;
-}
-.tag:before { content: '<'; }
-.tag:after { content: '>' }
-.tag.attribute:before { content: ''; }
-.tag.attribute:after { content: '' }
-.tag.comment:before { content: '<!--'; }
-.tag.comment:after { content: '-->' }
-.tag.paramentity:before, .tag.numcharref:before { content: '&'; }
-.tag.paramentity:after,  .tag.numcharref:after { content: ';' }
+code.xml { color: #51AA17; }
 
 ul.tagcloud {
     text-align: center;
