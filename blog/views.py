@@ -78,8 +78,10 @@ def post_detail(request, year, slug, lang=None):
                                  lang=choose_lang(request, lingos))
         return redirect(post.get_absolute_url())
     
-    similar = filter_by_language(post.tags.similar_objects(), post.lang,
-                                 extra_skip=post)
+    similar = sorted(filter_by_language(post.tags.similar_objects(), post.lang,
+                                        extra_skip=post),
+                     key=lambda p: '%2d%s' % (p.similar_tags, p.posted_time),
+                     reverse=True)[:10]
     
     translation.activate(lang)
     message = None
