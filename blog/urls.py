@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url as django_url
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post
+from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post, openid
 from blog.feeds import UpdatesFeed, TaggedUpdatesFeed
 import re
 
@@ -45,6 +45,7 @@ urlpatterns = patterns(
 
     url(r'^about$', about, {'lang': 'en'}, name='about'),
     url(r'^om$', about, {'lang': 'sv'}, name='about'),
+    url(r'^RasmusKaj', openid),
 
     url(r'^atom-en.xml$', UpdatesFeed('en'), name='atom-en'),
     url(r'^atom-sv.xml$', UpdatesFeed('sv'), name='atom-sv'),

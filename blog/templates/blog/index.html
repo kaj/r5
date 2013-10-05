@@ -7,12 +7,6 @@
     {# <meta name="Description" content="TODO" /> #}
     <link rel="alternate" type="application/atom+xml"
           href="/atom-{{lang}}.xml">
-    {% if not head %}
-        <link rel="openid.server"
-              href="http://openid.sys.kth.se/_/kthcasopenid.php/kaj">
-        <link rel="openid.delegate"
-              href="http://openid.sys.kth.se/_/kthcasopenid.php/kaj">
-    {% endif %}
 {% endblock %}
 
 {% block main %}

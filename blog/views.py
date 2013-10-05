@@ -157,6 +157,10 @@ def about(request, lang):
             'altlingos': langlinks('about', lang=lang),
             })
 
+def openid(request, lang='sv'):
+    translation.activate(lang)
+    return render(request, 'openid.html')
+
 def langlinks(page, lingos=None, lang=None, **kwargs):
     if lingos is None:
         lingos = {'sv', 'en'} - {lang}
