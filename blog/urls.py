@@ -40,8 +40,8 @@ urlpatterns = patterns(
     url(r'^img/<imgid>', image_view, name='image_view'),
     
     url(r'^tag/<lang>?$', tagcloud, name='tagcloud'),
-    url(r'^tag/<slug>$', tagged, name='tagged'),
     url(r'^tag/<slug>\.<lang>$', tagged, name='tagged'),
+    url(r'^tag/<slug>/?$', tagged, name='tagged'),
 
     url(r'^about$', about, {'lang': 'en'}, name='about'),
     url(r'^om$', about, {'lang': 'sv'}, name='about'),
