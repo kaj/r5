@@ -99,6 +99,15 @@ class SimpleTest(TestCase):
 
     def test_get_nonexistant_tag(self):
         doc = self.get('/tag/nonesuch', expected_status_code=404)
+        
+    def test_get_article(self):
+        doc = self.get('/2013/foo.sv')
+        self.assertEqual([u'Foo \u2013 Rasmus.krats.se '],
+                         select_texts(doc, 'head title'))
+        self.assertEqual(['Rasmus.krats.se'],
+                         select_texts(doc, 'header #sitename'))
+        self.assertEqual(['Foo'],
+                         select_texts(doc, 'main header h1'))
 
     def test_bad_c_is_404_not_5xx(self):
         doc = self.get('/2013/foo.sv?c=foo', expected_status_code=404)
