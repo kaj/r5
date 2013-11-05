@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 """
 Test browsing public pages in the blog app.
 """
@@ -10,9 +11,12 @@ from html5lib import treebuilders
 from lxml import etree
 from blog.models import Post, Update
 from datetime import datetime
+from re import sub
 
 def select_texts(doc, selector):
-    return [etree.tostring(e, method='text', encoding=unicode, with_tail=False)
+    return [sub('\s+', ' ',
+                etree.tostring(e, method='text', encoding=unicode, 
+                               with_tail=False))
             for e in CSSSelector(selector)(doc)]
 
 class SimpleTest(TestCase):
@@ -65,7 +69,12 @@ class SimpleTest(TestCase):
                          select_texts(doc, 'head title'))
         self.assertEqual(['Rasmus.krats.se'],
                          select_texts(doc, 'header #sitename'))
-        # TODO Have actual content in the test db and test for that.
+        self.assertEqual(['Foo'],
+                         select_texts(doc, 'article h1'))
+        self.assertEqual([u' Publicerad 5 november 2013 00:00 taggat ',
+                          u'Lorem ipsum dolor',
+                          u' Läs och kommentera inlägget Foo '],
+                         select_texts(doc, 'article p'))
 
     def test_get_nonexistant_page(self):
         doc = self.get('/2011/nonesuch', expected_status_code=404)
