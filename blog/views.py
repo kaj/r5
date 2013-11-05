@@ -86,7 +86,7 @@ def post_detail(request, year, slug, lang=None):
     translation.activate(lang)
     message = None
     if 'c' in request.GET:
-        comment = get_object_or_404(Comment, id=request.GET['c'])
+        comment = get_object_or_404(Comment, id=int_or_404(request.GET['c']))
         print "Comment:", comment
         if comment.is_removed:
             print "That comment is removed!!"
@@ -208,3 +208,9 @@ def serve_file(request, path, mimetype):
 def http_date_future(**args):
     future=datetime.now() + timedelta(**args)
     return http_date(mktime(future.timetuple()))
+
+def int_or_404(n):
+    try:
+        return int(n)
+    except ValueError:
+        raise Http404

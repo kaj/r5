@@ -8,16 +8,26 @@ from lxml.cssselect import CSSSelector
 import html5lib
 from html5lib import treebuilders
 from lxml import etree
+from blog.models import Post, Update
+from datetime import datetime
 
 def select_texts(doc, selector):
-    return [etree.tostring(e, method='text', with_tail=False)
+    return [etree.tostring(e, method='text', encoding=unicode, with_tail=False)
             for e in CSSSelector(selector)(doc)]
 
 class SimpleTest(TestCase):
     
     def setUp(self):
         self.c = Client()
-    
+        p, _ = Post.objects.get_or_create(
+            title='Foo',
+            posted_time= datetime(2013, 11, 5),
+            lang = 'sv',
+            abstract = '<p>Lorem ipsum dolor</p>\n',
+            content='<p>En text som i princip.</p>\n' +
+            '<p>Skulle kunna vara ganska intressant.</p>\n')
+        Update.objects.get_or_create(post=p, time=p.posted_time)
+
     def get(self, url, expected_status_code=200, expected_location=''):
         response = self.c.get(url)
         self.assertEqual((expected_status_code, expected_location, 
@@ -80,3 +90,6 @@ class SimpleTest(TestCase):
 
     def test_get_nonexistant_tag(self):
         doc = self.get('/tag/nonesuch', expected_status_code=404)
+
+    def test_bad_c_is_404_not_5xx(self):
+        doc = self.get('/2013/foo.sv?c=foo', expected_status_code=404)
