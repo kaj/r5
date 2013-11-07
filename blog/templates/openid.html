@@ -1,0 +1,74 @@
+{% extends "blog/base.html" %}
+{% load cache i18n blogtags %}
+
+{% block title %}Rasmus Kaj &#x2013; Rasmus.krats.se {% endblock %}
+{% block extrahead %}
+  <meta name="Description" content='{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}'/>
+  <link rel="openid.server"
+	href="http://openid.sys.kth.se/_/kthcasopenid.php/kaj">
+  <link rel="openid.delegate"
+	href="http://openid.sys.kth.se/_/kthcasopenid.php/kaj">
+{% endblock %}
+
+{% block main %}
+  <header>
+    <h1>Rasmus Kaj</h1>
+  </header>
+
+  <div class="abstract">
+    <p>{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}</p>
+  </div>
+
+  <div class="content">
+    {% blocktrans %}
+    <p>Jag är en systemutvecklare som i första hand jobbar med webb,
+      gärna på ett agilt sätt och gärna i unixmiljö.
+      Jag började med webb&#xad;utveckling både hobby&#xad;mässigt och
+      professionellt våren 1995 och har inte kunnat slita mig sedan dess.</p>
+    
+    <p>Jag är gift med <a href="http://tygbittar.krats.se/">Katarina Kaj</a>,
+      aktiv i
+      <a href="http://www.stacken.kth.se/">Dator&#xad;föreningen Stacken</a>
+      och läser gärna <a href="/tag/comics">serier</a>.</p>
+    {% endblocktrans %}
+
+    <section id="contact">
+      <h1>{% trans "Kontakt" %}</h1>
+    
+      <figure class="sidebar">
+        <img src="{{STATIC_URL}}qr-kaj.png" width="82" height="82"
+             alt=""/>
+      </figure>
+      
+      <dl>
+        <dt class="icon-mail">{% trans "Epost:" %}</dt>
+        <dd><a href="mailto:rasmus@krats.se">rasmus@krats.se</a></dd>
+        
+        <dt class="icon-phone">{% trans "Telefon:" %}</dt>
+        <dd><a href="tel:+46-8-790-67-21">08‒790 67 21</a></dd>
+        <dt class="icon-phone">{% trans "sms:" %}</dt>
+        <dd><a href="sms:+46-739736226">0739736226</a></dd>
+        
+        <dt class="icon-mail">{% trans "Papperspost:" %}</dt>
+        <dd>Rasmus Kaj<br>
+          Stamgatan 55<br>
+          SE-125 74 &#160;<span class="postort">Älvsjö</span><br>
+          Sweden</dd>
+      </dl>
+    </section>
+  </div>
+  
+  <address>Rasmus Kaj
+    <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
+  </address>
+{% endblock %}
+
+{% block lastskiplinks %}
+  <li><a href="#tagcloud">{% trans "taggmoln" %}</a></li>
+{% endblock %}
+
+{% block sideblockbottom %}
+  <aside id="tagcloud">
+    {% cache 14400 tagcloud LANGUAGE_CODE %}{% tagcloud %}{% endcache %}
+  </aside>
+{% endblock %}

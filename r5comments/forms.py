@@ -6,19 +6,21 @@ import re
 
 class CommentFormAvoidingSpam(CommentForm):
     bad_names = ('boobs', 'cash', 'casinos?', 'cialis', 'cigarettes?', 'cigs',
-                 'escorts?', 'finance', 'forex'
-                 'infoxesee', 'insurance', 'loans?', 'luggisintedge',
+                 'discounts?', 'download', 'escorts?', 'facebook', 'finance',
+                 'followers', 'forex', 'free', 'infoxesee', 'instagram',
+                 'insurance', 'loans?', 'luggisintedge',
                  'movie', 'offinafag',
                  'ordillaoffips', 'pay ?day', 'poker',
                  'praikicky', 'pyncpelay',
-                 'sex', 'sexchat', r'tripod\.co\.uk', 'viagra', 'video')
+                 'shemale', 'sex', 'sexchat', r'tripod\.co\.uk', 'twitter',
+                 'webcam', 'viagra', 'video', 'youtube')
 
     def clean_name(self):
         #super(CommentFormAvoidingSpam, self).clean_name()
         name = self.cleaned_data['name']
         if re.search('(?:^|-|\.|\s)(?:%s)(?:\s|-|\.|$)' % '|'.join(self.bad_names),
                      name, re.IGNORECASE):
-            raise forms.ValidationError(_(u'"%s" looks like spam, sorry.') %
+            raise forms.ValidationError(_(u'"%s" in a name looks like spam, sorry.') %
                                         name)
         return name
 

@@ -78,13 +78,15 @@ def post_detail(request, year, slug, lang=None):
                                  lang=choose_lang(request, lingos))
         return redirect(post.get_absolute_url())
     
-    similar = filter_by_language(post.tags.similar_objects(), post.lang,
-                                 extra_skip=post)
+    similar = sorted(filter_by_language(post.tags.similar_objects(), post.lang,
+                                        extra_skip=post),
+                     key=lambda p: '%2d%s' % (p.similar_tags, p.posted_time),
+                     reverse=True)[:10]
     
     translation.activate(lang)
     message = None
     if 'c' in request.GET:
-        comment = get_object_or_404(Comment, id=request.GET['c'])
+        comment = get_object_or_404(Comment, id=int_or_404(request.GET['c']))
         print "Comment:", comment
         if comment.is_removed:
             print "That comment is removed!!"
@@ -155,6 +157,10 @@ def about(request, lang):
             'altlingos': langlinks('about', lang=lang),
             })
 
+def openid(request, lang='sv'):
+    translation.activate(lang)
+    return render(request, 'openid.html')
+
 def langlinks(page, lingos=None, lang=None, **kwargs):
     if lingos is None:
         lingos = {'sv', 'en'} - {lang}
@@ -202,3 +208,9 @@ def serve_file(request, path, mimetype):
 def http_date_future(**args):
     future=datetime.now() + timedelta(**args)
     return http_date(mktime(future.timetuple()))
+
+def int_or_404(n):
+    try:
+        return int(n)
+    except ValueError:
+        raise Http404

@@ -2,6 +2,9 @@ from django.utils.safestring import mark_safe
 from lxml.etree import fromstring, Element, SubElement, tostring
 from re import match
 from urllib import quote
+from logging import getLogger
+
+logger = getLogger(__name__)
 
 def process_content(content, images, base=None, lang='sv'):
     dom = fromstring(u'<article lang="%s">%s</article>' % (lang, content))
@@ -12,7 +15,7 @@ def process_content(content, images, base=None, lang='sv'):
             info = images.get(ref=ref)
         except:
             figure.text = ' (image not found) '
-            print 'Image %s not found' % ref
+            logger.warning('Image %s not found' % ref)
             continue
 
         if info.is_small or 'scaled' in figure.attrib.get('class', ''):

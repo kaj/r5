@@ -183,7 +183,7 @@ figure {
     vertical-align: top;
     max-width: 100%;
     width: 206px;
-    width: intrinsic;
+    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
 }

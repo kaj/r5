@@ -29,12 +29,17 @@ class Command(NoArgsCommand):
         )
     
     def handle_noargs(self, **options):
+        self.verbosity = int(options['verbosity'])
         posts = Post.objects
         if options['year']:
-            posts = posts.filter(posted_time__year=options['year'])
+            year = options['year']
+            self.msg(0, "Dumping content from %s", year)
+            posts = posts.filter(posted_time__year=year)
+        else:
+            self.msg(0, "Dumping all content")
         for post in posts.all():
             filename = 'dump' + post.get_absolute_url() + '.html'
-            print "Should save", filename
+            self.msg(1, "Should save to %s", filename)
             if not path.exists(path.dirname(filename)):
                 mkdir(path.dirname(filename))
             with open(filename, 'w', encoding='utf-8') as f:
@@ -55,3 +60,7 @@ class Command(NoArgsCommand):
                 f.write(u'  </head>\n\n')
                 f.write(u'  ' + ready_to_save(post.content) + '\n')
                 f.write(u'</html>\n')
+    
+    def msg(self, level, message, *args):
+        if self.verbosity > level:
+            self.stdout.write(message % args)
