@@ -1,8 +1,9 @@
 from django.utils.safestring import mark_safe
-from lxml.etree import fromstring, Element, SubElement, tostring
-from re import match
-from urllib import quote
 from logging import getLogger
+from lxml.etree import fromstring, Element, SubElement, tostring
+from os.path import commonprefix
+from re import match, findall
+from urllib import quote
 
 logger = getLogger(__name__)
 
@@ -70,25 +71,31 @@ def process_content(content, images, base=None, lang='sv'):
         e.set('href', 'mailto:' +  e.text)
     
     for pre in dom.iterfind('.//pre'):
+        if len(pre):
+            next
+        content = tostring(pre, method='text', encoding=unicode,
+                           with_tail=False).strip()
+        indent = commonprefix(findall('\n *(?!\s)', content))
+        if indent:
+            content = content.replace(indent, '\n')
+
         cls = {c for c in pre.attrib.get('class', '').split()}
         if 'programlisting' in cls and len(cls) == 2:
             try:
                 lang, = cls - {'programlisting'}
-                code = tostring(pre, method='text', encoding=unicode,
-                                with_tail=False)
-                print "Found a program listing in", lang
-
                 from pygments import highlight
                 from pygments.lexers import get_lexer_by_name
                 from pygments.formatters import HtmlFormatter
 
                 lexer = get_lexer_by_name(lang)
                 formatter = HtmlFormatter(nowrap=True)
-                result = highlight(code, lexer, formatter)
+                result = highlight(content, lexer, formatter)
                 pre.text = None
                 pre.insert(0, fromstring('<span>'+result+'</span>'))
             except:
                 print "Error handling pre", cls
+        else:
+            pre.text = content
     return mark_safe((dom.text or u'') +
                      u''.join(tostring(x, encoding=unicode)
                               for x in dom.iterchildren()))

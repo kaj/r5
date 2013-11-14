@@ -4,6 +4,7 @@ from taggit.managers import TaggableManager
 from blog.contentprocessor import process_content
 from django.core.urlresolvers import reverse
 from django.utils.html import strip_tags
+from lxml.etree import fromstring as str2dom, tostring as dom2str
 from os import path
 from re import sub
 
@@ -43,7 +44,7 @@ class Post(models.Model):
     
     def __unicode__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
-        return u'%s (%s)' % (self.title, year)
+        return u'%s (%s)' % (html2cleanstr(self.title), year)
     
     def get_absolute_url(self):
         if self.posted_time:
@@ -140,4 +141,8 @@ class Image(models.Model):
     def height(self):
         return self.scaled_size(self.LARGE_MAX)[1]
 
-    
+def html2cleanstr(html):
+    """ Render a (partial) html document to a simple text string """
+    dom = str2dom(u'<span>%s</span>' % html)
+    return sub('\s+', ' ', dom2str(dom, method='text',
+                                   encoding=unicode).strip())
