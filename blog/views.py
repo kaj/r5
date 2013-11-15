@@ -176,7 +176,7 @@ def image_view(request, imgid, size=900):
     scaled_path = os.path.join(settings.SCALED_IMAGE_DIR,
                                '%s-%s' % (imgid, size))
     try:
-        return serve_file(request, path=scaled_path, mimetype=obj.mimetype)
+        return serve_file(request, path=scaled_path, content_type=obj.mimetype)
     except Http404:
         from PIL import Image as PImage
         sourcedata = PImage.open(os.path.join(settings.IMAGE_FILES_BASE, obj.sourcename))
@@ -186,9 +186,9 @@ def image_view(request, imgid, size=900):
         if not os.path.exists(dir):
             os.makedirs(dir, 0777)
         scaleddata.save(full_path, sourcedata.format)
-        return serve_file(request, path=scaled_path, mimetype=obj.mimetype)
+        return serve_file(request, path=scaled_path, content_type=obj.mimetype)
 
-def serve_file(request, path, mimetype):
+def serve_file(request, path, content_type):
     fullpath = os.path.join(settings.MEDIA_ROOT, path)
     if not os.path.exists(fullpath):
         raise Http404(_(u'"%(path)s" does not exist') % {'path': fullpath})
@@ -196,9 +196,9 @@ def serve_file(request, path, mimetype):
     statobj = os.stat(fullpath)
     if not was_modified_since(request.META.get('HTTP_IF_MODIFIED_SINCE'),
                               statobj.st_mtime, statobj.st_size):
-        return HttpResponseNotModified(mimetype=mimetype)
+        return HttpResponseNotModified(content_type=content_type)
     with open(fullpath, 'rb') as f:
-        response = HttpResponse(f.read(), mimetype=mimetype)
+        response = HttpResponse(f.read(), content_type=content_type)
     response["Last-Modified"] = http_date(statobj.st_mtime)
     response["Expires"] = http_date_future(weeks=26)
     if stat.S_ISREG(statobj.st_mode):
