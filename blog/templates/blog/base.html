@@ -7,6 +7,13 @@
     <!--[if lte IE 8]>
     <script type="text/javascript" src="{{STATIC_URL}}html5.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      kbsettings={
+      next: '{% trans "nästa" %} \u2192',
+      prev: '\u2190 {% trans "förra" %}',
+      close: '{% trans "stäng" %} \u00D7'
+      };
+    </script>
     {% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}kratsbox/kratsbox.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}myinit.js"></script>

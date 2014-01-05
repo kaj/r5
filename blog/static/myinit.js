@@ -49,5 +49,5 @@ document.addEventListener('DOMContentLoaded', function() {
         initMyLibthing();
     }
     initSkiplinks();
-    kratsbox("figure > a");
+    kratsbox("figure > a", kbsettings);
 }, false);
