@@ -11,14 +11,14 @@
   {% if post.abstract %}
     <meta name="Description" content="{{post.abstract_text}}" />
   {% endif %}
-  <script type="text/javascript" async="async"
+  <script type="text/javascript" async="async" defer="defer"
           src="//api.flattr.com/js/0.6/load.js"
           onload="FlattrLoader.render({uid:'rasmus_kaj', button:'compact',
             url:'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
             title:document.querySelector('title').innerHTML, category:'text',
             {% if post.abstract %}description:'{{post.abstract_text}}'{% endif %}
             }, 'socialwidgets', 'append')"></script>
-  <script type="text/javascript" async="async"
+  <script type="text/javascript" async="async" defer="defer"
           src="https://platform.twitter.com/widgets.js"></script>
 {% endblock %}
 
