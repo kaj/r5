@@ -17,9 +17,10 @@
 
   <figure class="sidebar">
     <a href="{% url 'image_view' 'rasmus-broos' %}">
-      <img src="{% url 'image_small' 'rasmus-broos' %}"></a>
-    <figcaption>På jobbet i september 2011.
-      Foto: Björn Roos.</figcaption>
+      <img width="149" height="200" alt="{% trans 'Bild på mig' %}"
+	   src="{% url 'image_small' 'rasmus-broos' %}"></a>
+    <figcaption>{% trans "På jobbet i september 2011. Foto: Björn Roos." %}
+    </figcaption>
   </figure>
 
   <div class="abstract">
