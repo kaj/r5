@@ -441,7 +441,9 @@ li[class*=" icon-"]:before {
     padding-right: .2em;
     color: #222;
 }
-
+section#contact {
+    clear: right;
+}
 p.postyears {
     border-top: solid 1px #454229;
     margin: 4em auto 2em 1.4em;
