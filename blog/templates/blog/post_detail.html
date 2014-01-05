@@ -13,10 +13,10 @@
   {% endif %}
   <script type="text/javascript" async="async"
           src="//api.flattr.com/js/0.6/load.js"
-          onload="FlattrLoader.render({'uid':'rasmus_kaj', 'button':'compact',
-            'url':'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
-            'title':$('head title').html(), 'category':'text',
-            'description':$('meta[name=Description]').attr('content')
+          onload="FlattrLoader.render({uid:'rasmus_kaj', button:'compact',
+            url:'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
+            title:document.querySelector('title').innerHTML, category:'text',
+            {% if post.abstract %}description:'{{post.abstract_text}}'{% endif %}
             }, 'socialwidgets', 'append')"></script>
   <script type="text/javascript" async="async"
           src="https://platform.twitter.com/widgets.js"></script>
