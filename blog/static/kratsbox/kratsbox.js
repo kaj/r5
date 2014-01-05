@@ -4,30 +4,20 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
         console.debug("In initkratsbox for selector '" + selector + "',",
                       options);
 
-        function create(htmlStr) {
-            var frag = document.createDocumentFragment(),
-            temp = document.createElement('div');
-            temp.innerHTML = htmlStr;
-            while (temp.firstChild) {
-                frag.appendChild(temp.firstChild);
-            }
-            return frag;
-        }
-
-        var settings, data = {}, root = false,
+        var settings, data = {}, root,
         methods = {
         open : function() {
             root = document.querySelector('#kratsbox');
             console.debug('Open called, root:', root, ' data:', data);
             if(!root) {
-                root = create('<div id="kratsbox"><div><img alt="">'+
-                      '<a href="#close" class="krbxbtn close">close</a>'+
-                      '<a href="#next" class="krbxbtn next">next</a>'+
-                      '<a href="#prev" class="krbxbtn prev">prev</a>'+
-                      '<p id="krbxcaption"></p></div></div>');
-
+                root = document.createElement('div');
+                root.id = 'kratsbox';
+                root.innerHTML = '<div><img alt="">'+
+                    '<a href="#close" class="krbxbtn close">close</a>'+
+                    '<a href="#next" class="krbxbtn next">next</a>'+
+                    '<a href="#prev" class="krbxbtn prev">prev</a>'+
+                    '<p id="krbxcaption"></p></div>';
                 document.body.appendChild(root);
-                root = document.querySelector('#kratsbox');
                 var img = root.querySelector('img');
                 function limitSize() {
                     if (img.clientWidth) {
@@ -88,13 +78,14 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
                 case 37: // left arrow
                 case 38: // up arrow
                 case 33: // pgup
-                case 78: // 'n'
+                case 80: // 'p'
                     methods.prev();
                     break;
+                case 32: // space
                 case 39: // right arrow
                 case 40: // down arrow
                 case 34: // pgdn
-                case 80: // 'p'
+                case 78: // 'n'
                     methods.next();
                     break;
                 default:
@@ -124,20 +115,15 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
             var img = root.querySelector('img');
             var cap = selected.getAttribute('title'),
                 capE = document.querySelector('#krbxcaption');
-            data.current = selected.getAttribute('data-krbxindex');
+            data.current = parseInt(selected.getAttribute('data-krbxindex'));
             img.setAttribute('src', selected.getAttribute('href'));
             if (cap) {
                 capE.innerHTML = cap;
             } else {
-                var capSrc = selected.parentNode.querySelectorAll('figcaption');
-                if (capSrc) {
-		    capE.innerHTML = '';
-		    [].forEach.call(capSrc, function(s) {
-			capE.innerHTML += (s.innerHTML + ' ');
-		    });
-                } else {
-		    capE.innerHTML = '';
-		}
+                capE.innerHTML = Array.prototype.map.call(
+                    selected.parentNode.querySelectorAll('figcaption'),
+                    function(e) {return e.innerHTML;}
+                ).join('<br>');
             }
             console.debug('Loaddata done');
         },
@@ -166,10 +152,9 @@ if ( 'querySelector' in document && 'addEventListener' in window && Array.protot
         
         data.links = document.querySelectorAll(selector);
         console.log("Selector:", selector, "Links: ", data.links);
-        var i = 0;
-        [].forEach.call(data.links, function(link) {
-            console.debug("Initializing", link);
-            link.setAttribute('data-krbxindex', i++);
+        Array.prototype.forEach.call(data.links, function(link, i) {
+            console.debug("Initializing", link, i);
+            link.setAttribute('data-krbxindex', i);
             link.onclick = methods.open;
         });
         console.log('Data:', data);
