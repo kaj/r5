@@ -1,27 +1,33 @@
 html, body {
-    margin: 0;
-    padding: 0;
     background: #f6f1f4;
     color: black;
+    margin: 0;
+    padding: 0;
 }
 header.site {
-    background: #454229 no-repeat 30% 60%;
     background-size: cover;
+    background: #454229 no-repeat 30% 60%;
     color: white;
     margin: 0;
     padding: 1ex 0;
 }
-header.site :link, header.site :visited {
+header.site :link,
+header.site :visited {
     color: white;
 }
-header.site a:hover, header.site a:focus {
+header.site a:hover,
+header.site a:focus {
     color: #eeccff;
     text-decoration: underline;
 }
-#sitename :link, #sitename :visited {
+#sitename :link,
+#sitename :visited {
     text-decoration: none;
 }
-#sitename, #lingos, #tagline, #skiplinks {
+#sitename,
+#lingos,
+#tagline,
+#skiplinks {
     margin: .1em 0;
     text-shadow: .11em .07em .1em black;
 }
@@ -37,10 +43,11 @@ header.site a:hover, header.site a:focus {
 }
 #skiplinks div {
     background: rgba(15,50,5,.7);
-    padding: .2em .4em;
     border-radius: .2em;
+    padding: .2em .4em;
 }
-#skiplinks ul, #skiplinks li {
+#skiplinks ul,
+#skiplinks li {
     display: inline;
     margin: 0;
     padding: 0;
@@ -52,29 +59,33 @@ header.site a:hover, header.site a:focus {
     content: '.';
 }
 #sitename {
+    border-bottom: solid 1px rgba(255,255,255,.5);
     font-size: 150%;
     font-weight: bold;
-    border-bottom: solid 1px rgba(255,255,255,.5);
 }
 
-header.site > div, #mainwrap, footer.site > div {
+header.site > div,
+#mainwrap,
+footer.site > div {
     margin: auto;
     max-width: 68em;
     padding: 0 1ex;
 }
 footer.site {
-    clear: both;
     border-top: solid 1px #454229;
-    padding: .2em 0;
+    clear: both;
     margin-top: 1em;
+    padding: .2em 0;
 }
 footer.site p {
-    font-size: 90%;
     color: #606060;
-    text-decoration: none;
+    font-size: 90%;
     overflow: hidden;
+    text-decoration: none;
 }
-footer.site .license br { display: none; }
+footer.site .license br {
+    display: none;
+}
 
 main {
     margin: 1em 0;
@@ -82,35 +93,49 @@ main {
 }
 
 #sideblockwrap aside {
-    font-size: 90%;
-    margin: 1em 0;
-    padding: 1ex;
     background: white;
-    color: black;
+    -webkit-border-radius: .5em;
+    border-radius: .5em;
     border: solid 1px #888888;
     -webkit-box-shadow: .2em .3em .8em #aaaaaa;
     box-shadow: .2em .3em .8em #aaaaaa;
-    -webkit-border-radius: .5em;
-    border-radius: .5em;
+    color: black;
+    font-size: 90%;
+    margin: 1em 0;
+    padding: 1ex;
 }
-aside ul { margin: .5ex 0; padding: 0 0 0 1.7em; }
-#mylinks ul { padding-left: .7em; }
-aside h1 { margin: 0 0 1ex 0; font-size: 140%; }
-aside h2 { margin: 1ex 0 0 0; font-size: 120%; }
-aside h1, aside h2 {
+aside ul {
+    margin: .5ex 0;
+    padding: 0 0 0 1.7em;
+}
+#mylinks ul {
+    padding-left: .7em;
+}
+aside h1 {
+    font-size: 140%;
+    margin: 0 0 1ex 0;
+}
+aside h2 {
+    font-size: 120%;
+    margin: 1ex 0 0 0;
+}
+aside h1,
+aside h2 {
     font-family: serif;
     font-weight: bold;
 }
-aside .tagcloud { font-size: 95%; }
+aside .tagcloud {
+    font-size: 95%;
+}
 
 article {
     margin: 1ex 0 1em;
     overflow: hidden;
 }
 article .readmore {
-    text-align: right;
-    margin: 0 7%;
     font-style: italic;
+    margin: 0 7%;
+    text-align: right;
 }
 article .readmore:before {
     content: "\261e";
@@ -118,8 +143,8 @@ article .readmore:before {
     padding-right: 1ex;
 }
 address {
-    text-align: right;
     margin: 1em 0;
+    text-align: right;
 }
 address:before {
     content: "\270d";
@@ -129,59 +154,62 @@ address:before {
 main header {
     margin: 1em 0;
 }
-h1, h2 {
+h1,
+h2 {
     margin: 0;
 }
 div.message {
     background: white;
+    border-radius: 1ex;
     border: dashed 1px red;
     padding: 1ex;
-    border-radius: 1ex;
 }
 h1 {
-    font-size: 2em;
-    font-weight: bold;
     font-family: sans-serif;
+    font-size: 200%;
+    font-weight: bold;
 }
-h2 {
-    font-size: 1.4em;
+h2,
+section h1 {
+    font-size: 140%;
 }
-h3 {
-    font-size: 1.2em;
+h3,
+section section h1 {
+    font-size: 120%;
 }
 p.publine {
-    font-size: 90%;
     font-family: sans-serif;
+    font-size: 90%;
 }
 article h1 a {
     color: black;
     text-decoration: none;
 }
-article h1 a:hover, article h1 a:focus {
-    color: #440088; /* TODO Link color */
+article h1 a:hover,
+article h1 a:focus {
+    color: #0000aa;
     text-decoration: underline;
 }
 section {
-  margin: 2em 0 1em;
-  overflow: auto;
+    margin: 2em 0 1em;
+    overflow: auto;
 }
-section h1 { font-size: 1.4em; }
-section section h1 { font-size: 1.2em; }
 main header p {
     margin: 0;
 }
 
-main aside, .sidebar {
-    float: right;
+main aside,
+.sidebar {
     clear: right;
-    max-width: 45%;
+    float: right;
     margin: 0 0 1ex 1ex;
+    max-width: 45%;
 }
 figure {
-    margin: 0 1ex 1ex 0;
     display: inline-block;
-    vertical-align: top;
+    margin: 0 1ex 1ex 0;
     max-width: 100%;
+    vertical-align: top;
     width: 206px;
     width: -webkit-min-content;
     width: -moz-min-content;
@@ -195,29 +223,31 @@ aside figure {
     margin: 0;
 }
 figure figcaption {
-    font-size: 83%;
+    font-size: 80%;
     font-style: italic;
 }
-img { border: 0; }
+img {
+    border: 0;
+}
 figure img, .comment img {
-    border: solid 1px #666666;
     background: white;
-    padding: 2px;
+    border: solid 1px #666666;
     display: block;
+    height: auto;
     max-width: 96%;
     max-width: -moz-calc(100% - 6px);
     max-width: -webkit-calc(100% - 6px);
     max-width: -o-calc(100% - 6px);
     max-width: calc(100% - 6px);
-    height: auto;
+    padding: 2px;
 }
 .orgname.parti {
     display: inline-block;
-    width: 52px;
     height: 40px;
-    vertical-align: bottom;
-    text-indent: 53px;
     overflow: hidden;
+    text-indent: 53px;
+    vertical-align: bottom;
+    width: 52px;
 }
 .orgname.parti.kds {
     background: url('/img/kds');
@@ -240,7 +270,8 @@ figure img, .comment img {
 .orgname.parti.v {
     background: url('/img/v');
 }
-.abstract, .update {
+.abstract,
+.update {
     font-style: italic;
     margin-bottom: 1em;
 }
@@ -252,31 +283,51 @@ p {
 }
 
 /** Tables **/
-table { border-collapse: collapse; }
-table caption { caption-side: bottom; text-align: left;
-  font-style: italic; font-size: 90%; }
-table th, table td 
-  { border: solid 1px #cccccc; text-align: left; padding: 0 1ex; }
-table thead tr, table tbody tr:nth-child(even) { background-color: #e8e8e8; color: black; }
-
+table {
+    border-collapse: collapse;
+}
+table caption {
+    caption-side: bottom;
+    font-size: 90%;
+    font-style: italic;
+    text-align: left;
+}
+table th,
+table td {
+    border: solid 1px #cccccc;
+    padding: 0 1ex;
+    text-align: left;
+}
+table thead tr,
+table tbody tr:nth-child(even) {
+    background-color: #e8e8e8;
+    color: black;
+}
 
 pre.programlisting {
     background: white;
     border-color: #aaaaaa;
     border-style: solid;
     border-width: 1px 0;
-    padding: 1ex;
     overflow: auto;
+    padding: 1ex;
 }
 
-blockquote { max-width: 34em; margin: 1ex 1em 1em; padding: 1ex 1em; 
-  font-style: italic;
-  background: #fafafa; color: #222222;
-  border: solid 1px #aaaaaa;
-  -webkit-box-shadow: .3em .2em .5em #aaaaaa;
-  box-shadow: .3em .2em .5em #cccccc;
+blockquote {
+    background: #fafafa;
+    border: solid 1px #aaaaaa;
+    -webkit-box-shadow: .3em .2em .5em #cccccc;
+    box-shadow: .3em .2em .5em #cccccc;
+    color: #222222;
+    font-style: italic;
+    margin: 1ex 1em 1em;
+    max-width: 34em;
+    padding: 1ex 1em; 
 }
-blockquote > *:first-child { margin-top: 0; padding-top: 0; }
+blockquote > *:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
 blockquote footer.attribution {
     text-align: right;
     font-style: italic;
@@ -284,13 +335,17 @@ blockquote footer.attribution {
 blockquote em {
     font-weight: bold;
 }
-.replaceable { font-style: italic; }
-code.xml { color: #51AA17; }
+.replaceable {
+    font-style: italic;
+}
+code.xml {
+    color: #51AA17;
+}
 
 ul.tagcloud {
-    text-align: center;
     margin: 0 0 1ex 0;
     padding: 0;
+    text-align: center;
 }
 ul.tagcloud li {
     display: inline;
@@ -301,13 +356,17 @@ ul.tagcloud li.w3 { font-size: 100%; }
 ul.tagcloud li.w4 { font-size: 120%; }
 ul.tagcloud li.w5 { font-size: 150%; }
 
-dl { margin: 1ex 0; padding: 0; }
+dl {
+    margin: 1ex 0;
+    padding: 0;
+}
 dl dt {
     float: left;
     margin-right: .5em;
 }
 dl dd {
-    margin: 0 0 1ex 8em; padding: 0;
+    margin: 0 0 1ex 8em;
+    padding: 0;
 }
 
 .comment {
@@ -315,26 +374,29 @@ dl dd {
 }
 .comment img { /* gravatar */
     float: right;
-    margin: 0 0 .2em .4em
+    margin: 0 0 .2em .4em;
 }
 .comment.authorized h1:before {
-    content: "\270d";
     color: #8a8452;
+    content: "\270d";
 }
 
-#writecomment label, #writecomment input, #writecomment textarea {
+#writecomment label,
+#writecomment input,
+#writecomment textarea {
     vertical-align: baseline;
 }
 #writecomment label {
     float: left;
 }
-#writecomment input, #writecomment textarea {
+#writecomment input,
+#writecomment textarea {
     width: 95%;
     width: -moz-available;
 }
 #writecomment p.fineprint {
     display: block;
-    font-size: 84%;
+    font-size: 85%;
 }
 #writecomment p.submit {
     display: block;
@@ -343,10 +405,10 @@ dl dd {
     width: auto;
 }
 #latestcomments p {
-    font-size: 90%;
     border-top: solid 1px #aaa;
-    padding: 1ex 0;
+    font-size: 90%;
     margin: 0;
+    padding: 1ex 0;
 }
 #latestcomments p:last-child {
     padding-bottom: 0;
@@ -357,12 +419,13 @@ dl dd {
 }
 
 :target {
-    padding-left: .5em;
+    background: -webkit-linear-gradient(176deg, rgba(255,0,99,.4), rgba(255,0,0,0) 3em);
+    background: linear-gradient(176deg, rgba(255,0,99,.4), rgba(255,0,0,0) 3em);
     border-radius: .4em 1em 0 0;
-    background: -webkit-linear-gradient(176deg, rgba(255,0,99,0.4), rgba(255,0,0,0) 3em);
-    background: linear-gradient(176deg, rgba(255,0,99,0.4), rgba(255,0,0,0) 3em);
+    padding-left: .5em;
 }
-:link:hover, :visited:hover {
+:link:hover,
+:visited:hover {
     text-decoration: underline;
 }
 :link:hover {
@@ -372,7 +435,8 @@ dl dd {
     color: #550088;
 }
 
-.LT_itemLast, .LT_powered {
+.LT_itemLast,
+.LT_powered {
     border-top: solid 1px #aaa;
     overflow: hidden;
     padding: 1ex 0;
@@ -383,15 +447,15 @@ dl dd {
 }
 .LT_title {
     display: block;
-    font-size: 111%;
+    font-size: 110%;
 }
 .LT_rating {
     display: block;
     margin-top: 1ex;
 }
 .LT_powered {
-    text-align: center;
     padding-bottom: 0;
+    text-align: center;
 }
 .LT_powered a {
     text-decoration: none;
@@ -402,19 +466,19 @@ dl dd {
 }
 #LT_LB_overlay {
     background: rgba(0, 0, 0, .2);
+    height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
 }
 
 main .LTitem {
     display: inline-block;
     margin: 0 1em 1em 0;
     vertical-align: middle;
-    width: 20em;
     width: -moz-max-content;
+    width: 20em;
 }
 main .LTitem img {
     float: left;
@@ -437,9 +501,9 @@ li[class*=" icon-"] {
 }
 li[class^="icon-"]:before,
 li[class*=" icon-"]:before {
+    color: #222;
     display: marker;
     padding-right: .2em;
-    color: #222;
 }
 section#contact {
     clear: right;
@@ -450,12 +514,12 @@ p.postyears {
     padding-top: .3em;
 }
 p.postyears:before {
-    font-family: 'font-kaj-20121124';
+    color: #8add52;
     content: '🍂'; /* \1f342 */
     float: left;
+    font-family: 'font-kaj-20121124';
     font-size: 280%;
     margin: -.5em .4em 0 -.5em;
-    color: #8add52;
     text-shadow: .07em .1em .15em #454229;
 }
 
@@ -464,8 +528,8 @@ p.postyears:before {
 	clear: left;
     }
     #skiplinks {
-	position: static;
 	float: left;
+	position: static;
     }
 }
 @media screen and (min-width: 35em) {
@@ -474,13 +538,13 @@ p.postyears:before {
         width: 66%;
     }
     #sideblockwrap {
-        width: 31.83%;
         float: right;
+        width: 31.83%;
     }
     #skiplinks.withoutfocus {
 	height: 0;
-	overflow: hidden;
 	margin: 0;
+	overflow: hidden;
     }
     #skiplinks.withfocus {
 	height: auto;
@@ -512,15 +576,15 @@ p.postyears:before {
 	display: none;
     }
     header.site, #mainwrap, footer {
-	color: inherit;
 	background: transparent;
+	color: inherit;
     }
     #sitename, #tagline {
-	display: inline;
-	font-size: 1em;
-	text-shadow: none;
-	font-weight: normal;
 	border: 0;
+	display: inline;
+	font-size: 100%;
+	font-weight: normal;
+	text-shadow: none;
     }
     #tagline:before {
 	content: ' \2013\00a0 ';
