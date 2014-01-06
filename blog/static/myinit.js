@@ -1,10 +1,10 @@
-!function(d){if ('querySelector' in d && 'addEventListener' in window &&
-                 'forEach' in Array) {
+!function(d,w,ap){if ('querySelector' in d && 'addEventListener' in w &&
+                      'forEach' in ap) {
 
     function initSkiplinks() {
         var sl = d.getElementById('skiplinks');
         sl.className = 'withoutfocus';
-        Array.prototype.forEach.call(sl.querySelectorAll('a'), function(link) {
+        ap.forEach.call(sl.querySelectorAll('a'), function(link) {
             link.addEventListener('focus', function() {
                 sl.className = 'withfocus';
             });
@@ -43,4 +43,4 @@
         initSkiplinks();
         kratsbox("figure > a", kbsettings);
     }, false);
-}}(document);
+}}(document,window,Array.prototype);
