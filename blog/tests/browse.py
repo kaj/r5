@@ -102,7 +102,7 @@ class SimpleTest(TestCase):
         
     def test_get_article(self):
         doc = self.get('/2013/foo.sv')
-        self.assertEqual([u'Foo \u2013 Rasmus.krats.se '],
+        self.assertEqual([u'Foo \u2013 Rasmus.krats.se'],
                          select_texts(doc, 'head title'))
         self.assertEqual(['Rasmus.krats.se'],
                          select_texts(doc, 'header #sitename'))

@@ -26,4 +26,10 @@ class PostCommentModerator(CommentModerator):
             .values_list('ip_address', flat=True).distinct()
         return request.META['REMOTE_ADDR'] in spammers
 
+    def email(self, comment, content_object, request):
+        '''Dont send email notifications for hidden comments.'''
+        if comment.is_public:
+            super(PostCommentModerator, self).email(comment, content_object,
+                                                    request)
+
 moderator.register(Post, PostCommentModerator)

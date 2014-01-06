@@ -1,143 +1,154 @@
-(function($) {
-    var settings, links, root = false, img,
-    methods = {
-        open : function() {
-            if(!root) {
-                root =
-                    $('<div id="kratsbox"><div class="bg"></div>'+
-                      '<div id="krbxframe"><img alt="">'+
-                      '<p><a href="#close" class="close" title="close">'+
-                      settings['close']+'</a>'+
-                      '<span class="krbxbtns">'+
-                      '<a href="#prev" class="prev" title="previous image">'+
-                      settings['prev']+'<span class="extra"></span></a>'+
-                      '<a href="#next" class="next" title="next image">'+
-                      settings['next']+'<span class="extra"></span></a>'+
-                      '</span><span id="krbxcaption"></span></p></div></div>')
-                    .appendTo('body');
-                img = root.find('img');
-                var close = root.find('.close'),
-                next = root.find('.next'),
-                prev = root.find('.prev');
-                close.bind('click.kratsbox', methods.close);
-                next.bind('click.kratsbox', methods.next);
-                prev.bind('click.kratsbox', methods.prev);
-                function setupfocus(elem, nextelem, prevelem) {
-                    elem.keydown(function(event){
+var kratsbox = function(d,w,ap) {
+    if ('querySelector' in d && 'addEventListener' in w && 'forEach' in ap) {
+        
+        return function(selector, options) {
+            var links, current, root, settings = {
+                'minsize': 500,
+                'next': 'next \u2192',
+                'prev': '\u2190 prev',
+                'close': 'close \u00D7'
+            };
+            for (var attrname in options) {
+                settings[attrname] = options[attrname];
+            }
+
+            if (w.innerWidth < settings.minsize ||
+                w.innerHeight < settings.minsize) {
+                console.debug('kratsbox disabled, size is ' + w.innerWidth + ' x ' + w.innerHeight + ' but limit is ' + settings.minsize)
+                return;
+            }
+
+            function open() {
+                root = d.querySelector('#kratsbox');
+                if(!root) {
+                    root = d.createElement('div');
+                    root.id = 'kratsbox';
+                    root.innerHTML = '<div><img alt="">'+
+                        '<a href="#close" class="krbxbtn close">close</a>'+
+                        '<a href="#next" class="krbxbtn next">next</a>'+
+                        '<a href="#prev" class="krbxbtn prev">prev</a>'+
+                        '<p id="krbxcaption"></p></div>';
+                    d.body.appendChild(root);
+                    var img = root.querySelector('img');
+                    function limitSize() {
+                        if (img.clientWidth) {
+                            var kf = root.querySelector('div');
+                            kf.style.width = 'auto';
+                            img.style.maxHeight = (root.clientHeight-120)+'px';
+                            kf.style.width = img.clientWidth+'px';
+                            ap.forEach.call(
+                                kf.querySelectorAll('.extra'),
+                                function(e){e.style.height=img.clientHeight+'px'})
+                        } else {
+                            w.setTimeout(limitSize, 100);
+                        }
+                    }
+                    w.addEventListener('resize', limitSize);
+                    img.addEventListener('load', limitSize);
+                    limitSize();
+                }
+                
+                var ce = root.querySelector('.close'),
+                ne = root.querySelector('.next'),
+                pe = root.querySelector('.prev');
+                pe.innerHTML = settings.prev + '<span class="extra"></span>';
+                ne.innerHTML = settings.next + '<span class="extra"></span>';
+                ce.innerHTML = settings.close;
+                ce.onclick = close;
+                ne.onclick = next;
+                pe.onclick = prev;
+                function setupfocus(src, next, prev) {
+                    src.onkeydown = function(event) {
                         if(event.which == 9) {
                             if(event.shiftKey) {
-                                prevelem.focus();
+                                prev.focus();
                             } else {
-                                nextelem.focus();
+                                next.focus();
                             } 
                             event.stopPropagation();
                             return false;
                         }
-                    });
+                    };
                 }
                 if (links.length > 1) {
-                    setupfocus(close, prev, next);
-                    setupfocus(next, close, prev);
-                    setupfocus(prev, next, close);
+                    root.querySelector('div').className = 'group';
+                    setupfocus(ce, pe, ne);
+                    setupfocus(ne, ce, pe);
+                    setupfocus(pe, ne, ce);
                 } else {
-                    prev.hide();
-                    next.hide();
-                    setupfocus(close, close, close);
+                    root.querySelector('div').className = 'single';
+                    setupfocus(ce, ce, ce);
                 }
-                root.keydown(function(event){
+                root.onkeydown = function(event) {
                     switch(event.which) {
                     case 9: // tab
-                        close.focus();
+                        ce.focus();
                         break;
                     case 27: // escape
-                        methods.close();
+                        close();
                         break;
                     case 37: // left arrow
                     case 38: // up arrow
                     case 33: // pgup
-                    case 78: // 'n'
-                        methods.prev();
+                    case 80: // 'p'
+                        prev();
                         break;
+                    case 32: // space
                     case 39: // right arrow
                     case 40: // down arrow
                     case 34: // pgdn
-                    case 80: // 'p'
-                        methods.next();
+                    case 78: // 'n'
+                        next();
                         break;
                     default:
                         return true;
                     }
                     event.stopPropagation();
                     return false;
-                });
-                function limitSize() {
-                    if (img.width()) {
-                        root.find('#krbxframe').width('auto');
-                        img.css('max-height', (root.height()-120)+'px');
-                        root.find('#krbxframe').width(img.width());
-                        root.find('.extra').height(img.height());
-                    } else {
-                        window.setTimeout(limitSize, 100);
-                    }
+                };
+                load(this);
+                root.className = 'showing';
+                root.querySelector('.close').focus();
+                return false;
+            };
+            function next() {
+                return load(links[(current + 1) % links.length]);
+            };
+            function prev() {
+                return load(links[(current+links.length-1) % links.length]);
+            };
+            function load(le) {
+                console.debug('kratsbox load', le);
+                var ce = d.querySelector('#krbxcaption'),
+                cap = le.getAttribute('title');
+                current = parseInt(le.getAttribute('data-krbxindex'));
+                root.querySelector('img').setAttribute('src', le.getAttribute('href'));
+                if (cap) {
+                    ce.innerHTML = cap;
+                } else {
+                    ce.innerHTML = ap.map.call(
+                        le.parentNode.querySelectorAll('figcaption'),
+                        function(e) {return e.innerHTML;}
+                    ).join('<br>');
                 }
-                $(window).resize(limitSize);
-                img.bind('load', limitSize);
-                limitSize();
-            }
-            methods.loaddata(this);
-            root.show();
-            root.find('.bg').fadeTo(200, 0.8);
-            root.find('#krbxframe').show();
-            root.find('.close').focus();
-            return false;
-        },
-        next: function() {
-            var i = img.data('current') + 1
-            methods.loaddata(links[i % links.length]);
-            return false;
-        },
-        prev: function() {
-            var i = img.data('current') - 1
-            methods.loaddata(links[(i+links.length) % links.length]);
-            return false;
-        },
-        loaddata: function(selected) {
-            var s = $(selected), cap = s.attr('title'),
-                capE = root.find('#krbxcaption');
-            img.data('current', s.data('krbxindex'));
-            img.attr('src', s.attr('href'));
-            if (cap) {
-                capE.text(cap);
-            } else {
-                capE.html(s.parent('figure').find('figcaption').html() || '');
-            }
-        },
-        close : function() {
-            root.find('.bg').fadeOut(400, function(){root.hide()});
-            root.find('#krbxframe').hide();
-            $(links[img.data('current')]).focus();
-            return false;
-        }
-    };
-    $.fn.kratsbox = function(options) {
-        settings = $.extend({
-            'minsize': 500,
-            'next': 'next \u2192',
-            'prev': '\u2190 prev',
-            'close': 'close \u00D7'
-        }, options);
-        
-        if ($(window).width() < settings.minsize ||
-            $(window).height() < settings.minsize) {
+                return false;
+            };
+            function close() {
+                root.className = 'hidden';
+                links[current].focus();
+                return false;
+            };
             
-            return this;
+            links = d.querySelectorAll(selector);
+            console.debug("kratsbox selector:", selector, ", links:", links);
+            ap.forEach.call(links, function(link, i) {
+                link.setAttribute('data-krbxindex', i);
+                link.onclick = open;
+            });
+        };
+    } else {
+        return function(s,o) {
+            console.debug("kratsbox not supported in this browser");
         }
-        
-        links = this;
-        links.each(function(index) {
-            $(this).data('krbxindex', index);
-        });
-        links.bind('click.kratsbox', methods.open);
-        return this;
-    };
-})(jQuery);
+    }
+}(document,window,Array.prototype);
