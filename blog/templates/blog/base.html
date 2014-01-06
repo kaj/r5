@@ -93,7 +93,8 @@
         <p class="license">
           <i class="icon-cc"></i>
           <i class="icon-cc-by"></i>
-          {% blocktrans with me='<a xmlns:cc="http://creativecommons.org/ns#" href="http://rasmus.krats.se/" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>' a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">' sa='</a>'%}
+          {% url 'me' lang=LANGUAGE_CODE as me_url %}
+          {% blocktrans with me='<a href="'|add:me_url|add:'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>'|safe a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">' sa='</a>'%}
           Detta verk av {{me}} är licensierat under en
           {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
           {% endblocktrans %}
