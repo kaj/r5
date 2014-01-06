@@ -7,8 +7,14 @@
     <!--[if lte IE 8]>
     <script type="text/javascript" src="{{STATIC_URL}}html5.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      kbsettings={
+      next: '{% trans "nästa" %} \u2192',
+      prev: '\u2190 {% trans "förra" %}',
+      close: '{% trans "stäng" %} \u00D7'
+      };
+    </script>
     {% compress js %}
-    <script type="text/javascript" src="{{STATIC_URL}}jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}kratsbox/kratsbox.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}myinit.js"></script>
     {% endcompress %}
@@ -19,9 +25,9 @@
     <link rel="stylesheet" href="{{STATIC_URL}}kratsbox/kratsbox.css" type="text/css"/>
     <link rel="stylesheet" href="{{STATIC_URL}}iconfont/css/font-kaj-20121124.css" type="text/css"/>
     {% endcompress %}
-    <script type="text/javascript" async="async"
+    <!--script type="text/javascript" async="async"
             src="http://s.gravatar.com/js/gprofiles.js"
-            onload="Gravatar.init()"></script>
+            onload="Gravatar.init()"></script-->
     <link rel="shortcut icon" href="{{STATIC_URL}}trafik-kaj-s.png" />
     <link rel="apple-touch-icon" href="{{STATIC_URL}}trafik-kaj.png" />
     {% block extrahead %}{% endblock %}

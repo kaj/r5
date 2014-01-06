@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-05 16:50+0100\n"
+"POT-Creation-Date: 2014-01-06 02:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -44,7 +44,7 @@ msgstr "Your comment awaits moderation."
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-#: templates/404.html:16 templates/blog/base.html:47
+#: templates/404.html:16 templates/blog/base.html:53
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
@@ -210,7 +210,7 @@ msgstr ""
 "      </p>\n"
 "      "
 
-#: templates/about.html:131 templates/openid.html:75
+#: templates/about.html:131 templates/openid.html:71
 #: templates/blog/index.html:27 templates/blog/tagcloud.html:4
 #: templates/blog/tagged.html:20
 msgid "taggmoln"
@@ -224,32 +224,44 @@ msgstr "Picture of me"
 msgid "På jobbet i september 2011. Foto: Björn Roos."
 msgstr "At work, september 2011. Photo: Björn Roos."
 
-#: templates/blog/base.html:44
+#: templates/blog/base.html:12
+msgid "nästa"
+msgstr "next"
+
+#: templates/blog/base.html:13
+msgid "förra"
+msgstr "prev"
+
+#: templates/blog/base.html:14
+msgid "stäng"
+msgstr "close"
+
+#: templates/blog/base.html:50
 msgctxt "target language"
 msgid "På svenska"
 msgstr "In English"
 
-#: templates/blog/base.html:48
+#: templates/blog/base.html:54
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: templates/blog/base.html:50
+#: templates/blog/base.html:56
 msgid "innehåll"
 msgstr "content"
 
-#: templates/blog/base.html:53
+#: templates/blog/base.html:59
 msgid "mina länkar"
 msgstr "my links"
 
-#: templates/blog/base.html:74
+#: templates/blog/base.html:80
 msgid "Om"
 msgstr "About"
 
-#: templates/blog/base.html:80
+#: templates/blog/base.html:86
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: templates/blog/base.html:96
+#: templates/blog/base.html:103
 #, python-format
 msgid ""
 "\n"
@@ -262,7 +274,7 @@ msgstr ""
 "          %(a)sCreative Commons Attribution 3.0 Unported License%(sa)s.\n"
 "          "
 
-#: templates/blog/base.html:100
+#: templates/blog/base.html:107
 msgid ""
 "\n"
 "\t  Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
