@@ -16,7 +16,7 @@
           onload="FlattrLoader.render({uid:'rasmus_kaj', button:'compact',
             url:'http://rasmus.krats.se{% url 'post_detail' post.year post.slug post.lang %}',
             title:document.querySelector('title').innerHTML, category:'text',
-            {% if post.abstract %}description:'{{post.abstract_text}}'{% endif %}
+            {% if post.abstract %}description:'{{post.abstract_text|escapejs}}'{% endif %}
             }, 'socialwidgets', 'append')"></script>
   <script type="text/javascript" async="async" defer="defer"
           src="https://platform.twitter.com/widgets.js"></script>
