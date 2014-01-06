@@ -211,7 +211,6 @@ figure {
     max-width: 100%;
     vertical-align: top;
     width: 206px;
-    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
 }
