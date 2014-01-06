@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-05 06:32+0100\n"
+"POT-Creation-Date: 2014-01-06 02:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -39,7 +39,7 @@ msgstr "Your comment is removed."
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
-#: views.py:194
+#: views.py:196
 #, python-format
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
@@ -49,12 +49,12 @@ msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
 #: templates/about.html:6 templates/about.html.py:15 templates/openid.html:6
-#: templates/openid.html.py:19
+#: templates/openid.html.py:27
 msgid "Systemutvecklare på IT-Avdelningen på KTH."
 msgstr ""
 "System developer at the IT UNIT of the Royal Institute of Technology, KTH."
 
-#: templates/about.html:19 templates/openid.html:23
+#: templates/about.html:19 templates/openid.html:31
 msgid ""
 "\n"
 "    <p>Jag är en systemutvecklare som i första hand jobbar med webb,\n"
@@ -79,23 +79,23 @@ msgstr ""
 "member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer club "
 "at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
 
-#: templates/about.html:32 templates/openid.html:36
+#: templates/about.html:32 templates/openid.html:44
 msgid "Kontakt"
 msgstr "Contact"
 
-#: templates/about.html:40 templates/openid.html:44
+#: templates/about.html:40 templates/openid.html:52
 msgid "Epost:"
 msgstr "E-mail:"
 
-#: templates/about.html:43 templates/openid.html:47
+#: templates/about.html:43 templates/openid.html:55
 msgid "Telefon:"
 msgstr "Phone:"
 
-#: templates/about.html:45 templates/openid.html:49
+#: templates/about.html:45 templates/openid.html:57
 msgid "sms:"
 msgstr "sms:"
 
-#: templates/about.html:48 templates/openid.html:52
+#: templates/about.html:48 templates/openid.html:60
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
@@ -210,11 +210,19 @@ msgstr ""
 "      </p>\n"
 "      "
 
-#: templates/about.html:131 templates/openid.html:67
+#: templates/about.html:131 templates/openid.html:71
 #: templates/blog/index.html:27 templates/blog/tagcloud.html:4
 #: templates/blog/tagged.html:20
 msgid "taggmoln"
 msgstr "tag cloud"
+
+#: templates/openid.html:20
+msgid "Bild på mig"
+msgstr "Picture of me"
+
+#: templates/openid.html:22
+msgid "På jobbet i september 2011. Foto: Björn Roos."
+msgstr "At work, september 2011. Photo: Björn Roos."
 
 #: templates/blog/base.html:12
 msgid "nästa"
@@ -253,7 +261,7 @@ msgstr "About"
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: templates/blog/base.html:102
+#: templates/blog/base.html:103
 #, python-format
 msgid ""
 "\n"
@@ -266,7 +274,7 @@ msgstr ""
 "          %(a)sCreative Commons Attribution 3.0 Unported License%(sa)s.\n"
 "          "
 
-#: templates/blog/base.html:106
+#: templates/blog/base.html:107
 msgid ""
 "\n"
 "\t  Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"

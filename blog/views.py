@@ -159,7 +159,9 @@ def about(request, lang):
 
 def openid(request, lang='sv'):
     translation.activate(lang)
-    return render(request, 'openid.html')
+    return render(request, 'openid.html', {
+        'altlingos': langlinks('me', lang=lang),
+    })
 
 def langlinks(page, lingos=None, lang=None, **kwargs):
     if lingos is None:

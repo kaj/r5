@@ -15,6 +15,14 @@
     <h1>Rasmus Kaj</h1>
   </header>
 
+  <figure class="sidebar">
+    <a href="{% url 'image_view' 'rasmus-broos' %}">
+      <img width="149" height="200" alt="{% trans 'Bild på mig' %}"
+	   src="{% url 'image_small' 'rasmus-broos' %}"></a>
+    <figcaption>{% trans "På jobbet i september 2011. Foto: Björn Roos." %}
+    </figcaption>
+  </figure>
+
   <div class="abstract">
     <p>{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}</p>
   </div>
@@ -57,10 +65,6 @@
       </dl>
     </section>
   </div>
-  
-  <address>Rasmus Kaj
-    <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
-  </address>
 {% endblock %}
 
 {% block lastskiplinks %}

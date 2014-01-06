@@ -1,7 +1,7 @@
 {% extends "blog/base.html" %}
 {% load comments i18n blogtags simplegravatar %}
 
-{% block title %}{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se {% endblock %}
+{% block title %}{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se{% endblock %}
 
 {% block firstskiplinks %}
   <li><a href="#similar">{% trans "liknande sidor" %}</a></li>
@@ -48,8 +48,8 @@
 
   <div class="content">{{post.content_output}}</div>
 
-  <address>Rasmus Kaj
-    <a href="mailto:rasmus@krats.se">rasmus@krats.se</a>
+  <address>
+    <a href="{% url 'me' lang=LANGUAGE_CODE %}" rel="author">Rasmus Kaj</a>
   </address>
   
   <div id="socialwidgets">
