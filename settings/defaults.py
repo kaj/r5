@@ -179,6 +179,7 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',
 )
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
+COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
 # Who should be allowed to see the debug toolbar.
 INTERNAL_IPS = ('127.0.0.1', )
