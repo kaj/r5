@@ -105,8 +105,7 @@
     <h1>{% trans "Liknande sidor" %}</h1>
     <ul>
       {% for p in similar %}
-      <li><a href="{{p.get_absolute_url}}" lang="{{p.lang}}">
-	  {{p.title|safe}}</a></li>
+      <li><a href="{{p.get_absolute_url}}" lang="{{p.lang}}">{{p.title|safe}}</a>
       {% endfor %}
     </ul>
   </aside>
