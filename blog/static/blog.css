@@ -352,7 +352,10 @@ ul.tagcloud {
 }
 ul.tagcloud li {
     display: inline;
+    display: inline-block;
+    margin: 0 .2em;
 }
+ul.tagcloud a { text-decoration: none; }
 ul.tagcloud li.w1 { font-size: 70%; }
 ul.tagcloud li.w2 { font-size: 85%; }
 ul.tagcloud li.w3 { font-size: 100%; }

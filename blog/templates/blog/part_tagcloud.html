@@ -1,9 +1,10 @@
-{% load i18n %}{% get_current_language as lang %}
+{% load i18n %}{% get_current_language as lang %}{% spaceless %}
 <h1>{% trans "Taggmoln" %}</h1>
 <ul class="tagcloud">
-  {% for tag in tags %}{% spaceless %}
-  <li class="n{{tag.n}} w{{tag.w}}">
+  {% for tag in tags %}
+  <li class="w{{tag.w}}">
     <a href="{% url 'tagged' slug=tag.slug lang=lang %}">{{tag.name}}</a>
-  </li>{% endspaceless %}
+  </li>
   {% endfor %}
 </ul>
+{% endspaceless %}
