@@ -97,23 +97,19 @@
 	{% block sideblockbottom %}{% endblock %}
       </div>
     </div>
+    {% spaceless %}
     <footer class="site">
       <div>
-        {% spaceless %}
-        <p class="license">
-          <i class="icon-cc"></i>
-          <i class="icon-cc-by"></i>
-          {% url 'me' lang=LANGUAGE_CODE as me_url %}
-          {% blocktrans with me='<a href="'|add:me_url|add:'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>'|safe a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">' sa='</a>'%}
+        {% url 'me' lang=LANGUAGE_CODE as me_url %}
+        <p class="license icon-cc-by">
+          {% blocktrans with me='<a href="'|add:me_url|add:'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>'|safe a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">' sa='</a>' %}
           Detta verk av {{me}} är licensierat under en
           {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
-          {% endblocktrans %}
-	  {% blocktrans %}
-	  Denna site <a href="/om#cookie">använder kakor</a>.
-	  {% endblocktrans %}
-        </p>
-        {% endspaceless %}
+          {% endblocktrans %}</p>
+        <p>{% blocktrans %}
+          Denna site <a href="/om#cookie">använder kakor</a>.
+          {% endblocktrans %}</p>
       </div>
     </footer>
-  </body>
+  </body>{% endspaceless %}
 </html>

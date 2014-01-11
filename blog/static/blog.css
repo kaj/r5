@@ -83,8 +83,12 @@ footer.site p {
     overflow: hidden;
     text-decoration: none;
 }
-footer.site .license br {
-    display: none;
+footer.site p {
+    display: inline;
+}
+footer.site p.icon-cc-by:before {
+    content: '\e7a5\0020\e7a6';
+    width: auto;
 }
 
 main {
