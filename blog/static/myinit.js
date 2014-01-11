@@ -24,12 +24,12 @@
         }
     }
     
-    d.addEventListener('DOMContentLoaded', function() {
+    function rkinit() {
         if (d.getElementById('latestcomments')) {
             d.getElementById('sideblockwrap').innerHTML +=
             ('<aside id="tweetbox">'+
              '<a class="twitter-timeline" href="https://twitter.com/rasmus_kaj"'+
-             ' data-dnt="true"  data-widget-id="348079144619356161">'+
+             ' data-dnt="true" data-widget-id="348079144619356161">'+
              'Tweets by @rasmus_kaj</a></aside>'+
              '<aside id="booksbox"><h1>Några bra böcker</h1>'+
              '<div id="w5c54f5e485d879152955168d893d33ab"></div></aside>');
@@ -42,5 +42,12 @@
         }
         initSkiplinks();
         kratsbox("figure > a", kbsettings);
-    }, false);
+    }
+    if (d.readyState == 'complete'
+        || d.readyState == 'loaded'
+        || d.readyState == 'interactive') {
+        rkinit()
+    } else {
+        d.addEventListener('DOMContentLoaded', rkinit, false)
+    }
 }}(document,window,Array.prototype);
