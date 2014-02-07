@@ -74,7 +74,7 @@ def process_content(content, images, base=None, lang='sv'):
         if len(pre):
             next
         content = tostring(pre, method='text', encoding=unicode,
-                           with_tail=False).strip()
+                           with_tail=False).rstrip()
         indent = commonprefix(findall('\n *(?!\s)', content))
         if indent:
             content = content.replace(indent, '\n')
