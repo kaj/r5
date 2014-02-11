@@ -17,18 +17,6 @@ nsmap = {
     'html': 'http://www.w3.org/1999/xhtml',
     }
 
-def parsedate(datestr=None):
-    if datestr:
-        try:
-            if len(datestr) < 20:
-                datestr = datestr + 'T12:00:00Z'
-            return datetime.strptime(datestr, '%Y-%m-%dT%H:%M:%SZ')
-        except ValueError:
-            print 'WARNING: Failed to parse date "%s".' % datestr
-            return None
-    else:
-        return None
-
 class Command(NoArgsCommand):
     help = 'Find and read content'
 
@@ -77,7 +65,7 @@ class Command(NoArgsCommand):
             for child in list(e):
                 child.parent = e
 
-        date = parsedate(serialize(tree.find('head/pubdate', nsmap)))
+        date = self.parsedate(serialize(tree.find('head/pubdate', nsmap)))
         if not date:
             print "Print ignoring %s, pubdate missing." % filename
             return
@@ -100,7 +88,7 @@ class Command(NoArgsCommand):
             update.time=date
             update.save()
         for revision in tree.findall('./head/update', nsmap):
-            rdate = parsedate(revision.get('date'))
+            rdate = self.parsedate(revision.get('date'))
             note = self.d2h(revision)
             # print rdate, note[:40]
             update, isnew = Update.objects.get_or_create(post=p, time=rdate)
@@ -159,6 +147,18 @@ class Command(NoArgsCommand):
                 print 'Found image %s.' % img
                 e.set('ref', img.ref)
         return serialize(elem)
+
+    def parsedate(self, datestr=None):
+        if datestr:
+            try:
+                if len(datestr) < 20:
+                    datestr = datestr + 'T12:00:00Z'
+                return datetime.strptime(datestr, '%Y-%m-%dT%H:%M:%SZ')
+            except ValueError:
+                print 'WARNING: Failed to parse date "%s".' % datestr
+                return None
+        else:
+            return None
 
 def serialize(elem, skip_root=True):
     if elem is None:
