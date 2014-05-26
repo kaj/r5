@@ -86,7 +86,12 @@ def post_detail(request, year, slug, lang=None):
     translation.activate(lang)
     message = None
     if 'c' in request.GET:
-        comment = get_object_or_404(Comment, id=int_or_404(request.GET['c']))
+        # TODO Require the comment to be on this post
+        try:
+            comment = Comment.objects.get(id=int_or_404(request.GET['c']))
+        except Comment.DoesNotExist:
+            # Silently ignore nonexisting comment id
+            return redirect(post.get_absolute_url())
         print "Comment:", comment
         if comment.is_removed:
             print "That comment is removed!!"

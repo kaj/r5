@@ -9,6 +9,8 @@ logger = getLogger(__name__)
 
 def process_content(content, images, base=None, lang='sv'):
     dom = fromstring(u'<article lang="%s">%s</article>' % (lang, content))
+    def getlang(elem):
+        return elem.get('lang') or getlang(elem.getparent())
     for figure in dom.iterfind('.//figure'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
@@ -48,16 +50,19 @@ def process_content(content, images, base=None, lang='sv'):
     for e in dom.iterfind('.//term'):
         href = e.get('href', '')
         if not href:
-            def getlang(elem):
-                return elem.get('lang') or getlang(elem.getparent())
             urlbase = {
                 'wp': 'http://{lang}.wikipedia.org/wiki/{ref}',
                 'sw': 'http://seriewikin.serieframjandet.se/index.php/{ref}',
                 'foldoc': 'http://foldoc.org/{ref}',
             }
+            ref = e.text.encode('utf8')
+            disambiguion = e.get('da')
+            if disambiguion:
+                ref = ref + ' (' + disambiguion + ')'
+                del e.attrib['da']
             e.set('href', urlbase.get(e.get('role') or 'wp', '').format(
                 lang=getlang(e),
-                ref=quote(e.text.encode('utf8'))))
+                ref=quote(ref)))
         e.tag = 'a'
     
     for e in dom.iterfind('.//uri'):
@@ -69,12 +74,21 @@ def process_content(content, images, base=None, lang='sv'):
         e.tag = 'a'
         e.set('class', 'email')
         e.set('href', 'mailto:' +  e.text)
-    
+
+    for e in dom.iterfind('.//cite'):
+        isbn = e.get('isbn')
+        if isbn:
+            # TODO Maybe put the link inside the cite?
+            e.tag = 'a'
+            e.set('href', 'http://{lang}.librarything.com/isbn/{isbn}'.format(
+                lang = getlang(e),
+                isbn=isbn))
+
     for pre in dom.iterfind('.//pre'):
         if len(pre):
             next
         content = tostring(pre, method='text', encoding=unicode,
-                           with_tail=False).strip()
+                           with_tail=False).rstrip()
         indent = commonprefix(findall('\n *(?!\s)', content))
         if indent:
             content = content.replace(indent, '\n')
