@@ -45,8 +45,8 @@ urlpatterns = patterns(
 
     url(r'^about$', about, {'lang': 'en'}, name='about'),
     url(r'^om$', about, {'lang': 'sv'}, name='about'),
-    url(r'^RasmusKaj', openid, {'lang': 'sv'}, name='me'),
-    url(r'^rkaj', openid, {'lang': 'en'}, name='me'),
+    url(r'^RasmusKaj$', openid, {'lang': 'sv'}, name='me'),
+    url(r'^rkaj$', openid, {'lang': 'en'}, name='me'),
 
     url(r'^atom-en.xml$', UpdatesFeed('en'), name='atom-en'),
     url(r'^atom-sv.xml$', UpdatesFeed('sv'), name='atom-sv'),

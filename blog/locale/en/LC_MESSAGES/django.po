@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-06 02:43+0100\n"
+"POT-Creation-Date: 2014-01-11 23:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -44,7 +44,7 @@ msgstr "Your comment awaits moderation."
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-#: templates/404.html:16 templates/blog/base.html:53
+#: templates/404.html:16 templates/blog/base.html:58
 msgid "Skriverier då och då, på webben sedan 1995"
 msgstr "Reminiscing this and that, on the web since 1995"
 
@@ -224,44 +224,44 @@ msgstr "Picture of me"
 msgid "På jobbet i september 2011. Foto: Björn Roos."
 msgstr "At work, september 2011. Photo: Björn Roos."
 
-#: templates/blog/base.html:12
+#: templates/blog/base.html:13
 msgid "nästa"
 msgstr "next"
 
-#: templates/blog/base.html:13
+#: templates/blog/base.html:14
 msgid "förra"
 msgstr "prev"
 
-#: templates/blog/base.html:14
+#: templates/blog/base.html:15
 msgid "stäng"
 msgstr "close"
 
-#: templates/blog/base.html:50
+#: templates/blog/base.html:55
 msgctxt "target language"
 msgid "På svenska"
 msgstr "In English"
 
-#: templates/blog/base.html:54
+#: templates/blog/base.html:59
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: templates/blog/base.html:56
+#: templates/blog/base.html:61
 msgid "innehåll"
 msgstr "content"
 
-#: templates/blog/base.html:59
+#: templates/blog/base.html:64
 msgid "mina länkar"
 msgstr "my links"
 
-#: templates/blog/base.html:80
+#: templates/blog/base.html:85
 msgid "Om"
 msgstr "About"
 
-#: templates/blog/base.html:86
+#: templates/blog/base.html:91
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: templates/blog/base.html:103
+#: templates/blog/base.html:106
 #, python-format
 msgid ""
 "\n"
@@ -270,19 +270,17 @@ msgid ""
 "          "
 msgstr ""
 "\n"
-"          This work by %(me)s is licensed under a\n"
-"          %(a)sCreative Commons Attribution 3.0 Unported License%(sa)s.\n"
-"          "
+"This work by %(me)s is licensed under a %(a)sCreative Commons Attribution "
+"3.0 Unported License%(sa)s."
 
-#: templates/blog/base.html:107
+#: templates/blog/base.html:110
 msgid ""
 "\n"
-"\t  Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
-"\t  "
+"          Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
+"          "
 msgstr ""
 "\n"
-"\t  This site <a href=\"/about#cookie\">uses cookies</a>.\n"
-"\t  "
+"This site <a href=\"/about#cookie\">uses cookies</a>."
 
 #: templates/blog/index.html:28
 msgid "senaste kommentarerna"
