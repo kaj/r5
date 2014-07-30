@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
+from urlparse import urlparse
 import re
 
 class CommentFormAvoidingSpam(CommentForm):
@@ -32,6 +33,12 @@ class CommentFormAvoidingSpam(CommentForm):
             if re.match('^https?://(bit.ly|is.gd|tinyurl.com)/.*', url, re.IGNORECASE):
                 raise forms.ValidationError(
                     _('Please use an unshortened url.'))
+
+            host = re.sub(r'^www\.', '', urlparse(url).netloc.lower())
+            if host in settings.SPAM_HOSTS:
+                raise forms.ValidationError(
+                    _(u'I get to much spam from %s, sorry.') % host)
+
             spamurls = Comment.objects \
                 .filter(is_public=False, is_removed=True) \
                 .values_list('user_url', flat=True)

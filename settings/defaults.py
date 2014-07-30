@@ -187,6 +187,7 @@ SIMPLEGRAVATAR_DEFAULT = 'identicon'
 COMMENTS_APP = 'r5comments'
 COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
+SPAM_HOSTS = { }
 
 SCALED_IMAGE_DIR = 'cache/image'
 
