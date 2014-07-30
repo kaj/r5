@@ -188,6 +188,9 @@ COMMENTS_APP = 'r5comments'
 COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
 SPAM_HOSTS = { }
+SHORTEN_SITES = {
+    'bit.ly', 'ow.ly', 'is.gd', 'tinyurl.com', 'tr.im', 't.co'
+}
 
 SCALED_IMAGE_DIR = 'cache/image'
 

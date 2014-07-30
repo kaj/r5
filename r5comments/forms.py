@@ -30,11 +30,11 @@ class CommentFormAvoidingSpam(CommentForm):
         #super(CommentFormAvoidingSpam, self).clean_url()
         url = self.cleaned_data['url']
         if url:
-            if re.match('^https?://(bit.ly|is.gd|tinyurl.com)/.*', url, re.IGNORECASE):
+            host = re.sub(r'^www\.', '', urlparse(url).netloc.lower())
+            if host in settings.SHORTEN_SITES:
                 raise forms.ValidationError(
                     _('Please use an unshortened url.'))
 
-            host = re.sub(r'^www\.', '', urlparse(url).netloc.lower())
             if host in settings.SPAM_HOSTS:
                 raise forms.ValidationError(
                     _(u'I get to much spam from %s, sorry.') % host)
