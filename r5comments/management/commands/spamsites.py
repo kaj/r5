@@ -13,7 +13,7 @@ class Command(NoArgsCommand):
                           .filter(is_public=False, is_removed=True) \
                           .exclude(user_url='') \
                           .values_list('user_url', flat=True)
-        known_spam = settings.SPAM_HOSTS
+        known_spam = settings.SPAM_HOSTS | settings.SHORTEN_SITES
         hosts = Counter()
         for url in spamurls:
             host = sub(r'^www\.', '', urlparse(url).netloc.lower())

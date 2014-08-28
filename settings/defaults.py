@@ -189,7 +189,8 @@ COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
 SPAM_HOSTS = { }
 SHORTEN_SITES = {
-    'bit.ly', 'ow.ly', 'is.gd', 'tinyurl.com', 'tr.im', 't.co'
+    'bit.ly', 'ow.ly', 'is.gd', 'tinyurl.com', 'tr.im', 't.co', 'tiny.cc',
+    'sn.im', 'youtu.be', 'goo.gl', 'rdlnk.co', 'smarturl.it',
 }
 
 SCALED_IMAGE_DIR = 'cache/image'
