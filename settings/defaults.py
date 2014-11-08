@@ -135,6 +135,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 # Override with 'web.url_domain' in local.py to enable django_statsd
 STATSD_PREFIX = None
 
