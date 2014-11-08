@@ -506,12 +506,10 @@ aside#tweetbox {
 li[class^="icon-"],
 li[class*=" icon-"] {
     list-style-type: none;
-    list-style-type: inline;
 }
 li[class^="icon-"]:before,
 li[class*=" icon-"]:before {
     color: #222;
-    display: marker;
     padding-right: .2em;
 }
 section#contact {

@@ -135,6 +135,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 # Override with 'web.url_domain' in local.py to enable django_statsd
 STATSD_PREFIX = None
 
@@ -189,7 +191,8 @@ COMMENTS_ALLOW_PROFANITIES = False
 PROFANITIES_LIST = ['[url=', 'penisadvantage']
 SPAM_HOSTS = { }
 SHORTEN_SITES = {
-    'bit.ly', 'ow.ly', 'is.gd', 'tinyurl.com', 'tr.im', 't.co'
+    'bit.ly', 'ow.ly', 'is.gd', 'tinyurl.com', 'tr.im', 't.co', 'tiny.cc',
+    'sn.im', 'youtu.be', 'goo.gl', 'rdlnk.co', 'smarturl.it',
 }
 
 SCALED_IMAGE_DIR = 'cache/image'

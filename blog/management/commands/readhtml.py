@@ -42,10 +42,10 @@ class Command(NoArgsCommand):
                         self.readfile(filename)
                     except Exception as err:
                         print "Failed to load %s" % filename
-                        raise err
+                        raise
 
     def readfile(self, filename):
-        print "Handle", filename
+        print "Handle %s" % (filename)
         slug = os.path.basename(filename)[:-5]
         dirname = os.path.dirname(filename)
         #if slug in ['index', 'sv', 'en']:
@@ -67,7 +67,7 @@ class Command(NoArgsCommand):
 
         date = self.parsedate(serialize(tree.find('head/pubdate', nsmap)))
         if not date:
-            print "Print ignoring %s, pubdate missing." % filename
+            print "Ignoring %s, pubdate missing." % filename
             return
 
         lang = tree.getroot().get('lang')
