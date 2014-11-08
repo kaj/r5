@@ -19,4 +19,4 @@ html5lib
 cssselect
 
 # Collect statistics in a nice way
-django-statsd-mozilla
+# django-statsd-mozilla
