@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.contrib.comments.forms import CommentForm
 from django.contrib.comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
