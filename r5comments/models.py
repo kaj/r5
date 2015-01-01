@@ -2,14 +2,15 @@
 # But here is a moderator class and the line that registers that.
 from django.contrib.comments.moderation import CommentModerator, moderator
 from django.contrib.comments.models import Comment
+from django.conf import settings
 from IPy import IP
 from blog.models import Post
 from datetime import datetime
 
 class PostCommentModerator(CommentModerator):
     """Moderator for comments to Posts."""
-    email_notification = True
-    
+    email_notification = not settings.DEBUG
+
     def moderate(self, comment, content_object, request):
         # Allow comments from known commenters
         commenters = Comment.objects.filter(is_removed=False, is_public=True) \
