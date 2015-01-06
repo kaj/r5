@@ -31,8 +31,8 @@ class UpdatesFeed(Feed):
         return feed
 
     def items(self):
-        updates = Update.objects.all().order_by('-time')[:10]
-        return filter_by_language(updates, self.lang)[:5]
+        updates = Update.objects.all().order_by('-time')[:17]
+        return filter_by_language(updates, self.lang)[:10]
 
     def item_title(self, item):
         return mark_safe(item.post.title)
@@ -50,5 +50,5 @@ class TaggedUpdatesFeed(UpdatesFeed):
 
     def items(self, obj):
         tagged = Post.objects.filter(tags__in=[obj])
-        updates = Update.objects.filter(post__in=tagged).order_by('-time')[:10]
-        return filter_by_language(updates, self.lang)[:5]
+        updates = Update.objects.filter(post__in=tagged).order_by('-time')[:17]
+        return filter_by_language(updates, self.lang)[:10]
