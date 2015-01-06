@@ -37,8 +37,8 @@ class UpdatesFeed(Feed):
     def item_title(self, item):
         return mark_safe(item.post.title)
 
-    def item_pubdate(self, obj):
-        return obj.posted_time
+    def item_pubdate(self, item):
+        return item.time
 
 class TaggedUpdatesFeed(UpdatesFeed):
 
