@@ -8,14 +8,18 @@ from urlparse import urlparse
 import re
 
 class CommentFormAvoidingSpam(CommentForm):
-    bad_names = ('boobs', 'cash', 'casinos?', 'cialis', 'cigarettes?', 'cigs',
+    bad_names = ('boobs',
+                 'cash', 'casinos?', 'cheap', 'cheats?', 'cialis',
+                 'cigarettes?', 'cigs',
                  'discounts?', 'download', 'escorts?', 'facebook', 'finance',
-                 'followers', 'forex', 'free', 'infoxesee', 'instagram',
-                 'insurance', 'loans?', 'luggisintedge',
-                 'movie', 'offinafag',
-                 'ordillaoffips', 'pay ?day', 'poker',
-                 'praikicky', 'pyncpelay',
-                 'shemale', 'sex', 'sexchat', r'tripod\.co\.uk', 'twitter',
+                 'followers', 'forex', 'free', 'hack',
+                 'infoxesee', 'instagram', 'insurance',
+                 'loans?', 'luggisintedge',
+                 'marketing', 'movie', 'offinafag', 'ordillaoffips', 'outlet',
+                 'pay ?day', 'penis', 'poker', 'praikicky', 'pyncpelay',
+                 'reviews?',
+                 'sale', 'shemale', 'sex', 'sexchat', 'stereoids',
+                 r'tripod\.co\.uk', 'twitter',
                  'webcam', 'viagra', 'video', 'youtube')
 
     def clean_name(self):
