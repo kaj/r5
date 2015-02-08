@@ -56,7 +56,7 @@ header.site a:focus {
     padding: 0;
 }
 #skiplinks li:after {
-    content: ', ';
+    content: ',\0020';
 }
 #skiplinks li:last-child:after {
     content: '.';
