@@ -55,46 +55,42 @@
           {% endlanguage %}{% endfor %}</p>
         {% endif %}
 	<p id="tagline">{% trans "Skriverier då och då, på webben sedan 1995" %}</p>
+	{% spaceless %}
 	<div id="skiplinks"><div>{% trans "Hoppa till" %}
 	  <ul>
 	    <li><a href="#main">{% trans "innehåll" %}</a></li>
-	    {% block skiplinks %}
 	    {% block firstskiplinks %}{% endblock %}
 	    <li><a href="#mylinks">{% trans "mina länkar" %}</a></li>
 	    {% block lastskiplinks %}{% endblock %}
-	    {% endblock %}
 	  </ul>
 	</div></div>
+	{% endspaceless %}
       </div>
     </header>
     <div id="mainwrap">
-      <main>
-	{% block main %}
-	<h1>{{post.title|safe}}</h1>
-	<div class="abstract">{{post.abstract|safe}}</div>
-	<div class="content">{{post.content|safe}}</div>
-	{% endblock %}
-      </main>
+      <main id="main">{% block main %}{% endblock %}</main>
 
       <div id="sideblockwrap">
-	{% block sideblocktop %}{% endblock %}
-	<aside id="mylinks">
-	  <h1>Rasmus Kaj</h1>
-	  <ul>
-	    <li class="icon-user"><a href="{% url 'about' lang=LANGUAGE_CODE %}">{% trans "Om" %} Rasmus.krats.se</a></li>
-	    <li class="icon-leaf"><a href="http://www.kth.se/profile/kaj/">KTH</a></li>
-	    <li class="icon-github"><a href="http://github.com/kaj">Github</a></li>
-	    <li class="icon-twitter"><a href="http://twitter.com/rasmus_kaj">Twitter</a></li>
-	    <li class="icon-book"><a href="http://www.librarything.com/profile/kaj">LibraryThing</a></li>
-	  </ul>
+        {% block sideblocktop %}{% endblock %}
+        {% spaceless %}
+        <aside id="mylinks">
+          <h1>Rasmus Kaj</h1>
+          <ul>
+            <li class="icon-user"><a href="{% url 'about' lang=LANGUAGE_CODE %}">{% trans "Om" %} Rasmus.krats.se</a>
+            <li class="icon-leaf"><a href="http://www.kth.se/profile/kaj/">KTH</a>
+            <li class="icon-github"><a href="http://github.com/kaj">Github</a>
+            <li class="icon-twitter"><a href="http://twitter.com/rasmus_kaj">Twitter</a>
+            <li class="icon-book"><a href="http://www.librarything.com/profile/kaj">LibraryThing</a>
+          </ul>
           <h2>{% trans "Övrigt" %}</h2>
           <ul>
-            <li class="icon-link-ext"><a href="http://krats.se/">krats.se</a></li>
-            <li class="icon-link-ext"><a href="http://fantomenindex.krats.se/">Fantomenindex</a></li>
-            <li class="icon-link-ext"><a href="http://www.albumforlaget.se/">Albumförlaget</a></li>
+            <li class="icon-link-ext"><a href="http://krats.se/">krats.se</a>
+            <li class="icon-link-ext"><a href="http://fantomenindex.krats.se/">Fantomenindex</a>
+            <li class="icon-link-ext"><a href="http://www.albumforlaget.se/">Albumförlaget</a>
           </ul>
-	</aside>
-	{% block sideblockbottom %}{% endblock %}
+        </aside>
+        {% endspaceless %}
+        {% block sideblockbottom %}{% endblock %}
       </div>
     </div>
     {% spaceless %}

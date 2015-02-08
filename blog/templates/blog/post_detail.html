@@ -16,9 +16,7 @@
 {% endblock %}
 
 {% block main %}
-  {% if message %}
-    <div class="message">{{message}}</div>
-  {% endif %}
+  {% if message %}<div class="message">{{message}}</div>{% endif %}
 
   <header>
     <h1>{{post.title|safe}}</h1>
@@ -93,7 +91,7 @@
   </section>
 {% endblock %}
 
-{% block sideblocktop %}
+{% block sideblocktop %}{% spaceless %}
   <aside id="similar">
     <h1>{% trans "Liknande sidor" %}</h1>
     <ul>
@@ -102,4 +100,4 @@
       {% endfor %}
     </ul>
   </aside>
-{% endblock %}
+{% endspaceless %}{% endblock %}
