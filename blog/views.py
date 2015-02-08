@@ -92,12 +92,9 @@ def post_detail(request, year, slug, lang=None):
         except Comment.DoesNotExist:
             # Silently ignore nonexisting comment id
             return redirect(post.get_absolute_url())
-        print "Comment:", comment
         if comment.is_removed:
-            print "That comment is removed!!"
             message = _(u'Din kommentar är borttagen.')
         elif not comment.is_public:
-            print "That comment awaits moderation!!"
             message = _(u'Din kommentar väntar på moderering.')
         else:
             return redirect('%s#c%d' % (post.get_absolute_url(), comment.id))

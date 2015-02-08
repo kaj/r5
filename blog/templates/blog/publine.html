@@ -1,9 +1,4 @@
-{% load i18n %}
-<p class="publine">
-  {% trans "Publicerad" %}
+{% load i18n %}<p class="publine">{%trans "Publicerad"%}
   <time datetime="{{time|date:'c'}}" pubdate>{{time}}</time>
-  {% trans "taggat" %}
-  {% for tag in tags %}
-    <a href="{% url 'tagged' slug=tag.slug lang=lang %}" rel="tag">{{tag.name}}</a>{%if forloop.last%}.{%else%}, {%endif%}
-  {% endfor %}
-</p>
+  {%trans "taggat"%}{% for tag in tags %}
+  <a href="{% url 'tagged' slug=tag.slug lang=lang %}" rel="tag">{{tag.name}}</a>{%if forloop.last%}.{%else%},{%endif%}{% endfor %}</p>

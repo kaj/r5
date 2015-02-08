@@ -19,7 +19,7 @@ class PostCommentModerator(CommentModerator):
             return False
         
         # Moderate comments for old posts
-        if (datetime.now() - content_object.posted_time).days > 100:
+        if (datetime.now() - content_object.posted_time).days > 25:
             return True
         
         # Moderate comments from previous spammers

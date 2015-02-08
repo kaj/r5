@@ -71,7 +71,7 @@ class SimpleTest(TestCase):
                          select_texts(doc, 'header #sitename'))
         self.assertEqual(['Foo'],
                          select_texts(doc, 'article h1'))
-        self.assertEqual([u' Publicerad 5 november 2013 00:00 taggat ',
+        self.assertEqual([u'Publicerad 5 november 2013 00:00 taggat',
                           u'Lorem ipsum dolor',
                           u' Läs och kommentera inlägget Foo '],
                          select_texts(doc, 'article p'))
