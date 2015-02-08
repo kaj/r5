@@ -68,7 +68,8 @@ class CommentFormAvoidingSpam(CommentForm):
                 pass
             elif resp.status in [301, 302, 303, 307]:
                 target = urlparse(resp.getheader('Location'))
-                print "Got redirect to %s" % (target.geturl())
+                print "Comment url redirect %s -> %s" \
+                    % (url.geturl(), target.geturl())
                 if target.netloc.lower() != url.netloc.lower():
                     raise forms.ValidationError(
                         _('Please use a direct url (%s redirects to %s)') %
