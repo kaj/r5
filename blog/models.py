@@ -18,7 +18,7 @@ class Post(models.Model):
     abstract = models.TextField(blank=True)
     content = models.TextField()
     frontimage = models.TextField(blank=True)
-    lang = models.CharField(max_length=2)
+    lang = models.CharField(max_length=2, db_index=True)
     tags = TaggableManager()
     
     class Meta:
