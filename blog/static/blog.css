@@ -218,12 +218,15 @@ figure {
     max-width: 100%;
     vertical-align: top;
     width: 206px;
+    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
 }
 figure.scaled {
     width: auto;
+    width: -webkit-min-content;
     width: -moz-min-content;
+    width: min-content;
 }
 aside figure {
     margin: 0;
@@ -293,7 +296,6 @@ pre.programlisting {
 blockquote {
     background: #fafafa;
     border: solid 1px #aaaaaa;
-    -webkit-box-shadow: .3em .2em .5em #cccccc;
     box-shadow: .3em .2em .5em #cccccc;
     color: #222222;
     font-style: italic;
