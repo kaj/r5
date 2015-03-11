@@ -247,35 +247,6 @@ figure img, .comment img {
     max-width: calc(100% - 6px);
     padding: 2px;
 }
-.orgname.parti {
-    display: inline-block;
-    height: 40px;
-    overflow: hidden;
-    text-indent: 53px;
-    vertical-align: bottom;
-    width: 52px;
-}
-.orgname.parti.kds {
-    background: url('/img/kds');
-}
-.orgname.parti.m {
-    background: url('/img/m');
-}
-.orgname.parti.fp {
-    background: url('/img/fp');
-}
-.orgname.parti.c {
-    background: url('/img/c');
-}
-.orgname.parti.mp {
-    background: url('/img/mp');
-}
-.orgname.parti.s {
-    background: url('/img/s');
-}
-.orgname.parti.v {
-    background: url('/img/v');
-}
 .abstract,
 .update {
     font-style: italic;
