@@ -56,7 +56,7 @@ header.site a:focus {
     padding: 0;
 }
 #skiplinks li:after {
-    content: ', ';
+    content: ',\0020';
 }
 #skiplinks li:last-child:after {
     content: '.';
@@ -218,12 +218,15 @@ figure {
     max-width: 100%;
     vertical-align: top;
     width: 206px;
+    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
 }
 figure.scaled {
     width: auto;
+    width: -webkit-min-content;
     width: -moz-min-content;
+    width: min-content;
 }
 aside figure {
     margin: 0;
@@ -246,35 +249,6 @@ figure img, .comment img {
     max-width: -o-calc(100% - 6px);
     max-width: calc(100% - 6px);
     padding: 2px;
-}
-.orgname.parti {
-    display: inline-block;
-    height: 40px;
-    overflow: hidden;
-    text-indent: 53px;
-    vertical-align: bottom;
-    width: 52px;
-}
-.orgname.parti.kds {
-    background: url('/img/kds');
-}
-.orgname.parti.m {
-    background: url('/img/m');
-}
-.orgname.parti.fp {
-    background: url('/img/fp');
-}
-.orgname.parti.c {
-    background: url('/img/c');
-}
-.orgname.parti.mp {
-    background: url('/img/mp');
-}
-.orgname.parti.s {
-    background: url('/img/s');
-}
-.orgname.parti.v {
-    background: url('/img/v');
 }
 .abstract,
 .update {
@@ -322,7 +296,6 @@ pre.programlisting {
 blockquote {
     background: #fafafa;
     border: solid 1px #aaaaaa;
-    -webkit-box-shadow: .3em .2em .5em #cccccc;
     box-shadow: .3em .2em .5em #cccccc;
     color: #222222;
     font-style: italic;
