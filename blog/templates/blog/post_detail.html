@@ -50,19 +50,19 @@
   </div>
   
   <section id="comments">
-    {% get_comment_list for post as comment_list %}
-    {% if comment_list %}
+    {% with comments=post.pub_comments %}
+    {% if comments %}
       <h1>{% trans "Kommentarer" %}</h1>
     
-      {% for comment in comment_list %}
+      {% for comment in comments %}
         <section id="c{{ comment.id }}"
                  class="comment{% if comment.user %} authorized{% endif %}" >
-          {% show_gravatar comment.email %}
+          {% show_gravatar comment.by_email %}
           <h1>
             {% if comment.user_url %}
-              <a href="{{comment.user_url}}">{{comment.name}}</a>,
+              <a href="{{comment.by_url}}">{{comment.by_name}}</a>,
             {% else %}
-              <span class="name">{{comment.name}}</span>,
+              <span class="name">{{comment.by_name}}</span>,
             {% endif %}
             <time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
           </h1>
@@ -73,6 +73,7 @@
         </section>
       {% endfor %}
     {% endif %}
+    {% endwith %}
 
     <section id="writecomment">
       <h1>{% trans "Skriv en kommentar" %}</h1>
