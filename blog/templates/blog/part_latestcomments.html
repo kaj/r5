@@ -3,8 +3,8 @@
   {% with comment.content_object as post %}
     <p class="comment" lang="{{post.lang}}">
       <a href="{{post.get_absolute_url}}#c{{comment.id}}">
-	{% show_gravatar comment.email 40 %}
-	{{comment.name}},
+	{% show_gravatar comment.by_email 40 %}
+	{{comment.by_name}},
 	<time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
 	{% trans "på" %} <i>{{post.title}}</i></a>:
       {{comment.comment|truncatewords:25}}

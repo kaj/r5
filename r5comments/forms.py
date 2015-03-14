@@ -1,13 +1,22 @@
+# -*- encoding: utf-8 -*-
 from django import forms
 from django.conf import settings
-from django.contrib.comments.forms import CommentForm
-from django.contrib.comments.models import Comment
+from django.forms import ModelForm
+from r5comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
 from httplib import HTTPConnection, HTTPSConnection
 from urlparse import urlparse
 import re
+from django.forms import widgets
 
-class CommentFormAvoidingSpam(CommentForm):
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('post', 'by_name', 'by_email', 'by_url', 'comment')
+        widgets = {
+            'post': widgets.HiddenInput(),
+        }
+
     bad_names = ('boobs',
                  'cash', 'casinos?', 'cheap', 'cheats?', 'cialis',
                  'cigarettes?', 'cigs',
@@ -31,10 +40,9 @@ class CommentFormAvoidingSpam(CommentForm):
                                         name)
         return name
 
-    def clean_url(self):
-        # Note: the form field is called url, but the model field is user_url.
+    def clean_by_url(self):
         #super(CommentFormAvoidingSpam, self).clean_url()
-        urlstr = self.cleaned_data['url']
+        urlstr = self.cleaned_data['by_url']
         if urlstr:
             url = urlparse(urlstr)
             host = re.sub(r'^www\.', '', url.netloc.lower())
@@ -80,7 +88,7 @@ class CommentFormAvoidingSpam(CommentForm):
 
             spamurls = Comment.objects \
                 .filter(is_public=False, is_removed=True) \
-                .values_list('user_url', flat=True)
+                .values_list('by_url', flat=True)
             if url in spamurls:
                 raise forms.ValidationError(
                     _(u'"%s" is used in spam, sorry.') % urlstr)

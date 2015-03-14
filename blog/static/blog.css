@@ -401,11 +401,14 @@ dl dd {
 #writecomment input,
 #writecomment textarea {
     width: 95%;
+    width: -webkit-available;
     width: -moz-available;
+    width: available;
 }
-#writecomment p.fineprint {
+#writecomment .helptext {
     display: block;
-    font-size: 85%;
+    font-size: 80%;
+    font-style: italic;
 }
 #writecomment p.submit {
     display: block;

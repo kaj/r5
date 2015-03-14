@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url as django_url
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from blog.views import index, post_detail, tagcloud, tagged, about, image_small, image_view, redirect_post, openid
+from blog.views import *
 from blog.feeds import UpdatesFeed, TaggedUpdatesFeed
 import re
 
@@ -42,6 +42,8 @@ urlpatterns = patterns(
     url(r'^tag/<lang>?$', tagcloud, name='tagcloud'),
     url(r'^tag/<slug>\.<lang>$', tagged, name='tagged'),
     url(r'^tag/<slug>/?$', tagged, name='tagged'),
+
+    url(r'^comment$', comment, name='comment'),
 
     url(r'^about$', about, {'lang': 'en'}, name='about'),
     url(r'^om$', about, {'lang': 'sv'}, name='about'),

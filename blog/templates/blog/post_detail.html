@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load comments i18n blogtags simplegravatar %}
+{% load i18n blogtags simplegravatar %}
 
 {% block title %}{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se{% endblock %}
 
@@ -59,7 +59,7 @@
                  class="comment{% if comment.user %} authorized{% endif %}" >
           {% show_gravatar comment.by_email %}
           <h1>
-            {% if comment.user_url %}
+            {% if comment.by_url %}
               <a href="{{comment.by_url}}">{{comment.by_name}}</a>,
             {% else %}
               <span class="name">{{comment.by_name}}</span>,
@@ -78,16 +78,12 @@
     <section id="writecomment">
       <h1>{% trans "Skriv en kommentar" %}</h1>
 
-      <p class="fineprint">
-        {% blocktrans with gravatar='<a href="https://gravatar.com/">gravatar</a>'%}
-        Din epostadress kommer inte att visas, men har du en {{gravatar}}
-        så visas den.
-        Du kan inte använda markup i kommentaren, men en dubbel radmating
-        blir en styckesbrytning.
-        {% endblocktrans %}
-      </p>
-      
-      {% render_comment_form for post %}
+      <form action="{% url 'comment' %}" method="post">
+	{% csrf_token %}
+	{{ commentform.as_p }}
+	<p class="submit">
+	  <input type="submit" value='{% trans "Posta kommentaren"%}'></p>
+      </form>
     </section>
   </section>
 {% endblock %}

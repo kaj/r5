@@ -123,7 +123,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.redirects',
-    'django.contrib.comments',
     'r5comments',
     'taggit',
     'compressor',
