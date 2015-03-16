@@ -42,6 +42,16 @@
         }
         initSkiplinks();
         kratsbox("figure > a", kbsettings);
+        if (t = d.querySelector('#socialwidgets .twitter')) {
+            t.onclick = function(e) {
+                window.open(
+                    t.href + "?text=" + encodeURIComponent(t.getAttribute('data-text')) + "&url=" + encodeURIComponent(d.location) + "&via=" + encodeURIComponent(t.getAttribute('data-via')),
+                    'tweetbox',
+                    'toolbar=no,location=no,status=no,menubar=no,width=600,height=300')
+                .moveTo(e.screenX-50, e.screenY-120);
+                return false;
+            }
+        }
     }
     if (d.readyState == 'complete'
         || d.readyState == 'loaded'

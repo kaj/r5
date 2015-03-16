@@ -485,6 +485,28 @@ li[class*=" icon-"]:before {
     color: #222;
     padding-right: .2em;
 }
+#socialwidgets a {
+    background: white;
+    background: linear-gradient(#fff, #ddd);
+    border-radius: .3em;
+    border: 1px #ccc solid;
+    color: black;
+    padding: .1em .5em;
+    text-decoration: none;
+    text-shadow: 1px 1px white;
+}
+#socialwidgets a:focus,
+#socialwidgets a:hover {
+    background: #ddd;
+    background: linear-gradient(#eee, #ccc);
+    border-color: #888;
+}
+#socialwidgets .twitter:before {
+    font-family: 'font-kaj-20121124';
+    content: '\f099\0020';
+    color: #0000ff;
+}
+
 section#contact {
     clear: right;
 }
