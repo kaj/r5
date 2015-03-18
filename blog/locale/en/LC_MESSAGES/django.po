@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-11 23:16+0100\n"
+"POT-Creation-Date: 2015-03-18 22:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -26,23 +26,10 @@ msgid ""
 msgstr ""
 "Updates on Rasmus.krats.se.  Reminiscing this and that, on the web since 1995"
 
-#: feeds.py:46
+#: feeds.py:49
 #, python-format
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
-
-#: views.py:93
-msgid "Din kommentar är borttagen."
-msgstr "Your comment is removed."
-
-#: views.py:96
-msgid "Din kommentar väntar på moderering."
-msgstr "Your comment awaits moderation."
-
-#: views.py:196
-#, python-format
-msgid "\"%(path)s\" does not exist"
-msgstr "\"%(path)s\" does not exist"
 
 #: templates/404.html:16 templates/blog/base.html:58
 msgid "Skriverier då och då, på webben sedan 1995"
@@ -210,19 +197,11 @@ msgstr ""
 "      </p>\n"
 "      "
 
-#: templates/about.html:131 templates/openid.html:71
-#: templates/blog/index.html:27 templates/blog/tagcloud.html:4
-#: templates/blog/tagged.html:20
+#: templates/about.html:131 templates/blog/index.html:27
+#: templates/blog/tagcloud.html:4 templates/blog/tagged.html:20
+#: templates/openid.html:71
 msgid "taggmoln"
 msgstr "tag cloud"
-
-#: templates/openid.html:20
-msgid "Bild på mig"
-msgstr "Picture of me"
-
-#: templates/openid.html:22
-msgid "På jobbet i september 2011. Foto: Björn Roos."
-msgstr "At work, september 2011. Photo: Björn Roos."
 
 #: templates/blog/base.html:13
 msgid "nästa"
@@ -241,11 +220,11 @@ msgctxt "target language"
 msgid "På svenska"
 msgstr "In English"
 
-#: templates/blog/base.html:59
+#: templates/blog/base.html:60
 msgid "Hoppa till"
 msgstr "Skip to"
 
-#: templates/blog/base.html:61
+#: templates/blog/base.html:62
 msgid "innehåll"
 msgstr "content"
 
@@ -253,15 +232,15 @@ msgstr "content"
 msgid "mina länkar"
 msgstr "my links"
 
-#: templates/blog/base.html:85
+#: templates/blog/base.html:80
 msgid "Om"
 msgstr "About"
 
-#: templates/blog/base.html:91
+#: templates/blog/base.html:86
 msgid "Övrigt"
 msgstr "Other stuff"
 
-#: templates/blog/base.html:106
+#: templates/blog/base.html:102
 #, python-format
 msgid ""
 "\n"
@@ -273,7 +252,7 @@ msgstr ""
 "This work by %(me)s is licensed under a %(a)sCreative Commons Attribution "
 "3.0 Unported License%(sa)s."
 
-#: templates/blog/base.html:110
+#: templates/blog/base.html:106
 msgid ""
 "\n"
 "          Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
@@ -302,20 +281,28 @@ msgstr "Tag cloud"
 msgid "liknande sidor"
 msgstr "similar pages"
 
-#: templates/blog/post_detail.html:42 templates/blog/post_summary.html:18
+#: templates/blog/post_detail.html:31 templates/blog/post_summary.html:18
 #: templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
 
-#: templates/blog/post_detail.html:64
+#: templates/blog/post_detail.html:46
+msgid "Tweeta"
+msgstr "Tweet"
+
+#: templates/blog/post_detail.html:49
+msgid "Dela"
+msgstr "Share"
+
+#: templates/blog/post_detail.html:55
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: templates/blog/post_detail.html:87
+#: templates/blog/post_detail.html:78
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: templates/blog/post_detail.html:90
+#: templates/blog/post_detail.html:81
 #, python-format
 msgid ""
 "\n"
@@ -330,7 +317,7 @@ msgstr ""
 "that will be displayed.  You can not use markup in the\n"
 "comment, but a double newline will be separate paragraphs."
 
-#: templates/blog/post_detail.html:105
+#: templates/blog/post_detail.html:96
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
@@ -382,11 +369,11 @@ msgstr[1] ""
 msgid "Kommentera inlägget"
 msgstr "Write a comment"
 
-#: templates/blog/publine.html:3
+#: templates/blog/publine.html:1
 msgid "Publicerad"
 msgstr "Published"
 
-#: templates/blog/publine.html:5
+#: templates/blog/publine.html:3
 msgid "taggat"
 msgstr "tagged"
 
@@ -397,6 +384,27 @@ msgstr "Tagged"
 #: templates/feed/description.html:20
 msgid "Läs inlägget"
 msgstr "Read"
+
+#: templates/openid.html:20
+msgid "Bild på mig"
+msgstr "Picture of me"
+
+#: templates/openid.html:22
+msgid "På jobbet i september 2011. Foto: Björn Roos."
+msgstr "At work, september 2011. Photo: Björn Roos."
+
+#: views.py:96
+msgid "Din kommentar är borttagen."
+msgstr "Your comment is removed."
+
+#: views.py:98
+msgid "Din kommentar väntar på moderering."
+msgstr "Your comment awaits moderation."
+
+#: views.py:198
+#, python-format
+msgid "\"%(path)s\" does not exist"
+msgstr "\"%(path)s\" does not exist"
 
 #~ msgid "jag twittrar"
 #~ msgstr "I tweet"

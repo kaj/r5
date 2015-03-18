@@ -23,7 +23,17 @@
             d.querySelector('head').appendChild(e);
         }
     }
-    
+    function socbox(sel, uf) {
+        var t = d.querySelector(sel);
+        if (t) {
+            t.onclick = function(e) {
+                window.open(uf(t), 'socbox',
+                            'toolbar=no,location=no,status=no,menubar=no,width=600,height=300')
+                    .moveTo(e.screenX-50, e.screenY-120);
+                return false;
+            }
+        }
+    }
     function rkinit() {
         if (d.getElementById('latestcomments')) {
             d.getElementById('sideblockwrap').innerHTML +=
@@ -42,16 +52,12 @@
         }
         initSkiplinks();
         kratsbox("figure > a", kbsettings);
-        if (t = d.querySelector('#socialwidgets .twitter')) {
-            t.onclick = function(e) {
-                window.open(
-                    t.href + "?text=" + encodeURIComponent(t.getAttribute('data-text')) + "&url=" + encodeURIComponent(d.location) + "&via=" + encodeURIComponent(t.getAttribute('data-via')),
-                    'tweetbox',
-                    'toolbar=no,location=no,status=no,menubar=no,width=600,height=300')
-                .moveTo(e.screenX-50, e.screenY-120);
-                return false;
-            }
-        }
+        socbox('#socialwidgets .twitter', function(e) {
+            return e.href + "?text=" + encodeURIComponent(e.getAttribute('data-text')) + "&url=" + encodeURIComponent(d.location) + "&via=" + encodeURIComponent(e.getAttribute('data-via'));
+        });
+        socbox('#socialwidgets .facebook', function(e) {
+            return e.href+'?u='+encodeURIComponent(d.location)+'&display=popup';
+        });
     }
     if (d.readyState == 'complete'
         || d.readyState == 'loaded'

@@ -485,6 +485,9 @@ li[class*=" icon-"]:before {
     color: #222;
     padding-right: .2em;
 }
+#socialwidgets {
+    color: #aaa;
+}
 #socialwidgets a {
     background: white;
     background: linear-gradient(#fff, #ddd);
@@ -504,6 +507,11 @@ li[class*=" icon-"]:before {
 #socialwidgets .twitter:before {
     font-family: 'font-kaj-20121124';
     content: '\f099\0020';
+    color: #0000ff;
+}
+#socialwidgets .facebook:before {
+    font-family: 'font-kaj-20121124';
+    content: '\f308\0020';
     color: #0000ff;
 }
 
