@@ -90,7 +90,7 @@ footer.site p {
     display: inline;
 }
 footer.site p.icon-cc-by:before {
-    content: '\e7a5\0020\e7a6';
+    content: '\e811\0020\e812'; /* icon-cc icon-cc-by */
     width: auto;
 }
 
@@ -485,6 +485,36 @@ li[class*=" icon-"]:before {
     color: #222;
     padding-right: .2em;
 }
+#socialwidgets {
+    color: #aaa;
+}
+#socialwidgets a {
+    background: white;
+    background: linear-gradient(#fff, #ddd);
+    border-radius: .3em;
+    border: 1px #ccc solid;
+    color: black;
+    padding: .1em .5em;
+    text-decoration: none;
+    text-shadow: 1px 1px white;
+}
+#socialwidgets a:focus,
+#socialwidgets a:hover {
+    background: #ddd;
+    background: linear-gradient(#eee, #ccc);
+    border-color: #888;
+}
+#socialwidgets .twitter:before {
+    font-family: 'font-kaj-20150319';
+    content: '\e806\0020'; /* icon-twitter */
+    color: #55acee;
+}
+#socialwidgets .facebook:before {
+    font-family: 'font-kaj-20150319';
+    content: '\e807\0020'; /* icon-facebook-squared */
+    color: #0000ff;
+}
+
 section#contact {
     clear: right;
 }
@@ -495,9 +525,9 @@ p.postyears {
 }
 p.postyears:before {
     color: #8add52;
-    content: '🍂'; /* \1f342 */
+    content: '\e805'; /* icon-leaf */
     float: left;
-    font-family: 'font-kaj-20121124';
+    font-family: 'font-kaj-20150319';
     font-size: 280%;
     margin: -.5em .4em 0 -.5em;
     text-shadow: .07em .1em .15em #454229;

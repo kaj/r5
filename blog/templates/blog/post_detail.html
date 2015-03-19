@@ -11,8 +11,6 @@
   {% if post.abstract %}
     <meta name="Description" content="{{post.abstract_text}}" />
   {% endif %}
-  <script type="text/javascript" async="async" defer="defer"
-          src="https://platform.twitter.com/widgets.js"></script>
 {% endblock %}
 
 {% block main %}
@@ -44,9 +42,11 @@
   </address>
   
   <div id="socialwidgets">
-    <a href="https://twitter.com/share" class="twitter-share-button"
-       data-text="{{post.title|striptags}}" data-via="rasmus_kaj"
-       data-lang="{{lang}}">Tweet</a>
+    <a href="https://twitter.com/share" class="twitter" data-via="rasmus_kaj"
+       data-text="{{post.title|striptags}}">{% trans "Tweeta" %}</a>
+    &#xB7;
+    <a href="https://www.facebook.com/sharer/sharer.php"
+       class="facebook">{% trans "Dela" %}</a>
   </div>
   
   <section id="comments">
