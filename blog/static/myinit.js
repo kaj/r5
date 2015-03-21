@@ -4,11 +4,11 @@
     function initSkiplinks() {
         var sl = d.getElementById('skiplinks');
         sl.className = 'withoutfocus';
-        ap.forEach.call(sl.querySelectorAll('a'), function(link) {
-            link.addEventListener('focus', function() {
+        ap.forEach.call(sl.querySelectorAll('a'), function(a) {
+            a.addEventListener('focus', function() {
                 sl.className = 'withfocus';
             });
-            link.addEventListener('blur', function() {
+            a.addEventListener('blur', function() {
                 sl.className = 'withoutfocus';
             });
         });
@@ -36,15 +36,15 @@
     }
     function rkinit() {
         if (d.getElementById('latestcomments')) {
-            d.getElementById('sideblockwrap').innerHTML +=
-            ('<aside id="tweetbox">'+
+            d.getElementById('sideblockwrap').insertAdjacentHTML('beforeend',
+             '<aside id="tweetbox">'+
              '<a class="twitter-timeline" href="https://twitter.com/rasmus_kaj"'+
              ' data-dnt="true" data-widget-id="348079144619356161">'+
              'Tweets by @rasmus_kaj</a></aside>'+
              '<aside id="booksbox"><h1>Några bra böcker</h1>'+
              '<div id="w5c54f5e485d879152955168d893d33ab"></div></aside>');
-            d.querySelector('#skiplinks ul').innerHTML +=
-            ('<li><a href="#tweetbox">my tweets</a></li> '+
+            d.querySelector('#skiplinks ul').insertAdjacentHTML('beforeend',
+             '<li><a href="#tweetbox">my tweets</a></li> '+
              '<li><a href="#booksbox">några bra böcker</a></li>');
             addscript('http://platform.twitter.com/widgets.js', 'twitter-wjs')
             addscript('http://www.librarything.com/widget_get.php?userid=kaj'+
