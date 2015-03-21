@@ -20,7 +20,7 @@ header.site :visited {
 }
 header.site a:hover,
 header.site a:focus {
-    color: #eeccff;
+    color: #ecf;
     text-decoration: underline;
 }
 #sitename :link,
@@ -81,7 +81,7 @@ footer.site {
     padding: .2em 0;
 }
 footer.site p {
-    color: #606060;
+    color: #666;
     font-size: 90%;
     overflow: hidden;
     text-decoration: none;
@@ -101,11 +101,9 @@ main {
 
 #sideblockwrap aside {
     background: white;
-    -webkit-border-radius: .5em;
     border-radius: .5em;
-    border: solid 1px #888888;
-    -webkit-box-shadow: .2em .3em .8em #aaaaaa;
-    box-shadow: .2em .3em .8em #aaaaaa;
+    border: solid 1px #888;
+    box-shadow: .2em .3em .8em #aaa;
     color: black;
     font-size: 90%;
     margin: 1em 0;
@@ -194,7 +192,7 @@ article h1 a {
 }
 article h1 a:hover,
 article h1 a:focus {
-    color: #0000aa;
+    color: #00a;
     text-decoration: underline;
 }
 section {
@@ -229,6 +227,7 @@ figure.scaled {
 figure.scaled img {
     width: -moz-available;
     width: -webkit-fill-available;
+    width: available;
 }
 aside figure {
     margin: 0;
@@ -239,7 +238,7 @@ figure figcaption {
 }
 figure img, .comment img {
     background: white;
-    border: solid 1px #666666;
+    border: solid 1px #666;
     display: block;
     height: auto;
     padding: 2px;
@@ -268,7 +267,7 @@ table caption {
 }
 table th,
 table td {
-    border: solid 1px #cccccc;
+    border: solid 1px #ccc;
     padding: 0 1ex;
     text-align: left;
 }
@@ -280,7 +279,7 @@ table tbody tr:nth-child(even) {
 
 pre.programlisting {
     background: white;
-    border-color: #aaaaaa;
+    border-color: #aaa;
     border-style: solid;
     border-width: 1px 0;
     overflow: auto;
@@ -289,9 +288,9 @@ pre.programlisting {
 
 blockquote {
     background: #fafafa;
-    border: solid 1px #aaaaaa;
-    box-shadow: .3em .2em .5em #cccccc;
-    color: #222222;
+    border: solid 1px #aaa;
+    box-shadow: .3em .2em .5em #ccc;
+    color: #222;
     font-style: italic;
     margin: 1ex 1em 1em;
     max-width: 34em;
@@ -307,9 +306,6 @@ blockquote footer.attribution {
 }
 blockquote em {
     font-weight: bold;
-}
-.replaceable {
-    font-style: italic;
 }
 code.xml {
     color: #51AA17;
@@ -345,9 +341,6 @@ dl dd {
     padding: 0;
 }
 
-.comment {
-    overflow: hidden;
-}
 .comment img { /* gravatar */
     float: right;
     margin: 0 0 .2em .4em;
@@ -397,7 +390,7 @@ dl dd {
 :target {
     background: -webkit-linear-gradient(176deg, rgba(255,0,99,.4), rgba(255,0,0,0) 3em);
     background: linear-gradient(176deg, rgba(255,0,99,.4), rgba(255,0,0,0) 3em);
-    border-radius: .4em 1em 0 0;
+    border-radius: 1ex 0 0;
     padding-left: .5em;
 }
 :link:hover,
@@ -405,10 +398,10 @@ dl dd {
     text-decoration: underline;
 }
 :link:hover {
-    color: #0000aa;
+    color: #00a;
 }
 :visited:hover {
-    color: #550088;
+    color: #508;
 }
 
 .LT_itemLast,
@@ -506,7 +499,7 @@ li[class*=" icon-"]:before {
 #socialwidgets .facebook:before {
     font-family: 'font-kaj-20150319';
     content: '\e807\0020'; /* icon-facebook-squared */
-    color: #0000ff;
+    color: #00f;
 }
 
 section#contact {
@@ -552,7 +545,6 @@ p.postyears:before {
     }
     #skiplinks.withfocus {
 	height: auto;
-	overflow: visible;
     }
     #writecomment form p {
         margin-left: 10em;

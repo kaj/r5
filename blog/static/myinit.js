@@ -4,11 +4,11 @@
     function initSkiplinks() {
         var sl = d.getElementById('skiplinks');
         sl.className = 'withoutfocus';
-        ap.forEach.call(sl.querySelectorAll('a'), function(link) {
-            link.addEventListener('focus', function() {
+        ap.forEach.call(sl.querySelectorAll('a'), function(a) {
+            a.addEventListener('focus', function() {
                 sl.className = 'withfocus';
             });
-            link.addEventListener('blur', function() {
+            a.addEventListener('blur', function() {
                 sl.className = 'withoutfocus';
             });
         });
