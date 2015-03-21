@@ -204,18 +204,18 @@ section {
 main header p {
     margin: 0;
 }
-
-main aside,
-.sidebar {
-    clear: right;
-    float: right;
-    margin: 0 0 1ex 1ex;
-    max-width: 45%;
+@media screen and (min-width: 460px) {
+    main aside,
+    .sidebar {
+        clear: right;
+        float: right;
+        margin: 0 0 1ex 1ex;
+        max-width: 45%;
+    }
 }
 figure {
     display: inline-block;
     margin: 0 1ex 1ex 0;
-    max-width: 100%;
     vertical-align: top;
     width: 206px;
     width: -webkit-min-content;
@@ -223,10 +223,12 @@ figure {
     width: min-content;
 }
 figure.scaled {
+    display: block;
     width: auto;
-    width: -webkit-min-content;
-    width: -moz-min-content;
-    width: min-content;
+}
+figure.scaled img {
+    width: -moz-available;
+    width: -webkit-fill-available;
 }
 aside figure {
     margin: 0;
@@ -235,19 +237,11 @@ figure figcaption {
     font-size: 80%;
     font-style: italic;
 }
-img {
-    border: 0;
-}
 figure img, .comment img {
     background: white;
     border: solid 1px #666666;
     display: block;
     height: auto;
-    max-width: 96%;
-    max-width: -moz-calc(100% - 6px);
-    max-width: -webkit-calc(100% - 6px);
-    max-width: -o-calc(100% - 6px);
-    max-width: calc(100% - 6px);
     padding: 2px;
 }
 .abstract,
@@ -542,7 +536,7 @@ p.postyears:before {
 	position: static;
     }
 }
-@media screen and (min-width: 35em) {
+@media screen and (min-width: 45em) {
     main {
         float: left;
         width: 66%;
