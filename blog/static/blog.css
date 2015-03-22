@@ -20,7 +20,7 @@ header.site :visited {
 }
 header.site a:hover,
 header.site a:focus {
-    color: #eeccff;
+    color: #ecf;
     text-decoration: underline;
 }
 #sitename :link,
@@ -81,7 +81,7 @@ footer.site {
     padding: .2em 0;
 }
 footer.site p {
-    color: #606060;
+    color: #666;
     font-size: 90%;
     overflow: hidden;
     text-decoration: none;
@@ -90,7 +90,7 @@ footer.site p {
     display: inline;
 }
 footer.site p.icon-cc-by:before {
-    content: '\e7a5\0020\e7a6';
+    content: '\e811\0020\e812'; /* icon-cc icon-cc-by */
     width: auto;
 }
 
@@ -101,11 +101,9 @@ main {
 
 #sideblockwrap aside {
     background: white;
-    -webkit-border-radius: .5em;
     border-radius: .5em;
-    border: solid 1px #888888;
-    -webkit-box-shadow: .2em .3em .8em #aaaaaa;
-    box-shadow: .2em .3em .8em #aaaaaa;
+    border: solid 1px #888;
+    box-shadow: .2em .3em .8em #aaa;
     color: black;
     font-size: 90%;
     margin: 1em 0;
@@ -194,7 +192,7 @@ article h1 a {
 }
 article h1 a:hover,
 article h1 a:focus {
-    color: #0000aa;
+    color: #00a;
     text-decoration: underline;
 }
 section {
@@ -204,26 +202,32 @@ section {
 main header p {
     margin: 0;
 }
-
-main aside,
-.sidebar {
-    clear: right;
-    float: right;
-    margin: 0 0 1ex 1ex;
-    max-width: 45%;
+@media screen and (min-width: 460px) {
+    main aside,
+    .sidebar {
+        clear: right;
+        float: right;
+        margin: 0 0 1ex 1ex;
+        max-width: 45%;
+    }
 }
 figure {
     display: inline-block;
     margin: 0 1ex 1ex 0;
-    max-width: 100%;
     vertical-align: top;
     width: 206px;
+    width: -webkit-min-content;
     width: -moz-min-content;
     width: min-content;
 }
 figure.scaled {
+    display: block;
     width: auto;
-    width: -moz-min-content;
+}
+figure.scaled img {
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: available;
 }
 aside figure {
     margin: 0;
@@ -232,49 +236,12 @@ figure figcaption {
     font-size: 80%;
     font-style: italic;
 }
-img {
-    border: 0;
-}
 figure img, .comment img {
     background: white;
-    border: solid 1px #666666;
+    border: solid 1px #666;
     display: block;
     height: auto;
-    max-width: 96%;
-    max-width: -moz-calc(100% - 6px);
-    max-width: -webkit-calc(100% - 6px);
-    max-width: -o-calc(100% - 6px);
-    max-width: calc(100% - 6px);
     padding: 2px;
-}
-.orgname.parti {
-    display: inline-block;
-    height: 40px;
-    overflow: hidden;
-    text-indent: 53px;
-    vertical-align: bottom;
-    width: 52px;
-}
-.orgname.parti.kds {
-    background: url('/img/kds');
-}
-.orgname.parti.m {
-    background: url('/img/m');
-}
-.orgname.parti.fp {
-    background: url('/img/fp');
-}
-.orgname.parti.c {
-    background: url('/img/c');
-}
-.orgname.parti.mp {
-    background: url('/img/mp');
-}
-.orgname.parti.s {
-    background: url('/img/s');
-}
-.orgname.parti.v {
-    background: url('/img/v');
 }
 .abstract,
 .update {
@@ -300,7 +267,7 @@ table caption {
 }
 table th,
 table td {
-    border: solid 1px #cccccc;
+    border: solid 1px #ccc;
     padding: 0 1ex;
     text-align: left;
 }
@@ -312,7 +279,7 @@ table tbody tr:nth-child(even) {
 
 pre.programlisting {
     background: white;
-    border-color: #aaaaaa;
+    border-color: #aaa;
     border-style: solid;
     border-width: 1px 0;
     overflow: auto;
@@ -321,10 +288,9 @@ pre.programlisting {
 
 blockquote {
     background: #fafafa;
-    border: solid 1px #aaaaaa;
-    -webkit-box-shadow: .3em .2em .5em #cccccc;
-    box-shadow: .3em .2em .5em #cccccc;
-    color: #222222;
+    border: solid 1px #aaa;
+    box-shadow: .3em .2em .5em #ccc;
+    color: #222;
     font-style: italic;
     margin: 1ex 1em 1em;
     max-width: 34em;
@@ -340,9 +306,6 @@ blockquote footer.attribution {
 }
 blockquote em {
     font-weight: bold;
-}
-.replaceable {
-    font-style: italic;
 }
 code.xml {
     color: #51AA17;
@@ -378,9 +341,6 @@ dl dd {
     padding: 0;
 }
 
-.comment {
-    overflow: hidden;
-}
 .comment img { /* gravatar */
     float: right;
     margin: 0 0 .2em .4em;
@@ -433,7 +393,7 @@ dl dd {
 :target {
     background: -webkit-linear-gradient(176deg, rgba(255,0,99,.4), rgba(255,0,0,0) 3em);
     background: linear-gradient(176deg, rgba(255,0,99,.4), rgba(255,0,0,0) 3em);
-    border-radius: .4em 1em 0 0;
+    border-radius: 1ex 0 0;
     padding-left: .5em;
 }
 :link:hover,
@@ -441,10 +401,10 @@ dl dd {
     text-decoration: underline;
 }
 :link:hover {
-    color: #0000aa;
+    color: #00a;
 }
 :visited:hover {
-    color: #550088;
+    color: #508;
 }
 
 .LT_itemLast,
@@ -515,6 +475,36 @@ li[class*=" icon-"]:before {
     color: #222;
     padding-right: .2em;
 }
+#socialwidgets {
+    color: #aaa;
+}
+#socialwidgets a {
+    background: white;
+    background: linear-gradient(#fff, #ddd);
+    border-radius: .3em;
+    border: 1px #ccc solid;
+    color: black;
+    padding: .1em .5em;
+    text-decoration: none;
+    text-shadow: 1px 1px white;
+}
+#socialwidgets a:focus,
+#socialwidgets a:hover {
+    background: #ddd;
+    background: linear-gradient(#eee, #ccc);
+    border-color: #888;
+}
+#socialwidgets .twitter:before {
+    font-family: 'font-kaj-20150319';
+    content: '\e806\0020'; /* icon-twitter */
+    color: #55acee;
+}
+#socialwidgets .facebook:before {
+    font-family: 'font-kaj-20150319';
+    content: '\e807\0020'; /* icon-facebook-squared */
+    color: #00f;
+}
+
 section#contact {
     clear: right;
 }
@@ -525,9 +515,9 @@ p.postyears {
 }
 p.postyears:before {
     color: #8add52;
-    content: '🍂'; /* \1f342 */
+    content: '\e805'; /* icon-leaf */
     float: left;
-    font-family: 'font-kaj-20121124';
+    font-family: 'font-kaj-20150319';
     font-size: 280%;
     margin: -.5em .4em 0 -.5em;
     text-shadow: .07em .1em .15em #454229;
@@ -542,7 +532,7 @@ p.postyears:before {
 	position: static;
     }
 }
-@media screen and (min-width: 35em) {
+@media screen and (min-width: 45em) {
     main {
         float: left;
         width: 66%;
@@ -558,7 +548,6 @@ p.postyears:before {
     }
     #skiplinks.withfocus {
 	height: auto;
-	overflow: visible;
     }
     #writecomment form p {
         margin-left: 10em;
