@@ -380,6 +380,7 @@ dl dd {
     border-top: solid 1px #aaa;
     font-size: 90%;
     margin: 0;
+    overflow: auto;
     padding: 1ex 0;
 }
 #latestcomments p:last-child {
