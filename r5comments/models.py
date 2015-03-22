@@ -20,6 +20,9 @@ class Comment(models.Model):
     is_removed = models.BooleanField(default=False, db_index=True)
     is_public = models.BooleanField(default=False, db_index=True)
 
+    class Meta:
+        ordering = ['submit_date']
+
     def __unicode__(self):
         return u'%s on %s: %s' % (self.by_name, self.post, self.comment[:20])
 
