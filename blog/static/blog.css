@@ -114,7 +114,18 @@ aside ul {
     padding: 0 0 0 1.7em;
 }
 #mylinks ul {
-    padding-left: .7em;
+    padding: 0;
+}
+#mylinks {
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#mylinks h1 {
+    width: 100%;
+    width: -moz-available;
+    width: available;
 }
 aside h1 {
     font-size: 140%;
