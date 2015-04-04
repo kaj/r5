@@ -120,9 +120,7 @@ def comment(request):
     form = CommentForm(request.POST)
     if form.is_valid():
         comment = form.save(commit=False)
-        # TODO Do I need to check request.META.get('HTTP_X_FORWARDED_FOR') ?
-        comment.by_ip = request.META.get('REMOTE_ADDR')
-        comment.is_public = True # TODO If post is recent etc
+        comment.moderate(request)
         comment.save()
         return redirect(comment)
     else:
