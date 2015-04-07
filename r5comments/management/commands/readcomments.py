@@ -22,7 +22,7 @@ class Command(NoArgsCommand):
                                             slug=m.group('slug'),
                                             lang=m.group('lang'))
                     #print "Read a comment on", post
-                    print Comment.objects.get_or_create(
+                    c, is_new = Comment.objects.get_or_create(
                         post=post,
                         by_name=obj['by'].get('name'),
                         by_email=obj['by'].get('email'),
@@ -33,6 +33,9 @@ class Command(NoArgsCommand):
                         is_public=obj['is_public'],
                         is_removed=obj['is_removed']
                     )
+                    c.submit_date = obj['submit_date']
+                    c.save()
+                    print c
                 else:
                     print "Non-match target:", obj['on']
                     exit(1)
