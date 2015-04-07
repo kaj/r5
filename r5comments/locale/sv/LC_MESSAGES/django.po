@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-15 22:36+0200\n"
+"POT-Creation-Date: 2015-04-07 19:54+0200\n"
 "PO-Revision-Date: 2013-07-15 22:36+0200\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -17,16 +17,74 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: forms.py:21
+#: forms.py:51
 #, python-format
-msgid "\"%s\" looks like spam, sorry."
-msgstr "\"%s\" ser ut som spam.  Beklagar."
+msgid "\"%s\" in a name looks like spam, sorry."
+msgstr "\"%s\" i ett namn ser ut som spam.  Beklagar."
 
-#: forms.py:32
+#: forms.py:63
 msgid "Please use an unshortened url."
 msgstr "Använd en oförkortad url."
 
-#: forms.py:38
+#: forms.py:67
+#, python-format
+msgid "I get to much spam from %s, sorry."
+msgstr "Jag får för mycket spam från %s.  Beklagar."
+
+#: forms.py:75
+#, python-format
+msgid "Please use a http or https url, not %s."
+msgstr "Använd en http- eller https-url, inte %s."
+
+#: forms.py:86
+#, python-format
+msgid "Failed to check url %(url)s: %(msg)s."
+msgstr "Kunde inte kontrollera urlen %(url)s: %(msg)s."
+
+#: forms.py:96
+#, python-format
+msgid "Please use a direct url (%(url)s redirects to %(target)s)"
+msgstr "Vänligen använd en direkt url (%(url)s redirectar till %(target)s)"
+
+#: forms.py:100
+#, python-format
+msgid "Your url returns %(code)s %(msg)s"
+msgstr "Din url returnerar %(code)s %(msg)s"
+
+#: forms.py:108
 #, python-format
 msgid "\"%s\" is used in spam, sorry."
 msgstr "\"%s\" förekommer i spam.  Beklagar."
+
+#: models.py:11
+msgid "Name"
+msgstr "Namn"
+
+#: models.py:12
+msgid "Your name (or pseudonym)."
+msgstr "Ditt namn (eller en pseudonym)."
+
+#: models.py:13
+msgid "Email"
+msgstr "Epost"
+
+#: models.py:14
+msgid "Not published, except as gravatar."
+msgstr "Publiceras inte, utom som gravatar."
+
+#: models.py:15
+msgid "URL"
+msgstr "URL"
+
+#: models.py:16
+msgid "Your homepage / presentation."
+msgstr "Din hemsida / presentation"
+
+#: models.py:17
+msgid "Comment"
+msgstr "Kommentar"
+
+#: models.py:18
+msgid ""
+"No formatting, except that an empty line is interpreted as a paragraph break."
+msgstr "Ingen formatering, utom att en tomrad tolkas som styckesbrytning."

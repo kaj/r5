@@ -9,7 +9,19 @@ from urlparse import urlparse
 import re
 from django.forms import widgets
 
+from django.forms.utils import ErrorList
+class MyErrorList(ErrorList):
+    def __unicode__(self):              # __unicode__ on Python 2
+        return self.as_divs()
+    def as_divs(self):
+        if not self: return ''
+        return ''.join('<i class="error">&#x2022; %s</i> ' % e for e in self)
+
 class CommentForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        kwargs['error_class'] = MyErrorList
+        super(CommentForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Comment
         fields = ('post', 'by_name', 'by_email', 'by_url', 'comment')
@@ -71,7 +83,8 @@ class CommentForm(ModelForm):
                 resp.read()
             except Exception as err:
                 raise forms.ValidationError(
-                    _('Failed to check url %s: %s.') % (urlstr, err))
+                    _('Failed to check url %(url)s: %(msg)s.') %
+                    {'url': urlstr, 'msg': err})
             if resp.status == 200:
                 pass
             elif resp.status in [301, 302, 303, 307]:
@@ -80,11 +93,12 @@ class CommentForm(ModelForm):
                     % (url.geturl(), target.geturl())
                 if target.netloc.lower() != url.netloc.lower():
                     raise forms.ValidationError(
-                        _('Please use a direct url (%s redirects to %s)') %
-                        (url.netloc, target.netloc))
+                        _('Please use a direct url (%(url)s redirects to %(target)s)') %
+                        {'url': url.netloc, 'target': target.netloc})
             else:
                 raise forms.ValidationError(
-                    _('Your url returns %s %s') % (resp.status, resp.reason))
+                    _('Your url returns %(code)s %(msg)s') %
+                    {'code': resp.status, 'msg': resp.reason})
 
             spamurls = Comment.objects \
                 .filter(is_public=False, is_removed=True) \
@@ -93,3 +107,12 @@ class CommentForm(ModelForm):
                 raise forms.ValidationError(
                     _(u'"%s" is used in spam, sorry.') % urlstr)
         return urlstr
+
+    def as_p(self):
+        "Returns this form rendered as HTML <p>s."
+        return self._html_output(
+            normal_row='<p%(html_class_attr)s>%(label)s <span>%(errors)s%(field)s%(help_text)s</span></p>',
+            error_row='%s',
+            row_ender='</p>',
+            help_text_html=' <i class="helptext">%s</i>',
+            errors_on_separate_row=False)
