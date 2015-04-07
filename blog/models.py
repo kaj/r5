@@ -28,6 +28,10 @@ class Post(models.Model):
     def year(self):
         return self.posted_time.year
 
+    @property
+    def pub_comments(self):
+        return self.comment_set.filter(is_public=True, is_removed=False).all()
+
     def abstract_output(self):
         return process_content(self.abstract, Image.objects, lang=self.lang)
     

@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-{% load comments i18n blogtags simplegravatar %}
+{% load i18n blogtags simplegravatar %}
 
 {% block title %}{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se{% endblock %}
 
@@ -50,19 +50,19 @@
   </div>
   
   <section id="comments">
-    {% get_comment_list for post as comment_list %}
-    {% if comment_list %}
+    {% with comments=post.pub_comments %}
+    {% if comments %}
       <h1>{% trans "Kommentarer" %}</h1>
     
-      {% for comment in comment_list %}
+      {% for comment in comments %}
         <section id="c{{ comment.id }}"
                  class="comment{% if comment.user %} authorized{% endif %}" >
-          {% show_gravatar comment.email %}
+          {% show_gravatar comment.by_email %}
           <h1>
-            {% if comment.user_url %}
-              <a href="{{comment.user_url}}">{{comment.name}}</a>,
+            {% if comment.by_url %}
+              <a href="{{comment.by_url}}">{{comment.by_name}}</a>,
             {% else %}
-              <span class="name">{{comment.name}}</span>,
+              <span class="name">{{comment.by_name}}</span>,
             {% endif %}
             <time datetime="{{comment.submit_date|date:'c'}}">{{comment.submit_date}}</time>
           </h1>
@@ -73,20 +73,17 @@
         </section>
       {% endfor %}
     {% endif %}
+    {% endwith %}
 
     <section id="writecomment">
       <h1>{% trans "Skriv en kommentar" %}</h1>
 
-      <p class="fineprint">
-        {% blocktrans with gravatar='<a href="https://gravatar.com/">gravatar</a>'%}
-        Din epostadress kommer inte att visas, men har du en {{gravatar}}
-        så visas den.
-        Du kan inte använda markup i kommentaren, men en dubbel radmating
-        blir en styckesbrytning.
-        {% endblocktrans %}
-      </p>
-      
-      {% render_comment_form for post %}
+      <form action="{% url 'comment' %}" method="post">
+	{% csrf_token %}
+	{{ commentform.as_p }}
+	<p class="submit">
+	  <input type="submit" value='{% trans "Posta kommentaren"%}'></p>
+      </form>
     </section>
   </section>
 {% endblock %}

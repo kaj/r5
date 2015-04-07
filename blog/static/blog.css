@@ -221,6 +221,19 @@ main header p {
         margin: 0 0 1ex 1ex;
         max-width: 45%;
     }
+    #writecomment label {
+	display: inline-block;
+	line-height: 1.8em;
+	vertical-align: top;
+	width: 27%;
+	width: calc(8em);
+    }
+    #writecomment p > span {
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
+	width: calc(100% - 8.5em);
+    }
 }
 figure {
     display: inline-block;
@@ -361,25 +374,22 @@ dl dd {
     content: "\270d";
 }
 
-#writecomment label,
-#writecomment input,
-#writecomment textarea {
-    vertical-align: baseline;
-}
-#writecomment label {
-    float: left;
-}
 #writecomment input,
 #writecomment textarea {
     width: 95%;
+    width: -webkit-available;
     width: -moz-available;
+    width: available;
 }
-#writecomment p.fineprint {
-    display: block;
-    font-size: 85%;
+#writecomment i {
+    font-size: 80%;
+}
+#writecomment .error {
+    color: red;
+    font-weight: bold;
 }
 #writecomment p.submit {
-    display: block;
+    text-align: right;
 }
 #writecomment p.submit input {
     width: auto;
@@ -388,6 +398,7 @@ dl dd {
     border-top: solid 1px #aaa;
     font-size: 90%;
     margin: 0;
+    overflow: auto;
     padding: 1ex 0;
 }
 #latestcomments p:last-child {
@@ -556,12 +567,6 @@ p.postyears:before {
     }
     #skiplinks.withfocus {
 	height: auto;
-    }
-    #writecomment form p {
-        margin-left: 10em;
-    }
-    #writecomment label {
-        margin-left: -10em;
     }
 }
 @media screen and (max-width: 550px) {

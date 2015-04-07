@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 22:51+0100\n"
+"POT-Creation-Date: 2015-04-07 20:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -269,7 +269,7 @@ msgstr "latest comments"
 msgid "Senaste kommentarerna"
 msgstr "Latest comments"
 
-#: templates/blog/part_latestcomments.html:9 templates/blog/tagged.html:3
+#: templates/blog/part_latestcomments.html:8 templates/blog/tagged.html:3
 msgid "på"
 msgstr "on"
 
@@ -281,7 +281,7 @@ msgstr "Tag cloud"
 msgid "liknande sidor"
 msgstr "similar pages"
 
-#: templates/blog/post_detail.html:31 templates/blog/post_summary.html:18
+#: templates/blog/post_detail.html:31 templates/blog/post_summary.html:17
 #: templates/feed/description.html:11
 msgid "Uppdatering"
 msgstr "Update"
@@ -298,30 +298,19 @@ msgstr "Share"
 msgid "Kommentarer"
 msgstr "Comments"
 
-#: templates/blog/post_detail.html:78
+#: templates/blog/post_detail.html:79
 msgid "Skriv en kommentar"
 msgstr "Write a comment"
 
-#: templates/blog/post_detail.html:81
-#, python-format
-msgid ""
-"\n"
-"        Din epostadress kommer inte att visas, men har du en %(gravatar)s\n"
-"        så visas den.\n"
-"        Du kan inte använda markup i kommentaren, men en dubbel radmating\n"
-"        blir en styckesbrytning.\n"
-"        "
-msgstr ""
-"\n"
-"Your email address will not be disclosed, but if you have a %(gravatar)s\n"
-"that will be displayed.  You can not use markup in the\n"
-"comment, but a double newline will be separate paragraphs."
+#: templates/blog/post_detail.html:85
+msgid "Posta kommentaren"
+msgstr "Post the comment"
 
-#: templates/blog/post_detail.html:96
+#: templates/blog/post_detail.html:93
 msgid "Liknande sidor"
 msgstr "Similar pages"
 
-#: templates/blog/post_summary.html:28
+#: templates/blog/post_summary.html:27
 #, python-format
 msgid ""
 "\n"
@@ -338,7 +327,7 @@ msgstr[1] ""
 "\n"
 "Read the post %(title)s with %(comments)s comments"
 
-#: templates/blog/post_summary.html:34
+#: templates/blog/post_summary.html:33
 #, python-format
 msgid ""
 "\n"
@@ -348,7 +337,7 @@ msgstr ""
 "\n"
 "Read and comment the post %(title)s"
 
-#: templates/blog/post_summary.html:49
+#: templates/blog/post_summary.html:48
 #, python-format
 msgid ""
 "\n"
@@ -365,7 +354,7 @@ msgstr[1] ""
 "\n"
 "Read %(comments)s comments"
 
-#: templates/blog/post_summary.html:55
+#: templates/blog/post_summary.html:54
 msgid "Kommentera inlägget"
 msgstr "Write a comment"
 
@@ -393,21 +382,15 @@ msgstr "Picture of me"
 msgid "På jobbet i september 2011. Foto: Björn Roos."
 msgstr "At work, september 2011. Photo: Björn Roos."
 
-#: views.py:96
+#: views.py:102
 msgid "Din kommentar är borttagen."
 msgstr "Your comment is removed."
 
-#: views.py:98
+#: views.py:104
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
-#: views.py:198
+#: views.py:225
 #, python-format
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
-
-#~ msgid "jag twittrar"
-#~ msgstr "I tweet"
-
-#~ msgid "Några bra böcker"
-#~ msgstr "Some good books"

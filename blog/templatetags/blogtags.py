@@ -1,8 +1,8 @@
 from django import template
 from django.db.models import Count
-from django.contrib.comments.models import Comment
 from taggit.models import Tag
 from math import pow
+from r5comments.models import Comment
 
 register = template.Library()
 
@@ -33,7 +33,7 @@ def latestcomments():
     return {
         'comments': Comment.objects.filter(is_public=True) \
             .order_by('-submit_date')[:5],
-        }
+    }
 
 @register.inclusion_tag('blog/post_summary.html')
 def updatesummary(update):
