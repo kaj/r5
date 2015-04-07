@@ -1,6 +1,5 @@
-{% load blogtags comments i18n %}
+{% load blogtags i18n %}
 <article lang="{{post.lang}}">
-  {% get_comment_count for post as comment_count %}
   <header>
     <h1><a href="{{post.get_absolute_url}}">{{post.title|safe}}</a></h1>
     {% publine post %}
@@ -24,8 +23,8 @@
   {% if post.abstract %}
     <p class="readmore">
       <a href="{{post.get_absolute_url}}">
-        {% if comment_count %}
-          {% blocktrans with title=post.title|safe count comments=comment_count %}
+        {% if update.ncomments %}
+          {% blocktrans with title=post.title|safe count comments=update.ncomments %}
             Läs inlägget {{title}} och en kommentar
           {% plural %}
             Läs inlägget {{title}} och {{comments}} kommentarer
@@ -45,8 +44,8 @@
 
     <p class="readmore">
       <a href="{{post.get_absolute_url}}#comments">
-        {% if comment_count %}
-          {% blocktrans count comments=comment_count %}
+        {% if update.ncomments %}
+          {% blocktrans count comments=update.ncomments %}
             Läs en kommentar
           {% plural %}
             Läs {{comments}} kommentarer

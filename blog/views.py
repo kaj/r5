@@ -1,8 +1,8 @@
 # -*- encoding: utf-8 -*-
 from datetime import datetime, timedelta
 from django.conf import settings
-from django.contrib.comments.models import Comment
 from django.core.urlresolvers import reverse
+from django.db.models import Aggregate, Count, Q
 from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.shortcuts import get_object_or_404, get_list_or_404, \
     redirect, render
@@ -16,11 +16,17 @@ from time import mktime
 from blog.models import Post, Update, Image
 import os
 import stat
+from r5comments.forms import CommentForm
+from r5comments.models import Comment
 
 logger = getLogger(__name__)
 
 def index(request, year=None, lang=None, nUpdates=6):
-    updates = Update.objects.all().select_related()
+    updates = Update.objects.all().select_related() \
+                    .filter(Q(post__comment__is_public=True,
+                              post__comment__is_removed=False) |
+                            Q(post__comment__isnull=True)) \
+                    .annotate(ncomments=Count('post__comment'))
     if year:
         head = u'inlägg från %s' % year
         updates = get_list_or_404(updates \
@@ -101,6 +107,7 @@ def post_detail(request, year, slug, lang=None):
         
     return render(request, 'blog/post_detail.html', {
             'post': post,
+            'commentform': CommentForm(initial={'post': post}),
             'message': message,
             'lang': post.lang,
             'altlingos': langlinks('post_detail', altlingos, 
@@ -108,6 +115,26 @@ def post_detail(request, year, slug, lang=None):
             'similar': similar,
             'next': post.get_absolute_url(),
             })
+
+def comment(request):
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.moderate(request)
+        comment.save()
+        return redirect(comment)
+    else:
+        print "Invalid"
+        post = form.cleaned_data['post']
+        return render(request, 'blog/post_detail.html', {
+            'post': post,
+            'commentform': form,
+            'lang': post.lang,
+            #'altlingos': langlinks('post_detail', altlingos,
+            #                       year=year, slug=slug),
+            #'similar': similar,
+            #'next': post.get_absolute_url(),
+        })
 
 def redirect_post(request, year, slug, lang=None):
     post_objects = Post.objects.filter(posted_time__year=year, slug=slug)

@@ -58,6 +58,18 @@
         socbox('#socialwidgets .facebook', function(e) {
             return e.href+'?u='+encodeURIComponent(d.location)+'&display=popup';
         });
+	var t = d.querySelector('#writecomment textarea');
+	if (t) {
+	    t.style.height = '5.2em'
+	    t.style.maxHeight = '20em'
+	    var p = t.parentNode;
+	    t.onkeyup = function() {
+		p.style.height = p.scrollHeight + 'px';
+		t.style.height = '5.2em';
+		t.style.height = t.scrollHeight + 'px';
+		p.style.height = null;
+	    }
+	}
     }
     if (d.readyState == 'complete'
         || d.readyState == 'loaded'

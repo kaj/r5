@@ -25,7 +25,15 @@ class Command(NoArgsCommand):
                     'sourcename': 'old/partier/%s.png' % parti,
                     'orig_width': 0,
                     'orig_height': 0})
-        
+
+        # Used on my presentation page
+        Image.objects.get_or_create(
+            ref='rasmus-broos',
+            defaults = {
+                'sourcename': '2011/09/rasmus-bjornroos-110901_DSC1423.jpg',
+                'orig_width': 0,
+                'orig_height': 0})
+
         files = Image.objects
         if not options['all']:
             files = files.filter(orig_width=0, orig_height=0)
