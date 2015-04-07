@@ -14,3 +14,11 @@ if STATSD_PREFIX:
     INSTALLED_APPS = (
         'django_statsd',
         ) + INSTALLED_APPS
+
+
+if DEBUG_TOOLBAR:
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    from .defaults import INSTALLED_APPS, MIDDLEWARE_CLASSES
+    INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar',)
+    MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + \
+                         MIDDLEWARE_CLASSES

@@ -17,7 +17,15 @@ urlpatterns = patterns(
     (r'^i18n/', include('django.conf.urls.i18n')),
 
     #url(r'^comments/', include('django.contrib.comments.urls')),
-    
+)
+
+if settings.DEBUG_TOOLBAR:
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
+
+urlpatterns += patterns('',
     # The blog app handles most urls.  Must be last.
     url(r'^', include('blog.urls')),
 )
