@@ -18,7 +18,9 @@ if STATSD_PREFIX:
 
 if DEBUG_TOOLBAR:
     DEBUG_TOOLBAR_PATCH_SETTINGS = False
-    from .defaults import INSTALLED_APPS, MIDDLEWARE_CLASSES
+    DEBUG_TOOLBAR_CONFIG = {
+        'SHOW_TOOLBAR_CALLBACK': 'blog.views.debug_toolbar_enabled'
+    }
     INSTALLED_APPS = INSTALLED_APPS + ('debug_toolbar',)
     MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',) + \
                          MIDDLEWARE_CLASSES

@@ -1,5 +1,5 @@
 from django.core.management.base import NoArgsCommand
-from django.contrib.comments.models import Comment
+from r5comments.models import Comment
 from django.conf import settings
 from urlparse import urlparse
 from collections import Counter
@@ -10,9 +10,9 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         spamurls = Comment.objects \
-                          .filter(is_public=False, is_removed=True) \
-                          .exclude(user_url='') \
-                          .values_list('user_url', flat=True)
+                          .filter(is_removed=True) \
+                          .exclude(by_url='') \
+                          .values_list('by_url', flat=True)
         known_spam = settings.SPAM_HOSTS | settings.SHORTEN_SITES
         hosts = Counter()
         for url in spamurls:
@@ -21,4 +21,4 @@ class Command(NoArgsCommand):
                 hosts[host] += 1
 
         print '\n'.join("'%s', #%s" % (a, b)
-                        for a, b in hosts.most_common(17))
+                        for a, b in hosts.most_common(22))

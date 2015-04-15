@@ -90,7 +90,7 @@ def post_detail(request, year, slug, lang=None):
                      reverse=True)[:10]
     
     translation.activate(lang)
-    message = None
+    comment_message = None
     if 'c' in request.GET:
         # TODO Require the comment to be on this post
         try:
@@ -99,16 +99,16 @@ def post_detail(request, year, slug, lang=None):
             # Silently ignore nonexisting comment id
             return redirect(post.get_absolute_url())
         if comment.is_removed:
-            message = _(u'Din kommentar är borttagen.')
+            comment_message = _(u'Din kommentar är borttagen.')
         elif not comment.is_public:
-            message = _(u'Din kommentar väntar på moderering.')
+            comment_message = _(u'Din kommentar väntar på moderering.')
         else:
             return redirect('%s#c%d' % (post.get_absolute_url(), comment.id))
         
     return render(request, 'blog/post_detail.html', {
             'post': post,
             'commentform': CommentForm(initial={'post': post}),
-            'message': message,
+            'comment_message': comment_message,
             'lang': post.lang,
             'altlingos': langlinks('post_detail', altlingos, 
                                    year=year, slug=slug),
@@ -124,7 +124,6 @@ def comment(request):
         comment.save()
         return redirect(comment)
     else:
-        print "Invalid"
         post = form.cleaned_data['post']
         return render(request, 'blog/post_detail.html', {
             'post': post,
@@ -245,3 +244,10 @@ def int_or_404(n):
         return int(n)
     except ValueError:
         raise Http404
+
+def debug_toolbar_enabled(request):
+    if request.META.get('HTTP_X_FORWARDED_FOR', None) not in settings.INTERNAL_IPS:
+        return False
+    if request.is_ajax():
+        return False
+    return True

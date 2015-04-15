@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-07 19:54+0200\n"
+"POT-Creation-Date: 2015-04-15 22:45+0200\n"
 "PO-Revision-Date: 2013-07-15 22:36+0200\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -18,40 +18,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: forms.py:51
-#, python-format
-msgid "\"%s\" in a name looks like spam, sorry."
-msgstr "\"%s\" i ett namn ser ut som spam.  Beklagar."
+msgid "This looks like spam, sorry."
+msgstr "Det här ser ut som spam.  Beklagar."
 
-#: forms.py:63
+#: forms.py:62
 msgid "Please use an unshortened url."
 msgstr "Använd en oförkortad url."
 
-#: forms.py:67
+#: forms.py:66
 #, python-format
 msgid "I get to much spam from %s, sorry."
 msgstr "Jag får för mycket spam från %s.  Beklagar."
 
-#: forms.py:75
+#: forms.py:74
 #, python-format
 msgid "Please use a http or https url, not %s."
 msgstr "Använd en http- eller https-url, inte %s."
 
-#: forms.py:86
+#: forms.py:85
 #, python-format
 msgid "Failed to check url %(url)s: %(msg)s."
 msgstr "Kunde inte kontrollera urlen %(url)s: %(msg)s."
 
-#: forms.py:96
+#: forms.py:95
 #, python-format
 msgid "Please use a direct url (%(url)s redirects to %(target)s)"
 msgstr "Vänligen använd en direkt url (%(url)s redirectar till %(target)s)"
 
-#: forms.py:100
+#: forms.py:99
 #, python-format
 msgid "Your url returns %(code)s %(msg)s"
 msgstr "Din url returnerar %(code)s %(msg)s"
 
-#: forms.py:108
+#: forms.py:107
 #, python-format
 msgid "\"%s\" is used in spam, sorry."
 msgstr "\"%s\" förekommer i spam.  Beklagar."

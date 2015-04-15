@@ -31,7 +31,7 @@ def tagcloud():
 @register.inclusion_tag('blog/part_latestcomments.html')
 def latestcomments():
     return {
-        'comments': Comment.objects.filter(is_public=True) \
+        'comments': Comment.objects.filter(is_removed=False, is_public=True) \
             .order_by('-submit_date')[:5],
     }
 
