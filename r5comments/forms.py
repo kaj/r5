@@ -37,19 +37,18 @@ class CommentForm(ModelForm):
                  'infoxesee', 'instagram', 'insurance',
                  'loans?', 'luggisintedge',
                  'marketing', 'movie', 'offinafag', 'ordillaoffips', 'outlet',
-                 'pay ?day', 'penis', 'poker', 'praikicky', 'pyncpelay',
+                 'pay ?day', 'penis', 'poker', 'porn', 'praikicky', 'pyncpelay',
                  'reviews?',
                  'sale', 'shemale', 'sex', 'sexchat', 'stereoids',
                  r'tripod\.co\.uk', 'twitter',
-                 'webcam', 'viagra', 'video', 'youtube')
+                 'webcam', 'viagra', 'video', 'xxx', 'youtube')
 
-    def clean_name(self):
+    def clean_by_name(self):
         #super(CommentFormAvoidingSpam, self).clean_name()
-        name = self.cleaned_data['name']
-        if re.search('(?:^|-|\.|\s)(?:%s)(?:\s|-|\.|$)' % '|'.join(self.bad_names),
+        name = self.cleaned_data['by_name']
+        if re.search('(?:^|-|\.|\s)(%s)(?:\s|-|\.|$)' % '|'.join(self.bad_names),
                      name, re.IGNORECASE):
-            raise forms.ValidationError(_(u'"%s" in a name looks like spam, sorry.') %
-                                        name)
+            raise forms.ValidationError(_(u'This looks like spam, sorry.'))
         return name
 
     def clean_by_url(self):
