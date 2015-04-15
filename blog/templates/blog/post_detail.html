@@ -14,8 +14,6 @@
 {% endblock %}
 
 {% block main %}
-  {% if message %}<div class="message">{{message}}</div>{% endif %}
-
   <header>
     <h1>{{post.title|safe}}</h1>
     {% publine post %}
@@ -78,12 +76,17 @@
     <section id="writecomment">
       <h1>{% trans "Skriv en kommentar" %}</h1>
 
+      {% if comment_message %}
+      <div class="message">{{comment_message}}</div>
+      <script type="text/javascript">window.location.hash='writecomment';</script>
+      {% else %}
       <form action="{% url 'comment' %}" method="post">
 	{% csrf_token %}
 	{{ commentform.as_p }}
 	<p class="submit">
 	  <input type="submit" value='{% trans "Posta kommentaren"%}'></p>
       </form>
+      {% endif %}
     </section>
   </section>
 {% endblock %}

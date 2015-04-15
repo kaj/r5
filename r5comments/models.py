@@ -28,7 +28,7 @@ class Comment(models.Model):
         return u'%s on %s: %s' % (self.by_name, self.post, self.comment[:20])
 
     def get_absolute_url(self):
-        return '%s#c%s' % (self.post.get_absolute_url(), self.id)
+        return '%s?c=%s' % (self.post.get_absolute_url(), self.id)
 
     def moderate(self, request):
         self.by_ip = request.META.get('HTTP_X_FORWARDED_FOR') or \
