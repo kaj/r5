@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-07 20:07+0200\n"
+"POT-Creation-Date: 2015-04-15 22:51+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -236,11 +236,7 @@ msgstr "my links"
 msgid "Om"
 msgstr "About"
 
-#: templates/blog/base.html:86
-msgid "Övrigt"
-msgstr "Other stuff"
-
-#: templates/blog/base.html:102
+#: templates/blog/base.html:101
 #, python-format
 msgid ""
 "\n"
@@ -252,7 +248,7 @@ msgstr ""
 "This work by %(me)s is licensed under a %(a)sCreative Commons Attribution "
 "3.0 Unported License%(sa)s."
 
-#: templates/blog/base.html:106
+#: templates/blog/base.html:105
 msgid ""
 "\n"
 "          Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
