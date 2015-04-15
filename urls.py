@@ -15,8 +15,6 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     # Language selector
     (r'^i18n/', include('django.conf.urls.i18n')),
-
-    #url(r'^comments/', include('django.contrib.comments.urls')),
 )
 
 if settings.DEBUG_TOOLBAR:
