@@ -10,7 +10,7 @@ class Command(NoArgsCommand):
 
     def handle_noargs(self, **options):
         spamurls = Comment.objects \
-                          .filter(is_public=False, is_removed=True) \
+                          .filter(is_removed=True) \
                           .exclude(user_url='') \
                           .values_list('user_url', flat=True)
         known_spam = settings.SPAM_HOSTS | settings.SHORTEN_SITES
@@ -21,4 +21,4 @@ class Command(NoArgsCommand):
                 hosts[host] += 1
 
         print '\n'.join("'%s', #%s" % (a, b)
-                        for a, b in hosts.most_common(17))
+                        for a, b in hosts.most_common(22))
