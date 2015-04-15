@@ -245,3 +245,10 @@ def int_or_404(n):
         return int(n)
     except ValueError:
         raise Http404
+
+def debug_toolbar_enabled(request):
+    if request.META.get('HTTP_X_FORWARDED_FOR', None) not in settings.INTERNAL_IPS:
+        return False
+    if request.is_ajax():
+        return False
+    return True
