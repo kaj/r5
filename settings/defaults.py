@@ -185,9 +185,6 @@ SIMPLEGRAVATAR_SIZE = 52
 SIMPLEGRAVATAR_DEFAULT = 'identicon'
 
 # Use the (rather silly) profanities system to avoid some spam
-COMMENTS_APP = 'r5comments'
-COMMENTS_ALLOW_PROFANITIES = False
-PROFANITIES_LIST = ['[url=', 'penisadvantage']
 SPAM_HOSTS = { }
 SHORTEN_SITES = {
     'bit.ly', 'ow.ly', 'is.gd', 'tinyurl.com', 'tr.im', 't.co', 'tiny.cc',
