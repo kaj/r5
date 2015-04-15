@@ -41,7 +41,7 @@ class Comment(models.Model):
                 # Known commenter, make it public
                 return True
 
-            if (datetime.now() - self.post.posted_time).days > 25:
+            if (datetime.now() - self.post.posted_time).days > 15:
                 # Old post, moderate
                 return False
             # Moderate comments from previous spammers
