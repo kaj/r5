@@ -124,7 +124,9 @@ def comment(request):
         comment.save()
         return redirect(comment)
     else:
-        post = form.cleaned_data['post']
+        post = form.cleaned_data.get('post', None)
+        if not post:
+            raise Http404;
         return render(request, 'blog/post_detail.html', {
             'post': post,
             'commentform': form,
