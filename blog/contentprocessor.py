@@ -104,10 +104,13 @@ def process_content(content, images, base=None, lang='sv'):
                 lexer = get_lexer_by_name(lang)
                 formatter = HtmlFormatter(nowrap=True)
                 result = highlight(content, lexer, formatter)
-                pre.text = None
-                pre.insert(0, fromstring('<span>'+result+'</span>'))
-            except:
-                print "Error handling pre", cls
+                pp = pre.getparent()
+                npre = fromstring('<pre>'+result+'</pre>')
+                npre.attrib.update(pre.attrib)
+                pp.insert(pp.index(pre), npre)
+                pp.remove(pre)
+            except Exception as e:
+                print "Error handling pre", cls, ":", e
         else:
             pre.text = content
     return mark_safe((dom.text or u'') +
