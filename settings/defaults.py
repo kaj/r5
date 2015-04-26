@@ -11,8 +11,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-SEND_BROKEN_LINK_EMAILS = True
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -102,7 +100,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
