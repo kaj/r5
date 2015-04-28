@@ -32,6 +32,8 @@ def tagcloud():
 def latestcomments():
     return {
         'comments': Comment.objects.filter(is_removed=False, is_public=True) \
+            .select_related('post') \
+            .defer('post__abstract', 'post__content', 'post__frontimage') \
             .order_by('-submit_date')[:5],
     }
 
