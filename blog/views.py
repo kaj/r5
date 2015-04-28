@@ -22,7 +22,7 @@ from r5comments.models import Comment
 logger = getLogger(__name__)
 
 def index(request, year=None, lang=None, nUpdates=6):
-    updates = Update.objects.all().select_related() \
+    updates = Update.objects.all().select_related('post') \
                     .filter(Q(post__comment__is_public=True,
                               post__comment__is_removed=False) |
                             Q(post__comment__isnull=True)) \
