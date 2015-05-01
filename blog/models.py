@@ -1,12 +1,16 @@
 from autoslug.fields import AutoSlugField
 from django.db import models
 from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
 from blog.contentprocessor import process_content
 from django.core.urlresolvers import reverse
 from django.utils.html import strip_tags
 from lxml.etree import fromstring as str2dom, tostring as dom2str
 from os import path
 from re import sub
+
+class TaggedPost(TaggedItemBase):
+    content_object = models.ForeignKey('Post')
 
 class Post(models.Model):
     
@@ -19,7 +23,7 @@ class Post(models.Model):
     content = models.TextField()
     frontimage = models.TextField(blank=True)
     lang = models.CharField(max_length=2, db_index=True)
-    tags = TaggableManager()
+    tags = TaggableManager(through=TaggedPost)
     
     class Meta:
         ordering = ['-posted_time']
