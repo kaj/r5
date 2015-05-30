@@ -7,6 +7,13 @@
     <!--[if lte IE 8]>
     <script type="text/javascript" src="{{STATIC_URL}}html5.js"></script>
     <![endif]-->
+    {% compress css %}
+    <link rel="stylesheet" href="{{STATIC_URL}}html5.css" type="text/css"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}blog.css" type="text/css"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}pygments.css" type="text/css"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}kratsbox/kratsbox.css" type="text/css"/>
+    <link rel="stylesheet" href="{{STATIC_URL}}iconfont/css/font-kaj-20150319.css" type="text/css"/>
+    {% endcompress %}
     {% compress js inline %}
     <script type="text/javascript">
       kbsettings={
@@ -19,13 +26,6 @@
     {% compress js %}
     <script type="text/javascript" src="{{STATIC_URL}}kratsbox/kratsbox.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}myinit.js"></script>
-    {% endcompress %}
-    {% compress css %}
-    <link rel="stylesheet" href="{{STATIC_URL}}html5.css" type="text/css"/>
-    <link rel="stylesheet" href="{{STATIC_URL}}blog.css" type="text/css"/>
-    <link rel="stylesheet" href="{{STATIC_URL}}pygments.css" type="text/css"/>
-    <link rel="stylesheet" href="{{STATIC_URL}}kratsbox/kratsbox.css" type="text/css"/>
-    <link rel="stylesheet" href="{{STATIC_URL}}iconfont/css/font-kaj-20150319.css" type="text/css"/>
     {% endcompress %}
     {% comment %}
     <script type="text/javascript" async="async"
