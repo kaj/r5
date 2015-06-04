@@ -1,7 +1,7 @@
 # Required python packages.
 # Can be installed py "pip install -r requirements.txt"
 
-Django >= 1.7
+Django >= 1.8
 django-autoslug
 django-taggit
 django_compressor
@@ -9,6 +9,7 @@ django-debug-toolbar
 python-memcached
 django-simplegravatar
 IPy
+Jinja2
 pymongo
 lxml
 # Source higlighing for code examples

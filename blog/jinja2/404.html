@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}404: Not on Rasmus.krats.se{% endblock %}
+
+{% block main %}
+  <h1>Page not found</h1>
+
+  <div class="content">
+    <p>The page you tried to view does not exist.  If you typed
+    the url manually, maybe you did not type it correcly &#x2013; or
+    maybe you corrected a spelling error of mine?</p>
+
+    <h2>What now?</h2>
+
+    <p>You can go to <a href="/">the start-page of rasmus.krats.se</a>,
+    or look for something related in the tag cloud.
+    Or you can <a href="mailto:rasmus@krats.se">write to me and
+    complain</a>.</p>
+  </div>
+{% endblock %}
+
+{% block skiplinks -%}
+  {{super()}}
+  <li><a href="#tagcloud">{{_("taggmoln")}}</a></li>
+{%- endblock %}
+
+{% block sideblock -%}
+  {{super()}}
+  <aside id="tagcloud">{{tagcloud()}}</aside>
+{%- endblock %}

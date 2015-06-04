@@ -1,0 +1,157 @@
+<!doctype html>
+{%- from 'macros.html' import time -%}
+{%- macro publine(post) -%}
+  <p class="publine">{{_("Publicerad")}} {{time(post.posted_time)}}
+  {{_("taggat")}} {% for tag in post.tags.all() -%}
+  <a href="{{url('tagged', kwargs={'slug': tag.slug, 'lang': getlang()})}}" rel="tag">{{tag.name}}</a>
+  {%- if loop.last %}.{% else %}, {% endif %}
+  {%- endfor %}</p>
+{%- endmacro %}
+{%- macro summary(post, update=None) -%}
+<article lang="{{post.lang}}">
+  <header>
+    <h1><a href="{{post.get_absolute_url()}}">{{post.title|safe}}</a></h1>
+    {{publine(post)}}
+  </header>
+  {% if post.abstract %}
+    {%- if post.frontimage -%}
+      <aside>{{post.frontimage_output()}}</aside>
+    {%- endif %}
+    <div class="abstract">{{post.abstract_output()}}</div>
+  {%- endif -%}
+  {%- if update.note %}
+    <div class="update">
+      <strong>{{_("Uppdatering")}} {{time(update.time)}}:</strong>
+      {{update.note_output()}}</div>
+  {%- endif -%}
+  {%- if post.abstract %}
+    <p class="readmore"><a href="{{post.get_absolute_url()}}">
+        {%- if update.ncomments -%}
+          {% trans comments=update.ncomments, title=post.title|safe %}
+            Läs inlägget {{title}} och en kommentar
+          {% pluralize %}
+            Läs inlägget {{title}} och {{comments}} kommentarer
+          {% endtrans %}
+        {%- else -%}
+          {%- trans title=post.title|safe -%}
+            Läs och kommentera inlägget {{title}}
+          {%- endtrans -%}
+        {%- endif -%}
+    </a></p>
+  {% else -%}
+    <div>
+      {{post.content_output()}}
+    </div>
+    <p class="readmore"><a href="{{post.get_absolute_url()}}#comments">
+        {%- if update.ncomments %}
+          {% trans comments=update.ncomments %}
+            Läs en kommentar
+          {% pluralize %}
+            Läs {{comments}} kommentarer
+          {% endtrans %}
+        {%- else -%}
+          {{_("Kommentera inlägget")}}
+        {%- endif -%}
+    </a></p>
+  {% endif -%}
+</article>
+{% endmacro %}
+<html lang="{{getlang()}}">
+  <head>
+    <title>{% block title %}Rasmus.krats.se{% endblock %}</title>
+    {% cache 'statichead_' + getlang() %}
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--[if lte IE 8]>
+    <script type="text/javascript" src="{{static('html5.js')}}"></script>
+    <![endif]-->
+    {% compress css %}
+    <link rel="stylesheet" href="{{static('html5.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static('blog.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static('pygments.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static('kratsbox/kratsbox.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static('iconfont/css/font-kaj-20150319.css')}}" type="text/css"/>
+    {% endcompress %}
+    {% compress js, inline %}
+    <script type="text/javascript">
+      kbsettings={
+      next: '{{_("nästa")}} \u2192',
+      prev: '\u2190 {{_("förra")}}',
+      close: '{{_("stäng")}} \u00D7'
+      };
+    </script>
+    {% endcompress %}
+    {% compress js %}
+    <script type="text/javascript" src="{{static('kratsbox/kratsbox.js')}}"></script>
+    <script type="text/javascript" src="{{static('myinit.js')}}"></script>
+    {% endcompress %}
+    <link rel="shortcut icon" href="{{static('trafik-kaj-s.png')}}" />
+    <link rel="apple-touch-icon" href="{{static('trafik-kaj.png')}}" />
+    {% endcache %}
+    {% block extrahead %}{% endblock %}
+    {% for l, url in altlingos %}
+    <link rel="alternate" hreflang="{{l}}" href="{{url}}"/>
+    {% endfor %}
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="{{static('iconfont/css/font-kaj-20150319-ie7.css')}}"><![endif]-->
+    <!--[if lte IE 8]>
+    <script type="text/javascript" src="{{static('respond.min.js')}}"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header class="site">
+      <div>
+	<p id="sitename"><a href="/" rel="start">Rasmus.krats.se</a></p>
+        {% if altlingos %}
+        <p id="lingos">{% for l, url in altlingos %}
+          <a rel="alternate" hreflang="{{l}}" lang="{{l}}" class="icon-flag"
+             href="{{url}}">{{langname(l)}}</a>{%if not loop.last%}, {%endif%}
+          {% endfor %}</p>
+        {% endif %}
+	<p id="tagline">{{_("Skriverier då och då, på webben sedan 1995")}}</p>
+	<div id="skiplinks"><div>{{_("Hoppa till") }}
+	  <ul>
+	    <li><a href="#main">{{_("innehåll")}}</a></li>
+	    {% block skiplinks -%}
+	    <li><a href="#mylinks">{{_("mina länkar")}}</a></li>
+	    {%- endblock -%}
+	  </ul>
+	</div></div>
+      </div>
+    </header>
+    <div id="mainwrap">
+      <main id="main">{% block main %}{% endblock %}</main>
+
+      <div id="sideblockwrap">
+        {%- block sideblock %}
+        <aside id="mylinks">
+          <h1>Rasmus Kaj</h1>
+          <ul>
+            <li class="icon-user"><a href="{{url('about', kwargs={'lang': getlang()})}}">{{_("Om")}} Rasmus.krats.se</a>
+            <li class="icon-leaf"><a href="http://www.kth.se/profile/kaj/">KTH</a>
+            <li class="icon-github"><a href="http://github.com/kaj">Github</a>
+            <li class="icon-twitter"><a href="http://twitter.com/rasmus_kaj">Twitter</a>
+            <li class="icon-book"><a href="http://www.librarything.com/profile/kaj">LibraryThing</a>
+          </ul>
+          <ul>
+            <li class="icon-link-ext"><a href="http://krats.se/">krats.se</a>
+            <li class="icon-link-ext"><a href="http://fantomenindex.krats.se/">Fantomenindex</a>
+            <li class="icon-link-ext"><a href="http://www.albumforlaget.se/">Albumförlaget</a>
+          </ul>
+        </aside>
+        {%- endblock -%}
+      </div>
+    </div>
+    <footer class="site">
+      <div>
+        <p class="license icon-cc-by">
+          {% trans me=('<a href="'+url('me')+'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>')|safe, a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">'|safe, sa='</a>'|safe %}
+          Detta verk av {{me}} är licensierat under en
+          {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
+          {% endtrans %}</p>
+        <p>{% trans %}
+          Denna site <a href="/om#cookie">använder kakor</a>.
+          {% endtrans %}</p>
+      </div>
+    </footer>
+  </body>
+</html>
