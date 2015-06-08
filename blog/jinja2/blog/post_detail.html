@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% from 'macros.html' import gravatar %}
+
+{% block title %}{{post.title|safe|striptags}} &#x2013; Rasmus.krats.se{% endblock %}
+
+{% block extrahead %}
+  {% if post.abstract %}
+    <meta name="Description" content="{{post.abstract_text()}}" />
+  {% endif %}
+{% endblock %}
+
+{% block main %}
+  <header>
+    <h1>{{post.title|safe}}</h1>
+    {{publine(post)}}
+  </header>
+
+  {% if post.abstract %}
+    <div class="abstract">{{post.abstract_output()}}</div>
+  {% endif %}
+
+  {% for u in post.update_set.all() %}
+    {% if u.note %}
+    <div class="update">
+      <strong>{{_("Uppdatering")}} {{time(u.time)}}:</strong>
+      {{u.note_output()}}
+    </div>
+    {% endif %}
+  {% endfor %}
+
+  <div class="content">{{post.content_output()}}</div>
+
+  <address>
+    <a href="{{url('me', kwargs={'lang': getlang()})}}" rel="author">Rasmus Kaj</a>
+  </address>
+  
+  <div id="socialwidgets">
+    <a href="https://twitter.com/share" class="twitter" data-via="rasmus_kaj"
+       data-text="{{post.title|striptags}}">{{_("Tweeta")}}</a>
+    &#xB7;
+    <a href="https://www.facebook.com/sharer/sharer.php"
+       class="facebook">{{_("Dela")}}</a>
+  </div>
+  
+  <section id="comments">
+    {% set comments = post.pub_comments %}
+    {% if comments %}
+      <h1>{{_("Kommentarer")}}</h1>
+    
+      {% for comment in comments %}
+        <section id="c{{ comment.id }}"
+                 class="comment{% if comment.user %} authorized{% endif %}">
+          {{gravatar(comment.by_email)}}
+          <h1>
+            {%- if comment.by_url -%}
+              <a href="{{comment.by_url}}">{{comment.by_name}}</a>,
+            {%- else -%}
+              <span class="name">{{comment.by_name}}</span>,
+            {%- endif %}
+            {{time(comment.submit_date)}}</h1>
+          <div>{{comment.comment|linebreaks}}</div>
+        </section>
+      {% endfor %}
+    {% endif -%}
+
+    <section id="writecomment">
+      <h1>{{_("Skriv en kommentar")}}</h1>
+
+      {%- if comment_message %}
+      <div class="message">{{comment_message}}</div>
+      <script type="text/javascript">window.location.hash='writecomment';</script>
+      {% else %}
+      <form action="{{url('comment')}}" method="post">
+	{{ commentform.as_p() }}
+	<p class="submit">
+	  <input type="hidden" name="csrfmiddlewaretoken" value="{{csrf_token}}">
+	  <input type="submit" value='{{_("Posta kommentaren")}}'></p>
+      </form>
+      {%- endif -%}
+    </section>
+  </section>
+{% endblock %}
+
+{% block skiplinks %}
+  <li><a href="#similar">{{_("liknande sidor")}}</a></li>
+  {{super()}}
+{% endblock %}
+
+{% block sideblock %}
+  <aside id="similar">
+    <h1>{{_("Liknande sidor")}}</h1>
+    <ul>
+      {%- for p in similar -%}
+      <li><a href="{{p.get_absolute_url()}}" lang="{{p.lang}}">{{p.title|safe}}</a>
+      {% endfor -%}
+    </ul>
+  </aside>
+  {{super()}}
+{% endblock %}

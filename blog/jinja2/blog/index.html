@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Rasmus.krats.se{%if head%} - {{head}}{%endif%}{% endblock %}
+
+{% block extrahead %}
+    {# <meta name="Description" content="TODO" /> #}
+    <link rel="alternate" type="application/atom+xml"
+          href="/atom-{{lang}}.xml">
+{% endblock %}
+
+{% block main %}
+    {% if head %}
+        <h1>{{head}}</h1>
+    {% endif %}
+
+    {% for update in updates %}
+        {{summary(update.post, update)}}
+    {% endfor %}
+
+    <p class="postyears">Övriga inlägg från
+      {% for y in years -%}
+      <a href="{{url('index', kwargs={'year': y, 'lang': getlang()})}}">{{y}}</a>
+      {%- if not loop.last %}, {% endif %}
+      {%- endfor %}.</p>
+{% endblock %}
+
+{% block skiplinks %}
+  {{super()}}
+  <li><a href="#tagcloud">{{_("taggmoln")}}</a></li>
+  {% if not head -%}
+  <li><a href="#latestcomments">{{_("senaste kommentarerna")}}</a></li>
+  {%- endif -%}
+{% endblock %}
+
+{% block sideblock -%}
+  {{super()}}
+  <aside id="tagcloud">{{tagcloud()}}</aside>
+
+  {%- if not head %}
+  <aside id="latestcomments">
+    <h1>{{_("Senaste kommentarerna")}}</h1>
+    {{latestcomments()}}
+  </aside>
+  {%- endif -%}
+{%- endblock %}

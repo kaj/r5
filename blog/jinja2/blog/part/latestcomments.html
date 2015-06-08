@@ -1,0 +1,10 @@
+{% for comment in comments %}
+{% from 'macros.html' import gravatar, time %}
+<p class="comment" lang="{{comment.post.lang}}">
+  <a href="{{comment.get_absolute_url()}}">
+    {{gravatar(comment.by_email)}}
+    {{comment.by_name}}, {{time(comment.submit_date)}}
+    {{_("på")}} <i>{{comment.post.title}}</i></a>:
+  {{comment.comment|truncate(128)}}
+</p>
+{% endfor %}

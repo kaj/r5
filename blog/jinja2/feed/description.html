@@ -1,0 +1,18 @@
+{%- from 'base.html' import publine -%}
+{%- from 'macros.html' import time -%}
+
+{{publine(obj.post)}}
+{% if obj.post.abstract -%}
+  {{obj.post.frontimage_output()}}
+  <div class="abstract">{{obj.post.abstract_output()}}</div>
+{%- endif %}
+{% if obj.note -%}
+  <div class="update"><strong>{{_("Uppdatering")}} {{time(obj.time)}}</strong>
+    {{obj.note|safe}}</div>
+{%- endif -%}
+{% if obj.post.abstract -%}
+  <p class="readmore"><a href="{{obj.post.get_absolute_url()}}">{{
+      _("Läs inlägget")}} {{obj.post.title|safe}}</a></p>
+{%- else -%}
+  <div>{{obj.post.content_output()}}</div>
+{%- endif -%}
