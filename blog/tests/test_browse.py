@@ -25,13 +25,13 @@ class SimpleTest(TestCase):
         self.c = Client()
         p, _ = Post.objects.get_or_create(
             title='Foo',
-            posted_time= datetime(2013, 11, 5),
+            posted_time= datetime(2013, 11, 5,  13, 47),
             lang = 'sv',
             abstract = '<p>Lorem ipsum dolor</p>\n',
             content='<p>En text som i princip.</p>\n' +
             '<p>Skulle kunna vara ganska intressant.</p>\n')
         Update.objects.get_or_create(post=p, time=p.posted_time)
-
+        p.tags.add('junk', 'test')
     def get(self, url, expected_status_code=200, expected_location=''):
         response = self.c.get(url)
         self.assertEqual((expected_status_code, expected_location, 
@@ -71,9 +71,9 @@ class SimpleTest(TestCase):
                          select_texts(doc, 'header #sitename'))
         self.assertEqual(['Foo'],
                          select_texts(doc, 'article h1'))
-        self.assertEqual([u'Publicerad 5 november 2013 00:00 taggat',
+        self.assertEqual([u'Publicerad 2013-11-05 13:47 taggat junk, test.',
                           u'Lorem ipsum dolor',
-                          u' Läs och kommentera inlägget Foo '],
+                          u'Läs och kommentera inlägget Foo'],
                          select_texts(doc, 'article p'))
 
     def test_get_nonexistant_page(self):

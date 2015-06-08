@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{tag.name}} {{_("på")}} Rasmus.krats.se{% endblock %}
+
+{% block extrahead %}
+    {# <meta name="Description" content="TODO" /> #}
+    <link rel="alternate" type="application/atom+xml"
+          href="/atom-{{lang}}-{{tag.slug}}.xml">
+{% endblock %}
+
+{% block main %}
+    <h1>{{_("Taggat")}} {{tag.name}}</h1>
+
+    {% for post in posts %}
+        {{summary(post)}}
+    {% endfor %}
+{% endblock %}
+
+{% block skiplinks -%}
+  {{super()}}
+  <li><a href="#tagcloud">{{_("taggmoln")}}</a></li>
+{%- endblock %}
+
+{% block sideblock -%}
+  {{super()}}
+  <aside id="tagcloud">{{tagcloud()}}</aside>
+{%- endblock %}

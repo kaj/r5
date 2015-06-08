@@ -1,0 +1,9 @@
+{%- macro gravatar(email) -%}
+  {%- set g = gravatardata(email).gravatar -%}
+  <img src="{{g.url}}" alt="" width="{{g.size}}" height="{{g.size}}"/>
+{%- endmacro -%}
+
+{% macro time(time) -%}
+  <time datetime="{{time.strftime('%c')}}">{{
+    time.strftime('%Y-%m-%d %H:%M')}}</time>
+{%- endmacro %}

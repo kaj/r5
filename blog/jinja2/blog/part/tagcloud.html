@@ -1,0 +1,8 @@
+<h1>{{_("Taggmoln")}}</h1>
+<ul class="tagcloud">
+  {% for tag in tags -%}
+  <li class="w{{tag.w}}"><a href="{{url('tagged',
+				  kwargs={'slug':tag.slug,
+				  'lang':getlang()})}}">{{tag.name}}</a></li>
+  {% endfor %}
+</ul>

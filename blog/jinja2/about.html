@@ -1,9 +1,8 @@
-{% extends "blog/base.html" %}
-{% load cache i18n blogtags %}
+{% extends "base.html" %}
 
-{% block title %}Rasmus Kaj &#x2013; Rasmus.krats.se {% endblock %}
+{% block title %}Om Rasmus.krats.se {% endblock %}
 {% block extrahead %}
-  <meta name="Description" content='{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}'/>
+  <meta name="Description" content="{{_('Systemutvecklare på IT-Avdelningen på KTH.')}}"/>
 {% endblock %}
 
 {% block main %}
@@ -12,11 +11,11 @@
   </header>
 
   <div class="abstract">
-    <p>{% trans "Systemutvecklare på IT-Avdelningen på KTH." %}</p>
+    <p>{{_("Systemutvecklare på IT-Avdelningen på KTH.")}}</p>
   </div>
 
   <div class="content">
-    {% blocktrans %}
+    {% trans %}
     <p>Jag är en systemutvecklare som i första hand jobbar med webb,
       gärna på ett agilt sätt och gärna i unixmiljö.
       Jag började med webb&#xad;utveckling både hobby&#xad;mässigt och
@@ -26,26 +25,23 @@
       aktiv i
       <a href="http://www.stacken.kth.se/">Dator&#xad;föreningen Stacken</a>
       och läser gärna <a href="/tag/comics">serier</a>.</p>
-    {% endblocktrans %}
+    {% endtrans %}
 
     <section id="contact">
-      <h1>{% trans "Kontakt" %}</h1>
-    
+      <h1>{{_("Kontakt")}}</h1>
+
       <figure class="sidebar">
-        <img src="{{STATIC_URL}}qr-kaj.png" width="82" height="82"
-             alt=""/>
+        <img src="{{static('qr-kaj.png')}}" width="82" height="82" alt=""/>
       </figure>
-      
+
       <dl>
-        <dt class="icon-mail">{% trans "Epost:" %}</dt>
+        <dt class="icon-mail">{{_("Epost:")}}</dt>
         <dd><a href="mailto:rasmus@krats.se">rasmus@krats.se</a></dd>
-        
-        <dt class="icon-phone">{% trans "Telefon:" %}</dt>
+        <dt class="icon-phone">{{_("Telefon:")}}</dt>
         <dd><a href="tel:+46-8-790-67-21">08‒790 67 21</a></dd>
-        <dt class="icon-phone">{% trans "sms:" %}</dt>
+        <dt class="icon-phone">{{_("sms:")}}</dt>
         <dd><a href="sms:+46-739736226">0739736226</a></dd>
-        
-        <dt class="icon-mail">{% trans "Papperspost:" %}</dt>
+        <dt class="icon-mail">{{_("Papperspost:")}}</dt>
         <dd>Rasmus Kaj<br>
           Stamgatan 55<br>
           SE-125 74 &#160;<span class="postort">Älvsjö</span><br>
@@ -55,57 +51,50 @@
   </div>
 
   <section id="site">
-      <h1>{% trans "Om den här siten" %}</h1>
-      
-      {% blocktrans %}
+      <h1>{{_("Om den här siten")}}</h1>
+
+      {% trans %}
       <p>Den här siten, <a href="/">rasmus.krats.se</a>, är dels en blogg där
         jag skriver om vad som helst som intresserar mig och dels en lekstuga
         och lab&#xad;plattform för webb&#xad;teknik.
         Mer om den här siten och hur jag har utvecklat den finns under taggen
         <a href="/tag/meta" rel="tag">meta</a>.</p>
-      {% endblocktrans %}
-      
+      {% endtrans %}
+
       <section id="feeds">
-        <h1>{% trans "Prenumerationer" %}</h1>
-      
-        {% url 'atom-sv' as atom-sv %}
-        {% url 'atom-en' as atom-en %}
-        {% if LANGUAGE_CODE == 'sv' %}
-        {% url 'atom-tag-sv' 'fandom' as atom-fandom %}
-        {% url 'atom-tag-sv' 'serier' as atom-serier %}
-        {% else %}
-        {% url 'atom-tag-en' 'fandom' as atom-fandom %}
-        {% url 'atom-tag-en' 'comics' as atom-serier %}
-        {% endif %}
-        {% blocktrans %}
+        <h1>{{_("Prenumerationer")}}</h1>
+
+        {% trans atom_sv=url('atom-sv'), atom_en=('atom_en'),
+	atom_fandom=url('atom-tag-'+getlang(), args=['fandom']),
+	atom_serier=url('atom-tag-'+getlang(), args=['serier' if getlang()=='sv' else 'comics']) %}
         <p>Det går att prenumerera på mina inlägg i form av en
           atomfeed, antingen
-          <a href="{{atom-sv}}">på svenska</a> eller
-          <a href="{{atom-en}}">på engelska</a>.
+          <a href="{{atom_sv}}">på svenska</a> eller
+          <a href="{{atom_en}}">på engelska</a>.
           Det går också att prenumerera på enskilda taggar, t&#xa0;ex
-          <a href="{{atom-fandom}}">fandom</a> eller
-          <a href="{{atom-serier}}">serier</a> (det går bra att byta ut
+          <a href="{{atom_fandom}}">fandom</a> eller
+          <a href="{{atom_serier}}">serier</a> (det går bra att byta ut
           "fandom" eller "serier" i de länkarna mot någon annan
           tagg).</p>
-        {% endblocktrans %}
+        {% endtrans %}
       </section>
 
       <section id="cookie">
-	<h1>{% trans "Kakor" %}</h1>
-	
-	{% blocktrans %}
+	<h1>{{_("Kakor")}}</h1>
+
+	{% trans %}
 	<p>Den här siten sätter en kaka som används när du skriver en
 	  kommentar.
 	  För att kunna kommentera mina inlägg behöver du ha kakor påslaget i
 	  din browser, att bara läsa inlägg och kommentarer går bra även utan
 	  kakor.</p>
-	{% endblocktrans %}
+	{% endtrans %}
       </section>
 
       <section id="iconfont">
-        <h1>{% trans "Ikonfont" %}</h1>
-      
-        {% blocktrans %}
+        <h1>{{_("Ikonfont")}}</h1>
+
+        {% trans %}
         <p>Jag använder en liten font med några ikoner.  På så sätt blir
           de dels snyggt skalbara och dels kan de laddas tillsammans i
           stället för en och en, vilket sparar lite bandbredd.</p>
@@ -117,22 +106,21 @@
           Symbolurvalet är gjort med
           <a href="http://fontello.com/">Fontello</a>.
         </p>
-        {% endblocktrans %}
+        {% endtrans %}
       </section>
-      
   </section>
-  
+
   <address>
-    <a href="{% url 'me' lang=LANGUAGE_CODE %}" rel="author">Rasmus Kaj</a>
+    <a href="{{url('me', kwargs={'lang': getlang()})}}" rel="author">Rasmus Kaj</a>
   </address>
 {% endblock %}
 
-{% block lastskiplinks %}
-  <li><a href="#tagcloud">{% trans "taggmoln" %}</a></li>
-{% endblock %}
+{% block skiplinks -%}
+  {{super()}}
+  <li><a href="#tagcloud">{{_("taggmoln")}}</a></li>
+{%- endblock %}
 
-{% block sideblockbottom %}
-  <aside id="tagcloud">
-    {% cache 14400 tagcloud LANGUAGE_CODE %}{% tagcloud %}{% endcache %}
-  </aside>
-{% endblock %}
+{% block sideblock -%}
+  {{super()}}
+  <aside id="tagcloud">{{tagcloud()}}</aside>
+{%- endblock %}

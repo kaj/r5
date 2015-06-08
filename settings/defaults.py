@@ -92,13 +92,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.app_directories.Loader',
-    )),
-)
-
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -109,8 +102,6 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'urls'
-
-TEMPLATE_DIRS = ()
 
 INSTALLED_APPS = (
     'blog',
@@ -131,6 +122,37 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages'
+            ],
+        },
+    },
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'blog.util.environment',
+            'extensions': [
+                'jinja2.ext.i18n',
+                'compressor.contrib.jinja2ext.CompressorExtension',
+                'blog.util.FragmentCacheExtension',
+            ],
+        },
+    },
+]
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
