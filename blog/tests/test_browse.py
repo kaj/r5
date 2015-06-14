@@ -78,7 +78,12 @@ class SimpleTest(TestCase):
 
     def test_get_nonexistant_page(self):
         doc = self.get('/2011/nonesuch', expected_status_code=404)
-        
+
+    def test_get_existing_year(self):
+        doc = self.get('/2013/sv')
+        self.assertEqual(['Foo'],
+                         select_texts(doc, 'article h1'))
+
     def test_get_nonexistant_year(self):
         doc = self.get('/1971/', expected_status_code=404)
 
