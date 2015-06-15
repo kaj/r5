@@ -2,7 +2,6 @@
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.db.models import Aggregate, Count, Q
 from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.shortcuts import get_object_or_404, get_list_or_404, \
     redirect, render
@@ -22,11 +21,11 @@ from r5comments.models import Comment
 logger = getLogger(__name__)
 
 def index(request, year=None, lang=None, nUpdates=6):
-    updates = Update.objects.all().select_related('post') \
-                    .filter(Q(post__comment__is_public=True,
-                              post__comment__is_removed=False) |
-                            Q(post__comment__isnull=True)) \
-                    .annotate(ncomments=Count('post__comment'))
+    updates = Update.objects.all().select_related('post').extra(
+        select={
+            'ncomments': 'select count(*) from r5comments_comment where post_id=blog_post.id and is_public=True and is_removed=False'
+        })
+
     if year:
         head = u'inlägg från %s' % year
         updates = get_list_or_404(updates \
