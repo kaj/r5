@@ -12,6 +12,7 @@ mod_remove.short_description = "Moderate to removed"
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('by_name', 'submit_date', 'by_email', 'by_ip', 'post',
                     'is_public', 'is_removed', 'by_url')
+    search_fields = ('by_name', 'by_email', 'by_ip', 'by_url', 'comment')
     date_hierarchy = 'submit_date'
     list_filter = ('is_public', 'is_removed')
     actions = [mod_public, mod_remove]
