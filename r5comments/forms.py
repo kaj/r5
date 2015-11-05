@@ -96,7 +96,7 @@ class CommentForm(ModelForm):
                         {'url': url.netloc, 'target': target.netloc})
             else:
                 raise forms.ValidationError(
-                    _('Your url returns %(code)s %(msg)s') %
+                    _(u'Your url returns %(code)s %(msg)s') %
                     {'code': resp.status, 'msg': resp.reason})
 
             spamurls = Comment.objects \

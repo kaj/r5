@@ -46,8 +46,8 @@
             d.querySelector('#skiplinks ul').insertAdjacentHTML('beforeend',
              '<li><a href="#tweetbox">my tweets</a></li> '+
              '<li><a href="#booksbox">några bra böcker</a></li>');
-            addscript('http://platform.twitter.com/widgets.js', 'twitter-wjs')
-            addscript('http://www.librarything.com/widget_get.php?userid=kaj'+
+            addscript('//platform.twitter.com/widgets.js', 'twitter-wjs')
+            addscript('//www.librarything.com/widget_get.php?userid=kaj'+
                       '&theID=w5c54f5e485d879152955168d893d33ab', 'libthing-wjs')
         }
         initSkiplinks();

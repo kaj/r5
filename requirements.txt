@@ -21,3 +21,6 @@ cssselect
 
 # Collect statistics in a nice way
 # django-statsd-mozilla
+
+gunicorn
+setproctitle
