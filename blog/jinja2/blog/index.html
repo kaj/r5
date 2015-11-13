@@ -29,6 +29,7 @@
   <li><a href="#tagcloud">{{_("taggmoln")}}</a></li>
   {% if not head -%}
   <li><a href="#latestcomments">{{_("senaste kommentarerna")}}</a></li>
+  <li><a href="#favbooks">{{_("några bra böcker")}}</a></li>
   {%- endif -%}
 {% endblock %}
 
@@ -40,6 +41,11 @@
   <aside id="latestcomments">
     <h1>{{_("Senaste kommentarerna")}}</h1>
     {{latestcomments()}}
+  </aside>
+  <aside id="favbooks">
+    <h1>{{_("Några bra böcker")}}</h1>
+    {{favbooks()}}
+    <p class="trailer"><a href="https://www.librarything.com/catalog/kaj">{{_("Ur mitt bibliotek på LibraryThing")}}</a>.</p>
   </aside>
   {%- endif -%}
 {%- endblock %}

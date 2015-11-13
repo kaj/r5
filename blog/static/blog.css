@@ -603,3 +603,66 @@ p.postyears:before {
 	text-decoration: none;
     }
 }
+
+.ltbooks {
+    display: flex;
+    flex-flow: row wrap;
+}
+.ltbooks .book {
+    overflow: auto;
+    flex-basis: 16em;
+    flex-grow: 1;
+    padding: 0 1ex 1ex 0;
+}
+#favbooks .book {
+    border-top: 1px solid #aaa;
+    padding: 1ex 0;
+    margin: 0;
+    overflow: auto;
+}
+#favbooks p.trailer {
+    border-top: 1px solid #aaa;
+    padding: 1ex 0 0;
+    margin: 0;
+    text-align: right;
+}
+.ltbooks .book .title,
+#favbooks .book .title {
+    font-size: 110%;
+}
+.book :link,
+.book :visited {
+    text-decoration: none;
+}
+.ltbooks book p,
+#favbooks p {
+    margin: 0 0 .2em 0;
+}
+.ltbooks .book img,
+#favbooks .book img {
+    float: right;
+    margin: 0 1ex 1ex 0;
+}
+.rating .star {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAQAAADI+WwIAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAACXZwQWcAAAALAAAACgCF+qVAAAAAhUlEQVQI103NMQqCABgF4C+Fxg7QHDQ0JkFnaKqlKJBu4Np9hEDoBq2doCYP0B4UBKLYUKZvex+P/+9N/dJ3FXl9S9CopbF9U1pOkAgb3irVanOMlGqldeBoo9CmspMFOFmp/hzLmtuXzvrWvpwJFVJvLLqci8Qmzl8OhzBwcMdD6ilXfwAd9B9f78yTCQAAAABJRU5ErkJggg==);
+}
+.rating .no {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAQAAADI+WwIAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAJiS0dEAP+Hj8y/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAACXZwQWcAAAALAAAACgCF+qVAAAAAo0lEQVQI1z2NMQrCQBRE32YxGFDwBGJnYZkll0ilpDISLO28k4lFwN7CTsTKSisbK8ELCJFI/BZJdn41j/kzSqiVuZ3r1yzeAAanoajpcOwsW2dxf+0yWGe6CaVzNmgY4VHyQKAiVsIlUlvc9otK4lXugNnJjKqlkpi86X6exIZfNztZBGhKUgr4hBZ3A3UX4ye/CYdeWHch7MOzJ9R3jFLt8we7izGyoi32iQAAAABJRU5ErkJggg==);
+}
+
+.rating .half {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAKCAQAAADI+WwIAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAACxIAAAsSAdLdfvwAAAAJdnBBZwAAAAsAAAAKAIX6pUAAAACTSURBVAjXTY0xCsJAEEVfdiEgpPAWFpYTvMRWSioDwdIuh7GydbEIeAM7sU1lo42tR1CEdSzMJk4178H/H7qTVK4+A0URTNTMmZhVhEHXMK69/UEiS3Z0sOGOQqBMQAr2pABbgKDlujHQHlgQYpdWeRO7z/0Cj8swOcPyxvOEl/vXN/K2+kw5Zq4PipNR/E+Ft8IX7yMjsFUGo0cAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAAAAElFTkSuQmCC);
+}
+
+.rating span {
+    float: left;
+    width: 11px;
+    height: 10px;
+}
+p.rating {
+    overflow: auto;
+}
+#favbooks p.tags {
+    font-family: sans-serif;
+    font-size: 90%;
+}

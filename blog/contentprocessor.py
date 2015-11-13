@@ -1,9 +1,12 @@
+from books.models import Book, BookTag
 from django.utils.safestring import mark_safe
 from logging import getLogger
 from lxml.etree import fromstring, Element, SubElement, tostring
 from os.path import commonprefix
 from re import match, findall
+from taggit.models import Tag
 from urllib import quote
+from util import render_books
 
 logger = getLogger(__name__)
 
@@ -11,6 +14,17 @@ def process_content(content, images, base=None, lang='sv'):
     dom = fromstring(u'<article lang="%s">%s</article>' % (lang, content))
     def getlang(elem):
         return elem.get('lang') or getlang(elem.getparent())
+    for books in dom.iterfind('.//books'):
+        tag = BookTag.objects.get(slug=books.attrib['tag'])
+        result = render_books([to.content_object
+                               for to in tag.books_taggedbook_items.all()])
+        # Workaround for broken parser:
+        result = result.replace('</span>', ' </span>')
+        bp = books.getparent()
+        npre = fromstring('<div class="ltbooks">'+result+'</div>')
+        bp.insert(bp.index(books), npre)
+        bp.remove(books)
+
     for figure in dom.iterfind('.//figure'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
