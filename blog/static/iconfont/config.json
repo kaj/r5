@@ -1,5 +1,5 @@
 {
-  "name": "font-kaj-20150319",
+  "name": "font-kaj-20151114",
   "css_prefix_text": "icon-",
   "css_use_suffix": false,
   "hinting": true,
@@ -10,6 +10,24 @@
       "uid": "bf882b30900da12fca090d9796bc3030",
       "css": "mail",
       "code": 59408,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "474656633f79ea2f1dad59ff63f6bf07",
+      "css": "star",
+      "code": 9733,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "d17030afaecc1e1c22349b99f3c4992a",
+      "css": "star-empty",
+      "code": 9734,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "84cf1fcc3fec556e7eaeb19679ca2dc9",
+      "css": "star-half",
+      "code": 10027,
       "src": "fontawesome"
     },
     {
@@ -63,7 +81,7 @@
     {
       "uid": "19e7b342a5e6bd0cd86de6d6208486a4",
       "css": "leaf",
-      "code": 59397,
+      "code": 10087,
       "src": "fontawesome"
     },
     {
