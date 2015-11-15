@@ -415,62 +415,6 @@ dl dd {
     color: #508;
 }
 
-.LT_itemLast,
-.LT_powered {
-    border-top: solid 1px #aaa;
-    overflow: hidden;
-    padding: 1ex 0;
-}
-.LT_cover {
-    float: left;
-    margin-right: .5em;
-}
-.LT_title {
-    display: block;
-    font-size: 110%;
-}
-.LT_rating {
-    display: block;
-    margin-top: 1ex;
-}
-.LT_powered {
-    padding-bottom: 0;
-    text-align: center;
-}
-.LT_powered a {
-    text-decoration: none;
-}
-.LT_powered img {
-    margin-right: .3em;
-    vertical-align: middle;
-}
-#LT_LB_overlay {
-    background: rgba(0, 0, 0, .2);
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
-main .LTitem {
-    display: inline-block;
-    margin: 0 1em 1em 0;
-    vertical-align: middle;
-    width: -moz-max-content;
-    width: 20em;
-}
-main .LTitem img {
-    float: left;
-    margin-right: 1ex;
-}
-main .LTitem .LTtitle {
-    display: block;
-    font-weight: bold;
-}
-main .LTitem a {
-    text-decoration: none;
-}
 aside#tweetbox {
     padding: 0;
 }
@@ -503,12 +447,12 @@ li[class*=" icon-"]:before {
     border-color: #888;
 }
 #socialwidgets .twitter:before {
-    font-family: 'font-kaj-20150319';
+    font-family: 'font-kaj-20151114';
     content: '\e806\0020'; /* icon-twitter */
     color: #55acee;
 }
 #socialwidgets .facebook:before {
-    font-family: 'font-kaj-20150319';
+    font-family: 'font-kaj-20151114';
     content: '\e807\0020'; /* icon-facebook-squared */
     color: #00f;
 }
@@ -525,7 +469,7 @@ p.postyears:before {
     color: #8add52;
     content: '\e805'; /* icon-leaf */
     float: left;
-    font-family: 'font-kaj-20150319';
+    font-family: 'font-kaj-20151114';
     font-size: 280%;
     margin: -.5em .4em 0 -.5em;
     text-shadow: .07em .1em .15em #454229;
@@ -602,4 +546,61 @@ p.postyears:before {
 	color: inherit;
 	text-decoration: none;
     }
+}
+
+.ltbooks {
+    display: flex;
+    flex-flow: row wrap;
+}
+.ltbooks .book {
+    overflow: auto;
+    flex-basis: 16em;
+    flex-grow: 1;
+    padding: 0 1ex 1ex 0;
+}
+#favbooks .book {
+    border-top: 1px solid #aaa;
+    padding: 1ex 0;
+    margin: 0;
+    overflow: auto;
+}
+#favbooks p.trailer {
+    border-top: 1px solid #aaa;
+    padding: 1ex 0 0;
+    margin: 0;
+    text-align: right;
+}
+.ltbooks .book .title,
+#favbooks .book .title {
+    font-size: 110%;
+}
+.book :link,
+.book :visited {
+    text-decoration: none;
+}
+.ltbooks book p,
+#favbooks p {
+    margin: 0 0 .2em 0;
+}
+.ltbooks .book img,
+#favbooks .book img {
+    float: right;
+    margin: 0 1ex 1ex 0;
+}
+.rating {
+    font-family: 'font-kaj-20151114';
+    color: #cdad00;
+}
+.rating .star:before {
+    content: '\2605'; /* icon-star */
+}
+.rating .no:before {
+    content: '\2606'; /* icon-star-empty */
+}
+.rating .half:before {
+    content: '\272b'; /* icon-star-half */
+}
+#favbooks p.tags {
+    font-family: sans-serif;
+    font-size: 90%;
 }

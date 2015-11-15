@@ -390,3 +390,9 @@ msgstr "Your comment awaits moderation."
 #, python-format
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
+
+msgid "Av"
+msgstr "By"
+
+msgid "Taggad"
+msgstr "Tagged"

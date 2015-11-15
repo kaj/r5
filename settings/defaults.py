@@ -105,6 +105,7 @@ ROOT_URLCONF = 'urls'
 
 INSTALLED_APPS = (
     'blog',
+    'books',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',

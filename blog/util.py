@@ -2,9 +2,10 @@ from __future__ import absolute_import  # Python 2 only
 
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
+from django.template.loader import get_template
+from django.utils import translation
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext, ngettext
-from django.utils import translation
 from jinja2 import evalcontextfilter, Markup, escape
 from jinja2 import Environment
 from jinja2 import nodes
@@ -71,7 +72,6 @@ class FragmentCacheExtension(Extension):
 def maketagcloud(lang):
     from taggit.models import Tag
     from django.db.models import Count
-    from django.template.loader import get_template
     tags = Tag.objects.all().order_by('name').annotate(
         n = Count('taggit_taggeditem_items'))
     if tags:
@@ -84,13 +84,27 @@ def maketagcloud(lang):
 
 def makelatestcomments(lang):
     from r5comments.models import Comment
-    from django.template.loader import get_template
     comments = Comment.objects.filter(is_removed=False, is_public=True). \
                select_related('post'). \
                defer('post__abstract', 'post__content', 'post__frontimage'). \
                order_by('-submit_date')[:5]
     return mark_safe(get_template('blog/part/latestcomments.html').
                      render({'comments': comments}))
+
+def render_books(books):
+    template = get_template('books/part/book.html')
+    def stars(r):
+        if r:
+            def t(name, n):
+                return ('<span class="' + name + '"></span>') * n
+            return mark_safe(t('star', int(r)) +
+                             t('half', 0 if r.is_integer() else 1) +
+                             t('no',   int(5-r)))
+        else:
+            return ''
+    return '\n'.join(template.render({'book': b,
+                                      'stars': stars(float(b.rating)/10)})
+                     for b in books)
 
 def environment(**options):
     from simplegravatar.templatetags.simplegravatar import show_gravatar_secure
@@ -117,6 +131,17 @@ def environment(**options):
             result = makelatestcomments(lang)
             cache.set(key, result)
         return result
+    def favbooks():
+        from django.core.cache import cache
+        lang = getlang()
+        key = 'b_favbooks_' + lang
+        result = cache.get(key)
+        if result is None:
+            from books.models import Book
+            goodbooks = Book.objects.filter(rating__gte=40).order_by('?')[:4]
+            result = render_books(goodbooks)
+            cache.set(key, result)
+        return mark_safe(result)
     @evalcontextfilter
     def linebreaks(eval_ctx, value):
         result = u'\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n')
@@ -130,6 +155,7 @@ def environment(**options):
         'langname': langname,
         'tagcloud': tagcloud,
         'latestcomments': latestcomments,
+        'favbooks': favbooks,
         'gravatardata': show_gravatar_secure,
         'static': staticfiles_storage.url,
         'url': reverse,
