@@ -1,7 +1,7 @@
 html, body {
     background: #f6f1f4;
     color: black;
-    line-height: 1.5;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
 }
@@ -467,7 +467,7 @@ p.postyears {
 }
 p.postyears:before {
     color: #8add52;
-    content: '\e805'; /* icon-leaf */
+    content: '\2767'; /* icon-leaf */
     float: left;
     font-family: 'font-kaj-20151114';
     font-size: 280%;
