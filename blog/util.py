@@ -120,7 +120,7 @@ def environment(**options):
         result = cache.get(key)
         if result is None:
             result = maketagcloud(lang)
-            cache.set(key, result)
+            cache.set(key, result, , 30*60)
         return result
     def latestcomments():
         from django.core.cache import cache
@@ -140,7 +140,7 @@ def environment(**options):
             from books.models import Book
             goodbooks = Book.objects.filter(rating__gte=40).order_by('?')[:4]
             result = render_books(goodbooks)
-            cache.set(key, result)
+            cache.set(key, result, 30*60)
         return mark_safe(result)
     @evalcontextfilter
     def linebreaks(eval_ctx, value):
