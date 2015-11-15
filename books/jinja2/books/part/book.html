@@ -1,12 +1,12 @@
 <div class="book" id="book{{book.book_id}}">
 <img src="{{book.cover}}"/>
 <p class="title"><a href="https://www.librarything.com/work/book/{{book.lt_id}}">{{book.title}}</a></p>
-<p>By <a href="https://www.librarything.com/author/{{book.author.lt_slug}}">{{book.author.name}}</a></p>
+<p>{{_("Av")}} <a href="https://www.librarything.com/author/{{book.author.lt_slug}}">{{book.author.name}}</a></p>
 {%- if stars -%}
   <p class="rating stars">{{stars}}</p>
 {%- endif -%}
-  {%- if book.tags -%}
-  <p class="tags">{% for tag in book.tags.all() -%}
+  {%- if book.tags.all() -%}
+  <p class="tags">{{_("Taggad")}} {% for tag in book.tags.all() -%}
   {{tag}}
   {%- if loop.last %}.{% else %}, {% endif -%}
   {%- endfor -%}</p>
