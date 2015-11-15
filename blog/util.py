@@ -120,7 +120,7 @@ def environment(**options):
         result = cache.get(key)
         if result is None:
             result = maketagcloud(lang)
-            cache.set(key, result, , 30*60)
+            cache.set(key, result, 30*60)
         return result
     def latestcomments():
         from django.core.cache import cache
