@@ -92,11 +92,18 @@ def process_content(content, images, base=None, lang='sv'):
     for e in dom.iterfind('.//cite'):
         isbn = e.get('isbn')
         if isbn:
-            # TODO Maybe put the link inside the cite?
+            # TODO Maybe put the link inside or around the cite?
             e.tag = 'a'
             e.set('href', 'http://{lang}.librarything.com/isbn/{isbn}'.format(
                 lang = getlang(e),
                 isbn=isbn))
+        else:
+            m = match('^Fa\s+([\d]+)(-\d+)?\s+([\d]+)$', e.text)
+            if m:
+                e.tag = 'a'
+                e.set('href', 'https://fantomenindex.krats.se/{year}#i{i}'.format(
+                    year = m.group(3),
+                    i = m.group(1)))
 
     for pre in dom.iterfind('.//pre'):
         if len(pre):
