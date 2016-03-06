@@ -97,7 +97,7 @@ def process_content(content, images, base=None, lang='sv'):
             e.set('href', 'http://{lang}.librarything.com/isbn/{isbn}'.format(
                 lang = getlang(e),
                 isbn=isbn))
-        else:
+        elif e.text:
             m = match('^Fa\s+([\d]+)(-\d+)?\s+([\d]+)$', e.text)
             if m:
                 e.tag = 'a'
