@@ -14,9 +14,7 @@
     {{publine(post)}}
   </header>
   {% if post.abstract %}
-    {%- if post.frontimage -%}
-      <aside>{{post.frontimage_output()}}</aside>
-    {%- endif %}
+    {%- if post.frontimage %}{{post.frontimage_output()}}{% endif %}
     <div class="abstract">{{post.abstract_output()}}</div>
   {%- endif -%}
   {%- if update.note %}
