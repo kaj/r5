@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url as django_url
+from django.conf.urls import url as django_url
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from blog.views import *
@@ -28,8 +28,7 @@ url.bind('year', '[0-9]{4}')
 url.bind('lang', '(sv|en)')
 url.bind('imgid', '[a-z0-9_-]+')
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^<lang>?$', index, {'year': None}, name='index'),
     url(r'^<year>/<lang>?$', index, name='index'),
     url(r'^<year>$', redirect_year), 
@@ -59,4 +58,4 @@ urlpatterns = patterns(
 
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
                                                content_type='text/plain')),
-)
+]

@@ -2,7 +2,7 @@
 {%- from 'macros.html' import time -%}
 {%- macro publine(post) -%}
   <p class="publine">{{_("Publicerad")}} {{time(post.posted_time)}}
-  {{_("taggat")}} {% for tag in post.tags.all() -%}
+  {{_("taggat")}} {% for tag in post.tags.all().order_by('name') -%}
   <a href="{{url('tagged', kwargs={'slug': tag.slug, 'lang': getlang()})}}" rel="tag">{{tag.name}}</a>
   {%- if loop.last %}.{% else %}, {% endif %}
   {%- endfor %}</p>
@@ -27,11 +27,11 @@
   {%- if post.abstract %}
     <p class="readmore"><a href="{{post.get_absolute_url()}}">
         {%- if update.ncomments -%}
-          {% trans comments=update.ncomments, title=post.title|safe %}
+          {%- trans comments=update.ncomments, title=post.title|safe -%}
             Läs inlägget {{title}} och en kommentar
-          {% pluralize %}
+          {%- pluralize -%}
             Läs inlägget {{title}} och {{comments}} kommentarer
-          {% endtrans %}
+          {%- endtrans -%}
         {%- else -%}
           {%- trans title=post.title|safe -%}
             Läs och kommentera inlägget {{title}}
@@ -43,12 +43,12 @@
       {{post.content_output()}}
     </div>
     <p class="readmore"><a href="{{post.get_absolute_url()}}#comments">
-        {%- if update.ncomments %}
-          {% trans comments=update.ncomments %}
+        {%- if update.ncomments -%}
+          {%- trans comments=update.ncomments -%}
             Läs en kommentar
-          {% pluralize %}
+          {%- pluralize -%}
             Läs {{comments}} kommentarer
-          {% endtrans %}
+          {%- endtrans -%}
         {%- else -%}
           {{_("Kommentera inlägget")}}
         {%- endif -%}

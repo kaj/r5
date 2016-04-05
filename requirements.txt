@@ -1,7 +1,7 @@
 # Required python packages.
 # Can be installed py "pip install -r requirements.txt"
 
-Django >= 1.8
+Django >= 1.9
 django-autoslug
 django-taggit
 django_compressor
