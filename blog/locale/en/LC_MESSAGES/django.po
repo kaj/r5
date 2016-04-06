@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-15 22:51+0200\n"
+"POT-Creation-Date: 2016-04-06 20:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -15,6 +15,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: contentprocessor.py:57 contentprocessor.py:61
+#, python-format
+msgid "Bild: %s"
+msgstr "Image: %s"
+
+#: contentprocessor.py:66
+msgid "Bild"
+msgstr "Image"
 
 #: feeds.py:12
 msgid "Rasmus.krats.se"
@@ -31,358 +40,258 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: templates/404.html:16 templates/blog/base.html:58
-msgid "Skriverier då och då, på webben sedan 1995"
-msgstr "Reminiscing this and that, on the web since 1995"
+#: jinja2/404.html:24 jinja2/about.html.py:81 jinja2/blog/index.html.py:29
+#: jinja2/blog/tagcloud.html:3 jinja2/blog/tagged.html.py:20
+#: jinja2/openid.html:64
+msgid "taggmoln"
+msgstr "tag cloud"
 
-#: templates/about.html:6 templates/about.html.py:15 templates/openid.html:6
-#: templates/openid.html.py:27
+#: jinja2/about.html:5 jinja2/openid.html.py:5 jinja2/openid.html.py:26
 msgid "Systemutvecklare på IT-Avdelningen på KTH."
 msgstr ""
 "System developer at the IT UNIT of the Royal Institute of Technology, KTH."
 
-#: templates/about.html:19 templates/openid.html:31
-msgid ""
-"\n"
-"    <p>Jag är en systemutvecklare som i första hand jobbar med webb,\n"
-"      gärna på ett agilt sätt och gärna i unixmiljö.\n"
-"      Jag började med webb&#xad;utveckling både hobby&#xad;mässigt och\n"
-"      professionellt våren 1995 och har inte kunnat slita mig sedan dess.</"
-"p>\n"
-"    \n"
-"    <p>Jag är gift med <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</"
-"a>,\n"
-"      aktiv i\n"
-"      <a href=\"http://www.stacken.kth.se/\">Dator&#xad;föreningen Stacken</"
-"a>\n"
-"      och läser gärna <a href=\"/tag/comics\">serier</a>.</p>\n"
-"    "
-msgstr ""
-"\n"
-"<p>I'm a system developer workin primarily with web, in an agile way and  "
-"mainly in a unix environment.  I started working and playing with web in the "
-"spring of 1995 and  hasn't been able to stop since then.</p>\n"
-"<p>I'm married to <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</a>, a "
-"member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer club "
-"at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>.</p>"
+#: jinja2/about.html:10
+msgid "Om Rasmus.krats.se"
+msgstr "About Rasmus.krats.se"
 
-#: templates/about.html:32 templates/openid.html:44
+#: jinja2/about.html:14
+msgid ""
+"Den här siten, <a href='/'>rasmus.krats.se</a>, är dels en blogg där jag, <a "
+"href='/RasmusKaj'>Rasmus Kaj</a>, skriver om vad som helst som intresserar "
+"mig och dels en lekstuga och lab&#xad;plattform för webb&#xad;teknik."
+msgstr ""
+"This site, <a href='/'>rasmus.krats.se</a>,  is part blog where I, <a href='/"
+"rkaj'>Rasmus Kaj</a>, write about whatever I feel like and part lab platform "
+"for my experiments with web development."
+
+#: jinja2/about.html:15
+msgid ""
+"Mer om den här siten och hur jag har utvecklat den finns under taggen <a "
+"href='/tag/meta.sv' rel='tag'>meta</a>."
+msgstr "More about this site under the tag <a href=\"/tag/meta.en\">meta</a>."
+
+#: jinja2/about.html:20 jinja2/openid.html.py:36
 msgid "Kontakt"
 msgstr "Contact"
 
-#: templates/about.html:40 templates/openid.html:52
+#: jinja2/about.html:27 jinja2/openid.html.py:44
 msgid "Epost:"
 msgstr "E-mail:"
 
-#: templates/about.html:43 templates/openid.html:55
+#: jinja2/about.html:29 jinja2/openid.html.py:47
 msgid "Telefon:"
 msgstr "Phone:"
 
-#: templates/about.html:45 templates/openid.html:57
+#: jinja2/about.html:31 jinja2/openid.html.py:49
 msgid "sms:"
 msgstr "sms:"
 
-#: templates/about.html:48 templates/openid.html:60
+#: jinja2/about.html:33 jinja2/openid.html.py:52
 msgid "Papperspost:"
 msgstr "Paper mail:"
 
-#: templates/about.html:58
-msgid "Om den här siten"
-msgstr "About this site"
-
-#: templates/about.html:60
-msgid ""
-"\n"
-"      <p>Den här siten, <a href=\"/\">rasmus.krats.se</a>, är dels en blogg "
-"där\n"
-"        jag skriver om vad som helst som intresserar mig och dels en "
-"lekstuga\n"
-"        och lab&#xad;plattform för webb&#xad;teknik.\n"
-"        Mer om den här siten och hur jag har utvecklat den finns under "
-"taggen\n"
-"        <a href=\"/tag/meta\" rel=\"tag\">meta</a>.</p>\n"
-"      "
-msgstr ""
-"\n"
-"<p>This site, <a href=\"/\">rasmus.krats.se</a>,  is part blog where I write "
-"about whatever I feel like and part lab platform for my experiments with web "
-"development.  More about this site under the tag <a href=\"/tag/meta\">meta</"
-"a>.</p>\n"
-" "
-
-#: templates/about.html:69
+#: jinja2/about.html:42
 msgid "Prenumerationer"
 msgstr "Feeds"
 
-#: templates/about.html:80
-#, python-format
-msgid ""
-"\n"
-"        <p>Det går att prenumerera på mina inlägg i form av en\n"
-"          atomfeed, antingen\n"
-"          <a href=\"%(atom-sv)s\">på svenska</a> eller\n"
-"          <a href=\"%(atom-en)s\">på engelska</a>.\n"
-"          Det går också att prenumerera på enskilda taggar, t&#xa0;ex\n"
-"          <a href=\"%(atom-fandom)s\">fandom</a> eller\n"
-"          <a href=\"%(atom-serier)s\">serier</a> (det går bra att byta ut\n"
-"          \"fandom\" eller \"serier\" i de länkarna mot någon annan\n"
-"          tagg).</p>\n"
-"        "
-msgstr ""
-"\n"
-"  <p>You can subscribe to my musings in the form of an atom feed,\n"
-"  either <a href=\"%(atom-en)s\">in english</a>\n"
-"  or <a href=\"%(atom-sv)s\">in swedish</a>.\n"
-"  You can also subscribe to an individual tag, such as\n"
-"  <a href=\"%(atom-fandom)s\">fandom</a> or\n"
-"  <a href=\"%(atom-serier)s\">comics</a> (you can change\n"
-"  \"fandom\" or \"comics\" in those links to another tag).</p>\n"
-"  "
-
-#: templates/about.html:94
+#: jinja2/about.html:58
 msgid "Kakor"
 msgstr "Cookies"
 
-#: templates/about.html:96
-msgid ""
-"\n"
-"\t<p>Den här siten sätter en kaka som används när du skriver en\n"
-"\t  kommentar.\n"
-"\t  För att kunna kommentera mina inlägg behöver du ha kakor påslaget i\n"
-"\t  din browser, att bara läsa inlägg och kommentarer går bra även utan\n"
-"\t  kakor.</p>\n"
-"\t"
-msgstr ""
-"\n"
-"\t<p>This site sets a cookie that is used when you write a comment.\n"
-"\t  To write a comment, you need to have cookies enabled in your browser.\n"
-"\t  To read posts and comments, cookies are optional.</p>\n"
-"\t"
+#: jinja2/about.html:60
+msgid "Den här siten sätter en kaka som används när du skriver en kommentar."
+msgstr "This site sets a cookie that is used when you write a comment."
 
-#: templates/about.html:106
+#: jinja2/about.html:61
+msgid ""
+"För att kunna kommentera mina inlägg behöver du ha kakor påslaget i din "
+"browser, att bara läsa inlägg och kommentarer går bra även utan kakor."
+msgstr ""
+"To write a comment, you need to have cookies enabled in your browser. To "
+"read posts and comments, cookies are optional."
+
+#: jinja2/about.html:65
 msgid "Ikonfont"
 msgstr "Icon font"
 
-#: templates/about.html:108
+#: jinja2/about.html:67
 msgid ""
-"\n"
-"        <p>Jag använder en liten font med några ikoner.  På så sätt blir\n"
-"          de dels snyggt skalbara och dels kan de laddas tillsammans i\n"
-"          stället för en och en, vilket sparar lite bandbredd.</p>\n"
-"        \n"
-"        <p>Symbolerna är ur\n"
-"          <a href=\"http://fortawesome.github.com/Font-Awesome/\">Font "
-"Awesome</a>,\n"
-"          CC BY Dave Gandy, och\n"
-"          <a href=\"http://www.entypo.com\">Entypo</a>, &#xA9; 2012 Daniel "
-"Bruce.\n"
-"          Symbolurvalet är gjort med\n"
-"          <a href=\"http://fontello.com/\">Fontello</a>.\n"
-"        </p>\n"
-"        "
+"Jag använder en liten font med några ikoner.  På så sätt blir de dels snyggt "
+"skalbara och dels kan de laddas tillsammans i stället för en och en, vilket "
+"sparar lite bandbredd."
 msgstr ""
-"\n"
-"      <p>I use a small font with some icons.  That way, I get nice looking\n"
-"      scalable icons, which are loaded together with one request\n"
-"      instead of one request per icon, saving some bandwidth.</p>\n"
-"\n"
-"      <p>The symbol glyphs are from\n"
-"      <a href=\"http://fortawesome.github.com/Font-Awesome/\">Font Awesome</"
-"a>,\n"
-"      CC BY Dave Gandy, and\n"
-"      <a href=\"http://www.entypo.com\">Entypo</a>, &#xA9; 2012 Daniel "
-"Bruce.\n"
-"      The font itself is made by <a href=\"http://fontello.com/\">Fontello</"
-"a>.\n"
-"      </p>\n"
-"      "
+"I use a small font with some icons.  That way, I get nice looking scalable "
+"icons, which are loaded together with one request instead of one request per "
+"icon, saving some bandwidth."
 
-#: templates/about.html:131 templates/blog/index.html:27
-#: templates/blog/tagcloud.html:4 templates/blog/tagged.html:20
-#: templates/openid.html:71
-msgid "taggmoln"
-msgstr "tag cloud"
-
-#: templates/blog/base.html:13
-msgid "nästa"
-msgstr "next"
-
-#: templates/blog/base.html:14
-msgid "förra"
-msgstr "prev"
-
-#: templates/blog/base.html:15
-msgid "stäng"
-msgstr "close"
-
-#: templates/blog/base.html:55
-msgctxt "target language"
-msgid "På svenska"
-msgstr "In English"
-
-#: templates/blog/base.html:60
-msgid "Hoppa till"
-msgstr "Skip to"
-
-#: templates/blog/base.html:62
-msgid "innehåll"
-msgstr "content"
-
-#: templates/blog/base.html:64
-msgid "mina länkar"
-msgstr "my links"
-
-#: templates/blog/base.html:80
-msgid "Om"
-msgstr "About"
-
-#: templates/blog/base.html:101
-#, python-format
+#: jinja2/about.html:69
 msgid ""
-"\n"
-"          Detta verk av %(me)s är licensierat under en\n"
-"          %(a)sCreative Commons Erkännande 3.0 Unported-licens%(sa)s.\n"
-"          "
+"Symbolerna är ur <a href='http://fortawesome.github.com/Font-Awesome/'>Font "
+"Awesome</a>, CC BY Dave Gandy, och <a href='http://www.entypo.com'>Entypo</"
+"a>, &#xA9; 2012 Daniel Bruce."
 msgstr ""
-"\n"
-"This work by %(me)s is licensed under a %(a)sCreative Commons Attribution "
-"3.0 Unported License%(sa)s."
+"The symbol glyphs are from <a href='http://fortawesome.github.com/Font-"
+"Awesome/'>Font Awesome</a>, CC BY Dave Gandy, and <a href=\"http://www."
+"entypo.com\">Entypo</a>, &#xA9; 2012 Daniel Bruce."
 
-#: templates/blog/base.html:105
-msgid ""
-"\n"
-"          Denna site <a href=\"/om#cookie\">använder kakor</a>.\n"
-"          "
+#: jinja2/about.html:70
+msgid "Symbolurvalet är gjort med <a href='http://fontello.com/'>Fontello</a>."
 msgstr ""
-"\n"
-"This site <a href=\"/about#cookie\">uses cookies</a>."
+"The font itself is made by <a href='http://fontello.com/'>Fontello</a>."
 
-#: templates/blog/index.html:28
-msgid "senaste kommentarerna"
-msgstr "latest comments"
-
-#: templates/blog/index.html:39
-msgid "Senaste kommentarerna"
-msgstr "Latest comments"
-
-#: templates/blog/part_latestcomments.html:8 templates/blog/tagged.html:3
-msgid "på"
-msgstr "on"
-
-#: templates/blog/part_tagcloud.html:2
-msgid "Taggmoln"
-msgstr "Tag cloud"
-
-#: templates/blog/post_detail.html:7
-msgid "liknande sidor"
-msgstr "similar pages"
-
-#: templates/blog/post_detail.html:31 templates/blog/post_summary.html:17
-#: templates/feed/description.html:11
-msgid "Uppdatering"
-msgstr "Update"
-
-#: templates/blog/post_detail.html:46
-msgid "Tweeta"
-msgstr "Tweet"
-
-#: templates/blog/post_detail.html:49
-msgid "Dela"
-msgstr "Share"
-
-#: templates/blog/post_detail.html:55
-msgid "Kommentarer"
-msgstr "Comments"
-
-#: templates/blog/post_detail.html:79
-msgid "Skriv en kommentar"
-msgstr "Write a comment"
-
-#: templates/blog/post_detail.html:85
-msgid "Posta kommentaren"
-msgstr "Post the comment"
-
-#: templates/blog/post_detail.html:93
-msgid "Liknande sidor"
-msgstr "Similar pages"
-
-#: templates/blog/post_summary.html:27
-#, python-format
-msgid ""
-"\n"
-"            Läs inlägget %(title)s och en kommentar\n"
-"          "
-msgid_plural ""
-"\n"
-"            Läs inlägget %(title)s och %(comments)s kommentarer\n"
-"          "
-msgstr[0] ""
-"\n"
-"Read the post %(title)s with one comment"
-msgstr[1] ""
-"\n"
-"Read the post %(title)s with %(comments)s comments"
-
-#: templates/blog/post_summary.html:33
-#, python-format
-msgid ""
-"\n"
-"            Läs och kommentera inlägget %(title)s\n"
-"          "
-msgstr ""
-"\n"
-"Read and comment the post %(title)s"
-
-#: templates/blog/post_summary.html:48
-#, python-format
-msgid ""
-"\n"
-"            Läs en kommentar\n"
-"          "
-msgid_plural ""
-"\n"
-"            Läs %(comments)s kommentarer\n"
-"          "
-msgstr[0] ""
-"\n"
-"Read one comment"
-msgstr[1] ""
-"\n"
-"Read %(comments)s comments"
-
-#: templates/blog/post_summary.html:54
-msgid "Kommentera inlägget"
-msgstr "Write a comment"
-
-#: templates/blog/publine.html:1
+#: jinja2/base.html:4
 msgid "Publicerad"
 msgstr "Published"
 
-#: templates/blog/publine.html:3
+#: jinja2/base.html:5
 msgid "taggat"
 msgstr "tagged"
 
-#: templates/blog/tagged.html:12
+#: jinja2/base.html:22 jinja2/blog/post_detail.html.py:25
+#: jinja2/feed/description.html:10
+msgid "Uppdatering"
+msgstr "Update"
+
+#: jinja2/base.html:51
+msgid "Kommentera inlägget"
+msgstr "Write a comment"
+
+#: jinja2/base.html:75
+msgid "nästa"
+msgstr "next"
+
+#: jinja2/base.html:76
+msgid "förra"
+msgstr "prev"
+
+#: jinja2/base.html:77
+msgid "stäng"
+msgstr "close"
+
+#: jinja2/base.html:108
+msgid "Skriverier då och då, på webben sedan 1995"
+msgstr "Reminiscing this and that, on the web since 1995"
+
+#: jinja2/base.html:109
+msgid "Hoppa till"
+msgstr "Skip to"
+
+#: jinja2/base.html:111
+msgid "innehåll"
+msgstr "content"
+
+#: jinja2/base.html:113
+msgid "mina länkar"
+msgstr "my links"
+
+#: jinja2/base.html:127
+msgid "Om"
+msgstr "About"
+
+#: jinja2/base.html:149
+msgid "Denna site <a href='/om#cookie'>använder kakor</a>."
+msgstr "This site <a href='/about#cookie'>uses cookies</a>."
+
+#: jinja2/blog/index.html:31
+msgid "senaste kommentarerna"
+msgstr "latest comments"
+
+#: jinja2/blog/index.html:32
+msgid "några bra böcker"
+msgstr ""
+
+#: jinja2/blog/index.html:42
+msgid "Senaste kommentarerna"
+msgstr "Latest comments"
+
+#: jinja2/blog/index.html:46
+msgid "Några bra böcker"
+msgstr ""
+
+#: jinja2/blog/index.html:48
+msgid "Ur mitt bibliotek på LibraryThing"
+msgstr ""
+
+#: jinja2/blog/part/latestcomments.html:7 jinja2/blog/tagged.html.py:2
+msgid "på"
+msgstr "on"
+
+#: jinja2/blog/part/tagcloud.html:1
+msgid "Taggmoln"
+msgstr "Tag cloud"
+
+#: jinja2/blog/post_detail.html:39
+msgid "Tweeta"
+msgstr "Tweet"
+
+#: jinja2/blog/post_detail.html:42
+msgid "Dela"
+msgstr "Share"
+
+#: jinja2/blog/post_detail.html:48
+msgid "Kommentarer"
+msgstr "Comments"
+
+#: jinja2/blog/post_detail.html:67
+msgid "Skriv en kommentar"
+msgstr "Write a comment"
+
+#: jinja2/blog/post_detail.html:77
+msgid "Posta kommentaren"
+msgstr "Post the comment"
+
+#: jinja2/blog/post_detail.html:85
+msgid "liknande sidor"
+msgstr "similar pages"
+
+#: jinja2/blog/post_detail.html:91
+msgid "Liknande sidor"
+msgstr "Similar pages"
+
+#: jinja2/blog/tagged.html:11
 msgid "Taggat"
 msgstr "Tagged"
 
-#: templates/feed/description.html:20
-msgid "Läs inlägget"
-msgstr "Read"
-
-#: templates/openid.html:20
+#: jinja2/openid.html:19
 msgid "Bild på mig"
 msgstr "Picture of me"
 
-#: templates/openid.html:22
+#: jinja2/openid.html:21
 msgid "På jobbet i september 2011. Foto: Björn Roos."
-msgstr "At work, september 2011. Photo: Björn Roos."
+msgstr "At work, september 2011. Photo: Bj&#xf6;rn Roos."
 
-#: views.py:102
+#: jinja2/openid.html:30
+msgid ""
+"Jag är en systemutvecklare som i första hand jobbar med webb, gärna på ett "
+"agilt sätt och gärna i unixmiljö."
+msgstr ""
+"I'm a system developer workin primarily with web, in an agile way and  "
+"mainly in a unix environment."
+
+#: jinja2/openid.html:31
+msgid ""
+"Jag började med webb&#xad;utveckling både hobby&#xad;mässigt och "
+"professionellt våren 1995 och har inte kunnat slita mig sedan dess."
+msgstr ""
+"I started working and playing with web in the spring of 1995 and hasn't been "
+"able to stop since then."
+
+#: jinja2/openid.html:33
+msgid ""
+"Jag är gift med <a href='http://tygbittar.krats.se/'>Katarina Kaj</a>, aktiv "
+"i <a href='http://www.stacken.kth.se/'>Dator&#xad;föreningen Stacken</a> och "
+"läser gärna <a href='/tag/comics'>serier</a>."
+msgstr ""
+"I'm married to <a href=\"http://tygbittar.krats.se/\">Katarina Kaj</a>, a "
+"member of <a href=\"http://www.stacken.kth.se/\">Stacken, the computer club "
+"at KTH</a> and I like to read <a href=\"/tag/comics\">comics</a>."
+
+#: views.py:101
 msgid "Din kommentar är borttagen."
 msgstr "Your comment is removed."
 
-#: views.py:104
+#: views.py:103
 msgid "Din kommentar väntar på moderering."
 msgstr "Your comment awaits moderation."
 
@@ -391,8 +300,40 @@ msgstr "Your comment awaits moderation."
 msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
-msgid "Av"
-msgstr "By"
+msgid ""
+"<p>Det går att prenumerera på mina inlägg i form av en atomfeed, "
+"antingen\n"
+"      <a href='%(atom_sv)s'>på svenska</a> eller\n"
+"      <a href='%(atom_en)s'>på engelska</a>.\n"
+"      Det går också att prenumerera på enskilda taggar, t&#xa0;ex\n"
+"      <a href='%(atom_fandom)s'>fandom</a> eller\n"
+"      <a href='%(atom_serier)s'>serier</a> (det går bra att byta ut\n"
+"      \"fandom\" eller \"serier\" i de länkarna mot någon annan tagg).</p>"
+msgstr ""
+"<p>You can subscribe to my musings in the form of an atom feed,\n"
+"  either <a href=\"%(atom_en)s\">in english</a>\n"
+"  or <a href=\"%(atom_sv)s\">in swedish</a>.\n"
+"  You can also subscribe to an individual tag, such as\n"
+"  <a href=\"%(atom_fandom)s\">fandom</a> or\n"
+"  <a href=\"%(atom_serier)s\">comics</a> (you can change\n"
+"  \"fandom\" or \"comics\" in those links to another tag).</p>"
 
-msgid "Taggad"
-msgstr "Tagged"
+msgid ""
+"Detta verk av %(me)s är licensierat under en\n"
+"          %(a)sCreative Commons Erkännande 3.0 Unported-licens%(sa)s."
+msgstr ""
+"This work by %(me)s is licensed under a %(a)sCreative Commons Attribution "
+"3.0 Unported License%(sa)s."
+
+msgid "Läs inlägget %(title)s och en kommentar"
+msgid_plural "Läs inlägget %(title)s och %(comments)s kommentarer"
+msgstr[0] "Read the post %(title)s with one comment"
+msgstr[1] "Read the post %(title)s with %(comments)s comments"
+
+msgid "Läs och kommentera inlägget %(title)s"
+msgstr "Read and comment the post %(title)s"
+
+msgid "Läs en kommentar"
+msgid_plural "Läs %(comments)s kommentarer"
+msgstr[0] "Read one comment"
+msgstr[1] "Read %(comments)s comments"

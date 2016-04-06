@@ -2,7 +2,7 @@
 {%- from 'macros.html' import time -%}
 {%- macro publine(post) -%}
   <p class="publine">{{_("Publicerad")}} {{time(post.posted_time)}}
-  {{_("taggat")}} {% for tag in post.tags.all() -%}
+  {{_("taggat")}} {% for tag in post.tags.all().order_by('name') -%}
   <a href="{{url('tagged', kwargs={'slug': tag.slug, 'lang': getlang()})}}" rel="tag">{{tag.name}}</a>
   {%- if loop.last %}.{% else %}, {% endif %}
   {%- endfor %}</p>
@@ -14,9 +14,7 @@
     {{publine(post)}}
   </header>
   {% if post.abstract %}
-    {%- if post.frontimage -%}
-      <aside>{{post.frontimage_output()}}</aside>
-    {%- endif %}
+    {%- if post.frontimage %}{{post.frontimage_output()}}{% endif %}
     <div class="abstract">{{post.abstract_output()}}</div>
   {%- endif -%}
   {%- if update.note %}
@@ -27,11 +25,11 @@
   {%- if post.abstract %}
     <p class="readmore"><a href="{{post.get_absolute_url()}}">
         {%- if update.ncomments -%}
-          {% trans comments=update.ncomments, title=post.title|safe %}
+          {%- trans comments=update.ncomments, title=post.title|safe -%}
             Läs inlägget {{title}} och en kommentar
-          {% pluralize %}
+          {%- pluralize -%}
             Läs inlägget {{title}} och {{comments}} kommentarer
-          {% endtrans %}
+          {%- endtrans -%}
         {%- else -%}
           {%- trans title=post.title|safe -%}
             Läs och kommentera inlägget {{title}}
@@ -43,12 +41,12 @@
       {{post.content_output()}}
     </div>
     <p class="readmore"><a href="{{post.get_absolute_url()}}#comments">
-        {%- if update.ncomments %}
-          {% trans comments=update.ncomments %}
+        {%- if update.ncomments -%}
+          {%- trans comments=update.ncomments -%}
             Läs en kommentar
-          {% pluralize %}
+          {%- pluralize -%}
             Läs {{comments}} kommentarer
-          {% endtrans %}
+          {%- endtrans -%}
         {%- else -%}
           {{_("Kommentera inlägget")}}
         {%- endif -%}
@@ -144,13 +142,11 @@
     <footer class="site">
       <div>
         <p class="license icon-cc-by">
-          {% trans me=('<a href="'+url('me')+'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>')|safe, a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">'|safe, sa='</a>'|safe %}
+          {% trans me=('<a href="'+url('me')+'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>')|safe, a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">'|safe, sa='</a>'|safe -%}
           Detta verk av {{me}} är licensierat under en
           {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
-          {% endtrans %}</p>
-        <p>{% trans %}
-          Denna site <a href="/om#cookie">använder kakor</a>.
-          {% endtrans %}</p>
+          {%- endtrans %}</p>
+        <p>{{_("Denna site <a href='/om#cookie'>använder kakor</a>.")}}</p>
       </div>
     </footer>
   </body>
