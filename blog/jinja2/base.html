@@ -142,13 +142,11 @@
     <footer class="site">
       <div>
         <p class="license icon-cc-by">
-          {% trans me=('<a href="'+url('me')+'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>')|safe, a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">'|safe, sa='</a>'|safe %}
+          {% trans me=('<a href="'+url('me')+'" xmlns:cc="http://creativecommons.org/ns#" rel="cc:attributionURL" property="cc:attributionName">Rasmus Kaj</a>')|safe, a='<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">'|safe, sa='</a>'|safe -%}
           Detta verk av {{me}} är licensierat under en
           {{a}}Creative Commons Erkännande 3.0 Unported-licens{{sa}}.
-          {% endtrans %}</p>
-        <p>{% trans %}
-          Denna site <a href="/om#cookie">använder kakor</a>.
-          {% endtrans %}</p>
+          {%- endtrans %}</p>
+        <p>{{_("Denna site <a href='/om#cookie'>använder kakor</a>.")}}</p>
       </div>
     </footer>
   </body>
