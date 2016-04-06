@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: r5, rasmus.krats.se\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-06 07:49+0200\n"
+"POT-Creation-Date: 2016-04-06 20:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Rasmus Kaj <rasmus@krats.se>\n"
 "Language-Team: Rasmus Kaj <rasmus@krats.se>\n"
@@ -15,6 +15,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: contentprocessor.py:57 contentprocessor.py:61
+#, python-format
+msgid "Bild: %s"
+msgstr "Image: %s"
+
+#: contentprocessor.py:66
+msgid "Bild"
+msgstr "Image"
 
 #: feeds.py:12
 msgid "Rasmus.krats.se"
@@ -31,7 +40,7 @@ msgstr ""
 msgid "Taggat %s på Rasmus.krats.se"
 msgstr "Tagged %s on Rasmus.krats.se"
 
-#: jinja2/404.html:24 jinja2/about.html.py:83 jinja2/blog/index.html.py:29
+#: jinja2/404.html:24 jinja2/about.html.py:81 jinja2/blog/index.html.py:29
 #: jinja2/blog/tagcloud.html:3 jinja2/blog/tagged.html.py:20
 #: jinja2/openid.html:64
 msgid "taggmoln"
@@ -52,16 +61,15 @@ msgid ""
 "href='/RasmusKaj'>Rasmus Kaj</a>, skriver om vad som helst som intresserar "
 "mig och dels en lekstuga och lab&#xad;plattform för webb&#xad;teknik."
 msgstr ""
-"This site, <a href='/'>rasmus.krats.se</a>,  is part blog where I, <a "
-"href='/rkaj'>Rasmus Kaj</a>, write about whatever I feel like and "
-"part lab platform for my experiments with web development."
+"This site, <a href='/'>rasmus.krats.se</a>,  is part blog where I, <a href='/"
+"rkaj'>Rasmus Kaj</a>, write about whatever I feel like and part lab platform "
+"for my experiments with web development."
 
 #: jinja2/about.html:15
 msgid ""
 "Mer om den här siten och hur jag har utvecklat den finns under taggen <a "
 "href='/tag/meta.sv' rel='tag'>meta</a>."
-msgstr ""
-"More about this site under the tag <a href=\"/tag/meta.en\">meta</a>."
+msgstr "More about this site under the tag <a href=\"/tag/meta.en\">meta</a>."
 
 #: jinja2/about.html:20 jinja2/openid.html.py:36
 msgid "Kontakt"
@@ -87,49 +95,47 @@ msgstr "Paper mail:"
 msgid "Prenumerationer"
 msgstr "Feeds"
 
-#: jinja2/about.html:60
+#: jinja2/about.html:58
 msgid "Kakor"
 msgstr "Cookies"
 
-#: jinja2/about.html:62
+#: jinja2/about.html:60
 msgid "Den här siten sätter en kaka som används när du skriver en kommentar."
 msgstr "This site sets a cookie that is used when you write a comment."
 
-#: jinja2/about.html:63
+#: jinja2/about.html:61
 msgid ""
 "För att kunna kommentera mina inlägg behöver du ha kakor påslaget i din "
 "browser, att bara läsa inlägg och kommentarer går bra även utan kakor."
 msgstr ""
-"To write a comment, you need to have cookies enabled in your browser."
-"To read posts and comments, cookies are optional."
+"To write a comment, you need to have cookies enabled in your browser. To "
+"read posts and comments, cookies are optional."
 
-#: jinja2/about.html:67
+#: jinja2/about.html:65
 msgid "Ikonfont"
 msgstr "Icon font"
 
-#: jinja2/about.html:69
+#: jinja2/about.html:67
 msgid ""
 "Jag använder en liten font med några ikoner.  På så sätt blir de dels snyggt "
 "skalbara och dels kan de laddas tillsammans i stället för en och en, vilket "
 "sparar lite bandbredd."
 msgstr ""
-"I use a small font with some icons.  That way, I get nice "
-"looking scalable icons, which are loaded together with one request "
-"instead of one request per icon, saving some bandwidth."
+"I use a small font with some icons.  That way, I get nice looking scalable "
+"icons, which are loaded together with one request instead of one request per "
+"icon, saving some bandwidth."
 
-#: jinja2/about.html:71
+#: jinja2/about.html:69
 msgid ""
 "Symbolerna är ur <a href='http://fortawesome.github.com/Font-Awesome/'>Font "
 "Awesome</a>, CC BY Dave Gandy, och <a href='http://www.entypo.com'>Entypo</"
 "a>, &#xA9; 2012 Daniel Bruce."
 msgstr ""
-"The symbol glyphs are from "
-"<a href='http://fortawesome.github.com/Font-Awesome/'>Font Awesome</a>, "
-"CC BY Dave Gandy, and "
-"<a href=\"http://www.entypo.com\">Entypo</a>, &#xA9; 2012 Daniel Bruce."
+"The symbol glyphs are from <a href='http://fortawesome.github.com/Font-"
+"Awesome/'>Font Awesome</a>, CC BY Dave Gandy, and <a href=\"http://www."
+"entypo.com\">Entypo</a>, &#xA9; 2012 Daniel Bruce."
 
-
-#: jinja2/about.html:72
+#: jinja2/about.html:70
 msgid "Symbolurvalet är gjort med <a href='http://fontello.com/'>Fontello</a>."
 msgstr ""
 "The font itself is made by <a href='http://fontello.com/'>Fontello</a>."
@@ -295,7 +301,8 @@ msgid "\"%(path)s\" does not exist"
 msgstr "\"%(path)s\" does not exist"
 
 msgid ""
-"<p>Det går att prenumerera på mina inlägg i form av en atomfeed, antingen\n"
+"<p>Det går att prenumerera på mina inlägg i form av en atomfeed, "
+"antingen\n"
 "      <a href='%(atom_sv)s'>på svenska</a> eller\n"
 "      <a href='%(atom_en)s'>på engelska</a>.\n"
 "      Det går också att prenumerera på enskilda taggar, t&#xa0;ex\n"
@@ -309,8 +316,7 @@ msgstr ""
 "  You can also subscribe to an individual tag, such as\n"
 "  <a href=\"%(atom_fandom)s\">fandom</a> or\n"
 "  <a href=\"%(atom_serier)s\">comics</a> (you can change\n"
-"  \"fandom\" or \"comics\" in those links to another tag).</p>\n"
-"  "
+"  \"fandom\" or \"comics\" in those links to another tag).</p>"
 
 msgid ""
 "Detta verk av %(me)s är licensierat under en\n"

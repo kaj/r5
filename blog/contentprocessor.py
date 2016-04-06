@@ -7,6 +7,7 @@ from re import match, findall
 from taggit.models import Tag
 from urllib import quote
 from util import render_books
+from django.utils.translation import ugettext as _
 
 logger = getLogger(__name__)
 
@@ -37,6 +38,7 @@ def process_content(content, images, base=None, lang='sv'):
 
         if info.is_small or 'scaled' in figure.attrib.get('class', ''):
             img = Element('img', {'src': info.large,
+                                  'alt': '',
                                   'width': str(info.width),
                                   'height': str(info.height)})
             figure.insert(0, img)
@@ -51,7 +53,18 @@ def process_content(content, images, base=None, lang='sv'):
             img = SubElement(a, 'img', {'src': info.icon,
                                         'width': str(info.iwidth),
                                         'height': str(info.iheight)})
-    
+            if len(title) == 1:
+                img.set('alt', _(u'Bild: %s') % a.get('title'))
+            else:
+                caption = figure.xpath('figcaption')
+                if len(caption) == 1:
+                    img.set('alt', _(u'Bild: %s') % tostring(caption[0],
+                                                            method='text',
+                                                            encoding=unicode,
+                                                            with_tail=False))
+                else:
+                    img.set('alt', _(u'Bild'))
+
     for e in dom.iterfind('.//a'):
         href = e.attrib.get('href', '')
         if href.startswith('rfc:'):
