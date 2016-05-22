@@ -91,9 +91,9 @@ def post_detail(request, year, slug, lang=None):
     translation.activate(lang)
     comment_message = None
     if 'c' in request.GET:
-        # TODO Require the comment to be on this post
         try:
-            comment = Comment.objects.get(id=int_or_404(request.GET['c']))
+            comment = Comment.objects.get(id=int_or_404(request.GET['c']),
+                                          post=post)
         except Comment.DoesNotExist:
             # Silently ignore nonexisting comment id
             return redirect(post.get_absolute_url())
