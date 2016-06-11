@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import *
+from .models import *
 
 class UpdatesInline(admin.TabularInline):
     model = Update
@@ -28,7 +28,7 @@ class PostAdmin(admin.ModelAdmin):
         field = super(PostAdmin, self).formfield_for_dbfield(
             db_field, **kwargs)
         if db_field.name in ('abstract', 'frontimage'):
-            print field.widget.attrs
+            print(field.widget.attrs)
             field.widget.attrs['rows'] = 4
             field.widget.attrs['cols'] = 60
             field.widget.attrs['class'] = None

@@ -16,7 +16,7 @@ from r5comments.models import Comment
 
 def select_texts(doc, selector):
     return [sub('\s+', ' ',
-                etree.tostring(e, method='text', encoding=unicode, 
+                etree.tostring(e, method='text', encoding=str,
                                with_tail=False))
             for e in CSSSelector(selector)(doc)]
 

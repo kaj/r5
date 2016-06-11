@@ -4,8 +4,8 @@ from django.utils.safestring import mark_safe
 from django.utils.feedgenerator import Atom1Feed
 from django.shortcuts import get_object_or_404
 from taggit.models import Tag
-from blog.models import Post, Update
-from views import filter_by_language
+from .models import Post, Update
+from .views import filter_by_language
 from django.utils.translation import activate, ugettext_lazy as _
 
 class UpdatesFeed(Feed):

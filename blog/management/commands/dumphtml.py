@@ -18,7 +18,7 @@ def ready_to_save(content):
             print 'Image %s not found' % ref
             continue
 
-    return u''.join(tostring(x, encoding=unicode) for x in dom.iterchildren())
+    return u''.join(tostring(x, encoding=str) for x in dom.iterchildren())
     
 class Command(NoArgsCommand):
     help = 'Save content in semi-html format'

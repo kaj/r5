@@ -215,7 +215,7 @@ def image_view(request, imgid, size=900):
         full_path = os.path.join(settings.MEDIA_ROOT, scaled_path)
         dir = os.path.dirname(full_path)
         if not os.path.exists(dir):
-            os.makedirs(dir, 0777)
+            os.makedirs(dir, mode=0o777)
         scaleddata.save(full_path, sourcedata.format)
         return serve_file(request, path=scaled_path, content_type=obj.mimetype)
 
