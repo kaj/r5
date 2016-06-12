@@ -2,7 +2,7 @@ from PIL import Image as PImage
 from blog.models import Post, Update, Image
 from datetime import datetime
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.contrib.redirects.models import Redirect
 from optparse import make_option
 from shutil import copy
@@ -17,15 +17,14 @@ nsmap = {
     'html': 'http://www.w3.org/1999/xhtml',
     }
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'Find and read content'
 
-    option_list = NoArgsCommand.option_list + (
-        make_option('--year', help='Year (i.e. directory) of site to read',
-                    dest='year'),
-        )
-    
-    def handle_noargs(self, **options):
+    def add_arguments(self, parser):
+        parser.add_argument('--year', dest='year',
+                            help='Year (i.e. directory) of site to read')
+
+    def handle(self, **options):
         base = 'dump'
         
         if options['year']:

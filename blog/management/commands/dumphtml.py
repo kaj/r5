@@ -1,5 +1,5 @@
 from blog.models import Post, Update, Image
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from io import open
 from optparse import make_option
 from os import mkdir, path
@@ -15,20 +15,19 @@ def ready_to_save(content):
         try:
             figure.set('ref', Image.objects.get(ref=ref).sourcename)
         except:
-            print 'Image %s not found' % ref
+            print('Image %s not found' % ref)
             continue
 
     return u''.join(tostring(x, encoding=str) for x in dom.iterchildren())
     
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'Save content in semi-html format'
 
-    option_list = NoArgsCommand.option_list + (
-        make_option('--year', help='Include posts from this year only',
-                    dest='year', type=int),
-        )
-    
-    def handle_noargs(self, **options):
+    def add_arguments(self, parser):
+        parser.add_argument('--year', dest='year', type=int,
+                            help='Include posts from this year only')
+
+    def handle(self, **options):
         self.verbosity = int(options['verbosity'])
         posts = Post.objects
         if options['year']:

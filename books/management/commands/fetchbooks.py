@@ -1,13 +1,13 @@
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 import json
 from urllib.request import urlopen
 from books.models import Author, Book, BookTag
 from django.utils.safestring import mark_safe
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'Fetch my books from LibraryThing'
 
-    def handle_noargs(self, **options):
+    def handle(self, **options):
         Book.objects.all().delete()
         BookTag.objects.all().delete()
         url = 'https://www.librarything.com/api_getdata.php?userid=kaj&key=w5c54f5e485d879152955168d89&responseType=json&coverheight=100&max=2000&showTags=1'
