@@ -30,7 +30,7 @@ class ContentProcessorTest(TestCase):
                 ])
         
         EXPECTED = '\n'.join([
-                '<figure class="image sidebar"><a href="/img/foo"><img height="133" src="/img/foo.i" width="200"/></a></figure>',
+                '<figure class="image sidebar"><a href="/img/foo"><img height="133" src="/img/foo.i" width="200" alt="Bild"/></a></figure>',
                 '<p>Lorem ipsum.</p>'
                 ])
         
@@ -46,7 +46,7 @@ class ContentProcessorTest(TestCase):
         
         EXPECTED = u''.join([
                 '<figure class="image sidebar">',
-                '<a href="/img/foo" title="Foo"><img height="133" src="/img/foo.i" width="200"/></a>',
+                '<a href="/img/foo" title="Foo"><img height="133" src="/img/foo.i" width="200" alt="Bild: Foo"/></a>',
                 '</figure>',
                 '<p>Lorem ipsum.</p>'
                 ])
@@ -76,7 +76,7 @@ class ContentProcessorTest(TestCase):
         
         EXPECTED = u''.join([
                 '<figure class="image sidebar">',
-                '<a href="/img/foo" title="Foo"><img height="133" src="/img/foo.i" width="200"/></a>',
+                '<a href="/img/foo" title="Foo"><img height="133" src="/img/foo.i" width="200" alt="Bild: Foo"/></a>',
                 '<figcaption>This is some kind of caption.</figcaption>',
                 '</figure>',
                 '<p>Lorem ipsum.</p>'

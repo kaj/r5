@@ -6,14 +6,16 @@ django-autoslug
 django-taggit
 django_compressor
 django-debug-toolbar
-python-memcached == 1.54
+python-memcached
 django-simplegravatar
 IPy
 Jinja2
 pymongo
 lxml
+psycopg2
 # Source higlighing for code examples
 Pygments
+django-ssl-admin
 
 # For testing
 html5lib
@@ -24,4 +26,3 @@ cssselect
 
 gunicorn
 setproctitle
-django-sslify-admin

@@ -13,4 +13,4 @@ class PostTest(TestCase):
                     title = '  <em>Foo</em>\n\t&lt; bar\n\t',
                     lang = 'sv',
                     content = '<p>Foo</p>')
-        self.assertEqual(u'Foo < bar (2013)', u'%s' % post)
+        self.assertEqual('Foo < bar (2013)', '%s' % post)

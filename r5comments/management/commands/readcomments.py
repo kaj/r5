@@ -1,18 +1,15 @@
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from r5comments.models import Comment
 from blog.models import Post
 from django.conf import settings
-#from urlparse import urlparse
-#from collections import Counter
-#from re import sub
 import json
 from sys import stdin
 import re
 
-class Command(NoArgsCommand):
-    help = 'Count hosts I get spam comments for'
+class Command(BaseCommand):
+    help = 'Read comments from json dump'
 
-    def handle_noargs(self, **options):
+    def handle(self, **options):
         up = re.compile('^/(?P<year>\d+)/(?P<slug>[^.]+)\.(?P<lang>\w+)$')
         def one_comment(obj):
             if 'comment' in obj and 'on' in obj and 'by' in obj:
@@ -35,9 +32,9 @@ class Command(NoArgsCommand):
                     )
                     c.submit_date = obj['submit_date']
                     c.save()
-                    print c
+                    print(c)
                 else:
-                    print "Non-match target:", obj['on']
+                    print("Non-match target:", obj['on'])
                     exit(1)
                 return None
             else:

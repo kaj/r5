@@ -1,14 +1,14 @@
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from r5comments.models import Comment
 from django.conf import settings
-from urlparse import urlparse
+from urllib.parse import urlparse
 from collections import Counter
 from re import sub
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'Count hosts I get spam comments for'
 
-    def handle_noargs(self, **options):
+    def handle(self, **options):
         spamurls = Comment.objects \
                           .filter(is_removed=True) \
                           .exclude(by_url='') \
@@ -20,5 +20,5 @@ class Command(NoArgsCommand):
             if not host in known_spam:
                 hosts[host] += 1
 
-        print '\n'.join("'%s', #%s" % (a, b)
-                        for a, b in hosts.most_common(22))
+        print('\n'.join("'%s', #%s" % (a, b)
+                        for a, b in hosts.most_common(22)))

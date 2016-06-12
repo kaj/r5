@@ -32,7 +32,7 @@ class FragmentCacheExtension(Extension):
         # we only listen to ``'cache'`` so this will be a name token with
         # `cache` as value.  We get the line number so that we can give
         # that line number to the nodes we create by hand.
-        lineno = parser.stream.next().lineno
+        lineno = next(parser.stream).lineno
 
         # now we parse a single expression that is used as cache key.
         args = [parser.parse_expression()]
@@ -63,7 +63,7 @@ class FragmentCacheExtension(Extension):
         from django.core.cache import cache
         rv = cache.get(key)
         if rv is not None:
-            return rv
+            return mark_safe(rv)
         rv = caller()
         cache.set(key, rv, timeout)
         return rv
@@ -80,7 +80,7 @@ def maketagcloud(lang):
         c = 5.9 / pow(max_n, exponent)
         for tag in tags:
             tag.w = int(pow(tag.n, exponent)*c)
-    return mark_safe(get_template('blog/part/tagcloud.html').render({'tags': tags}))
+    return get_template('blog/part/tagcloud.html').render({'tags': tags})
 
 def makelatestcomments(lang):
     from r5comments.models import Comment
@@ -121,7 +121,7 @@ def environment(**options):
         if result is None:
             result = maketagcloud(lang)
             cache.set(key, result, 30*60)
-        return result
+        return mark_safe(result)
     def latestcomments():
         from django.core.cache import cache
         lang = getlang()

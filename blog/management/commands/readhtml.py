@@ -2,11 +2,11 @@ from PIL import Image as PImage
 from blog.models import Post, Update, Image
 from datetime import datetime
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.contrib.redirects.models import Redirect
 from optparse import make_option
 from shutil import copy
-from urllib import quote
+from urllib.parse import quote
 from xml.etree import ElementTree
 import os
 
@@ -17,15 +17,14 @@ nsmap = {
     'html': 'http://www.w3.org/1999/xhtml',
     }
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'Find and read content'
 
-    option_list = NoArgsCommand.option_list + (
-        make_option('--year', help='Year (i.e. directory) of site to read',
-                    dest='year'),
-        )
-    
-    def handle_noargs(self, **options):
+    def add_arguments(self, parser):
+        parser.add_argument('--year', dest='year',
+                            help='Year (i.e. directory) of site to read')
+
+    def handle(self, **options):
         base = 'dump'
         
         if options['year']:
@@ -41,11 +40,11 @@ class Command(NoArgsCommand):
                     try:
                         self.readfile(filename)
                     except Exception as err:
-                        print "Failed to load %s" % filename
+                        print("Failed to load %s" % filename)
                         raise
 
     def readfile(self, filename):
-        print "Handle %s" % (filename)
+        print("Handle %s" % filename)
         slug = os.path.basename(filename)[:-5]
         dirname = os.path.dirname(filename)
         #if slug in ['index', 'sv', 'en']:
@@ -53,7 +52,7 @@ class Command(NoArgsCommand):
         if slug.endswith('.sv') or slug.endswith('.en'):
             slug = slug[:-3]
         else:
-            print "Strange, language code missing in filename %s" % filename
+            print("Strange, language code missing in filename %s" % filename)
 
         for prefix, url in nsmap.items():
             ElementTree.register_namespace(prefix, url)
@@ -61,13 +60,13 @@ class Command(NoArgsCommand):
         tree = ElementTree.parse(filename)
         # Ok, I don't know if this is a good idea, but mark parents.
         # Maybe there is a flag to ElementTree that provides this instead?
-        for e in tree.iter():
-            for child in list(e):
-                child.parent = e
+        #for e in tree.iter():
+        #    for child in list(e):
+        #        child.parent = e
 
         date = self.parsedate(serialize(tree.find('head/pubdate', nsmap)))
         if not date:
-            print "Ignoring %s, pubdate missing." % filename
+            print("Ignoring %s, pubdate missing." % filename)
             return
 
         lang = tree.getroot().get('lang')
@@ -106,15 +105,6 @@ class Command(NoArgsCommand):
         p.save()
         # print " ", date, slug, p.title, tags
 
-    def redirect(old_path, new_path):
-        if old_path == new_path:
-            return
-        redirect, _isnew = Redirect.objects.get_or_create(
-            site_id=settings.SITE_ID,
-            old_path=old_path)
-        redirect.new_path = new_path
-        redirect.save();
-
     def d2h(self, elem, dirname='', year=''):
         if elem is None:
             return ''
@@ -144,7 +134,7 @@ class Command(NoArgsCommand):
                             orig_height=data.size[1],
                             mimetype=mime[data.format])
                 img.save()
-                print 'Found image %s.' % img
+                print('Found image %s.' % img)
                 e.set('ref', img.ref)
         return serialize(elem)
 
@@ -155,7 +145,7 @@ class Command(NoArgsCommand):
                     datestr = datestr + 'T12:00:00Z'
                 return datetime.strptime(datestr, '%Y-%m-%dT%H:%M:%SZ')
             except ValueError:
-                print 'WARNING: Failed to parse date "%s".' % datestr
+                print('WARNING: Failed to parse date "%s".' % datestr)
                 return None
         else:
             return None
@@ -164,19 +154,26 @@ def serialize(elem, skip_root=True):
     if elem is None:
         return ''
 
-    qnames, namespaces = ElementTree._namespaces(
-        elem, 'utf8', None
-        )
+    qnames, namespaces = ElementTree._namespaces(elem, None)
 
     if skip_root:
         elem.tag = None
     data = []
-    ElementTree._serialize_xml(data.append, elem, encoding='utf8',
-                               qnames=qnames, namespaces=namespaces)
-    return "".join(data).decode('utf8').strip()
+    ElementTree._serialize_xml(data.append, elem, qnames=qnames,
+                               namespaces=namespaces, short_empty_elements=True)
+    return "".join(data).strip()
 
 def textcontent(e):
     if e is None:
         return ''
 
     return (e.text or '') + u''.join(textcontent(ee)+(ee.tail or '') for ee in list(e))
+
+def redirect(old_path, new_path):
+    if old_path == new_path:
+        return
+    redirect, _isnew = Redirect.objects.get_or_create(
+        site_id=settings.SITE_ID,
+        old_path=old_path)
+    redirect.new_path = new_path
+    redirect.save();

@@ -1,11 +1,10 @@
-from django.core.management.base import NoArgsCommand
-#from django.contrib.redirects.models import Redirect
-from readfiles import redirect
+from django.core.management.base import BaseCommand
+from .readhtml import redirect
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     help = 'Set up some "special" redirects.'
     
-    def handle_noargs(self, **options):
+    def handle(self, **options):
         redirect('/2004/trafik-kaj-s.png', '/static/trafik-kaj-s.png')
         redirect('/2004/trafik-kaj-m.png', '/static/trafik-kaj-m.png')
         redirect('/2004/trafik-kaj.png', '/static/trafik-kaj.png')

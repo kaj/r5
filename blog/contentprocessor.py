@@ -5,8 +5,8 @@ from lxml.etree import fromstring, Element, SubElement, tostring
 from os.path import commonprefix
 from re import match, findall
 from taggit.models import Tag
-from urllib import quote
-from util import render_books
+from urllib.parse import quote
+from .util import render_books
 from django.utils.translation import ugettext as _
 
 logger = getLogger(__name__)
@@ -48,7 +48,7 @@ def process_content(content, images, base=None, lang='sv'):
             figure.insert(0, a)
             if len(title) == 1:
                 a.set('title', tostring(title[0], method='text',
-                                        encoding=unicode, with_tail=False))
+                                        encoding=str, with_tail=False))
                 figure.remove(*title)
             img = SubElement(a, 'img', {'src': info.icon,
                                         'width': str(info.iwidth),
@@ -60,7 +60,7 @@ def process_content(content, images, base=None, lang='sv'):
                 if len(caption) == 1:
                     img.set('alt', _(u'Bild: %s') % tostring(caption[0],
                                                             method='text',
-                                                            encoding=unicode,
+                                                            encoding=str,
                                                             with_tail=False))
                 else:
                     img.set('alt', _(u'Bild'))
@@ -121,7 +121,7 @@ def process_content(content, images, base=None, lang='sv'):
     for pre in dom.iterfind('.//pre'):
         if len(pre):
             next
-        content = tostring(pre, method='text', encoding=unicode,
+        content = tostring(pre, method='text', encoding=str,
                            with_tail=False).rstrip()
         indent = commonprefix(findall('\n *(?!\s)', content))
         if indent:
@@ -144,9 +144,9 @@ def process_content(content, images, base=None, lang='sv'):
                 pp.insert(pp.index(pre), npre)
                 pp.remove(pre)
             except Exception as e:
-                print "Error handling pre", cls, ":", e
+                print("Error handling pre", cls, ":", e)
         else:
             pre.text = content
     return mark_safe((dom.text or u'') +
-                     u''.join(tostring(x, encoding=unicode)
+                     u''.join(tostring(x, encoding=str)
                               for x in dom.iterchildren()))

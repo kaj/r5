@@ -4,14 +4,14 @@ from django.conf import settings
 from django.forms import ModelForm
 from r5comments.models import Comment
 from django.utils.translation import ugettext_lazy as _
-from httplib import HTTPConnection, HTTPSConnection
-from urlparse import urlparse
+from http.client import HTTPConnection, HTTPSConnection
+from urllib.parse import urlparse
 import re
 from django.forms import widgets
 
 from django.forms.utils import ErrorList
 class MyErrorList(ErrorList):
-    def __unicode__(self):              # __unicode__ on Python 2
+    def __str__(self):
         return self.as_divs()
     def as_divs(self):
         if not self: return ''
@@ -88,8 +88,8 @@ class CommentForm(ModelForm):
                 pass
             elif resp.status in [301, 302, 303, 307]:
                 target = urlparse(resp.getheader('Location'))
-                print "Comment url redirect %s -> %s" \
-                    % (url.geturl(), target.geturl())
+                print("Comment url redirect %s -> %s" \
+                      % (url.geturl(), target.geturl()))
                 if target.netloc.lower() != url.netloc.lower():
                     raise forms.ValidationError(
                         _('Please use a direct url (%(url)s redirects to %(target)s)') %

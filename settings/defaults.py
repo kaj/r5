@@ -93,7 +93,7 @@ STATICFILES_FINDERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'sslifyadmin.middleware.SSLifyAdminMiddleware',
+    'ssladmin.middleware.SSLAdmin',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
