@@ -15,6 +15,7 @@ lxml
 psycopg2
 # Source higlighing for code examples
 Pygments
+django-ssl-admin
 
 # For testing
 html5lib
@@ -25,4 +26,3 @@ cssselect
 
 gunicorn
 setproctitle
-django-sslify-admin
