@@ -35,9 +35,9 @@ class Command(NoArgsCommand):
                     )
                     c.submit_date = obj['submit_date']
                     c.save()
-                    print c
+                    print(c)
                 else:
-                    print "Non-match target:", obj['on']
+                    print("Non-match target:", obj['on'])
                     exit(1)
                 return None
             else:
