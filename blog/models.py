@@ -46,7 +46,7 @@ class Post(models.Model):
     def frontimage_output(self):
         return process_content(self.frontimage, Image.objects, lang=self.lang)
     
-    def __unicode__(self):
+    def __str__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
         return u'%s (%s)' % (html2cleanstr(self.title), year)
     
@@ -79,7 +79,7 @@ class Update(models.Model):
     def slug(self):
         return self.post.slug
     
-    def __unicode__(self):
+    def __str__(self):
         return u'Update %s to %s' % (self.time, self.post)
     
     def note_output(self):
@@ -104,7 +104,7 @@ class Image(models.Model):
                                  .lower().partition('.')
         super(Image, self).save(*args, **kwargs)
     
-    def __unicode__(self):
+    def __str__(self):
         return u'<Image from %s>' % self.sourcename
 
     def get_absolute_url(self):
@@ -148,5 +148,4 @@ class Image(models.Model):
 def html2cleanstr(html):
     """ Render a (partial) html document to a simple text string """
     dom = str2dom(u'<span>%s</span>' % html)
-    return sub('\s+', ' ', dom2str(dom, method='text',
-                                   encoding=unicode).strip())
+    return sub('\s+', ' ', dom2str(dom, method='text', encoding=str).strip())

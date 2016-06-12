@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import *
+from .models import *
 
 def mod_public(modeladmin, request, queryset):
     queryset.update(is_public=True)

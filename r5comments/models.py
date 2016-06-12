@@ -24,7 +24,7 @@ class Comment(models.Model):
     class Meta:
         ordering = ['submit_date']
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s on %s: %s' % (self.by_name, self.post, self.comment[:20])
 
     def get_absolute_url(self):
