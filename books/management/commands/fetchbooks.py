@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 import json
-import urllib
+from urllib.request import urlopen
 from books.models import Author, Book, BookTag
 from django.utils.safestring import mark_safe
 
@@ -11,10 +11,12 @@ class Command(NoArgsCommand):
         Book.objects.all().delete()
         BookTag.objects.all().delete()
         url = 'https://www.librarything.com/api_getdata.php?userid=kaj&key=w5c54f5e485d879152955168d89&responseType=json&coverheight=100&max=2000&showTags=1'
-        data = json.load(urllib.urlopen(url))
+        resp = urlopen(url)
+        print("Response is", resp.headers['content-type'])
+        data = json.loads(resp.read().decode('utf8'))
 
         for key, book in data.get('books').items():
-            print "Found book %s" % key
+            print("Found book %s" % key)
             author, _new = Author.objects.get_or_create(
                 lt_slug=book.get('author_code'),
                 defaults={'name': book.get('author_fl')})
@@ -29,5 +31,5 @@ class Command(NoArgsCommand):
             book_object.save()
             tags = book.get('tags')
             if tags:
-                print "Book is tagged %s" % tags
+                print("Book is tagged %s" % tags)
                 book_object.tags.add(*tags)

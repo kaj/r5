@@ -40,7 +40,7 @@ class Command(NoArgsCommand):
         
         for img in files.all():
             filename = os.path.join(settings.IMAGE_FILES_BASE, img.sourcename)
-            print "Read %s size from %s" % (img.ref, filename)
+            print("Read %s size from %s" % (img.ref, filename))
             data = PImage.open(filename)
             img.orig_width, img.orig_height = data.size
             img.mimetype = mime[data.format]

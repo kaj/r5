@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 #from django.contrib.redirects.models import Redirect
-from readfiles import redirect
+from .readhtml import redirect
 
 class Command(NoArgsCommand):
     help = 'Set up some "special" redirects.'
