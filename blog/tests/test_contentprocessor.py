@@ -84,6 +84,11 @@ class ContentProcessorTest(TestCase):
         
         self.assertEqual(EXPECTED, process_content(INPUT, self.images))
 
+    def test_process_figure_with_caption(self):
+        INPUT = '<term da="film">Åskbollen</term>'
+        EXPECTED = '<a href="http://sv.wikipedia.org/wiki/%C3%85skbollen%20%28film%29">Åskbollen</a>'
+        self.assertEqual(EXPECTED, process_content(INPUT, self.images))
+
 #def t():
 #    process_content_etree(INPUT)
 
