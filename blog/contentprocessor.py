@@ -82,7 +82,7 @@ def process_content(content, images, base=None, lang='sv'):
                 'sw': 'http://seriewikin.serieframjandet.se/index.php/{ref}',
                 'foldoc': 'http://foldoc.org/{ref}',
             }
-            ref = e.text.encode('utf8')
+            ref = e.text
             disambiguion = e.get('da')
             if disambiguion:
                 ref = ref + ' (' + disambiguion + ')'
