@@ -13,6 +13,7 @@ Jinja2
 pymongo
 lxml
 psycopg2
+pillow
 # Source higlighing for code examples
 Pygments
 django-ssl-admin
