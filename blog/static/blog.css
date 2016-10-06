@@ -262,6 +262,9 @@ figure img, .comment img {
     font-style: italic;
     margin-bottom: 1em;
 }
+.abstract em {
+    font-weight: bold;
+}
 p {
     margin: 0 0 1ex 0;
 }
@@ -319,6 +322,9 @@ blockquote footer.attribution {
 }
 blockquote em {
     font-weight: bold;
+}
+code {
+    font-size-adjust: 0.7;
 }
 code.xml {
     color: #51AA17;
