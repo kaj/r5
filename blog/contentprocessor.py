@@ -81,6 +81,7 @@ def process_content(content, images, base=None, lang='sv'):
                 'wp': 'http://{lang}.wikipedia.org/wiki/{ref}',
                 'sw': 'http://seriewikin.serieframjandet.se/index.php/{ref}',
                 'foldoc': 'http://foldoc.org/{ref}',
+                'cargo': 'https://crates.io/crates/{ref}',
             }
             ref = e.text
             disambiguion = e.get('da')
