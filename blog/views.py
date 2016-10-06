@@ -9,6 +9,7 @@ from django.utils import translation
 from django.utils.http import http_date
 from django.utils.translation import ugettext_lazy as _
 from django.views.static import was_modified_since
+from django.views.decorators.clickjacking import xframe_options_deny
 from logging import getLogger
 from taggit.models import Tag
 from time import mktime
@@ -67,6 +68,7 @@ def choose_lang(request, availiable=None):
     # no match, fallback to "any" language
     return list(availiable)[0]
 
+@xframe_options_deny
 def post_detail(request, year, slug, lang=None):
     post_objects = Post.objects.filter(posted_time__year=year, slug=slug)
     try:
@@ -115,6 +117,7 @@ def post_detail(request, year, slug, lang=None):
             'next': post.get_absolute_url(),
             })
 
+@xframe_options_deny
 def comment(request):
     form = CommentForm(request.POST)
     if form.is_valid():
