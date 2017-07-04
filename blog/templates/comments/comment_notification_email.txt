@@ -12,10 +12,10 @@ Commenter's URL: {{ comment.user_url }}
 {{ comment.comment }} 
 
 Posted at:
-http://rasmus.krats.se{{ comment.get_absolute_url }}
+https://rasmus.krats.se{{ comment.get_absolute_url }}
 
 Moderate the latest comments here:
-http://rasmus.krats.se/admin/comments/comment/
+https://rasmus.krats.se/admin/comments/comment/
 
 -- 
 The r5 server.
