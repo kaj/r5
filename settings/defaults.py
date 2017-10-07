@@ -159,9 +159,6 @@ TEMPLATES = [
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-# Override with 'web.url_domain' in local.py to enable django_statsd
-STATSD_PREFIX = None
-
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.

@@ -22,8 +22,5 @@ django-ssl-admin
 html5lib
 cssselect
 
-# Collect statistics in a nice way
-# django-statsd-mozilla
-
 gunicorn
 setproctitle
