@@ -6,17 +6,16 @@ django-autoslug
 django-taggit
 django_compressor
 django-debug-toolbar
-python-memcached
+# Some bug makes 1.58 impossible to install on guran
+python-memcached == 1.57
 django-simplegravatar
 IPy
 Jinja2
-pymongo
 lxml
 psycopg2
 pillow
 # Source higlighing for code examples
 Pygments
-django-ssl-admin
 
 # For testing
 html5lib
