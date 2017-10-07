@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('time', models.DateTimeField(db_index=True)),
                 ('note', models.TextField(blank=True)),
-                ('post', models.ForeignKey(to='blog.Post')),
+                ('post', models.ForeignKey(to='blog.Post', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['-time'],

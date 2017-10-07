@@ -6,9 +6,9 @@ class BookTag(TagBase):
     pass
 
 class TaggedBook(ItemBase):
-    tag = models.ForeignKey(BookTag,
+    tag = models.ForeignKey(BookTag, on_delete=models.CASCADE,
                             related_name="%(app_label)s_%(class)s_items")
-    content_object = models.ForeignKey('Book')
+    content_object = models.ForeignKey('Book', on_delete=models.CASCADE)
 
     @classmethod
     def tags_for(cls, model, instance=None, **extra_filters):
@@ -31,7 +31,7 @@ class Book(models.Model):
     """One of my books on LibraryThing."""
     lt_id = models.CharField(max_length=16, unique=True, db_index=True)
     title = models.CharField(max_length=200, db_index=True)
-    author = models.ForeignKey(Author, db_index=True)
+    author = models.ForeignKey(Author, db_index=True, on_delete=models.CASCADE)
     cover = models.URLField(null=True, blank=True)
     lang = models.CharField(max_length=3, db_index=True)
     rating = models.PositiveSmallIntegerField(help_text='LT rating times 10',

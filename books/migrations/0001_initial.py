@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('cover', models.URLField(null=True, blank=True)),
                 ('lang', models.CharField(max_length=3, db_index=True)),
                 ('rating', models.PositiveSmallIntegerField(help_text=b'LT rating times 10', db_index=True)),
-                ('author', models.ForeignKey(to='books.Author')),
+                ('author', models.ForeignKey(to='books.Author', on_delete=models.CASCADE)),
             ],
         ),
         migrations.CreateModel(
@@ -46,8 +46,8 @@ class Migration(migrations.Migration):
             name='TaggedBook',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('content_object', models.ForeignKey(to='books.Book')),
-                ('tag', models.ForeignKey(related_name='books_taggedbook_items', to='books.BookTag')),
+                ('content_object', models.ForeignKey(to='books.Book', on_delete=models.CASCADE)),
+                ('tag', models.ForeignKey(related_name='books_taggedbook_items', to='books.BookTag', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,

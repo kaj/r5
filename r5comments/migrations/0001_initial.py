@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
                 ('by_ip', models.GenericIPAddressField(null=True, db_index=True)),
                 ('is_removed', models.BooleanField(default=False, db_index=True)),
                 ('is_public', models.BooleanField(default=False, db_index=True)),
-                ('post', models.ForeignKey(to='blog.Post')),
+                ('post', models.ForeignKey(to='blog.Post', on_delete=models.CASCADE)),
             ],
             options={
             },

@@ -58,7 +58,7 @@ class Post(models.Model):
 
 class Update(models.Model):
     
-    post = models.ForeignKey(Post)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     time = models.DateTimeField(db_index=True)
 
     note = models.TextField(blank=True)

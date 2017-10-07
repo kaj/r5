@@ -7,7 +7,7 @@ from datetime import datetime
 
 class Comment(models.Model):
     """A comment on a blog.Post.  Optimized by not beeing generic-key."""
-    post = models.ForeignKey(Post, db_index=True)
+    post = models.ForeignKey(Post, db_index=True, on_delete=models.CASCADE)
     by_name = models.CharField(_('Name'), max_length=100,
                                help_text=_(u'Your name (or pseudonym).'))
     by_email = models.EmailField(_('Email'), db_index=True,
