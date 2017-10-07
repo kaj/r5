@@ -4,6 +4,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 # COMPRESS = True
 DEBUG_TOOLBAR = False
+PROD = False
 
 ADMINS = (
     ('Rasmus Kaj', 'rasmus@krats.se'),
