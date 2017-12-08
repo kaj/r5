@@ -36,7 +36,7 @@ if settings.DEBUG:
 
 # And even laster:
 urlpatterns += [
-    url(r'^(?P<path>.*)$', serve, {
+    url(r'^(?P<path>[a-z0-9][a-z0-9._/-]*)$', serve, {
             'document_root': settings.MEDIA_ROOT,
             }),
 ]
