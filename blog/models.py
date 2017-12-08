@@ -2,7 +2,7 @@ from autoslug.fields import AutoSlugField
 from django.db import models
 from taggit.managers import TaggableManager
 from blog.contentprocessor import process_content
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.html import strip_tags
 from lxml.etree import fromstring as str2dom, tostring as dom2str
 from os import path
