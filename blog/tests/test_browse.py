@@ -5,6 +5,7 @@ Test browsing public pages in the blog app.
 
 from django.test import TestCase
 from django.test.client import Client
+from django.utils.text import slugify
 from lxml.cssselect import CSSSelector
 import html5lib
 from html5lib import treebuilders
@@ -23,7 +24,7 @@ def select_texts(doc, selector):
 def createPost(title, content, lang='sv', abstract='', tags=None,
                posted_time=None):
     post, _ = Post.objects.get_or_create(
-        title=title, lang=lang, posted_time=posted_time,
+        title=title, slug=slugify(title), lang=lang, posted_time=posted_time,
         abstract=abstract, content=content)
     Update.objects.get_or_create(post=post, time=post.posted_time)
     if tags:
@@ -62,9 +63,9 @@ class BlogTestCase(TestCase):
 
     def get(self, url, expected_status_code=200, expected_location=''):
         response = self.c.get(url)
-        self.assertEqual((expected_status_code, expected_location, 
+        self.assertEqual((url, expected_status_code, expected_location,
                           'text/html; charset=utf-8'),
-                         (response.status_code,
+                         (url, response.status_code,
                           response.get('Location', '') \
                               .replace('http://testserver', ''),
                           response['Content-Type']))
