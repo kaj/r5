@@ -24,7 +24,7 @@ logger = getLogger(__name__)
 def index(request, year=None, lang=None, nUpdates=6):
     updates = Update.objects.all().select_related('post').extra(
         select={
-            'ncomments': 'select count(*) from r5comments_comment where post_id=blog_post.id and is_public=True and is_removed=False'
+            'ncomments': 'select count(*) from r5comments_comment where post_id=blog_post.id and is_public and not(is_removed)'
         })
 
     if year:
