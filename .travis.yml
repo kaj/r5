@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.6"
+services:
+ - memcached
+ - postgresql
+install: "pip install -r requirements.txt"
+before_script:
+ - echo "SECRET_KEY='abcdefghijklmnopqrstuvwxyz123456789'" > settings/local.py
+ - echo "from .defaults import DATABASES" >> settings/local.py
+ - echo "DATABASES['default']['USER'] = 'postgres'" >> settings/local.py
+ - psql -c 'create database r5;' -U postgres
+script: "./manage.py test"
