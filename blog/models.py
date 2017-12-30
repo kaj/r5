@@ -1,4 +1,3 @@
-from autoslug.fields import AutoSlugField
 from django.db import models
 from taggit.managers import TaggableManager
 from blog.contentprocessor import process_content
@@ -11,8 +10,7 @@ from re import sub
 class Post(models.Model):
     
     posted_time = models.DateTimeField(null=True, blank=True, db_index=True)
-    slug = AutoSlugField(populate_from='title', db_index=True,
-                         unique_with=('posted_time__year', 'lang'))
+    slug = models.SlugField(db_index=True)
 
     title = models.CharField(max_length=200)
     abstract = models.TextField(blank=True)
@@ -23,6 +21,7 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-posted_time']
+        # unique_together = ('slug', 'posted_time__year', 'lang')
 
     @property
     def year(self):
