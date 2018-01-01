@@ -62,7 +62,7 @@ class BlogTestCase(TestCase):
                    tags=['junk', 'test'])
 
     def get(self, url, expected_status_code=200, expected_location=''):
-        response = self.c.get(url)
+        response = self.c.get(url, HTTP_ACCEPT_LANGUAGE='en')
         self.assertEqual((url, expected_status_code, expected_location,
                           'text/html; charset=utf-8'),
                          (url, response.status_code,
