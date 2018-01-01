@@ -77,7 +77,7 @@ class BlogTestCase(TestCase):
         
         try:
             if response.content:
-                return parser.parse(response.content)
+                return parser.parse(response.content.decode(response.charset))
             else:
                 return None
 
