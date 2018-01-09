@@ -88,8 +88,8 @@ def makelatestcomments(lang):
                select_related('post'). \
                defer('post__abstract', 'post__content', 'post__frontimage'). \
                order_by('-submit_date')[:5]
-    return mark_safe(get_template('blog/part/latestcomments.html').
-                     render({'comments': comments}))
+    return get_template('blog/part/latestcomments.html') \
+        .render({'comments': comments})
 
 def render_books(books):
     template = get_template('books/part/book.html')
@@ -130,7 +130,7 @@ def environment(**options):
         if result is None:
             result = makelatestcomments(lang)
             cache.set(key, result)
-        return result
+        return mark_safe(result)
     def favbooks():
         from django.core.cache import cache
         lang = getlang()
