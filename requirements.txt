@@ -2,7 +2,6 @@
 # Can be installed py "pip install -r requirements.txt"
 
 Django >= 1.11, < 1.12
-django-autoslug
 django-taggit
 django_compressor
 django-debug-toolbar
