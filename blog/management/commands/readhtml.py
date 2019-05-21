@@ -21,11 +21,15 @@ class Command(BaseCommand):
     help = 'Find and read content'
 
     def add_arguments(self, parser):
-        parser.add_argument('--year', dest='year',
-                            help='Year (i.e. directory) of site to read')
+        parser.add_argument(
+            '--year', dest='year',
+            help='Year (i.e. directory) of site to read')
+        parser.add_argument(
+            '--basedir', dest='base', default='dump',
+            help='Base directory containing files to read (default: %(default)s)')
 
     def handle(self, **options):
-        base = 'dump'
+        base = options['base']
         
         if options['year']:
             base = os.path.join(base, options['year'])
