@@ -1,23 +1,23 @@
 # Required python packages.
 # Can be installed py "pip install -r requirements.txt"
 
-Django >= 2.0.8, < 2.1
-django-taggit
-django_compressor
-django-debug-toolbar
+Django >= 2.0.13, < 2.1
+django-taggit ~= 1.1.0
+django_compressor ~= 2.2
+django-debug-toolbar ~= 1.11
 python-memcached ~= 1.59
-django-simplegravatar
-IPy
-Jinja2
-lxml
-psycopg2-binary
-pillow
+django-simplegravatar ~= 0.3.2
+IPy ~= 1.0
+Jinja2 ~= 2.10.1
+lxml ~= 4.3.3
+psycopg2-binary ~= 2.8.2
+pillow ~= 6.0.0
 # Source higlighing for code examples
-Pygments
+Pygments ~= 2.4.0
 
 # For testing
-html5lib
-cssselect
+html5lib ~= 1.0.1
+cssselect ~= 1.0.3
 
 gunicorn
 setproctitle
