@@ -1,7 +1,7 @@
 # Required python packages.
 # Can be installed py "pip install -r requirements.txt"
 
-Django >= 2.1.10, < 2.2
+Django >= 2.2.5, < 2.3
 django-taggit ~= 1.1.0
 django_compressor ~= 2.2
 django-debug-toolbar ~= 1.11
@@ -9,7 +9,7 @@ python-memcached ~= 1.59
 django-simplegravatar ~= 0.3.2
 IPy ~= 1.0
 Jinja2 ~= 2.10.1
-lxml ~= 4.3.3
+lxml ~= 4.3.5
 psycopg2-binary ~= 2.8.2
 pillow ~= 6.0.0
 # Source higlighing for code examples
