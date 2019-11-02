@@ -8,6 +8,7 @@ from optparse import make_option
 from shutil import copy
 from urllib.parse import quote
 from xml.etree import ElementTree
+import requests
 import os
 
 nsmap = {
@@ -27,13 +28,19 @@ class Command(BaseCommand):
         parser.add_argument(
             '--basedir', dest='base', default='dump',
             help='Base directory containing files to read (default: %(default)s)')
+        parser.add_argument(
+            '--make-images-public', dest='make_images_public', action='store_true',
+            help='Tell rphotos that referensed images should be made public.')
 
     def handle(self, **options):
         base = options['base']
-        
+        self.make_images_public = options['make_images_public']
         if options['year']:
             base = os.path.join(base, options['year'])
-        
+
+        self.img_base = settings.IMG_BASE
+        self.img_key = self.rphotos_login()
+
         for root, dirs, files in os.walk(base):
             #print "Current directory", root
             #print "Sub directories", dirs
@@ -46,6 +53,15 @@ class Command(BaseCommand):
                     except Exception as err:
                         print("Failed to load %s" % filename)
                         raise
+
+    def rphotos_login(self):
+        response = requests.post(
+            self.img_base + "/api/login",
+            json = { 'user': settings.IMG_USER,
+                     'password': settings.IMG_PASS },
+        )
+        response.raise_for_status()
+        return response.json()['token']
 
     def readfile(self, filename):
         print("Handle %s" % filename)
@@ -126,20 +142,60 @@ class Command(BaseCommand):
 
         for e in elem.findall('.//figure', nsmap):
             ref = e.get('ref')
-            try:
-                e.set('ref', Image.objects.get(sourcename=ref).ref)
-            except Exception as err:
-                mime = { 'JPEG': 'image/jpeg',
-                         'PNG': 'image/png',
-                       }
-                data = PImage.open(os.path.join(settings.IMAGE_FILES_BASE, ref))
-                img = Image(sourcename=ref,
-                            orig_width=data.size[0],
-                            orig_height=data.size[1],
-                            mimetype=mime[data.format])
-                img.save()
-                print('Found image %s.' % img)
-                e.set('ref', img.ref)
+            if self.make_images_public:
+                response = requests.post(
+                    self.img_base + "/api/image/makepublic",
+                    json = {'path': ref },
+                    headers = { 'authorization': self.img_key }
+                )
+            else:
+                response = requests.get(
+                    self.img_base + "/api/image",
+                    params = {'path': ref },
+                    headers = { 'authorization': self.img_key }
+                )
+            response.raise_for_status()
+            data = response.json()
+
+            if not data.get('public', False):
+                print("NOTE, image %s is not public" % ref)
+            # TODO: Note if an image is "small" on server
+            if 'scaled' in e.attrib.get('class', ''):
+                medium = data['medium']
+                img = ElementTree.Element('img', {
+                    'src': self.img_base + medium['url'],
+                    'alt': '',
+                    'width': str(medium['width']),
+                    'height': str(medium['height'])})
+                e.insert(0, img)
+            else:
+                title = e.find('zoomcaption')
+                a = ElementTree.Element('a', {
+                    'href': self.img_base + data['medium']['url']
+                })
+                e.insert(0, a)
+                if title is not None:
+                    e.remove(title)
+                    title = ElementTree.tostring(title, method='text', encoding='unicode')
+                    a.set('title', title)
+                small = data['small']
+                img = ElementTree.SubElement(a, 'img', {
+                    'src': self.img_base + small['url'],
+                    'width': str(small['width']),
+                    'height': str(small['height'])
+                })
+                if title:
+                    img.set('alt', (u'Bild: %s') % a.get('title'))
+                else:
+                    caption = e.find('figcaption')
+                    if caption is not None:
+                        caption = ElementTree.tostring(caption, method='text', encoding='unicode')
+                        img.set('alt', (u'Bild: %s') % caption)
+                    else:
+                        img.set('alt', (u'Bild'))
+
+            del e.attrib['ref']
+
         return serialize(elem)
 
     def parsedate(self, datestr=None):

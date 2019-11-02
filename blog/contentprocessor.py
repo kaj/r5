@@ -26,7 +26,7 @@ def process_content(content, images, base=None, lang='sv'):
         bp.insert(bp.index(books), npre)
         bp.remove(books)
 
-    for figure in dom.iterfind('.//figure'):
+    for figure in dom.iterfind('.//figure[@ref]'):
         ref = figure.attrib['ref']
         del figure.attrib['ref']
         try:

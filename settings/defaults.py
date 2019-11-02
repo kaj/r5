@@ -214,6 +214,8 @@ SHORTEN_SITES = {
 
 SCALED_IMAGE_DIR = 'cache/image'
 
+IMG_BASE = 'https://img.krats.se'
+
 import sys
 if 'test' in sys.argv or 'testserver' in sys.argv:
     DATABASES['default'] = {'ENGINE': 'django.db.backends.sqlite3'}
