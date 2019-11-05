@@ -1,12 +1,8 @@
-from PIL import Image as PImage
-from blog.models import Post, Update, Image
+from blog.models import Post, Update
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.contrib.redirects.models import Redirect
-from optparse import make_option
-from shutil import copy
-from urllib.parse import quote
 from xml.etree import ElementTree
 import requests
 import os
