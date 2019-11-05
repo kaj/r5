@@ -18,6 +18,7 @@ import os
 import stat
 from r5comments.forms import CommentForm
 from r5comments.models import Comment
+import requests
 
 logger = getLogger(__name__)
 
@@ -207,20 +208,22 @@ def image_small(request, imgid):
 
 def image_view(request, imgid, size=900):
     obj = get_object_or_404(Image, ref=imgid)
-    scaled_path = os.path.join(settings.SCALED_IMAGE_DIR,
-                               '%s-%s' % (imgid, size))
-    try:
-        return serve_file(request, path=scaled_path, content_type=obj.mimetype)
-    except Http404:
-        from PIL import Image as PImage
-        sourcedata = PImage.open(os.path.join(settings.IMAGE_FILES_BASE, obj.sourcename))
-        scaleddata = sourcedata.resize(obj.scaled_size(size), int(PImage.ANTIALIAS))
-        full_path = os.path.join(settings.MEDIA_ROOT, scaled_path)
-        dir = os.path.dirname(full_path)
-        if not os.path.exists(dir):
-            os.makedirs(dir, mode=0o777)
-        scaleddata.save(full_path, sourcedata.format)
-        return serve_file(request, path=scaled_path, content_type=obj.mimetype)
+    data = requests.get(
+        settings.IMG_BASE + "/api/image",
+        params = {'path': obj.sourcename },
+    ).json()
+
+    if size > Image.ICON_MAX:
+        to_url = data.get('medium', {}).get('url')
+    else:
+        to_url = data.get('small', {}).get('url')
+
+    if to_url:
+        return redirect(settings.IMG_BASE + to_url)
+    else:
+        raise Exception('No redirect found for image',
+                        obj, data.get('err', ''))
+
 
 def serve_file(request, path, content_type):
     fullpath = os.path.join(settings.MEDIA_ROOT, path)

@@ -11,7 +11,6 @@ IPy ~= 1.0
 Jinja2 ~= 2.10.1
 lxml ~= 4.3.5
 psycopg2-binary ~= 2.8.2
-pillow ~= 6.0.0
 # Source higlighing for code examples
 Pygments ~= 2.4.0
 requests
