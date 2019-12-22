@@ -1,6 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
 from blog.contentprocessor import process_content
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import reverse
 from django.utils.html import strip_tags
 from lxml.etree import fromstring as str2dom, tostring as dom2str
@@ -44,7 +45,12 @@ class Post(models.Model):
 
     def frontimage_output(self):
         return process_content(self.frontimage, Image.objects, lang=self.lang)
-    
+
+    def image_url(self):
+        return first_image_url(self.frontimage) \
+            or first_image_url(self.content) \
+            or staticfiles_storage.url('trafik-kaj.png')
+
     def __str__(self):
         year = self.posted_time.year if self.posted_time else 'unposted'
         return u'%s (%s)' % (html2cleanstr(self.title), year)
@@ -148,3 +154,14 @@ def html2cleanstr(html):
     """ Render a (partial) html document to a simple text string """
     dom = str2dom(u'<span>%s</span>' % html)
     return sub('\s+', ' ', dom2str(dom, method='text', encoding=str).strip())
+
+def first_image_url(markup):
+    if markup:
+        dom = str2dom('<div>%s</div>' % markup)
+        a = dom.find('.//figure/a[@href][img]')
+        if a is not None:
+            return a.get('href')
+        img = dom.find('.//img')
+        if img is not None:
+            return img.get('src')
+    return None
