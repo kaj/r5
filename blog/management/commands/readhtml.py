@@ -1,7 +1,7 @@
 from blog.models import Post, Update
 from datetime import datetime
 from django.conf import settings
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 from django.contrib.redirects.models import Redirect
 from xml.etree import ElementTree
 import requests
@@ -150,7 +150,10 @@ class Command(BaseCommand):
                     params = {'path': ref },
                     headers = { 'authorization': self.img_key }
                 )
-            response.raise_for_status()
+
+            if not response.ok:
+                raise CommandError("Failed to get image %s: %s %s" % (
+                    ref, response.status_code, response.json()))
             data = response.json()
 
             if not data.get('public', False):
