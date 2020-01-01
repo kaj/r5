@@ -12,6 +12,12 @@ header.site {
     margin: 0;
     padding: 2em 0 1em 0;
 }
+html.index header.site {
+    padding-top: 20vmin;
+}
+html.index #sitename {
+    font-size: calc(1.8em + 3vmin);
+}
 header.site :link,
 header.site :visited {
     color: white;

@@ -54,7 +54,7 @@
   {% endif -%}
 </article>
 {% endmacro %}
-<html lang="{{getlang()}}">
+<html lang="{{getlang()}}"{% if years %} class="index"{% endif %}>
   <head>
     <title>{% block title %}Rasmus.krats.se{% endblock %}</title>
     {% cache 'statichead_' + getlang() %}
