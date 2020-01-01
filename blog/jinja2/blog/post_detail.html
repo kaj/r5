@@ -7,8 +7,8 @@
   <meta property='og:title' content='{{post.title|safe|striptags}}'>
   <meta property='og:image' content='{{post.image_url()}}' />
   {% if post.abstract %}
-    <meta property='og:description' content='#Julkort, Älvsjö postort (2)'>
-    <meta name="Description" content="{{post.abstract_text()}}" />
+  <meta property='og:description' content='{{post.abstract_text()}}'>
+  <meta name="Description" content="{{post.abstract_text()}}" />
   {% endif %}
 {% endblock %}
 
