@@ -116,7 +116,10 @@ class Command(BaseCommand):
         p.content = self.d2h(tree.getroot(), dirname, str(date.year) if date else '')
         for image in tree.findall('.//figure'):
             if 'front' in image.get('class', ''):
-                image.set('class', 'sidebar')
+                if 'noborder' in image.get('class'):
+                    image.set('class', 'sidebar noborder')
+                else:
+                    image.set('class', 'sidebar')
                 p.frontimage = serialize(image, False)
         p.save()
         # print " ", date, slug, p.title, tags

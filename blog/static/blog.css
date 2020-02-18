@@ -263,6 +263,12 @@ figure img, .comment img {
     height: auto;
     padding: 2px;
 }
+figure.noborder img {
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
 .abstract,
 .update {
     font-style: italic;
