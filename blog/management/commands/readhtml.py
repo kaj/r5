@@ -121,6 +121,33 @@ class Command(BaseCommand):
         p.save()
         # print " ", date, slug, p.title, tags
 
+    def get_image_data(self, ref):
+        if self.make_images_public:
+            response = requests.post(
+                self.img_base + "/api/image/makepublic",
+                json = {'path': ref },
+                headers = { 'authorization': self.img_key }
+            )
+        else:
+            response = requests.get(
+                self.img_base + "/api/image",
+                params = {'path': ref },
+                headers = { 'authorization': self.img_key }
+            )
+
+        if not response.ok:
+            raise CommandError("Failed to get image %s: %s %s" % (
+                ref, response.status_code, response.json()))
+        data = response.json()
+
+        if not data.get('public', False):
+            print("NOTE, image %s is not public" % ref)
+
+        data['medium']['url'] = self.img_base + data['medium']['url']
+        data['small']['url'] = self.img_base + data['small']['url']
+        print("Image %s is %s." % (ref, data['medium']['url']))
+        return data
+
     def d2h(self, elem, dirname='', year=''):
         if elem is None:
             return ''
@@ -138,62 +165,49 @@ class Command(BaseCommand):
 
         for e in elem.findall('.//figure', nsmap):
             ref = e.get('ref')
-            if self.make_images_public:
-                response = requests.post(
-                    self.img_base + "/api/image/makepublic",
-                    json = {'path': ref },
-                    headers = { 'authorization': self.img_key }
-                )
+            if ref:
+                data = self.get_image_data(ref)
+                del e.attrib['ref']
             else:
-                response = requests.get(
-                    self.img_base + "/api/image",
-                    params = {'path': ref },
-                    headers = { 'authorization': self.img_key }
-                )
-
-            if not response.ok:
-                raise CommandError("Failed to get image %s: %s %s" % (
-                    ref, response.status_code, response.json()))
-            data = response.json()
-
-            if not data.get('public', False):
-                print("NOTE, image %s is not public" % ref)
+                fa = e.get('facover')
+                n, y = fa.split('/')
+                n = n.split('-')[0]
+                img = {
+                    'url': 'https://fantomenindex.krats.se/c/f%s-%s.jpg' % (y, n)
+                }
+                data = {
+                    'medium': img,
+                    'small': img,
+                    'public': True,
+                }
+                data['small']['width'] = 150
+                ElementTree.SubElement(e, 'figcaption').text = 'Fantomen %s.' % fa
             # TODO: Note if an image is "small" on server
             if 'scaled' in e.attrib.get('class', ''):
-                medium = data['medium']
-                img = ElementTree.Element('img', {
-                    'src': self.img_base + medium['url'],
-                    'alt': '',
-                    'width': str(medium['width']),
-                    'height': str(medium['height'])})
+                img = ElementTree.Element('img', imgattrs(data['medium']))
                 e.insert(0, img)
             else:
                 title = e.find('zoomcaption')
                 a = ElementTree.Element('a', {
-                    'href': self.img_base + data['medium']['url']
+                    'href': data['medium']['url']
                 })
                 e.insert(0, a)
                 if title is not None:
                     e.remove(title)
                     title = ElementTree.tostring(title, method='text', encoding='unicode')
                     a.set('title', title)
-                small = data['small']
-                img = ElementTree.SubElement(a, 'img', {
-                    'src': self.img_base + small['url'],
-                    'width': str(small['width']),
-                    'height': str(small['height'])
-                })
+                img = ElementTree.SubElement(a, 'img', imgattrs(data['small']))
                 if title:
                     img.set('alt', (u'Bild: %s') % a.get('title'))
                 else:
                     caption = e.find('figcaption')
                     if caption is not None:
                         caption = ElementTree.tostring(caption, method='text', encoding='unicode')
+                    if caption is not None:
                         img.set('alt', (u'Bild: %s') % caption)
                     else:
                         img.set('alt', (u'Bild'))
 
-            del e.attrib['ref']
 
         return serialize(elem)
 
@@ -208,6 +222,17 @@ class Command(BaseCommand):
                 return None
         else:
             return None
+
+def imgattrs(data):
+    attrs = {
+        'src': data['url'],
+        'alt': '',
+    }
+    for dim in ['width', 'height']:
+        d = data.get(dim)
+        if d:
+            attrs[dim] = str(d)
+    return attrs
 
 def serialize(elem, skip_root=True):
     if elem is None:
