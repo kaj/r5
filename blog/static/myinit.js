@@ -65,6 +65,12 @@
 		p.style.height = null;
 	    }
 	}
+        [].forEach.call(document.querySelectorAll('.wrapiframe'), function(w) {
+            var f = w.querySelector('iframe[height][width]');
+            if (f) {
+                w.style.paddingBottom = 100 * f.height / f.width + '%';
+            }
+        });
     }
     if (d.readyState == 'complete'
         || d.readyState == 'loaded'
