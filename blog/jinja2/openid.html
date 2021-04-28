@@ -11,10 +11,8 @@
   </header>
 
   <figure class="sidebar">
-    <a href="{{ url('image_view', args=['rasmus-broos']) }}">
-      <img width="149" height="200" alt="{{ _('Bild på mig') }}"
-	   src="{{ url('image_small', args=['rasmus-broos']) }}"></a>
-    <figcaption>{{ _("På jobbet i september 2011. Foto: Björn Roos.") }}
+    {{showimg('2021/04/28/IMG_20210428_161126.jpg', _('Bild på mig'))}}
+    <figcaption>{{ _("På hemmakontoret i april 2021. Foto: Katarina Kaj.") }}
     </figcaption>
   </figure>
 

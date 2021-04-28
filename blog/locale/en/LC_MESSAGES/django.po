@@ -257,8 +257,8 @@ msgid "Bild på mig"
 msgstr "Picture of me"
 
 #: jinja2/openid.html:17
-msgid "På jobbet i september 2011. Foto: Björn Roos."
-msgstr "At work, september 2011. Photo: Bj&#xf6;rn Roos."
+msgid "På hemmakontoret i april 2021. Foto: Katarina Kaj."
+msgstr "In my home office, april 2021. Photo: Katarina Kaj."
 
 #: jinja2/openid.html:26
 msgid ""

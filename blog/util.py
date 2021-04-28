@@ -2,6 +2,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.urls import reverse
 from django.template.loader import get_template
 from django.utils import translation
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext, ngettext
 from jinja2 import evalcontextfilter, Markup, escape
@@ -104,6 +105,26 @@ def render_books(books):
                                       'stars': stars(float(b.rating)/10)})
                      for b in books)
 
+def makeshowimg(ref, alt):
+    import requests
+    from django.conf import settings
+    data = requests.get(
+        settings.IMG_BASE + "/api/image",
+        params = {'path': ref},
+    ).json()
+    medium = data.get('medium', {})
+    small = data.get('small', {})
+    return format_html(
+        '<a href="{}{}"><img src="{}{}" width="{}" height="{}" alt="{}"></a>',
+        settings.IMG_BASE,
+        medium.get('url'),
+        settings.IMG_BASE,
+        small.get('url'),
+        small.get('width'),
+        small.get('height'),
+        alt,
+    )
+
 def environment(**options):
     from simplegravatar.templatetags.simplegravatar import show_gravatar_secure
     env = Environment(**options)
@@ -127,6 +148,16 @@ def environment(**options):
         result = cache.get(key)
         if result is None:
             result = makelatestcomments(lang)
+            cache.set(key, result)
+        return mark_safe(result)
+    def showimg(ref, alt):
+        from django.core.cache import cache
+        lang = getlang()
+        key = 'j_showimg_' + lang + ref
+        print(key)
+        result = cache.get(key)
+        if result is None:
+            result = makeshowimg(ref, alt)
             cache.set(key, result)
         return mark_safe(result)
     def favbooks():
@@ -155,6 +186,7 @@ def environment(**options):
         'latestcomments': latestcomments,
         'favbooks': favbooks,
         'gravatardata': show_gravatar_secure,
+        'showimg': showimg,
         'static': staticfiles_storage.url,
         'url': reverse,
     })
