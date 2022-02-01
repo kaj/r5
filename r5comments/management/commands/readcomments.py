@@ -15,9 +15,13 @@ class Command(BaseCommand):
             if 'comment' in obj and 'on' in obj and 'by' in obj:
                 m = up.match(obj['on'])
                 if m:
-                    post = Post.objects.get(posted_time__year=m.group('year'),
-                                            slug=m.group('slug'),
-                                            lang=m.group('lang'))
+                    try:
+                        post = Post.objects.get(posted_time__year=m.group('year'),
+                                                slug=m.group('slug'),
+                                                lang=m.group('lang'))
+                    except:
+                        print("Post not found:", obj['on'])
+                        return None
                     #print "Read a comment on", post
                     c, is_new = Comment.objects.get_or_create(
                         post=post,
